@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dashboard\v2kind;
+use App\Models\Dashboard\kind;
 use Illuminate\Http\Request;
 
 class V2kindController extends Controller
@@ -41,10 +41,10 @@ class V2kindController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Dashboard\v2kind  $v2kind
+     * @param  \App\Models\Dashboard\kind  $v2kind
      * @return \Illuminate\Http\Response
      */
-    public function show(v2kind $v2kind)
+    public function show(kind $v2kind)
     {
         //
     }
@@ -52,10 +52,10 @@ class V2kindController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Dashboard\v2kind  $v2kind
+     * @param  \App\Models\Dashboard\kind  $v2kind
      * @return \Illuminate\Http\Response
      */
-    public function edit(v2kind $v2kind)
+    public function edit(kind $v2kind)
     {
         //
     }
@@ -64,10 +64,10 @@ class V2kindController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dashboard\v2kind  $v2kind
+     * @param  \App\Models\Dashboard\kind  $v2kind
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, v2kind $v2kind)
+    public function update(Request $request, kind $v2kind)
     {
         //
     }
@@ -75,10 +75,10 @@ class V2kindController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Dashboard\v2kind  $v2kind
+     * @param  \App\Models\Dashboard\kind  $v2kind
      * @return \Illuminate\Http\Response
      */
-    public function destroy(v2kind $v2kind)
+    public function destroy(kind $v2kind)
     {
         //
     }

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Dashboard\v2photo;
+use App\Models\Dashboard\photo;
 use Illuminate\Http\Request;
 
 class V2photoController extends Controller
@@ -41,10 +41,10 @@ class V2photoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Dashboard\v2photo  $v2photo
+     * @param  \App\Models\Dashboard\photo  $v2photo
      * @return \Illuminate\Http\Response
      */
-    public function show(v2photo $v2photo)
+    public function show(photo $v2photo)
     {
         //
     }
@@ -52,10 +52,10 @@ class V2photoController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Dashboard\v2photo  $v2photo
+     * @param  \App\Models\Dashboard\photo  $v2photo
      * @return \Illuminate\Http\Response
      */
-    public function edit(v2photo $v2photo)
+    public function edit(photo $v2photo)
     {
         //
     }
@@ -64,10 +64,10 @@ class V2photoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dashboard\v2photo  $v2photo
+     * @param  \App\Models\Dashboard\photo  $v2photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, v2photo $v2photo)
+    public function update(Request $request, photo $v2photo)
     {
         //
     }
@@ -75,10 +75,10 @@ class V2photoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Dashboard\v2photo  $v2photo
+     * @param  \App\Models\Dashboard\photo  $v2photo
      * @return \Illuminate\Http\Response
      */
-    public function destroy(v2photo $v2photo)
+    public function destroy(photo $v2photo)
     {
         //
     }

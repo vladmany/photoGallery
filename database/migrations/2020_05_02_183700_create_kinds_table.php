@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnimationsTable extends Migration
+class CreateKindsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,9 @@ class CreateAnimationsTable extends Migration
      */
     public function up()
     {
-        Schema::create('animations', function (Blueprint $table) {
+        Schema::create('kinds', function (Blueprint $table) {
             $table->id();
-            $table->integer('size')->comment('размер файла');
-            $table->string('url')->comment('ссылка на анимацию');
+            $table->string('name')->comment('вид мультимедиа: статфото, коллаж, анимация');
             $table->timestamps();
         });
     }
@@ -28,6 +27,6 @@ class CreateAnimationsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('animations');
+        Schema::dropIfExists('kinds');
     }
 }
