@@ -1,0 +1,46 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+class CreatePhotosTable extends Migration
+{
+    /**
+     * Run the migrations.
+     *
+     * @return void
+     */
+    public function up()
+    {
+        Schema::create('photos', function (Blueprint $table) {
+            $table->id();
+            $table->unsignedBigInteger('user_id')->comment('автор фото');
+            $table->unsignedBigInteger('album_id')->comment('альбом с фото');
+            $table->integer('width')->comment('ширина фото');
+            $table->integer('height')->comment('высота фото');
+            $table->string('url')->comment('ссылка на фото');
+            $table->integer('size')->comment('размер файла');
+            $table->string('extension', 5)->comment('формат файла');
+            $table->string('path')->comment('ссылка на файл');
+            $table->timestamps();
+        });
+
+        Schema::table('photos', function (Blueprint $table){
+            $table->foreign('album_id')
+                ->references('id')
+                ->on('albums')
+                ->onDelete('cascade');
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     *
+     * @return void
+     */
+    public function down()
+    {
+        Schema::dropIfExists('photos');
+    }
+}
