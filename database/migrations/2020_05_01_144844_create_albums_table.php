@@ -17,6 +17,7 @@ class CreateAlbumsTable extends Migration
             $table->id();
             $table->string('name', 100)->comment('навание альбома');
             $table->string('url')->comment('ссылка на альбом');
+            $table->string('cover')->comment('ссылка на картинку обложки');
             $table->timestamps();
         });
     }
