@@ -17,3 +17,12 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
+Route::namespace('Dashboard')
+    ->group(function (){
+        Route::apiResource('all-photos', 'PhotoController');
+        Route::apiResource('albums', 'AlbumController');
+        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
+        Route::get('/collages', 'PhotoController@collageIndex')->name('collages');
+        Route::get('/animatoins', 'PhotoController@animationIndex')->name('animations');
+    });
+

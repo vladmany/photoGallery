@@ -3,19 +3,21 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\PhotoRequest;
 use App\Models\Dashboard\Photo;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PhotoController extends Controller
 {
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return Photo::all();
     }
 
     /**
@@ -24,9 +26,27 @@ class PhotoController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PhotoRequest $request)
     {
-        //
+        if($request->hasFile('photo')) {
+            $file = $request->file('photo');
+            $kindId = $request->all()['kind'];
+            $date = Carbon::now()->format('Y_m_d');
+            $data = [];
+
+            $data['size'] = $file->getSize();
+            $data['name'] = $file->getClientOriginalName();
+            $data['path'] = $file->store("/{$date}", 'images');
+            $data['extension'] = $file->getExtension();
+            $data['url'] = Storage::url($data['path']);
+            $data['width'] = 1; # !!!!!!!
+            $data['height'] = 1; # !!!!!!!
+            $data['kind_id'] = $kindId;
+
+            Photo::add($file);
+        }
+
+        dd($request->all());
     }
 
     /**
@@ -47,7 +67,7 @@ class PhotoController extends Controller
      * @param  \App\Models\Dashboard\Photo  $photo
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Photo $photo)
+    public function update(PhotoRequest $request, Photo $photo)
     {
         //
     }
@@ -61,5 +81,35 @@ class PhotoController extends Controller
     public function destroy(Photo $photo)
     {
         //
+    }
+
+    public function photoIndex()
+    {
+        $photos = Photo::where('kind_id', 1)
+                    ->with('roles')
+                    ->orderBy('created_at', 'desc')
+                    ->get();
+
+        return $photos;
+    }
+
+    public function collageIndex()
+    {
+        $collages = Photo::where('kind_id', 2)
+            ->with('roles')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return $collages;
+    }
+
+    public function animationIndex()
+    {
+        $animations = Photo::where('kind_id', 3)
+            ->with('roles')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return $animations;
     }
 }
