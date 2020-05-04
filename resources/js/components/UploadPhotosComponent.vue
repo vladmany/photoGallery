@@ -2,7 +2,7 @@
     <div>
         <button class="upload-btn" @click="switchShowMethods">Загрузить</button>
         <div class="upload-methods flex-column">
-            <form action="" class="from-computer-form">
+            <form action="/photos/upload" method="post" class="from-computer-form">
                 <input type="file" name="file-1" id="file-1" class="inputfile inputfile-1" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
                 <label for="file-1" class="from-computer" @click="switchShowMethods">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -28,7 +28,6 @@
                 <span>С диска</span>
             </button>
         </div>
-
     </div>
 </template>
 
