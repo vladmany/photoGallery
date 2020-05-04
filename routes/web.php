@@ -20,4 +20,5 @@ use Illuminate\Support\Facades\Route;
 //Auth::routes();
 //
 //Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/', 'Dashboard\PhotoController@photoIndex')->name('web.photos');
+//Route::get('/', 'Dashboard\PhotoController@photoIndex')->name('web.photos');
+Route::view('/','spa');

@@ -38268,7 +38268,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [false ? undefined : _vm._e()], 1)
+  return _c("div", [true ? _c("TestModalWindow") : undefined], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -50807,8 +50807,8 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /home/alex/projects/domen/project/photoGallery/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /home/alex/projects/domen/project/photoGallery/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/photoGallery/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/photoGallery/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

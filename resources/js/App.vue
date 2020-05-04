@@ -1,6 +1,6 @@
 <template>
 <div>
-    <TestModalWindow v-if="false"></TestModalWindow>
+    <TestModalWindow v-if="true"></TestModalWindow>
 </div>
 </template>
 
