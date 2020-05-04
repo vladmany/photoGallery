@@ -17,7 +17,7 @@ class CreatePhotosTable extends Migration
             $table->id();
             $table->unsignedBigInteger('user_id')->comment('автор фото');
             $table->unsignedBigInteger('album_id')->nullable()->comment('альбом');
-            $table->unsignedBigInteger('kind_id')->comment('вид мультимедиа');
+            $table->unsignedBigInteger('kind_id')->comment('вид мультимедиа')->default(1);
             $table->string('name', 100)->comment('оригинальное имя файла с расширением');
             $table->integer('width')->comment('ширина фото');
             $table->integer('height')->comment('высота фото');

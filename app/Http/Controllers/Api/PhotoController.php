@@ -30,7 +30,7 @@ class PhotoController extends Controller
     {
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $kindId = $request->all()['kind'];
+            $kindId = $request->all()['kind'] ?? null;
             $date = Carbon::now()->format('Y_m_d');
             $data = [];
 
