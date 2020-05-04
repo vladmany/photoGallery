@@ -14,7 +14,7 @@ class PhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|mimes:bmp,gif,png,tiff,jpg',
+            'photo' => 'required|mimes:bmp,gif,png,tiff,jpg|max:16|dimensions:max_width=3024,max_height=4032',
 //            'name' => 'required',
 //            'width' => 'required|max:3024',
 //            'height' => 'required|max:4032',
@@ -31,8 +31,10 @@ class PhotoRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => ':attribute поле обязательно к заполнению.',
-            'mimes' => 'Загружаемое фото должно иметь один из следующих типов bmp,gif,png,tiff,jpg.',
+            'required' => 'Поле обязательно к заполнению',
+            'mimes' => 'Загружаемое фото должно иметь один из следующих типов bmp,gif,png,tiff,jpg',
+            'photo.max' => 'Максимальный размер загружаемого фото :max МБ',
+            'photo.dimensions' => "Максимальное разрешение фото 3024x4032"
         ];
     }
 }
