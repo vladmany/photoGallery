@@ -13,6 +13,11 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
-
-Route::view('/', 'spa');
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+//
+//Auth::routes();
+//
+//Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/', 'Dashboard\PhotoController@photoIndex')->name('web.photos');

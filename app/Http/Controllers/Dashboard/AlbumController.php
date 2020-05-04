@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Dashboard;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\AlbumRequest;
 use App\Models\Dashboard\Album;
 use Illuminate\Http\Request;
 
@@ -11,11 +12,10 @@ class AlbumController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
      */
     public function index()
     {
-        //
+        return Album::all();
     }
 
     /**
@@ -24,7 +24,7 @@ class AlbumController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlbumRequest $request)
     {
         //
     }
@@ -47,7 +47,7 @@ class AlbumController extends Controller
      * @param  \App\Models\Dashboard\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Album $album)
+    public function update(AlbumRequest $request, Album $album)
     {
         //
     }

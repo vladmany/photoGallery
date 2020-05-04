@@ -16,7 +16,9 @@ class CreatePhotosTable extends Migration
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('user_id')->comment('автор фото');
-            $table->unsignedBigInteger('album_id')->comment('альбом с фото');
+            $table->unsignedBigInteger('album_id')->nullable()->comment('альбом');
+            $table->unsignedBigInteger('kind_id')->comment('вид мультимедиа');
+            $table->string('name', 100)->comment('оригинальное имя файла с расширением');
             $table->integer('width')->comment('ширина фото');
             $table->integer('height')->comment('высота фото');
             $table->string('url')->comment('ссылка на фото');
@@ -30,6 +32,13 @@ class CreatePhotosTable extends Migration
             $table->foreign('album_id')
                 ->references('id')
                 ->on('albums')
+                ->onDelete('set null');
+        });
+
+        Schema::table('photos', function (Blueprint $table){
+            $table->foreign('kind_id')
+                ->references('id')
+                ->on('kinds')
                 ->onDelete('cascade');
         });
     }
