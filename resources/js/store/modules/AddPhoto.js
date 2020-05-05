@@ -1,12 +1,12 @@
-const state: {
+const state = {
     isUploadError: false,
         UploadErrorMessages: [],
         UploadErrorFiles: [],
-},
-const getters: {
+}
+const getters = {
 
-},
-const mutations: {
+}
+const mutations = {
     showUploadError(state) {
         state.isUploadError = true
     },
@@ -19,8 +19,8 @@ const mutations: {
     setUploadErrorFiles(state, data) {
         state.UploadErrorFiles = data
     }
-},
-const actions: {
+}
+const actions = {
 
 }
 

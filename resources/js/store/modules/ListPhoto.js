@@ -1,20 +1,20 @@
-const state: {
+const state = {
     photos: [],
         groups: {}
-},
-const getters: {
+}
+const getters = {
     photos: state => state.photos,
         groups: state => state.groups,
-},
-const mutations: {
+}
+const mutations = {
     getPhotos:(state, payload) => {
         state.photos = payload
     },
         makeGroups: (state, payload) => {
         state.groups = payload;
     }
-},
-const actions: {
+}
+const actions = {
     addPhoto: payload => {
         axios.post('api/photos', {
             photo: payload.photo,
@@ -29,8 +29,8 @@ const actions: {
             })
     },
         makeGroups: (context, array) => {
-        groups = {};
-        key = 'created_at';
+        let groups = {};
+        let key = 'created_at';
         array.forEach(item => {
             if (!groups[item[key]]){
                 groups[item[key]] = []

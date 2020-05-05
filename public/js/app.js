@@ -6766,7 +6766,7 @@ function toComment(sourceMap) {
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.5.0
+ * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -6776,7 +6776,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-04-10T15:07Z
+ * Date: 2020-05-04T22:49Z
  */
 ( function( global, factory ) {
 
@@ -6914,7 +6914,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.5.0",
+	version = "3.5.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -11011,7 +11011,7 @@ Data.prototype = {
 
 		// If not, create one
 		if ( !value ) {
-			value = Object.create( null );
+			value = {};
 
 			// We can accept data for non-element nodes in modern browsers,
 			// but we should not, see #8335.
@@ -55334,32 +55334,124 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/AddPhoto */ "./resources/js/store/modules/AddPhoto.js");
+/* harmony import */ var _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/ListPhoto */ "./resources/js/store/modules/ListPhoto.js");
+
+
 
 
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__["default"]);
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
-  state: {
-    isUploadError: false,
-    UploadErrorMessages: [],
-    UploadErrorFiles: []
-  },
-  getters: {},
-  mutations: {
-    showUploadError: function showUploadError(state) {
-      state.isUploadError = true;
-    },
-    hideUploadError: function hideUploadError(state) {
-      state.isUploadError = false;
-    },
-    setUploadErrorMessages: function setUploadErrorMessages(state, data) {
-      state.UploadErrorMessages = data;
-    },
-    setUploadErrorFiles: function setUploadErrorFiles(state, data) {
-      state.UploadErrorFiles = data;
-    }
-  },
-  actions: {}
+  modules: {
+    AddPhoto: _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__["default"],
+    ListPhoto: _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__["default"]
+  }
 }));
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/AddPhoto.js":
+/*!************************************************!*\
+  !*** ./resources/js/store/modules/AddPhoto.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  isUploadError: false,
+  UploadErrorMessages: [],
+  UploadErrorFiles: []
+};
+var getters = {};
+var mutations = {
+  showUploadError: function showUploadError(state) {
+    state.isUploadError = true;
+  },
+  hideUploadError: function hideUploadError(state) {
+    state.isUploadError = false;
+  },
+  setUploadErrorMessages: function setUploadErrorMessages(state, data) {
+    state.UploadErrorMessages = data;
+  },
+  setUploadErrorFiles: function setUploadErrorFiles(state, data) {
+    state.UploadErrorFiles = data;
+  }
+};
+var actions = {};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/ListPhoto.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/ListPhoto.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  photos: [],
+  groups: {}
+};
+var getters = {
+  photos: function photos(state) {
+    return state.photos;
+  },
+  groups: function groups(state) {
+    return state.groups;
+  }
+};
+var mutations = {
+  getPhotos: function getPhotos(state, payload) {
+    state.photos = payload;
+  },
+  makeGroups: function makeGroups(state, payload) {
+    state.groups = payload;
+  }
+};
+var actions = {
+  addPhoto: function addPhoto(payload) {
+    axios.post('api/photos', {
+      photo: payload.photo
+    }).then(function (res) {
+      console.log(res.data);
+    });
+  },
+  getPhotos: function getPhotos(context) {
+    axios.get('api/all-photos').then(function (res) {
+      context.commit('getPhotos', res.data);
+    });
+  },
+  makeGroups: function makeGroups(context, array) {
+    var groups = {};
+    var key = 'created_at';
+    array.forEach(function (item) {
+      if (!groups[item[key]]) {
+        groups[item[key]] = [];
+      }
+
+      groups[item[key]].push(item);
+    });
+    context.commit(array);
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  namespaced: true,
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
 
 /***/ }),
 
@@ -55381,8 +55473,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! /var/www/html/photoGallery/resources/js/app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! /var/www/html/photoGallery/resources/sass/app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /home/alex/projects/domen/project/photoGallery/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /home/alex/projects/domen/project/photoGallery/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
