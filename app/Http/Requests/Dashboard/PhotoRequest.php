@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Dashboard;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Support\Facades\Log;
 
 class PhotoRequest extends FormRequest
 {
@@ -14,14 +15,7 @@ class PhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|mimes:bmp,gif,png,tiff,jpg|max:16|dimensions:max_width=3024,max_height=4032',
-//            'name' => 'required',
-//            'width' => 'required|max:3024',
-//            'height' => 'required|max:4032',
-//            'url' => 'required',
-//            'size' => 'required|max:16000',
-//            'extension' => 'required',
-//            'path' => 'required',
+            'photo' => 'required|image|mimes:png,bmp,gif,tiff,jpg|max:1600|dimensions:max_width=3024,max_height=4032'
         ];
     }
 
@@ -32,9 +26,11 @@ class PhotoRequest extends FormRequest
     {
         return [
             'required' => 'Поле обязательно к заполнению',
-            'mimes' => 'Загружаемое фото должно иметь один из следующих типов bmp,gif,png,tiff,jpg',
-            'photo.max' => 'Максимальный размер загружаемого фото :max МБ',
-            'photo.dimensions' => "Максимальное разрешение фото 3024x4032"
+            'image' => 'Загружаемый файл не является картинкой',
+            'mimes' => 'Не соответствует формат загружаемых фото. Рекомендуемые форматы - BMP; GIF; JPG; PNG; TIFF',
+            'max' => 'Максимальный размер загружаемого фото :max МБ',
+            'dimensions' => "Максимальное разрешение фото 3024x4032",
+            'uploaded' => "Ошибка загрузки фото"
         ];
     }
 }

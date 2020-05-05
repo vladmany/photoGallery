@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
-    protected $fillable = ['name', 'kind_id'];
+    protected $fillable = ['name', 'kind_id', 'user_id', 'album_id', 'kind_id', 'width', 'height', 'url', 'size', 'extension', 'path'];
 
     public function Album()
     {

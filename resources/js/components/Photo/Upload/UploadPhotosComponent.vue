@@ -2,9 +2,9 @@
     <div>
         <button class="upload-btn" @click="switchShowMethods">Загрузить</button>
         <div class="upload-methods flex-column">
-            <form action="/photos/upload" method="post" class="from-computer-form">
-                <input type="file" name="file-1" id="file-1" class="inputfile inputfile-1" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
-                <label for="file-1" class="from-computer" @click="switchShowMethods">
+            <form action="/photoGallery/public/index.php/api/photos/upload" method="post" class="from-computer-form">
+                <input type="file" name="photo" id="photo" class="inputfile inputfile-1" @change="sendFiles" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
+                <label for="photo" class="from-computer" @click="switchShowMethods">
                     <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="7" width="24" height="16">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M23 21C24.1 21 25 20.1 25 19V9C25 7.9 24.1 7 23 7H7C5.9 7 5 7.9 5 9V19C5 20.1 5.9 21 7 21H3V23H27V21H23ZM7 9H23V19H7V9Z" fill="white"/>
@@ -44,6 +44,35 @@
                 let methods = $('.upload-methods')
                 // console.log(methods.css('display') === 'none' ? 'flex' : 'none')
                 methods.css('display', methods.css('display') === 'none' ? 'flex' : 'none')
+            },
+            sendFiles(e) {
+                let photos = $(e.target);
+                if (photos.prop('files').length >= 1)
+                {
+                    let formData = new FormData();
+                    formData.append("photo", photos.prop('files')[0]);
+                    axios.post('/photoGallery/public/index.php/api/photos/upload', formData, {
+                        headers: {
+                            'Content-Type': 'multipart/form-data'
+                        }
+                    })
+                    .then(response => {
+                        console.log('Фото загружено')
+                    })
+                    .catch(error => {
+                        if (error.response.status === 422)
+                        {
+                            this.$store.commit('setUploadErrorMessages',error.response.data.errors.photo)
+                            let fileNames = [];
+                            let files = photos.prop('files')
+                            for(let i = 0; i < files.length; i++)
+                                fileNames.push(files[i].name)
+                            this.$store.commit('setUploadErrorFiles', fileNames)
+                            this.$store.commit('showUploadError');
+                            photos.val('')
+                        }
+                    });
+                }
             }
         },
         created() {

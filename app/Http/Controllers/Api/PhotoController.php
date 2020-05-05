@@ -5,9 +5,12 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\PhotoRequest;
 use App\Models\Dashboard\Photo;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class PhotoController extends Controller
 {
@@ -24,29 +27,31 @@ class PhotoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\JsonResponse
      */
     public function store(PhotoRequest $request)
     {
+        dd($request->allFiles('photo'));
         if($request->hasFile('photo')) {
             $file = $request->file('photo');
-            $kindId = $request->all()['kind'] ?? null;
+            $kindId = $request->all()['kind'] ?? 1;
             $date = Carbon::now()->format('Y_m_d');
             $data = [];
 
+            $data['user_id'] = 1;
             $data['size'] = $file->getSize();
             $data['name'] = $file->getClientOriginalName();
             $data['path'] = $file->store("/{$date}", 'images');
-            $data['extension'] = $file->getExtension();
+            $data['extension'] = $file->getClientOriginalExtension();
             $data['url'] = Storage::url($data['path']);
-            $data['width'] = 1; # !!!!!!!
-            $data['height'] = 1; # !!!!!!!
+            $imageSize = getimagesize($file);
+            $data['width'] = $imageSize[0];
+            $data['height'] = $imageSize[2];
             $data['kind_id'] = $kindId;
 
-            Photo::add($file);
+            (new \App\Models\Dashboard\Photo)->create($data);
         }
 
-        dd($request->all());
     }
 
     /**

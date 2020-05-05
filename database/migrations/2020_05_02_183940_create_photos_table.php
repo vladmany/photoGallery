@@ -15,7 +15,7 @@ class CreatePhotosTable extends Migration
     {
         Schema::create('photos', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('user_id')->comment('автор фото');
+            $table->unsignedBigInteger('user_id')->comment('автор фото')->default(1);
             $table->unsignedBigInteger('album_id')->nullable()->comment('альбом');
             $table->unsignedBigInteger('kind_id')->comment('вид мультимедиа')->default(1);
             $table->string('name', 100)->comment('оригинальное имя файла с расширением');

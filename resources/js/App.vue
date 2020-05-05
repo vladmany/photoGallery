@@ -1,17 +1,17 @@
 <template>
 <div>
-    <TestModalWindow v-if="false"></TestModalWindow>
+    <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
     <upload-photos-component></upload-photos-component>
 </div>
 </template>
 
 <script>
-    import TestModalWindow from "./components/TestModalWindow";
-    import UploadPhotosComponent from "./components/UploadPhotosComponent";
+    import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
+    import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
 
     export default {
         name: "App",
-        components: {UploadPhotosComponent, TestModalWindow}
+        components: {UploadPhotosComponent, ErrorsModalWindow}
     }
 </script>
 
