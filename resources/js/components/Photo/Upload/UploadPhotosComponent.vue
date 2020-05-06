@@ -49,7 +49,6 @@
         methods: {
             switchShowMethods() {
                 let methods = $('.upload-methods')
-                // console.log(methods.css('display') === 'none' ? 'flex' : 'none')
                 methods.css('display', methods.css('display') === 'none' ? 'flex' : 'none')
             },
             cancelUpload() {
@@ -81,69 +80,7 @@
                                 }
                             }));
                         this.formData.append('photo[' + res.length + ']', file);
-                        // console.log(this.formData)
-                        // for(let [name, value] of this.formData) {
-                        //     console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
-                        // }
-
-
-                        console.log(res);
-                        // console.log('Клиент пропустил')
                     }
-                    // this.$root.$emit('continueUpload')
-                    // this.$store.commit('showUploadError');
-                    // for( let i = 0; i < this.$refs.photo.files.length; i++){
-                    //     let file = this.$refs.photo.files[i];
-                    //     this.formData.append('photo[' + i + ']', file);
-                    // }
-                    // while(true)
-                    // {
-                    //     if (step <= steps)
-                    //     {
-                    //         switch (step) {
-                    //             case 0: {
-                    //                 // let file = this.$refs.photo.files[step];
-                    //                 // console.log(file)
-                    //                 // step++
-                    //             }
-                    //             case 1: {
-                    //
-                    //             }
-                    //             case 2: {
-                    //
-                    //             }
-                    //             case 3: {
-                    //
-                    //             }
-                    //             case 4: {
-                    //
-                    //             }
-                    //             case 5: {
-                    //
-                    //             }
-                    //             case 6: {
-                    //
-                    //             }
-                    //             case 7: {
-                    //
-                    //             }
-                    //             case 8: {
-                    //
-                    //             }
-                    //             case 9: {
-                    //
-                    //             }
-                    //             default: {
-                    //                 break;
-                    //             }
-                    //         }
-                    //     } else {
-                    //         break;
-                    //     }
-                    // }
-
-                    // formData.append("photo", photos.prop('files')[0]);
-
                 }
             },
             validate(file) {
@@ -178,7 +115,6 @@
 
                 setTimeout( () => {
                     if ((this.width <= 3024) && (this.height <= 4032)) {
-                        console.log(this.height)
                         return true
                     } else {
 
@@ -213,7 +149,7 @@
                                 }
                             })
                             .then(response => {
-                                console.log('Сервер пропустил')
+                                this.formData = new FormData() // Сброс
                             })
                             .catch(error => {
                                 if (error.response.status === 422)
@@ -232,11 +168,9 @@
                                     this.$refs.photo.val('')
                                 }
                             });
-                            this.formData = new FormData() // Сброс
                     }
                     if ((this.step < this.steps))
                     {
-                        console.log(`${this.step} шаг`)
                         let files = this.$refs.photo.files;
                         let file = files[this.step]
 
@@ -262,11 +196,6 @@
                                     }
                                 }));
                             this.formData.append('photo[' + res.length + ']', file);
-                            // for(let [name, value] of this.formData) {
-                            //     console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
-                            // }
-                            // console.log(res)
-                            // console.log('Клиент пропустил')
                         }
 
                     } else {
@@ -287,24 +216,6 @@
             })
         }
     }
-
-    // ;(function (document, window, index){
-    //     'use strict';
-    //     var inputs = document.querySelectorAll('.inputfile');
-    //     Array.prototype.forEach.call(inputs, function (input) {
-    //         var label = input.nextElementSibling,
-    //             labelVal = label.innerHTML;
-    //
-    //
-    //         // Firefox bug fix
-    //         input.addEventListener('focus', function () {
-    //             input.classList.add('has-focus');
-    //         });
-    //         input.addEventListener('blur', function () {
-    //             input.classList.remove('has-focus');
-    //         });
-    //     });
-    // }(document, window, 0));
 </script>
 
 <style scoped>
