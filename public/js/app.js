@@ -2206,7 +2206,7 @@ var height;
     this.$root.$on('continueUpload', function () {
       if (_this3.step !== false && _this3.steps !== false) {
         if (_this3.step === _this3.steps && _this3.step !== false && _this3.steps !== false) {
-          axios.post('api/photos/upload', _this3.formData, {
+          axios.post('/api/photos/upload', _this3.formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
