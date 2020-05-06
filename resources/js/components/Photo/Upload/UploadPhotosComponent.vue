@@ -143,7 +143,7 @@
                 if ((this.step !== false) && (this.steps !== false))
                 {
                     if ((this.step === this.steps) && (this.step !== false) && (this.steps !== false)) {
-                            axios.post('/photoGallery/public/index.php/api/photos/upload', this.formData, {
+                            axios.post('/api/photos/upload', this.formData, {
                                 headers: {
                                     'Content-Type': 'multipart/form-data'
                                 }

@@ -2057,8 +2057,7 @@ var height;
   },
   methods: {
     switchShowMethods: function switchShowMethods() {
-      var methods = $('.upload-methods'); // console.log(methods.css('display') === 'none' ? 'flex' : 'none')
-
+      var methods = $('.upload-methods');
       methods.css('display', methods.css('display') === 'none' ? 'flex' : 'none');
     },
     cancelUpload: function cancelUpload() {},
@@ -2090,65 +2089,8 @@ var height;
               "ContentLength": typeof prop === "string" ? prop.length : prop.size
             });
           });
-          this.formData.append('photo[' + res.length + ']', file); // console.log(this.formData)
-          // for(let [name, value] of this.formData) {
-          //     console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
-          // }
-
-          console.log(res); // console.log('Клиент пропустил')
-        } // this.$root.$emit('continueUpload')
-        // this.$store.commit('showUploadError');
-        // for( let i = 0; i < this.$refs.photo.files.length; i++){
-        //     let file = this.$refs.photo.files[i];
-        //     this.formData.append('photo[' + i + ']', file);
-        // }
-        // while(true)
-        // {
-        //     if (step <= steps)
-        //     {
-        //         switch (step) {
-        //             case 0: {
-        //                 // let file = this.$refs.photo.files[step];
-        //                 // console.log(file)
-        //                 // step++
-        //             }
-        //             case 1: {
-        //
-        //             }
-        //             case 2: {
-        //
-        //             }
-        //             case 3: {
-        //
-        //             }
-        //             case 4: {
-        //
-        //             }
-        //             case 5: {
-        //
-        //             }
-        //             case 6: {
-        //
-        //             }
-        //             case 7: {
-        //
-        //             }
-        //             case 8: {
-        //
-        //             }
-        //             case 9: {
-        //
-        //             }
-        //             default: {
-        //                 break;
-        //             }
-        //         }
-        //     } else {
-        //         break;
-        //     }
-        // }
-        // formData.append("photo", photos.prop('files')[0]);
-
+          this.formData.append('photo[' + res.length + ']', file);
+        }
       }
     },
     validate: function validate(file) {
@@ -2186,7 +2128,6 @@ var height;
 
       setTimeout(function () {
         if (_this2.width <= 3024 && _this2.height <= 4032) {
-          console.log(_this2.height);
           return true;
         } else {
           _this2.$store.commit('setUploadErrorMessage', 'Не соответствует размер загружаемых фото. Размер загружаемых фото не должен превышать 3024 × 4032');
@@ -2215,12 +2156,12 @@ var height;
     this.$root.$on('continueUpload', function () {
       if (_this3.step !== false && _this3.steps !== false) {
         if (_this3.step === _this3.steps && _this3.step !== false && _this3.steps !== false) {
-          axios.post('/photoGallery/public/index.php/api/photos/upload', _this3.formData, {
+          axios.post('/api/photos/upload', _this3.formData, {
             headers: {
               'Content-Type': 'multipart/form-data'
             }
           }).then(function (response) {
-            console.log('Сервер пропустил');
+            _this3.formData = new FormData(); // Сброс
           })["catch"](function (error) {
             if (error.response.status === 422) {
               var errors = [];
@@ -2246,11 +2187,9 @@ var height;
               _this3.$refs.photo.val('');
             }
           });
-          _this3.formData = new FormData(); // Сброс
         }
 
         if (_this3.step < _this3.steps) {
-          console.log("".concat(_this3.step, " \u0448\u0430\u0433"));
           var files = _this3.$refs.photo.files;
           var file = files[_this3.step];
           if (_this3.$store.state.isUploadError === true) _this3.$store.commit('hideUploadError');
@@ -2275,12 +2214,7 @@ var height;
               });
             });
 
-            _this3.formData.append('photo[' + res.length + ']', file); // for(let [name, value] of this.formData) {
-            //     console.log(`${name} = ${value}`); // key1=value1, потом key2=value2
-            // }
-            // console.log(res)
-            // console.log('Клиент пропустил')
-
+            _this3.formData.append('photo[' + res.length + ']', file);
           }
         } else {
           _this3.$store.commit('hideUploadError');
@@ -2297,23 +2231,7 @@ var height;
       _this3.$store.commit('hideUploadError');
     });
   }
-}); // ;(function (document, window, index){
-//     'use strict';
-//     var inputs = document.querySelectorAll('.inputfile');
-//     Array.prototype.forEach.call(inputs, function (input) {
-//         var label = input.nextElementSibling,
-//             labelVal = label.innerHTML;
-//
-//
-//         // Firefox bug fix
-//         input.addEventListener('focus', function () {
-//             input.classList.add('has-focus');
-//         });
-//         input.addEventListener('blur', function () {
-//             input.classList.remove('has-focus');
-//         });
-//     });
-// }(document, window, 0));
+});
 
 /***/ }),
 
