@@ -11,7 +11,10 @@
 
     export default {
         name: "App",
-        components: {UploadPhotosComponent, ErrorsModalWindow}
+        components: {UploadPhotosComponent, ErrorsModalWindow},
+        methods: {
+
+        }
     }
 </script>
 

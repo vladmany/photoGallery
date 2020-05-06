@@ -2,7 +2,6 @@
     <div>
         <div class="outside-the-window">
             <div class="window animated fadeInDown">
-                <h1>{{  }}</h1>
                 <button class="close-window-btn" @click="closeWindow()">
                     <svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="14" height="14">
@@ -15,13 +14,13 @@
                 </button>
                 <div class="window-content">
                     <h1>Загрузка фото</h1>
-                    <span v-for="message in this.$store.state.UploadErrorMessages">{{ message }}</span>
+                    <span>{{ this.$store.state.UploadErrorMessage }}</span>
                     <span class="d-block">Не удается загрузить фото:</span>
-                    <span class="error-file d-block" v-for="file in this.$store.state.UploadErrorFiles">{{ file }}</span>
+                    <span class="error-file d-block">{{ this.$store.state.UploadErrorFile }}</span>
 
                     <div class="window-buttons d-flex">
-                        <button class="window-btn-ok" @click="closeWindow()">Продолжить</button>
-                        <button class="window-btn-cancel" @click="closeWindow()">Отменить</button>
+                        <button class="window-btn-ok" @click="apply()">Продолжить</button>
+                        <button class="window-btn-cancel" @click="cancel()">Отменить</button>
                     </div>
                 </div>
             </div>
@@ -35,8 +34,11 @@
         name: "TestModalWindow",
         showed: true,
         methods: {
-            closeWindow() {
-                this.$store.commit('hideUploadError')
+            apply() {
+                this.$root.$emit('continueUpload')
+            },
+            cancel() {
+                this.$root.$emit('cancelUpload')
             }
         }
     }
