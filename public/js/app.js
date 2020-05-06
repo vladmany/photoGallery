@@ -1924,8 +1924,7 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     UploadPhotosComponent: _components_Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
     ErrorsModalWindow: _components_Photo_Upload_ErrorsModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"]
-  },
-  methods: {}
+  }
 });
 
 /***/ }),
@@ -1970,15 +1969,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "TestModalWindow",
   showed: true,
   methods: {
-    apply: function apply() {
-      this.$root.$emit('continueUpload');
-    },
-    cancel: function cancel() {
-      this.$root.$emit('cancelUpload');
+    closeWindow: function closeWindow() {
+      this.$store.commit('hideUploadError');
     }
   }
 });
@@ -1994,20 +1991,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
-
-function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-
-function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
-
-function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
-
-function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
-
-function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
-
 //
 //
 //
@@ -2041,103 +2024,52 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 //
 //
 //
-var width;
-var height;
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "UploadPhotosComponent",
   data: function data() {
     return {
-      showMethods: false,
-      steps: false,
-      step: false,
-      height: 0,
-      width: 0,
-      formData: new FormData()
+      showMethods: false
     };
   },
   methods: {
     switchShowMethods: function switchShowMethods() {
-      var methods = $('.upload-methods');
+      var methods = $('.upload-methods'); // console.log(methods.css('display') === 'none' ? 'flex' : 'none')
+
       methods.css('display', methods.css('display') === 'none' ? 'flex' : 'none');
     },
-    cancelUpload: function cancelUpload() {},
     sendFiles: function sendFiles(e) {
       var _this = this;
 
       var photos = $(e.target);
 
       if (photos.prop('files').length >= 1) {
-        this.steps = this.$refs.photo.files.length > 10 ? 10 : this.$refs.photo.files.length;
-        this.step = 0;
-        var files = this.$refs.photo.files;
-        var file = files[0];
+        var formData = new FormData();
+        formData.append("photo", photos.prop('files')[0]);
+        axios.post('/photoGallery/public/index.php/api/photos/upload', formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        }).then(function (response) {
+          console.log('Фото загружено');
+        })["catch"](function (error) {
+          if (error.response.status === 422) {
+            _this.$store.commit('setUploadErrorMessages', error.response.data.errors.photo);
 
-        if (this.validate(file) === false) {
-          setTimeout(function () {
+            var fileNames = [];
+            var files = photos.prop('files');
+
+            for (var i = 0; i < files.length; i++) {
+              fileNames.push(files[i].name);
+            }
+
+            _this.$store.commit('setUploadErrorFiles', fileNames);
+
             _this.$store.commit('showUploadError');
-          }, 250);
-          this.step++;
-        } else {
-          this.step++;
-          this.$root.$emit('continueUpload');
-          var res = Array.from(this.formData.entries(), function (_ref) {
-            var _ref2 = _slicedToArray(_ref, 2),
-                key = _ref2[0],
-                prop = _ref2[1];
 
-            return _defineProperty({}, key, {
-              "ContentLength": typeof prop === "string" ? prop.length : prop.size
-            });
-          });
-          this.formData.append('photo[' + res.length + ']', file);
-        }
+            photos.val('');
+          }
+        });
       }
-    },
-    validate: function validate(file) {
-      var _this2 = this;
-
-      if (file.size > 16000000) {
-        this.$store.commit('setUploadErrorMessage', 'Превышает объем  загружаемого фото. Объем загружаемого файла не должен превышать 16 МВ');
-        this.$store.commit('setUploadErrorFile', file.name);
-        return false;
-      }
-
-      if (!['bmp', 'gif', 'jpeg', 'jpg', 'png', 'tiff'].includes(file.type.split('/').pop())) {
-        this.$store.commit('setUploadErrorMessage', 'Не соответствует формат загружаемых фото. Рекомендуемые форматы - BMP; GIF; JPG; PNG; TIFF');
-        this.$store.commit('setUploadErrorFile', file.name);
-        return false;
-      }
-
-      var reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onload = function (evt) {
-        var img = new Image();
-
-        img.onload = function () {
-          _this2.width = img.width;
-          _this2.height = img.height;
-        };
-
-        img.src = evt.target.result;
-      };
-
-      reader.onerror = function (evt) {
-        console.error(evt);
-      };
-
-      setTimeout(function () {
-        if (_this2.width <= 3024 && _this2.height <= 4032) {
-          return true;
-        } else {
-          _this2.$store.commit('setUploadErrorMessage', 'Не соответствует размер загружаемых фото. Размер загружаемых фото не должен превышать 3024 × 4032');
-
-          _this2.$store.commit('setUploadErrorFile', file.name);
-
-          return false;
-        }
-      }, 250);
-      return true;
     }
   },
   created: function created() {
@@ -2149,89 +2081,24 @@ var height;
         container.css('display', 'none');
       }
     });
-  },
-  mounted: function mounted() {
-    var _this3 = this;
-
-    this.$root.$on('continueUpload', function () {
-      if (_this3.step !== false && _this3.steps !== false) {
-        if (_this3.step === _this3.steps && _this3.step !== false && _this3.steps !== false) {
-          axios.post('/api/photos/upload', _this3.formData, {
-            headers: {
-              'Content-Type': 'multipart/form-data'
-            }
-          }).then(function (response) {
-            _this3.formData = new FormData(); // Сброс
-          })["catch"](function (error) {
-            if (error.response.status === 422) {
-              var errors = [];
-
-              for (var key in error.response.data.errors) {
-                errors.push(error.response.data.errors[key][0]);
-              }
-
-              _this3.$store.commit('setUploadErrorMessages', errors);
-
-              var fileNames = [];
-
-              var files = _this3.$refs.photo.prop('files');
-
-              for (var i = 0; i < files.length; i++) {
-                fileNames.push(files[i].name);
-              }
-
-              _this3.$store.commit('setUploadErrorFiles', fileNames);
-
-              _this3.$store.commit('showUploadError');
-
-              _this3.$refs.photo.val('');
-            }
-          });
-        }
-
-        if (_this3.step < _this3.steps) {
-          var files = _this3.$refs.photo.files;
-          var file = files[_this3.step];
-          if (_this3.$store.state.isUploadError === true) _this3.$store.commit('hideUploadError');
-
-          if (_this3.validate(file) === false) {
-            setTimeout(function () {
-              _this3.$store.commit('showUploadError');
-            }, 250);
-            _this3.step++;
-          } else {
-            _this3.step++;
-
-            _this3.$root.$emit('continueUpload');
-
-            var res = Array.from(_this3.formData.entries(), function (_ref4) {
-              var _ref5 = _slicedToArray(_ref4, 2),
-                  key = _ref5[0],
-                  prop = _ref5[1];
-
-              return _defineProperty({}, key, {
-                "ContentLength": typeof prop === "string" ? prop.length : prop.size
-              });
-            });
-
-            _this3.formData.append('photo[' + res.length + ']', file);
-          }
-        } else {
-          _this3.$store.commit('hideUploadError');
-        }
-      } else {
-        _this3.$root.$emit('cancelUpload');
-      }
-    });
-    this.$root.$on('cancelUpload', function () {
-      _this3.$refs.photo.value = '';
-      _this3.steps = false;
-      _this3.step = false;
-
-      _this3.$store.commit('hideUploadError');
-    });
   }
-});
+}); // ;(function (document, window, index){
+//     'use strict';
+//     var inputs = document.querySelectorAll('.inputfile');
+//     Array.prototype.forEach.call(inputs, function (input) {
+//         var label = input.nextElementSibling,
+//             labelVal = label.innerHTML;
+//
+//
+//         // Firefox bug fix
+//         input.addEventListener('focus', function () {
+//             input.classList.add('has-focus');
+//         });
+//         input.addEventListener('blur', function () {
+//             input.classList.remove('has-focus');
+//         });
+//     });
+// }(document, window, 0));
 
 /***/ }),
 
@@ -38608,6 +38475,8 @@ var render = function() {
   return _c("div", [
     _c("div", { staticClass: "outside-the-window" }, [
       _c("div", { staticClass: "window animated fadeInDown" }, [
+        _c("h1", [_vm._v(_vm._s())]),
+        _vm._v(" "),
         _c(
           "button",
           {
@@ -38671,47 +38540,56 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "window-content" }, [
-          _c("h1", [_vm._v("Загрузка фото")]),
-          _vm._v(" "),
-          _c("span", [_vm._v(_vm._s(this.$store.state.UploadErrorMessage))]),
-          _vm._v(" "),
-          _c("span", { staticClass: "d-block" }, [
-            _vm._v("Не удается загрузить фото:")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "error-file d-block" }, [
-            _vm._v(_vm._s(this.$store.state.UploadErrorFile))
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "window-buttons d-flex" }, [
-            _c(
-              "button",
-              {
-                staticClass: "window-btn-ok",
-                on: {
-                  click: function($event) {
-                    return _vm.apply()
-                  }
-                }
-              },
-              [_vm._v("Продолжить")]
-            ),
+        _c(
+          "div",
+          { staticClass: "window-content" },
+          [
+            _c("h1", [_vm._v("Загрузка фото")]),
             _vm._v(" "),
-            _c(
-              "button",
-              {
-                staticClass: "window-btn-cancel",
-                on: {
-                  click: function($event) {
-                    return _vm.cancel()
+            _vm._l(this.$store.state.UploadErrorMessages, function(message) {
+              return _c("span", [_vm._v(_vm._s(message))])
+            }),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-block" }, [
+              _vm._v("Не удается загрузить фото:")
+            ]),
+            _vm._v(" "),
+            _vm._l(this.$store.state.UploadErrorFiles, function(file) {
+              return _c("span", { staticClass: "error-file d-block" }, [
+                _vm._v(_vm._s(file))
+              ])
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "window-buttons d-flex" }, [
+              _c(
+                "button",
+                {
+                  staticClass: "window-btn-ok",
+                  on: {
+                    click: function($event) {
+                      return _vm.closeWindow()
+                    }
                   }
-                }
-              },
-              [_vm._v("Отменить")]
-            )
-          ])
-        ])
+                },
+                [_vm._v("Продолжить")]
+              ),
+              _vm._v(" "),
+              _c(
+                "button",
+                {
+                  staticClass: "window-btn-cancel",
+                  on: {
+                    click: function($event) {
+                      return _vm.closeWindow()
+                    }
+                  }
+                },
+                [_vm._v("Отменить")]
+              )
+            ])
+          ],
+          2
+        )
       ])
     ])
   ])
@@ -38757,7 +38635,6 @@ var render = function() {
         },
         [
           _c("input", {
-            ref: "photo",
             staticClass: "inputfile inputfile-1",
             attrs: {
               type: "file",
@@ -55463,8 +55340,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   state: {
     isUploadError: false,
-    UploadErrorMessage: '',
-    UploadErrorFile: ''
+    UploadErrorMessages: [],
+    UploadErrorFiles: []
   },
   getters: {},
   mutations: {
@@ -55474,11 +55351,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     hideUploadError: function hideUploadError(state) {
       state.isUploadError = false;
     },
-    setUploadErrorMessage: function setUploadErrorMessage(state, data) {
-      state.UploadErrorMessage = data;
+    setUploadErrorMessages: function setUploadErrorMessages(state, data) {
+      state.UploadErrorMessages = data;
     },
-    setUploadErrorFile: function setUploadErrorFile(state, data) {
-      state.UploadErrorFile = data;
+    setUploadErrorFiles: function setUploadErrorFiles(state, data) {
+      state.UploadErrorFiles = data;
     }
   },
   actions: {}
@@ -55504,8 +55381,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! /var/www/html/photoGallery/resources/js/app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! /var/www/html/photoGallery/resources/sass/app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
