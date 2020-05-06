@@ -31,25 +31,29 @@ class PhotoController extends Controller
      */
     public function store(PhotoRequest $request)
     {
-        dd($request->allFiles('photo'));
+//        dd('ДАДОВА!');
+////        dd($request->allFiles('photo'));
         if($request->hasFile('photo')) {
-            $file = $request->file('photo');
-            $kindId = $request->all()['kind'] ?? 1;
-            $date = Carbon::now()->format('Y_m_d');
-            $data = [];
+            foreach($request->file('photo') as $file) {
+                $file = $file;
+                $kindId = $request->all()['kind'] ?? 1;
+                $date = Carbon::now()->format('Y_m_d');
+                $data = [];
 
-            $data['user_id'] = 1;
-            $data['size'] = $file->getSize();
-            $data['name'] = $file->getClientOriginalName();
-            $data['path'] = $file->store("/{$date}", 'images');
-            $data['extension'] = $file->getClientOriginalExtension();
-            $data['url'] = Storage::url($data['path']);
-            $imageSize = getimagesize($file);
-            $data['width'] = $imageSize[0];
-            $data['height'] = $imageSize[2];
-            $data['kind_id'] = $kindId;
+                $data['user_id'] = 1;
+                $data['size'] = $file->getSize();
+                $data['name'] = $file->getClientOriginalName();
+                $data['path'] = $file->store("/{$date}", 'images');
+                $data['extension'] = $file->getClientOriginalExtension();
+                $data['url'] = Storage::url($data['path']);
+                $imageSize = getimagesize($file);
+                $data['width'] = $imageSize[0];
+                $data['height'] = $imageSize[2];
+                $data['kind_id'] = $kindId;
 
-            (new \App\Models\Dashboard\Photo)->create($data);
+                (new \App\Models\Dashboard\Photo)->create($data);
+            }
+
         }
 
     }

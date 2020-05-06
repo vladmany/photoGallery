@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 
 class PhotoRequest extends FormRequest
 {
+
     /**
      * Get the validation rules that apply to the request.
      *
@@ -15,7 +16,7 @@ class PhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo' => 'required|image|mimes:png,bmp,gif,tiff,jpg|max:1600|dimensions:max_width=3024,max_height=4032'
+            'photo.*' => 'image|mimes:png,bmp,gif,tiff,jpg|max:1600|dimensions:max_width=3024,max_height=4032'
         ];
     }
 
