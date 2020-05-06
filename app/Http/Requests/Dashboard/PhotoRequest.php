@@ -16,7 +16,7 @@ class PhotoRequest extends FormRequest
     public function rules()
     {
         return [
-            'photo.*' => 'image|mimes:png,bmp,gif,tiff,jpg|max:1600|dimensions:max_width=3024,max_height=4032'
+            'photo.*' => 'image|mimes:jpeg,bmp,png,giff,tiff|max:16000|dimensions:max_width=3024,max_height=4032'
         ];
     }
 
@@ -29,7 +29,7 @@ class PhotoRequest extends FormRequest
             'required' => 'Поле обязательно к заполнению',
             'image' => 'Загружаемый файл не является картинкой',
             'mimes' => 'Не соответствует формат загружаемых фото. Рекомендуемые форматы - BMP; GIF; JPG; PNG; TIFF',
-            'max' => 'Максимальный размер загружаемого фото :max МБ',
+            'max' => 'Максимальный размер загружаемого фото 16 МБ',
             'dimensions' => "Максимальное разрешение фото 3024x4032",
             'uploaded' => "Ошибка загрузки фото"
         ];
