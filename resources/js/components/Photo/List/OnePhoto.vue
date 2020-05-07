@@ -1,7 +1,9 @@
 <template>
     <div class="d-flex">
-        <Checkbox></Checkbox>
-        <img :src="photo.path" :alt="photo.name" class="one-photo">
+        <div>
+            <Checkbox class="mx-1"></Checkbox>
+            <img :src="photo.path" :alt="photo.name" class="one-photo">
+        </div>
     </div>
 </template>
 

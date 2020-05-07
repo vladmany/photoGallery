@@ -16,14 +16,14 @@ const mutations = {
 }
 const actions = {
     addPhoto: payload => {
-        axios.post('index.php/api/all-photos', {
+        axios.post('api/all-photos', {
             photo: payload.photo,
         }).then(res => {
             console.log(res.data)
         })
     },
     getPhotos: context => {
-        axios.get('index.php/api/all-photos')
+        axios.get('api/all-photos')
             .then(res => {
                 context.commit('getPhotos', res.data)
             })
