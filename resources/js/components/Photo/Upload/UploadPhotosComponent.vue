@@ -129,7 +129,7 @@
             }
         },
         created() {
-            let vm = this;
+            // let vm = this;
             document.addEventListener('mouseup', function (e) {
                 let container = $(".upload-methods");
 

@@ -56,7 +56,8 @@
                 var newAlbum = app.album;
                 axios.post('api/albums/create', newAlbum)
                     .then(
-                        this.$emit('closeModal')
+                        this.$emit('closeModal'),
+                        this.$store.commit('getAlbums'),
                     )
                     .catch(function (resp) {
                         console.log(resp);
