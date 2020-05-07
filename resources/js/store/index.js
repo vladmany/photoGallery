@@ -12,8 +12,8 @@ export default new Vuex.Store({
     },
     state: {
         isUploadError: false,
-        UploadErrorMessages: [],
-        UploadErrorFiles: [],
+        UploadErrorMessage: [],
+        UploadErrorFile: [],
     },
     getters: {
 
@@ -26,10 +26,10 @@ export default new Vuex.Store({
             state.isUploadError = false
         },
         setUploadErrorMessages(state, data) {
-            state.UploadErrorMessages = data
+            state.UploadErrorMessage = data
         },
         setUploadErrorFiles(state, data) {
-            state.UploadErrorFiles = data
+            state.UploadErrorFile = data
         }
     },
     actions: {
