@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="d-flex flex-column px-5">
 
-        <div>
+        <div class="w-100 breadcrumb">
             <slot name="breadcrumbs">
                 <p>Хлебные крошки</p>
             </slot>
@@ -13,7 +13,7 @@
             </slot>
         </div>
 
-        <div>
+        <div class="py-3">
             <slot name="content">
                 <p>Контент страницы</p>
             </slot>

@@ -1,8 +1,7 @@
 <template>
 <div>
-    <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
-    <upload-photos-component></upload-photos-component>
-    <IndexAlbums></IndexAlbums>
+<!--    <IndexAlbums></IndexAlbums>-->
+    <BlockPhotoList></BlockPhotoList>
 </div>
 </template>
 
@@ -11,10 +10,11 @@
     import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
     import AllAlbums from "./components/Album/AllAlbums";
     import IndexAlbums from "./components/Album/Index";
+    import BlockPhotoList from "./components/Photo/List/BlockPhotoList";
 
     export default {
         name: "App",
-        components: {AllAlbums, UploadPhotosComponent, ErrorsModalWindow, IndexAlbums}
+        components: {AllAlbums, UploadPhotosComponent, ErrorsModalWindow, IndexAlbums, BlockPhotoList}
     }
 </script>
 

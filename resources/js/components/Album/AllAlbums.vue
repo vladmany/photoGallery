@@ -43,7 +43,7 @@
         },
         methods:{
             getAlbums(){
-                axios.get('api/albums')
+                axios.get('api/albums/index')
                 .then(r => this.albums = r.data)
             },
             formatDate(created_at) {

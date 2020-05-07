@@ -3,6 +3,8 @@ import VueRouter from 'vue-router'
 import Albums from "./components/Album/Index";
 import Index from "./components/Album/Index";
 import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
+import BlockPhotoList from "./components/Photo/List/BlockPhotoList";
+
 export default new VueRouter({
     routes: [
         // {
@@ -11,13 +13,18 @@ export default new VueRouter({
         //     name: name
         // }
         {
-            path:'',
-            components:UploadPhotosComponent
+            path: '',
+            component: UploadPhotosComponent
         },
         {
-            path:'albums',
-            components:Index
-        }
+            path: '/albums',
+            component: Index
+        },
+        {
+            path: '/photo',
+            component: BlockPhotoList,
+            name: 'BlockPhotoList'
+        },
     ],
     mode: 'history',
 })
