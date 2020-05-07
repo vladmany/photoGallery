@@ -1,20 +1,20 @@
 <template>
 <div>
     <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
-    <all-photo></all-photo>
+    <upload-photos-component></upload-photos-component>
+    <IndexAlbums></IndexAlbums>
 </div>
 </template>
 
 <script>
     import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
-    import AllPhoto from "./components/Photo/List/AllPhoto";
+    import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
+    import AllAlbums from "./components/Album/AllAlbums";
+    import IndexAlbums from "./components/Album/Index";
 
     export default {
         name: "App",
-        components: {AllPhoto, ErrorsModalWindow},
-        methods: {
-
-        }
+        components: {AllAlbums, UploadPhotosComponent, ErrorsModalWindow, IndexAlbums}
     }
 </script>
 
