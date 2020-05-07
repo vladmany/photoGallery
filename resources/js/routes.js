@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 import Albums from "./components/Album/Index";
 import Index from "./components/Album/Index";
 import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
+import ExampleComponent from "./components/ExampleComponent";
 export default new VueRouter({
     routes: [
         // {
@@ -11,13 +12,13 @@ export default new VueRouter({
         //     name: name
         // }
         {
-            path:'/photos',
-            // components:UploadPhotosComponent,
+            path:'/photo',
+            component: UploadPhotosComponent,
             name:'photos'
         },
         {
             path:'/albums',
-            // components:Index
+            component:Index
         },
         {
             path:'/studio'
