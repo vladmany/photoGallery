@@ -25,10 +25,10 @@ export default new Vuex.Store({
         hideUploadError(state) {
             state.isUploadError = false
         },
-        setUploadErrorMessages(state, data) {
+        setUploadErrorMessage(state, data) {
             state.UploadErrorMessage = data
         },
-        setUploadErrorFiles(state, data) {
+        setUploadErrorFile(state, data) {
             state.UploadErrorFile = data
         }
     },
