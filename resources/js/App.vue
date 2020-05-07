@@ -1,17 +1,17 @@
 <template>
 <div>
     <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
-    <upload-photos-component></upload-photos-component>
+    <all-photo></all-photo>
 </div>
 </template>
 
 <script>
     import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
-    import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
+    import AllPhoto from "./components/Photo/List/AllPhoto";
 
     export default {
         name: "App",
-        components: {UploadPhotosComponent, ErrorsModalWindow},
+        components: {AllPhoto, ErrorsModalWindow},
         methods: {
 
         }
