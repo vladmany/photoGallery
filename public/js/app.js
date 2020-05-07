@@ -2220,7 +2220,7 @@ var height;
                 errors.push(error.response.data.errors[key][0]);
               }
 
-              _this3.$store.commit('setUploadErrorMessages', errors);
+              _this3.$store.commit('setUploadErrorMessage', errors);
 
               var fileNames = [];
 
@@ -2230,7 +2230,7 @@ var height;
                 fileNames.push(files[i].name);
               }
 
-              _this3.$store.commit('setUploadErrorFiles', fileNames);
+              _this3.$store.commit('setUploadErrorFile', fileNames);
 
               _this3.$store.commit('showUploadError');
 
@@ -55698,10 +55698,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     hideUploadError: function hideUploadError(state) {
       state.isUploadError = false;
     },
-    setUploadErrorMessages: function setUploadErrorMessages(state, data) {
+    setUploadErrorMessage: function setUploadErrorMessage(state, data) {
       state.UploadErrorMessage = data;
     },
-    setUploadErrorFiles: function setUploadErrorFiles(state, data) {
+    setUploadErrorFile: function setUploadErrorFile(state, data) {
       state.UploadErrorFile = data;
     }
   },
