@@ -55687,8 +55687,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   state: {
     isUploadError: false,
-    UploadErrorMessages: [],
-    UploadErrorFiles: []
+    UploadErrorMessage: [],
+    UploadErrorFile: []
   },
   getters: {},
   mutations: {
@@ -55699,10 +55699,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       state.isUploadError = false;
     },
     setUploadErrorMessages: function setUploadErrorMessages(state, data) {
-      state.UploadErrorMessages = data;
+      state.UploadErrorMessage = data;
     },
     setUploadErrorFiles: function setUploadErrorFiles(state, data) {
-      state.UploadErrorFiles = data;
+      state.UploadErrorFile = data;
     }
   },
   actions: {}
