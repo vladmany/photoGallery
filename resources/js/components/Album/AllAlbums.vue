@@ -42,10 +42,6 @@
             }
         },
         methods:{
-            getAlbums(){
-                axios.get('api/albums')
-                .then(r => this.albums = r.data)
-            },
             formatDate(created_at) {
                 created_at = new Date(created_at)
                 this.date =  created_at.getDate() +' '+this.monthes[created_at.getMonth()] + ' '+ created_at.getFullYear();
@@ -53,7 +49,7 @@
             }
         },
         created() {
-            this.getAlbums()
+            this.$store.commit('getAlbums')
         }
 
     }

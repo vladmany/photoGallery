@@ -14,6 +14,7 @@ export default new Vuex.Store({
         isUploadError: false,
         UploadErrorMessage: [],
         UploadErrorFile: [],
+        AllAlbums: []
     },
     getters: {
 
@@ -30,6 +31,10 @@ export default new Vuex.Store({
         },
         setUploadErrorFile(state, data) {
             state.UploadErrorFile = data
+        },
+        getAlbums() {
+            axios.get('api/albums')
+                .then(r => this.albums = r.data)
         }
     },
     actions: {

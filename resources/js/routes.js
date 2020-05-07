@@ -11,12 +11,16 @@ export default new VueRouter({
         //     name: name
         // }
         {
-            path:'',
-            components:UploadPhotosComponent
+            path:'/photos',
+            // components:UploadPhotosComponent,
+            name:'photos'
         },
         {
-            path:'albums',
-            components:Index
+            path:'/albums',
+            // components:Index
+        },
+        {
+            path:'/studio'
         }
     ],
     mode: 'history',
