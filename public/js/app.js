@@ -2030,6 +2030,16 @@ __webpack_require__.r(__webpack_exports__);
     cancel: function cancel() {
       this.$root.$emit('cancelUpload');
     }
+  },
+  created: function created() {
+    var vm = this;
+    document.addEventListener('mouseup', function (e) {
+      var container = $(".window");
+
+      if (container.has(e.target).length === 0 && ($(':focus').attr('class') === !'upload-btn' || $(':focus').attr('class') == undefined) && container.css('display') === 'flex') {
+        container.css('display', 'none');
+      }
+    });
   }
 });
 
@@ -38743,7 +38753,7 @@ var render = function() {
             staticClass: "close-window-btn",
             on: {
               click: function($event) {
-                return _vm.closeWindow()
+                return _vm.cancel()
               }
             }
           },
