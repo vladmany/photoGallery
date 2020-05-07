@@ -13,10 +13,6 @@ export default new VueRouter({
         //     name: name
         // }
         {
-            path: '',
-            component: UploadPhotosComponent
-        },
-        {
             path: '/albums',
             component: Index
         },
@@ -24,6 +20,11 @@ export default new VueRouter({
             path: '/photo',
             component: BlockPhotoList,
             name: 'BlockPhotoList'
+        },
+
+        {
+            path: '/photo',
+
         },
     ],
     mode: 'history',
