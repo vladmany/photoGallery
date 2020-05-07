@@ -158,12 +158,12 @@
                                     for (let key in error.response.data.errors) {
                                         errors.push(error.response.data.errors[key][0])
                                     }
-                                    this.$store.commit('setUploadErrorMessages',errors)
+                                    this.$store.commit('setUploadErrorMessage',errors)
                                     let fileNames = [];
                                     let files = this.$refs.photo.prop('files')
                                     for(let i = 0; i < files.length; i++)
                                         fileNames.push(files[i].name)
-                                    this.$store.commit('setUploadErrorFiles', fileNames)
+                                    this.$store.commit('setUploadErrorFile', fileNames)
                                     this.$store.commit('showUploadError');
                                     this.$refs.photo.val('')
                                 }
