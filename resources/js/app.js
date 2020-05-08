@@ -8,11 +8,11 @@ import store from './store'
 import axios from 'axios'
 
 Vue.use(VueRouter)
-Vue.config.productionTip = false;
 
 Vue.prototype.$http = axios;
+Vue.config.productionTip = false;
 
 const app = new Vue({
     render: h => h(App),
-    router, store
+    store, router
 }).$mount('#app');

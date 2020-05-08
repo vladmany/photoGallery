@@ -1,10 +1,8 @@
 <template>
-    <div class="one-photo" :style="style">
+    <div class="d-flex">
         <div>
-            <Checkbox />
-        </div>
-        <div>
-
+            <Checkbox class="mx-1"></Checkbox>
+            <img :src="photo.path" :alt="photo.name" class="one-photo">
         </div>
     </div>
 </template>
@@ -21,13 +19,13 @@
                 type: Object,
             }
         },
-        computed: {
-            style() {
-                return {
-                    background: "no-repeat center url({{this.photo.url}});"
-                }
-            }
-        }
+        // computed: {
+        //     style() {
+        //         return {
+        //             background: "no-repeat center url({{this.photo.url}});"
+        //         }
+        //     }
+        // }
     }
 </script>
 
