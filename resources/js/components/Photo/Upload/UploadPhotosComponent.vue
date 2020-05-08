@@ -88,12 +88,14 @@
                 {
                     this.$store.commit('setUploadErrorMessage', 'Превышает объем  загружаемого фото. Объем загружаемого файла не должен превышать 16 МВ')
                     this.$store.commit('setUploadErrorFile',file.name)
+                    console.log('Есть ошибка')
                     return false
                 }
                 if (!['bmp','gif','jpeg','jpg','png','tiff'].includes(file.type.split('/').pop()))
                 {
                     this.$store.commit('setUploadErrorMessage', 'Не соответствует формат загружаемых фото. Рекомендуемые форматы - BMP; GIF; JPG; PNG; TIFF')
                     this.$store.commit('setUploadErrorFile',file.name)
+                    console.log('Есть ошибка')
                     return false
                 }
 

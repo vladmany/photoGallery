@@ -34,8 +34,9 @@ class PhotoController extends Controller
 //        dd('ДАДОВА!');
 ////        dd($request->allFiles('photo'));
         if($request->hasFile('photo')) {
+//            dd('ЕСТЬ ФАЙЛЫ');
             foreach($request->file('photo') as $file) {
-                $file = $file;
+//                $file = $file;
                 $kindId = $request->all()['kind'] ?? 1;
                 $date = Carbon::now()->format('Y_m_d');
                 $data = [];

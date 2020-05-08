@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+        <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
         <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
             <a class="navbar-brand">
                 <img src="/storage/navbar_logo.png" alt="navbar_logo">
@@ -160,10 +161,11 @@
     // import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
     // import AllAlbums from "./components/Album/AllAlbums";
     // import IndexAlbums from "./components/Album/Index";
+    import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
 
 
     export default {
-        components: {},
+        components: {ErrorsModalWindow},
         data: function () {
             return {
                 name : 'Анна Кононенко',
