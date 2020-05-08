@@ -9,6 +9,11 @@ import axios from 'axios'
 
 Vue.use(VueRouter)
 
+Vue.config.devtools = false
+Vue.config.debug = false
+Vue.config.silent = true
+
+
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
 

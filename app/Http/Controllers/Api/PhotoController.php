@@ -20,6 +20,7 @@ class PhotoController extends Controller
      */
     public function index()
     {
+//        dd(Photo::all());
         return Photo::all();
     }
 
@@ -44,16 +45,16 @@ class PhotoController extends Controller
                 $data['user_id'] = 1;
                 $data['size'] = $file->getSize();
                 $data['name'] = $file->getClientOriginalName();
-                $data['path'] = $file->store("/{$date}", 'images');
+                $data['path'] = $file->store("/images/{$date}", 'public');
                 $data['extension'] = $file->getClientOriginalExtension();
                 $data['url'] = Storage::url($data['path']);
                 $imageSize = getimagesize($file);
                 $data['width'] = $imageSize[0];
                 $data['height'] = $imageSize[2];
                 $data['kind_id'] = $kindId;
-
-                (new \App\Models\Dashboard\Photo)->create($data);
-            }
+//                dd(Photo::all());
+                Photo::create($data);
+        }
 
         }
 
@@ -62,7 +63,7 @@ class PhotoController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Dashboard\Photo  $photo
+     * @param Photo $photo
      * @return \Illuminate\Http\Response
      */
     public function show(Photo $photo)
@@ -74,7 +75,7 @@ class PhotoController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Dashboard\Photo  $photo
+     * @param Photo $photo
      * @return \Illuminate\Http\Response
      */
     public function update(PhotoRequest $request, Photo $photo)
@@ -85,7 +86,7 @@ class PhotoController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Dashboard\Photo  $photo
+     * @param Photo $photo
      * @return \Illuminate\Http\Response
      */
     public function destroy(Photo $photo)

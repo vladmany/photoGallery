@@ -39,7 +39,7 @@
                 </li>
                 <div class="group-tabs" :style="'display: ' + (photosOpen ? 'block' : 'none')">
                     <li>
-                        <router-link to="/photo" >
+                        <router-link to="/photos" >
                             <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
                             <span>Фото</span>
                         </router-link>
@@ -125,31 +125,31 @@
                             <li>Фото</li>
                         </ul>
                     </li>
-                    <li class="col-lg-4 offset-md-6 offset-sm-0 offset-lg-0 col-md-6 col-sm-12 pl-sm-3">
-                        <h4 class="text">Контакты</h4>
-                        <ul>
-                            <li>+38095 900 38 00 </li>
-                            <li>mail@aiti20.com</li>
-                        </ul>
+<!--                    <li class="col-lg-4 offset-md-6 offset-sm-0 offset-lg-0 col-md-6 col-sm-12 pl-sm-3">-->
+<!--                        <h4 class="text">Контакты</h4>-->
+<!--                        <ul>-->
+<!--                            <li>+38095 900 38 00 </li>-->
+<!--                            <li>mail@aiti20.com</li>-->
+<!--                        </ul>-->
 
-                        <ul class="social_block">
-                            <li>
-                                <a href="google.com">
-                                    <object type="image/svg+xml" data="/storage/social_ic/ic_facebook.svg"></object>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="google.com">
-                                    <object type="image/svg+xml" data="/storage/social_ic/ic_twitter.svg"></object>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="google.com">
-                                    <object type="image/svg+xml" data="/storage/social_ic/ic_instagram.svg"></object>
-                                </a>
-                            </li>
-                        </ul>
-                    </li>
+<!--                        <ul class="social_block">-->
+<!--                            <li>-->
+<!--                                <a href="google.com">-->
+<!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_facebook.svg"></object>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a href="google.com">-->
+<!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_twitter.svg"></object>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                            <li>-->
+<!--                                <a href="google.com">-->
+<!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_instagram.svg"></object>-->
+<!--                                </a>-->
+<!--                            </li>-->
+<!--                        </ul>-->
+<!--                    </li>-->
                 </ul>
             </footer>
         </div>
