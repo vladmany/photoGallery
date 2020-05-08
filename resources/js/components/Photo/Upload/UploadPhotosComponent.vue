@@ -152,6 +152,7 @@
                             })
                             .then(response => {
                                 this.formData = new FormData() // Сброс
+                                this.$store.dispatch('getPhotos');
                             })
                             .catch(error => {
                                 if (error.response.status === 422)

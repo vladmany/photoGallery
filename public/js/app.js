@@ -2823,6 +2823,8 @@ var height;
             }
           }).then(function (response) {
             _this3.formData = new FormData(); // Сброс
+
+            _this3.$store.dispatch('getPhotos');
           })["catch"](function (error) {
             if (error.response.status === 422) {
               var errors = [];
