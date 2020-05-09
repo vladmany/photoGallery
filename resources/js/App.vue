@@ -1,6 +1,8 @@
 <template>
     <div class="wrapper">
         <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
+        <success-modal-window v-if="this.$store.state.isSuccessUpload"></success-modal-window>
+        <selection-error-modal v-if="this.$store.state.isSelectFilesError"></selection-error-modal>
         <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
             <a class="navbar-brand">
                 <img src="/storage/navbar_logo.png" alt="navbar_logo">
@@ -95,7 +97,7 @@
                 </div>
             </nav>
             <main>
-                <router-view></router-view>
+                <router-view style="position: fixed; width: 100%"></router-view>
             </main>
         </div>
         <div class="footer_wrapper">
@@ -162,10 +164,12 @@
     // import AllAlbums from "./components/Album/AllAlbums";
     // import IndexAlbums from "./components/Album/Index";
     import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
+    import SuccessModalWindow from "./components/Photo/Upload/SuccessModalWindow";
+    import SelectionErrorModal from "./components/Photo/Upload/SelectionErrorModal";
 
 
     export default {
-        components: {ErrorsModalWindow},
+        components: {SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
             return {
                 name : 'Анна Кононенко',

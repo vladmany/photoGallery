@@ -1,9 +1,9 @@
 <template>
     <div class="d-flex">
-        <div>
-            <Checkbox class="mx-1"></Checkbox>
+        <label class="photo_element">
+            <input type="checkbox" class="mx-1">
             <img :src="photo.url" :alt="photo.name" class="one-photo">
-        </div>
+        </label>
     </div>
 </template>
 
@@ -31,7 +31,19 @@
 
 <style scoped>
     .one-photo {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
+    }
+
+    .photo_element {
+        margin: 7px;
+    }
+
+    .photo_element input[type=checkbox] {
+        display: flex;
+        position: absolute;
+        transform:scale(1.5);
+        margin-top: 6px;
+        margin-left: 6px!important;
     }
 </style>

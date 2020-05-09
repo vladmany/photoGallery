@@ -14,6 +14,10 @@ export default new Vuex.Store({
         isUploadError: false,
         UploadErrorMessage: [],
         UploadErrorFile: [],
+        isSuccessUpload: false,
+        successUploadFiles: [],
+        isSelectFilesError: false,
+        maxFilesToUpload: 15,
         AllAlbums: []
     },
     getters: {
@@ -26,11 +30,26 @@ export default new Vuex.Store({
         hideUploadError(state) {
             state.isUploadError = false
         },
+        showUploadSuccess(state) {
+            state.isSuccessUpload = true
+        },
+        hideUploadSuccess(state) {
+            state.isSuccessUpload = false
+        },
         setUploadErrorMessage(state, data) {
             state.UploadErrorMessage = data
         },
         setUploadErrorFile(state, data) {
             state.UploadErrorFile = data
+        },
+        setUploadSuccessFile(state, data) {
+            state.successUploadFiles = data
+        },
+        showSelectError(state) {
+            state.isSelectFilesError = true
+        },
+        hideSelectError(state) {
+            state.isSelectFilesError = false
         },
         getAlbums() {
             axios.get('api/albums')
