@@ -2443,36 +2443,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       "default": 20
     }
   },
-  data: function data() {
-    return {
-      groups: {},
-      weekdays: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'],
-      months: ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря']
-    };
-  },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['photos'])),
-  methods: {
-    makeDataFormat: function makeDataFormat(title) {
-      var date = new Date(title);
-      var weekday = this.weekdays[date.getDay()];
-      var month = this.months[date.getMonth()];
-      return "".concat(weekday, ", ").concat(date.getDate(), " ").concat(month);
-    }
-  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['photos', 'groups'])),
   watch: {
     photos: function photos() {
-      var _this = this;
-
-      var key = 'created_at';
-      this.photos.forEach(function (item) {
-        var val = _this.makeDataFormat(item[key].split('T')[0]);
-
-        if (!_this.groups[val]) {
-          _this.groups[val] = [];
-        }
-
-        _this.groups[val].push(item);
-      });
+      this.$store.dispatch('makeGroups');
     }
   },
   created: function created() {
@@ -59242,7 +59216,8 @@ var actions = {};
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 var state = {
-  photos: []
+  photos: [],
+  groups: {}
 };
 var getters = {
   photos: function photos(state) {
@@ -59262,6 +59237,9 @@ var getters = {
 var mutations = {
   getPhotos: function getPhotos(state, payload) {
     state.photos = payload;
+  },
+  makeGroups: function makeGroups(state, payload) {
+    state.groups = payload;
   }
 };
 var actions = {
@@ -59277,6 +59255,29 @@ var actions = {
     axios.get('api/all-photos').then(function (res) {
       commit('getPhotos', res.data);
     });
+  },
+  makeGroups: function makeGroups(_ref2) {
+    var state = _ref2.state,
+        commit = _ref2.commit;
+    var weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+    var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    var groups = {};
+    var key = 'created_at';
+    state.photos.forEach(function (item) {
+      var val = item[key].split('T')[0];
+      var date = new Date(val);
+      var weekday = weekdays[date.getDay()];
+      var month = months[date.getMonth()];
+      var ret = "".concat(weekday, ", ").concat(date.getDate(), " ").concat(month);
+
+      if (!groups[ret]) {
+        groups[ret] = [];
+      }
+
+      groups[ret].push(item);
+    });
+    console.log(groups);
+    commit('makeGroups', groups);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({

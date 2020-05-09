@@ -36,40 +36,15 @@
                 default: 20
             }
         },
-        data() {
-            return {
-                groups: {},
-                weekdays: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб',],
-                months: [
-                    'января', 'февраля', 'марта', 'апреля',
-                    'мая', 'июня', 'июля', 'августа',
-                    'сентября', 'октября', 'ноября', 'декабря',
-                ],
-            }
-        },
         computed: {
             ...mapGetters([
-                'photos'
+                'photos',
+                'groups'
             ]),
-        },
-        methods: {
-            makeDataFormat(title) {
-                let date = new Date(title);
-                let weekday = this.weekdays[date.getDay()];
-                let month = this.months[date.getMonth()];
-                return `${weekday}, ${date.getDate()} ${month}`;
-            }
         },
         watch: {
             photos() {
-                let key = 'created_at';
-                this.photos.forEach(item => {
-                    let val = this.makeDataFormat(item[key].split('T')[0]);
-                    if (!this.groups[val]){
-                        this.groups[val] = []
-                    }
-                    this.groups[val].push(item)
-                });
+                this.$store.dispatch('makeGroups');
             }
         },
         created() {

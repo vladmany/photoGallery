@@ -6,7 +6,7 @@
         <template v-slot:content>
             <div>
                 <p class="pl-5">Панель инструментов</p>
-                <OnePhoto :id="photoId"></OnePhoto>
+                <OnePhoto :id="id"></OnePhoto>
             </div>
         </template>
     </Section>
@@ -20,7 +20,7 @@
         name: "BlockOnePhoto",
         components: { OnePhoto, Section },
         props: {
-            photoId: {
+            id: {
                 required: true,
                 type: Number
             }
