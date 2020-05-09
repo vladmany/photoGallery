@@ -52,7 +52,15 @@ let actions = {
             groups[ret].push(item)
         });
 
-        commit('makeGroups', groups);
+        let keys = Object.keys(groups);
+        keys.reverse();
+        let desc_groups = {};
+
+        for(key of keys) {
+            desc_groups[key] = groups[key];
+        }
+
+        commit('makeGroups', desc_groups);
     }
 }
 

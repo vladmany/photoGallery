@@ -59276,8 +59276,16 @@ var actions = {
 
       groups[ret].push(item);
     });
-    console.log(groups);
-    commit('makeGroups', groups);
+    var keys = Object.keys(groups);
+    keys.reverse();
+    var desc_groups = {};
+
+    for (var _i = 0, _keys = keys; _i < _keys.length; _i++) {
+      key = _keys[_i];
+      desc_groups[key] = groups[key];
+    }
+
+    commit('makeGroups', desc_groups);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
