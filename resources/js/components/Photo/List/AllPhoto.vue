@@ -2,12 +2,14 @@
     <div class="photos-wrap">
         <div class="main-panel">
             <div class="upload">
-                <UploadPhotosComponent></UploadPhotosComponent>
+                <UploadPhotosComponent />
             </div>
             <div class="actions-panel"></div>
         </div>
         <div class="" v-if="photos.length > 0">
-
+            <GroupPhoto v-for="(elements, title) in groups"
+                        :elements="elements" :title="title"
+                        :key="title" />
         </div>
         <div v-else class="placeholder">
             <h2>Здесь вы можете добавить свои фотографии</h2>
@@ -19,7 +21,6 @@
 <script>
     import Section from '../../Global/Section'
     import GroupPhoto from './GroupPhoto'
-    import OnePhoto from "./OnePhoto";
     import { mapGetters } from 'vuex'
     import ListPhoto from "../../../store/modules/ListPhoto";
     import ErrorsModalWindow from "../Upload/ErrorsModalWindow";
@@ -28,11 +29,22 @@
 
     export default {
         name: "AllPhoto",
-        components: {Checkbox, Section, OnePhoto, ErrorsModalWindow, UploadPhotosComponent},
+        components: {Checkbox, Section, GroupPhoto, ErrorsModalWindow, UploadPhotosComponent},
         props: {
             paginateCount: {
                 type: Number,
-                default: 40
+                default: 20
+            }
+        },
+        data() {
+            return {
+                groups: {},
+                weekdays: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб',],
+                months: [
+                    'января', 'февраля', 'марта', 'апреля',
+                    'мая', 'июня', 'июля', 'августа',
+                    'сентября', 'октября', 'ноября', 'декабря',
+                ],
             }
         },
         computed: {
@@ -41,8 +53,23 @@
             ]),
         },
         methods: {
-            getPhotos() {
-                // this.$store.dispatch('getPhotos', null, { root:true });
+            makeDataFormat(title) {
+                let date = new Date(title);
+                let weekday = this.weekdays[date.getDay()];
+                let month = this.months[date.getMonth()];
+                return `${weekday}, ${date.getDate()} ${month}`;
+            }
+        },
+        watch: {
+            photos() {
+                let key = 'created_at';
+                this.photos.forEach(item => {
+                    let val = this.makeDataFormat(item[key].split('T')[0]);
+                    if (!this.groups[val]){
+                        this.groups[val] = []
+                    }
+                    this.groups[val].push(item)
+                });
             }
         },
         created() {
@@ -97,35 +124,5 @@
         height: 100%;
         margin-right: auto;
         margin-left: auto
-    }
-    .group {
-        display: flex;
-        flex-direction: column;
-        margin-top: 53px;
-    }
-    .group-selector {
-        display: flex;
-        flex-direction: row;
-    }
-    .group-selector input[type=checkbox] {
-        display: flex;
-        transform:scale(1.5);
-        margin-top: 7px;
-        margin-right: 4px;
-    }
-    .group-date {
-        font-family: 'Roboto', sans-serif;
-        font-style: normal;
-        font-weight: 500;
-        font-size: 16px;
-        line-height: 30px;
-        text-align: center;
-        color: #999999;
-    }
-    .group-content {
-        display: flex;
-        flex-direction: row;
-        /*justify-content: space-between;*/
-        flex-wrap: wrap;
     }
 </style>

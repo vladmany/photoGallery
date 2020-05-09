@@ -1,8 +1,10 @@
 <template>
     <div class="d-flex">
         <label class="photo_element">
-            <input type="checkbox" class="mx-1">
-            <img :src="photo.url" :alt="photo.name" class="one-photo">
+            <input type="checkbox" class="mx-1 mb-1" v-model="isSelected">
+            <router-link :to="{ name: 'OnePhoto', params: { photoId: photo.id } }">
+                <img :src="photo.url" :alt="photo.name" class="one-photo">
+            </router-link>
         </label>
     </div>
 </template>
@@ -24,11 +26,6 @@
                 isSelected: false,
             }
         },
-        methods: {
-            select() {
-                this.isSelected = this.isSelected;
-            }
-        }
     }
 </script>
 

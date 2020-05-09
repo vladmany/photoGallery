@@ -1,20 +1,18 @@
-const state = {
+let state = {
     photos: [],
-    groups: {},
 }
-const getters = {
+let getters = {
     photos: state => state.photos,
     groups: state => state.groups,
+    photo: state => id =>
+        state.photos.find(photo => photo.id === id)
 }
-const mutations = {
+let mutations = {
     getPhotos:(state, payload) => {
         state.photos = payload
     },
-    makeGroups: (state, payload) => {
-        state.groups = payload;
-    }
 }
-const actions = {
+let actions = {
     addPhoto: payload => {
         axios.post('api/all-photos', {
             photo: payload.photo,
@@ -22,22 +20,11 @@ const actions = {
             console.log(res.data)
         })
     },
-    getPhotos: context => {
+    getPhotos({ commit }) {
         axios.get('api/all-photos')
             .then(res => {
-                context.commit('getPhotos', res.data)
+                commit('getPhotos', res.data)
             })
-    },
-    makeGroups: (context, array) => {
-        let groups = {};
-        let key = 'created_at';
-        array.forEach(item => {
-            if (!groups[item[key]]){
-                groups[item[key]] = []
-            }
-            groups[item[key]].push(item)
-        });
-        context.commit(array)
     }
 }
 
