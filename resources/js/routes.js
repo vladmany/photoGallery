@@ -14,12 +14,13 @@ export default new VueRouter({
         // }
         {
             path: '/albums',
-            component: Index
+            component: Index,
         },
         {
             path: '/photos',
             component: BlockPhotoList,
-            name: 'BlockPhotoList'
+            name: 'BlockPhotoList',
+            alias: '/'
         },
 
         {

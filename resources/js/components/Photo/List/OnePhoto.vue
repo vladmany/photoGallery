@@ -19,13 +19,16 @@
                 type: Object,
             }
         },
-        // computed: {
-        //     style() {
-        //         return {
-        //             background: "no-repeat center url({{this.photo.url}});"
-        //         }
-        //     }
-        // }
+        data() {
+            return {
+                isSelected: false,
+            }
+        },
+        methods: {
+            select() {
+                this.isSelected = this.isSelected;
+            }
+        }
     }
 </script>
 
