@@ -52,7 +52,6 @@ let actions = {
             groups[ret].push(item)
         });
 
-        console.log(groups);
         commit('makeGroups', groups);
     }
 }
