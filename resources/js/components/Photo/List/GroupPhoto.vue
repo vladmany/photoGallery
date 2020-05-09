@@ -1,9 +1,12 @@
 <template>
-    <div>
-        <h2>{{ strTitle }}</h2>
-        <div class="d-flex">
-            <OnePhoto v-for="element in elements" :key="element.id"
-                      :photo="element"></OnePhoto>
+    <div class="group">
+        <div class="group-selector">
+            <input type="checkbox" id="sel-group">
+            <label for="sel-group" class="group-date">{{ strTitle }}</label>
+        </div>
+        <div class="group-content">
+            <OnePhoto v-for="photo in photos" :key="photo.id" :photo="photo"
+            ></OnePhoto>
         </div>
     </div>
 </template>

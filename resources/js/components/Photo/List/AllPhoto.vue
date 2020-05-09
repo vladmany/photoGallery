@@ -7,19 +7,10 @@
             <div class="actions-panel"></div>
         </div>
         <div class="" v-if="photos.length > 0">
-            <div class="group">
-                <div class="group-selector">
-                    <input type="checkbox">
-                    <label class="group-date">пт, 8 мая</label>
-                </div>
-                <div class="group-content">
-                    <OnePhoto v-for="photo in photos" :key="photo.id" :photo="photo"
-                    ></OnePhoto>
-                </div>
-            </div>
+
         </div>
         <div v-else class="placeholder">
-            <span>Здесь вы можете добавить свои фотографии</span>
+            <h2>Здесь вы можете добавить свои фотографии</h2>
             <img src="/storage/photos/placeholder.png">
         </div>
     </div>
