@@ -14,9 +14,12 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth.redirect');
+Route::post('/auth/callback', 'Auth\LoginController@callback')->name('auth.callback');
 
 Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('/albums', 'Api\AlbumController');
@@ -26,4 +29,3 @@ Route::post('/albums/create', 'Api\AlbumController@store')->name('albums.create'
 Route::post('/albums/index', 'Api\AlbumController@index')->name('albums.index');
 Route::get('/collages', 'Api\PhotoController@collageIndex')->name('collages');
 Route::get('/animatoins', 'Api\PhotoController@animationIndex')->name('animations');
-

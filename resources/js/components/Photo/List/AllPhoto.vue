@@ -1,15 +1,15 @@
 <template>
     <div>
-        <div class="d-flex py-5">
-            <div>
+        <div class="row py-5">
+            <div class="col-auto">
                 <ErrorsModalWindow v-if="this.$store.state.isUploadError"></ErrorsModalWindow>
                 <UploadPhotosComponent></UploadPhotosComponent>
             </div>
-            <div class="px-3">Панель команд</div>
+            <div class="col-auto px-3">Панель команд</div>
         </div>
-        <div class="d-flex" v-if="photos.length > 0">
+        <div class="row" v-if="photos.length > 0">
             <OnePhoto v-for="photo in photos" :key="photo.id" :photo="photo"
-                        class="mx-2"
+                      class="col-auto"
             ></OnePhoto>
         </div>
         <div v-else>
