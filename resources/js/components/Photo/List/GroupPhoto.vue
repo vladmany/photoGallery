@@ -5,7 +5,9 @@
             <label for="sel-group" class="group-date">{{ title }}</label>
         </div>
         <div class="group-content">
-            <OnePhoto v-for="photo in elements" :key="photo.id" :photo="photo"
+            <OnePhoto v-for="photo in elements" :key="photo.id"
+                      :photo="photo"
+                      :is-selected="isSelected"
             ></OnePhoto>
         </div>
     </div>

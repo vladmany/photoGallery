@@ -2513,6 +2513,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GroupPhoto",
@@ -2569,13 +2571,17 @@ __webpack_require__.r(__webpack_exports__);
     photo: {
       required: true,
       type: Object
+    },
+    isSelected: {
+      required: true,
+      type: Boolean
     }
-  },
-  data: function data() {
-    return {
-      isSelected: false
-    };
-  }
+  } // data() {
+  //     return {
+  //         isSelected: false,
+  //     }
+  // },
+
 });
 
 /***/ }),
@@ -40761,7 +40767,10 @@ var render = function() {
       "div",
       { staticClass: "group-content" },
       _vm._l(_vm.elements, function(photo) {
-        return _c("OnePhoto", { key: photo.id, attrs: { photo: photo } })
+        return _c("OnePhoto", {
+          key: photo.id,
+          attrs: { photo: photo, "is-selected": _vm.isSelected }
+        })
       }),
       1
     )

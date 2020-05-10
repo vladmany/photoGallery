@@ -19,13 +19,17 @@
             photo: {
                 required: true,
                 type: Object,
+            },
+            isSelected: {
+                required: true,
+                type: Boolean,
             }
         },
-        data() {
-            return {
-                isSelected: false,
-            }
-        },
+        // data() {
+        //     return {
+        //         isSelected: false,
+        //     }
+        // },
     }
 </script>
 
