@@ -8,7 +8,8 @@ class Album extends Model
 {
     protected $fillable = ['name'];
     protected $attributes = [
-        'url'=> 'none-url'
+        'url'=> 'none-url',
+        'cover' => '/storage/albums/placeholderAlbum.png'
     ];
 
     public function add(array $data): self
