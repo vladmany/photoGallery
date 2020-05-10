@@ -1,0 +1,55 @@
+<template>
+    <div>
+        <Slider :images="images" :current-index="start"></Slider>
+<!--        <carousel :data="slides" :autoplay="false"></carousel>-->
+    </div>
+</template>
+
+<script>
+    import Slider from "../../Global/Slider";
+
+    export default {
+        name: "SliderPhoto",
+        components: { Slider },
+        props: {
+            id: {
+                required: true,
+                type: Object,
+            }
+        },
+        data() {
+            return {
+
+            }
+        },
+        computed: {
+            imagesind() {
+                let ret = this.$store.getters.groupByPhoto(this.id);
+                return ret;
+            },
+            images() {
+                return this.imagesind[1];
+            },
+            start() {
+                return this.imagesind[0];
+            },
+            slides(){
+                let ret = [];
+                for(let image of this.images) {
+                    ret.push(
+                        `<div><img src="${image}"></div>`
+                    )
+                }
+
+                return ret;
+            }
+        },
+        created() {
+
+        }
+    }
+</script>
+
+<style scoped>
+
+</style>

@@ -1,9 +1,14 @@
 <template>
-    <div>
-        <h2>{{ strTitle }}</h2>
-        <div class="d-flex">
-            <OnePhoto v-for="element in elements" :key="element.id"
-                      :photo="element"></OnePhoto>
+    <div class="group">
+        <div class="group-selector">
+            <input type="checkbox" id="sel-group" v-model="isSelected">
+            <label for="sel-group" class="group-date">{{ title }}</label>
+        </div>
+        <div class="group-content">
+            <OnePhoto v-for="photo in elements" :key="photo.id"
+                      :photo="photo"
+                      :is-selected="isSelected"
+            ></OnePhoto>
         </div>
     </div>
 </template>
@@ -13,11 +18,11 @@
 
     export default {
         name: "GroupPhoto",
-        components: {OnePhoto},
+        components: { OnePhoto },
         props: {
             title: {
                 required: true,
-                type: Date
+                type: String
             },
             elements: {
                 required: true,
@@ -26,23 +31,41 @@
         },
         data() {
             return {
-                strTitle: '',
-                weekdays: ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб',],
-                months: ['Января', 'Февраля', 'Марта', 'Апреля',
-                    'Мая', 'Июня', 'Июля', 'Августа',
-                    'Сентября', 'Октября', 'Ноября', 'Декабря',],
-            }
-        },
-        watch: {
-            title: (date) => {
-                let weekday = this.weekdays[date.day];
-                let month = this.months[date.month];
-                this.strTitle = `${weekday}, ${date.date} ${month}`;
+                isSelected: false,
             }
         }
     }
 </script>
 
 <style scoped>
-
+    .group {
+        display: flex;
+        flex-direction: column;
+        margin-top: 53px;
+    }
+    .group-selector {
+        display: flex;
+        flex-direction: row;
+    }
+    .group-selector input[type=checkbox] {
+        display: flex;
+        transform:scale(1.5);
+        margin-top: 7px;
+        margin-right: 4px;
+    }
+    .group-date {
+        font-family: 'Roboto', sans-serif;
+        font-style: normal;
+        font-weight: 500;
+        font-size: 16px;
+        line-height: 30px;
+        text-align: center;
+        color: #999999;
+    }
+    .group-content {
+        display: flex;
+        flex-direction: row;
+        /*justify-content: space-between;*/
+        flex-wrap: wrap;
+    }
 </style>
