@@ -1,7 +1,7 @@
 <template>
-    <div>
+    <div class="wrapper">
         <div class="container body-wrapper">
-            <div class="row mt-4 pb-2 album" v-for="(album, index) in albums">
+            <div class="row pt-4 pb-2 album" v-for="(album, index) in albums">
                 <div class="col-2 col-md-1 align-self-center d-flex justify-content-center text-center">
                     <input type="checkbox" class="checkbox-album text-center">
                 </div>
@@ -70,6 +70,9 @@
 </script>
 
 <style scoped>
+    .wrapper{
+        width: 100%;
+    }
     .img-cover{
         width: 180px;
         height: 100px;

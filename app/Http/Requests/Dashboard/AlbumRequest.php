@@ -20,7 +20,7 @@ class AlbumRequest extends FormRequest
     public function messages()
     {
         return [
-            'required' => 'Поле обязательно к заполнению',
+            'required' => 'Вы не ввели название альбома',
             'min' => 'Минимальна длина названия 3 символа',
             'max' => 'Максимальная длина названия 100 символов',
         ];

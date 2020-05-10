@@ -15,7 +15,7 @@
                                     <div class="col-xs-12 form-group">
                                         <label class="control-label" for="name">Добавить название альбома</label>
                                         <input type="text" id="name" v-model="album.name" class="form-control input">
-                                        <span v-if="errors.name" class="error">{{errors.name[0]}}</span>
+                                        <span v-if="errors.name" class="create-error">{{errors.name[0]}}</span>
                                     </div>
                                 <div class="window-buttons d-flex pt-3">
                                     <button class="window-btn-ok">Добавить</button>
@@ -217,6 +217,11 @@
         max-width: 380px;
         height: 45px;
         font-size: 22px;
+    }
+    .create-error{
+        color: #FF0000 !important;
+        font-size: 14px;
+
     }
 
 </style>

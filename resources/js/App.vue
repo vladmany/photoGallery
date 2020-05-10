@@ -5,69 +5,69 @@
         <selection-error-modal v-if="this.$store.state.isSelectFilesError"></selection-error-modal>
         <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
             <a class="navbar-brand">
-                <img src="/storage/app/public/navbar_logo.png" alt="navbar_logo">
+                <img src="/storage/navbar_logo.png" alt="navbar_logo">
             </a>
             <div @click="sidebarOpen = !sidebarOpen" class="p-3"><div class="toggle_sidebar" :class="sidebarOpen ? 'toggled' : ''"></div></div>
             <ul id="side_menu" class="list-unstyled components">
                 <li>
                     <router-link to="/home" >
-                        <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_home.svg"></object>
+                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_home.svg"></object>
                         <span>Главная страница</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link to="/disk" >
-                        <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_cloud_download.svg"></object>
+                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_cloud_download.svg"></object>
                         <span>Диск</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link to="/mail" >
-                        <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_email.svg"></object>
+                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_email.svg"></object>
                         <span>Почта</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link to="/calendar" >
-                        <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_today.svg"></object>
+                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_today.svg"></object>
                         <span>Календарь</span>
                     </router-link>
                 </li>
                 <li @click="photosOpen = !photosOpen" :class="photosOpen ? 'group-tab-open' : ''" style="cursor: pointer; user-select: none">
                     <a>
-                        <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/photos/ic_camera_alt.svg"></object>
+                        <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_camera_alt.svg"></object>
                         <span>Фотографии</span>
                     </a>
                 </li>
                 <div class="group-tabs" :style="'display: ' + (photosOpen ? 'block' : 'none')">
                     <li>
                         <router-link to="/photos" >
-                            <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_people.svg"></object>
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
                             <span>Фото</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/albums" >
-                            <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/photos/ic_albums.svg"></object>
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_albums.svg"></object>
                             <span>Альбомы</span>
                         </router-link>
                     </li>
                     <li>
                         <router-link to="/studio" >
-                            <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_business_center.svg"></object>
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
                             <span>Креативная студия</span>
                         </router-link>
                     </li>
                 </div>
                 <li>
                     <router-link to="/contacts" >
-                        <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_people.svg"></object>
+                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
                         <span>Контакты</span>
                     </router-link>
                 </li>
                 <li>
                     <router-link to="/manage" >
-                        <object type="image/svg+xml" data="/storage/app/public/sidebar_icons/ic_business_center.svg"></object>
+                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
                         <span>Управление</span>
                     </router-link>
                 </li>
@@ -90,7 +90,7 @@
                     </ul>
                     <router-link to="/user/profile">
                         {{ name }}
-                        <img :src="'/storage/app/public/avatars/' + avatar">
+                        <img :src="'/storage/avatars/' + avatar">
                     </router-link>
                     <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
 
@@ -109,7 +109,7 @@
 
                         <ul>
                             <li>
-                                <img src="/storage/app/public/navbar_logo.png" alt="navbar_logo">
+                                <img src="/storage/navbar_logo.png" alt="navbar_logo">
                             </li>
                             <li>Все права защищены</li>
                             <li>© OOO «IT 2.0»</li>
@@ -127,31 +127,31 @@
                             <li>Фото</li>
                         </ul>
                     </li>
-<!--                    <li class="col-lg-4 offset-md-6 offset-sm-0 offset-lg-0 col-md-6 col-sm-12 pl-sm-3">-->
-<!--                        <h4 class="text">Контакты</h4>-->
-<!--                        <ul>-->
-<!--                            <li>+38095 900 38 00 </li>-->
-<!--                            <li>mail@aiti20.com</li>-->
-<!--                        </ul>-->
+                    <!--                    <li class="col-lg-4 offset-md-6 offset-sm-0 offset-lg-0 col-md-6 col-sm-12 pl-sm-3">-->
+                    <!--                        <h4 class="text">Контакты</h4>-->
+                    <!--                        <ul>-->
+                    <!--                            <li>+38095 900 38 00 </li>-->
+                    <!--                            <li>mail@aiti20.com</li>-->
+                    <!--                        </ul>-->
 
-<!--                        <ul class="social_block">-->
-<!--                            <li>-->
-<!--                                <a href="google.com">-->
-<!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_facebook.svg"></object>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a href="google.com">-->
-<!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_twitter.svg"></object>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                            <li>-->
-<!--                                <a href="google.com">-->
-<!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_instagram.svg"></object>-->
-<!--                                </a>-->
-<!--                            </li>-->
-<!--                        </ul>-->
-<!--                    </li>-->
+                    <!--                        <ul class="social_block">-->
+                    <!--                            <li>-->
+                    <!--                                <a href="google.com">-->
+                    <!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_facebook.svg"></object>-->
+                    <!--                                </a>-->
+                    <!--                            </li>-->
+                    <!--                            <li>-->
+                    <!--                                <a href="google.com">-->
+                    <!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_twitter.svg"></object>-->
+                    <!--                                </a>-->
+                    <!--                            </li>-->
+                    <!--                            <li>-->
+                    <!--                                <a href="google.com">-->
+                    <!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_instagram.svg"></object>-->
+                    <!--                                </a>-->
+                    <!--                            </li>-->
+                    <!--                        </ul>-->
+                    <!--                    </li>-->
                 </ul>
             </footer>
         </div>
@@ -166,8 +166,6 @@
     import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
     import SuccessModalWindow from "./components/Photo/Upload/SuccessModalWindow";
     import SelectionErrorModal from "./components/Photo/Upload/SelectionErrorModal";
-
-
     export default {
         components: {SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
@@ -181,7 +179,6 @@
         },
         methods: {
             logout() {
-
             }
         },
         watch: {
@@ -196,7 +193,6 @@
     nav {
         background-color: #fff;
     }
-
     #sidebar {
         top: 0;
         left: 0;
@@ -306,7 +302,6 @@
         max-width: 160px;
         margin-left:20px;
     }
-
     #sidebar .toggle_sidebar {
         cursor: pointer;
         display: block;
@@ -321,7 +316,6 @@
         padding: 4px;
         transition: transform .3s ;
     }
-
     .user_block {
         position: relative;
         margin-left: auto;
@@ -336,7 +330,6 @@
         text-align: right;
         color: #999999;
         position: relative;
-
     }
     .user_block img{
         margin-left: 20px;
@@ -362,7 +355,6 @@
         align-items: center;
         width: 100%;
         padding: 0 50px;
-
     }
     .user_menu a {
         font-style: normal;
@@ -420,7 +412,6 @@
         font-size: 14px;
         line-height: 30px;
         color: #B3B3B3;
-
     }
     footer ul {
         list-style: none;
