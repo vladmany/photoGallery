@@ -8,7 +8,26 @@ let getters = {
     photo: state => id =>
         state.photos.find(photo => photo.id === id),
     groupByPhoto: state => id => {
-        state.groups.find((key, photo) => photo.id === id)
+        let group = {};
+        let ind = 0;
+        for(let key of Object.keys(state.groups)) {
+            let br = false;
+            for(let elem of state.groups[key]) {
+                if(elem.id === id) {
+                    group = state.groups[key];
+                    ind = state.groups[key].indexOf(elem);
+                    br = true;
+                    break;
+                }
+            }
+            if (br) break;
+        }
+        let arr = [];
+        for(let val of group) {
+            arr.push(val.url);
+        }
+
+        return [ind, arr];
     }
 
 }

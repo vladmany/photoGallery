@@ -1,6 +1,7 @@
 <template>
     <div>
-        <p>Слайдер</p>
+        <Slider :images="images" :current-index="start"></Slider>
+<!--        <carousel :data="slides" :autoplay="false"></carousel>-->
     </div>
 </template>
 
@@ -18,13 +19,29 @@
         },
         data() {
             return {
-                // group: {},
+
             }
         },
         computed: {
-            group(photoId) {
-                let gr = this.$store.getters.groupByPhoto(photoId);
-                return gr;
+            imagesind() {
+                let ret = this.$store.getters.groupByPhoto(this.id);
+                return ret;
+            },
+            images() {
+                return this.imagesind[1];
+            },
+            start() {
+                return this.imagesind[0];
+            },
+            slides(){
+                let ret = [];
+                for(let image of this.images) {
+                    ret.push(
+                        `<div><img src="${image}"></div>`
+                    )
+                }
+
+                return ret;
             }
         },
         created() {

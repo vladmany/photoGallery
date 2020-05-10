@@ -6,6 +6,9 @@ import VueRouter from 'vue-router'
 import router from './routes'
 import store from './store'
 import axios from 'axios'
+import VueCarousel from '@chenfengyuan/vue-carousel';
+
+Vue.component(VueCarousel.name, VueCarousel);
 
 Vue.use(VueRouter)
 
