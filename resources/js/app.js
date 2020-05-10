@@ -7,8 +7,10 @@ import router from './routes'
 import store from './store'
 import axios from 'axios'
 import VueCarousel from '@chenfengyuan/vue-carousel';
+import Section from "./components/Global/Section";
 
 Vue.component(VueCarousel.name, VueCarousel);
+Vue.component('Section', Section);
 
 Vue.use(VueRouter)
 

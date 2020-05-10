@@ -14,12 +14,11 @@
 
 <script>
     import OnePhoto from "./OnePhoto";
-    import Section from "../../Global/Section";
     import SliderPhoto from "./SliderPhoto";
 
     export default {
         name: "BlockOnePhoto",
-        components: {SliderPhoto, OnePhoto, Section },
+        components: {SliderPhoto, OnePhoto },
         props: {
             id: {
                 required: true,
