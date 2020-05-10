@@ -28,6 +28,8 @@
     "dependencies": {
         "@chenfengyuan/vue-carousel": "^1.0.3",
         "animate.css": "^4.0.0",
-        "material-design-icons-iconfont": "^5.0.1"
+        "jw-vue-pagination": "^1.0.3",
+        "material-design-icons-iconfont": "^5.0.1",
+        "vuejs-paginate": "^2.1.0"
     }
 }

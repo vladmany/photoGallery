@@ -2,7 +2,7 @@
     <div class="group">
         <div class="group-selector">
             <input type="checkbox" v-model="isSelected">
-            <label class="group-date">{{ title }}</label>
+            <label class="group-date pl-3">{{ title }}</label>
         </div>
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
