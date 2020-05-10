@@ -2,7 +2,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import AddPhoto from './modules/AddPhoto'
 import ListPhoto from './modules/ListPhoto'
-import ListAlbum from './modules/ListAlbum'
+import ListAlbum from "./modules/ListAlbum";
 
 Vue.use(Vuex)
 
@@ -10,7 +10,7 @@ export default new Vuex.Store({
     modules: {
         AddPhoto,
         ListPhoto,
-        ListAlbum,
+        ListAlbum
     },
     state: {
         isUploadError: false,
@@ -20,7 +20,7 @@ export default new Vuex.Store({
         successUploadFiles: [],
         isSelectFilesError: false,
         maxFilesToUpload: 15,
-        // AllAlbums: []
+        AllAlbums: []
     },
     getters: {
 
@@ -53,10 +53,10 @@ export default new Vuex.Store({
         hideSelectError(state) {
             state.isSelectFilesError = false
         },
-        getAlbums() {
+        /*getAlbums() {
             axios.get('api/albums')
                 .then(r => this.albums = r.data)
-        }
+        }*/
     },
     actions: {
 
