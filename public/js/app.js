@@ -2951,6 +2951,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 // import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
 // import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
 // import AllAlbums from "./components/Album/AllAlbums";
@@ -3438,6 +3443,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
+    console.log(this.photos);
     this.$store.dispatch('getPhotos');
   }
 });
@@ -8709,7 +8715,7 @@ exports = module.exports = __webpack_require__(/*! ../../node_modules/css-loader
 
 
 // module
-exports.push([module.i, "\nnav {\n    background-color: #fff;\n}\n#sidebar {\n    top: 0;\n    left: 0;\n    height: 100vh;\n    max-height: 100%;\n    z-index: 999;\n    background: #fff;\n    color: #fff;\n    transition: all 0.3s;\n    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.05);\n    border-radius: 6px;\n    max-width: 160px;\n    width: 100%;\n}\n.sidebar-open {\n    max-width: 255px!important;\n}\n#side_menu a {\n    display: flex;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: 100%;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    text-decoration: none;\n    color: #999999;\n    height: 100%;\n}\n#side_menu a span {\n    width: 150px;\n    text-align: center;\n}\n.sidebar-open a span {\n    text-align: left!important;\n    margin-left: 22px;\n}\n.sidebar-open li {\n    border-bottom: 2px solid #F5F5F5;\n}\n#side_menu .router-link-active {\n    color: #666666;\n}\n#side_menu .router-link-active object {\n    -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n            filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n}\n#side_menu object{\n    margin-top: 12px;\n    margin-bottom: 7px;\n    z-index: -1;\n}\n#side_menu li{\n    height: 60px;\n}\n#side_menu li{\n    margin-bottom: 14px;\n    transition: margin-bottom .3s;\n}\n.sidebar-open li{\n    margin-bottom: 0px!important;\n}\n#side_menu .router-link-active {\n    border-left: 3px solid #1875F0;\n}\n#side_menu .group-tab-open {\n    cursor: pointer;\n}\n.group-tab-open {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.group-tab-open a span{\n    color: #666666;\n    font-weight: 500;\n    font-size: 13px;\n    /*line-height: 60px;*/\n}\nli.group-tab-open {\n    border-bottom: none;\n}\n.group-tab-open a object {\n    -webkit-filter: brightness(15%);\n            filter: brightness(15%);\n}\n.group-tabs li {\n    border: none\n}\n.sidebar-open .group-tabs li:last-child {\n    border-bottom: 2px solid #F5F5F5;\n}\n.wrapper {\n    display: flex;\n    flex-wrap: wrap;\n    position: relative;\n}\n.main_content {\n    flex-grow: 1;\n}\n#sidebar .navbar-brand {\n    padding: 19px 0;\n    margin-right: 0;\n    width: 100%;\n    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);\n    position: relative;\n}\n#sidebar .navbar-brand img {\n    max-width: 160px;\n    margin-left:20px;\n}\n#sidebar .toggle_sidebar {\n    cursor: pointer;\n    display: block;\n    position: absolute;\n    width: 10px;\n    height: 10px;\n    top: 40px;\n    transform: translate(50%) rotate(-45deg);\n    left: 214px;\n    border-right: 2px solid #D8D8D8;;\n    border-bottom: 2px solid #D8D8D8;;\n    padding: 4px;\n    transition: transform .3s ;\n}\n.user_block {\n    position: relative;\n    margin-left: auto;\n    display: flex;\n    align-items: center;\n}\n.user_block > a{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 75px;\n    text-align: right;\n    color: #999999;\n    position: relative;\n}\n.user_block img{\n    margin-left: 20px;\n}\n.user_menu {\n    position: absolute;\n    background: #fff;\n    border-radius: 6px;\n    list-style: none;\n    /*left: -97%;*/\n    bottom: -33px;\n    padding: 0;\n    transform: translateY(100%);\n    max-height: 0px;\n    overflow: hidden;\n    transition: max-height .7s ease-in-out;\n}\n.user_menu li {\n    border-bottom: 2px solid #F5F5F5;\n    justify-content: center;\n    height:60px;\n    display:flex;\n    align-items: center;\n    width: 100%;\n    padding: 0 50px;\n}\n.user_menu a {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    text-align: center;\n    color: #808080;\n}\n.user_menu-opened:after {\n    display: block;\n    content: '';\n    position: absolute;\n    width: 0;\n    height: 0;\n    top: -9px;\n    right: 30px;\n    border-left: 5px solid transparent;\n    border-right: 5px solid transparent;\n    border-bottom: 9px solid #fff;\n}\n.toggle_user-menu {\n    width: 26px;\n    height: 26px;\n    margin-left: 7px;\n    position: relative;\n    cursor: pointer;\n}\n.toggle_user-menu:after {\n    content: '';\n    display: block;\n    content: '';\n    position: absolute;\n    width: 0;\n    height: 0;\n    top: 50%;\n    transform: translate(50%,-50%) rotate(45deg);\n    right: 50%;\n    border-right: 2px solid #D8D8D8;;\n    border-bottom: 2px solid #D8D8D8;;\n    padding: 4px;\n}\n.user_menu-opened {\n    max-height: 251px;\n}\n.toggled {\n    transform: rotate(-220deg)!important;\n}\nfooter {\n    background: #fff;\n    width: 100%;\n    display: flex;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #B3B3B3;\n}\nfooter ul {\n    list-style: none;\n    width:100%;\n    padding: 0;\n}\nbody * {\n    font-family: 'Roboto', sans-serif;\n}\nfooter h4 {\n    color: #666666;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 30px;\n    padding-bottom: 29px;\n}\nfooter ul li:not(:first-of-type) ul:not(.social_block) {\n    columns: 2;\n    -webkit-columns: 2;\n    -moz-columns: 2;\n}\n.social_block {\n    display: flex;\n}\n.social_block a {\n    display: block;\n    margin-right: 19px;\n}\n.social_block object{\n    z-index: -1000;\n}\nfooter li{\n    margin-bottom: 20px;\n}\n.social_block li:hover object{\n    -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n            filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n}\n.footer_wrapper {\n    width: 100%;\n    background: #fff;\n    padding-top: 48px;\n}\n", ""]);
+exports.push([module.i, "\nnav {\n    background-color: #fff;\n}\n#sidebar {\n    top: 0;\n    left: 0;\n    height: 100vh;\n    max-height: 100%;\n    z-index: 999;\n    background: #fff;\n    color: #fff;\n    transition: all 0.3s;\n    box-shadow: 0px -2px 5px rgba(0, 0, 0, 0.05);\n    border-radius: 6px;\n    max-width: 160px;\n    width: 100%;\n}\n.sidebar-open {\n    max-width: 255px!important;\n}\n#side_menu a {\n    display: flex;\n    align-items: center;\n    flex-direction: row;\n    flex-wrap: wrap;\n    justify-content: center;\n    width: 100%;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    text-decoration: none;\n    color: #999999;\n    height: 100%;\n}\n#side_menu a span {\n    width: 150px;\n    text-align: center;\n}\n.sidebar-open a span {\n    text-align: left!important;\n    margin-left: 22px;\n}\n.sidebar-open li {\n    border-bottom: 2px solid #F5F5F5;\n}\n#side_menu .router-link-active {\n    color: #666666;\n}\n#side_menu .router-link-active object {\n    -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n            filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n}\n#side_menu object{\n    margin-top: 12px;\n    margin-bottom: 7px;\n    z-index: -1;\n}\n#side_menu li{\n    height: 60px;\n}\n#side_menu li{\n    margin-bottom: 14px;\n    transition: margin-bottom .3s;\n}\n.sidebar-open li{\n    margin-bottom: 0px!important;\n}\n#side_menu .router-link-active {\n    border-left: 3px solid #1875F0;\n}\n#side_menu .group-tab-open {\n    cursor: pointer;\n}\n.group-tab-open {\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.group-tab-open a span{\n    color: #666666;\n    font-weight: 500;\n    font-size: 13px;\n    /*line-height: 60px;*/\n}\nli.group-tab-open {\n    border-bottom: none;\n}\n.group-tab-open a object {\n    -webkit-filter: brightness(15%);\n            filter: brightness(15%);\n}\n.group-tabs li {\n    border: none\n}\n.sidebar-open .group-tabs li:last-child {\n    border-bottom: 2px solid #F5F5F5;\n}\n.wrapper {\n    display: flex;\n    flex-wrap: nowrap;\n    position: relative;\n}\n.main_content {\n    flex-grow: 1;\n}\n#sidebar .navbar-brand {\n    padding: 19px 0;\n    margin-right: 0;\n    width: 100%;\n    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);\n    position: relative;\n}\n#sidebar .navbar-brand img {\n    max-width: 160px;\n    margin-left:20px;\n}\n#sidebar .toggle_sidebar {\n    cursor: pointer;\n    display: block;\n    position: absolute;\n    width: 10px;\n    height: 10px;\n    top: 40px;\n    transform: translate(50%) rotate(-45deg);\n    left: 214px;\n    border-right: 2px solid #D8D8D8;;\n    border-bottom: 2px solid #D8D8D8;;\n    padding: 4px;\n    transition: transform .3s ;\n}\n.user_block {\n    position: relative;\n    margin-left: auto;\n    display: flex;\n    align-items: center;\n}\n.user_block > a{\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 75px;\n    text-align: right;\n    color: #999999;\n    position: relative;\n}\n.user_block img{\n    margin-left: 20px;\n}\n.user_menu-wrapper {\n    max-height: 0px;\n    overflow: hidden;\n    transition: max-height .7s ease-in-out;\n    position: absolute;\n    left: -20%;\n    transform: translateY(100%);\n    bottom: -8px;\n    z-index: 9;\n}\n.user_menu-wrapper > div:first-child {\n    display: block;\n    position: relative;\n    width: 0;\n    height: 0;\n    margin-left: auto;\n    right: 30px;\n    border-left: 5px solid transparent;\n    border-right: 5px solid transparent;\n    border-bottom: 9px solid #fff;\n}\n.user_menu {\n    position: absolute;\n    background: #fff;\n    border-radius: 6px;\n    list-style: none;\n    /*left: -97%;*/\n    bottom: -33px;\n    padding: 0;\n    transform: translateY(100%);\n    max-height: 0px;\n    overflow: hidden;\n    transition: max-height .7s ease-in-out;\n}\n.user_menu li {\n    border-bottom: 2px solid #F5F5F5;\n    justify-content: center;\n    height:60px;\n    display:flex;\n    align-items: center;\n    width: 100%;\n    padding: 0 50px;\n}\n.user_menu a {\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    text-align: center;\n    color: #808080;\n}\n.user_menu-opened:after {\n    display: block;\n    content: '';\n    position: absolute;\n    width: 0;\n    height: 0;\n    top: -9px;\n    right: 30px;\n    border-left: 5px solid transparent;\n    border-right: 5px solid transparent;\n    border-bottom: 9px solid #fff;\n}\n.toggle_user-menu {\n    width: 26px;\n    height: 26px;\n    margin-left: 7px;\n    position: relative;\n    cursor: pointer;\n}\n.toggle_user-menu:after {\n    content: '';\n    display: block;\n    content: '';\n    position: absolute;\n    width: 0;\n    height: 0;\n    top: 50%;\n    transform: translate(50%,-50%) rotate(45deg);\n    right: 50%;\n    border-right: 2px solid #D8D8D8;;\n    border-bottom: 2px solid #D8D8D8;;\n    padding: 4px;\n}\n.user_menu-opened {\n    max-height: 251px;\n}\n.toggled {\n    transform: rotate(-220deg)!important;\n}\nfooter {\n    background: #fff;\n    width: 100%;\n    display: flex;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #B3B3B3;\n}\nfooter ul {\n    list-style: none;\n    width:100%;\n    padding: 0;\n}\nbody * {\n    font-family: 'Roboto', sans-serif;\n}\nfooter h4 {\n    color: #666666;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 30px;\n    padding-bottom: 29px;\n}\nfooter ul li:not(:first-of-type) ul:not(.social_block) {\n    columns: 2;\n    -webkit-columns: 2;\n    -moz-columns: 2;\n}\n.social_block {\n    display: flex;\n}\n.social_block a {\n    display: block;\n    margin-right: 19px;\n}\n.social_block object{\n    z-index: -1000;\n}\nfooter li{\n    margin-bottom: 20px;\n}\n.social_block li:hover object{\n    -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n            filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);\n}\n.footer_wrapper {\n    width: 100%;\n    background: #fff;\n    padding-top: 48px;\n}\n", ""]);
 
 // exports
 
@@ -41024,322 +41030,331 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "wrapper" },
-    [
-      this.$store.state.isUploadError ? _c("errors-modal-window") : _vm._e(),
-      _vm._v(" "),
-      this.$store.state.isSuccessUpload ? _c("success-modal-window") : _vm._e(),
-      _vm._v(" "),
-      this.$store.state.isSelectFilesError
-        ? _c("selection-error-modal")
-        : _vm._e(),
-      _vm._v(" "),
-      _c(
-        "nav",
-        {
-          class: _vm.sidebarOpen ? "sidebar-open" : "",
-          attrs: { id: "sidebar" }
-        },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _c(
-            "div",
-            {
-              staticClass: "p-3",
-              on: {
-                click: function($event) {
-                  _vm.sidebarOpen = !_vm.sidebarOpen
-                }
-              }
-            },
-            [
-              _c("div", {
-                staticClass: "toggle_sidebar",
-                class: _vm.sidebarOpen ? "toggled" : ""
-              })
-            ]
-          ),
-          _vm._v(" "),
-          _c(
-            "ul",
-            {
-              staticClass: "list-unstyled components",
-              attrs: { id: "side_menu" }
-            },
-            [
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: "/home" } }, [
-                    _c("object", {
-                      attrs: {
-                        type: "image/svg+xml",
-                        data: "/storage/sidebar_icons/ic_home.svg"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Главная страница")])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: "/disk" } }, [
-                    _c("object", {
-                      attrs: {
-                        type: "image/svg+xml",
-                        data: "/storage/sidebar_icons/ic_cloud_download.svg"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Диск")])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: "/mail" } }, [
-                    _c("object", {
-                      attrs: {
-                        type: "image/svg+xml",
-                        data: "/storage/sidebar_icons/ic_email.svg"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Почта")])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: "/calendar" } }, [
-                    _c("object", {
-                      attrs: {
-                        type: "image/svg+xml",
-                        data: "/storage/sidebar_icons/ic_today.svg"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Календарь")])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                {
-                  class: _vm.photosOpen ? "group-tab-open" : "",
-                  staticStyle: { cursor: "pointer", "user-select": "none" },
-                  on: {
-                    click: function($event) {
-                      _vm.photosOpen = !_vm.photosOpen
-                    }
-                  }
-                },
-                [_vm._m(1)]
-              ),
-              _vm._v(" "),
-              _c(
-                "div",
-                {
-                  staticClass: "group-tabs",
-                  style: "display: " + (_vm.photosOpen ? "block" : "none")
-                },
-                [
-                  _c(
-                    "li",
-                    [
-                      _c("router-link", { attrs: { to: "/photos" } }, [
-                        _c("object", {
-                          attrs: {
-                            type: "image/svg+xml",
-                            data: "/storage/sidebar_icons/ic_people.svg"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Фото")])
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c("router-link", { attrs: { to: "/albums" } }, [
-                        _c("object", {
-                          attrs: {
-                            type: "image/svg+xml",
-                            data: "/storage/sidebar_icons/photos/ic_albums.svg"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Альбомы")])
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c("router-link", { attrs: { to: "/studio" } }, [
-                        _c("object", {
-                          attrs: {
-                            type: "image/svg+xml",
-                            data:
-                              "/storage/sidebar_icons/ic_business_center.svg"
-                          }
-                        }),
-                        _vm._v(" "),
-                        _c("span", [_vm._v("Креативная студия")])
-                      ])
-                    ],
-                    1
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: "/contacts" } }, [
-                    _c("object", {
-                      attrs: {
-                        type: "image/svg+xml",
-                        data: "/storage/sidebar_icons/ic_people.svg"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Контакты")])
-                  ])
-                ],
-                1
-              ),
-              _vm._v(" "),
-              _c(
-                "li",
-                [
-                  _c("router-link", { attrs: { to: "/manage" } }, [
-                    _c("object", {
-                      attrs: {
-                        type: "image/svg+xml",
-                        data: "/storage/sidebar_icons/ic_business_center.svg"
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c("span", [_vm._v("Управление")])
-                  ])
-                ],
-                1
-              )
-            ]
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "main_content" }, [
-        _c("nav", { staticClass: "navbar navbar-light" }, [
-          _c(
-            "div",
-            { staticClass: "user_block" },
-            [
-              _c(
-                "ul",
-                {
-                  staticClass: "user_menu",
-                  class: _vm.userMenuOpen ? "user_menu-opened" : ""
-                },
-                [
-                  _c(
-                    "li",
-                    [
-                      _c("router-link", { attrs: { to: "user/profile/" } }, [
-                        _vm._v("Мой профиль")
-                      ])
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        { attrs: { to: "user/profile/security" } },
-                        [_vm._v("Настройки безопасности")]
-                      )
-                    ],
-                    1
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "li",
-                    [
-                      _c(
-                        "router-link",
-                        {
-                          attrs: { to: "/authorization" },
-                          on: { click: _vm.logout }
-                        },
-                        [_vm._v("Выход из системы")]
-                      )
-                    ],
-                    1
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c("router-link", { attrs: { to: "/user/profile" } }, [
-                _vm._v(
-                  "\n                        " +
-                    _vm._s(_vm.name) +
-                    "\n                        "
-                ),
-                _c("img", { attrs: { src: "/storage/avatars/" + _vm.avatar } })
-              ]),
-              _vm._v(" "),
-              _c("div", {
-                staticClass: "toggle_user-menu",
-                on: {
-                  click: function($event) {
-                    _vm.userMenuOpen = !_vm.userMenuOpen
-                  }
-                }
-              })
-            ],
-            1
-          )
-        ]),
+  return _c("div", [
+    _c(
+      "div",
+      { staticClass: "wrapper" },
+      [
+        this.$store.state.isUploadError ? _c("errors-modal-window") : _vm._e(),
+        _vm._v(" "),
+        this.$store.state.isSuccessUpload
+          ? _c("success-modal-window")
+          : _vm._e(),
+        _vm._v(" "),
+        this.$store.state.isSelectFilesError
+          ? _c("selection-error-modal")
+          : _vm._e(),
         _vm._v(" "),
         _c(
-          "main",
+          "nav",
+          {
+            class: _vm.sidebarOpen ? "sidebar-open" : "",
+            attrs: { id: "sidebar" }
+          },
           [
-            _c("router-view", {
-              staticStyle: { position: "fixed", width: "100%" }
-            })
-          ],
-          1
-        )
-      ]),
-      _vm._v(" "),
-      _vm._m(2)
-    ],
-    1
-  )
+            _vm._m(0),
+            _vm._v(" "),
+            _c(
+              "div",
+              {
+                staticClass: "p-3",
+                on: {
+                  click: function($event) {
+                    _vm.sidebarOpen = !_vm.sidebarOpen
+                  }
+                }
+              },
+              [
+                _c("div", {
+                  staticClass: "toggle_sidebar",
+                  class: _vm.sidebarOpen ? "toggled" : ""
+                })
+              ]
+            ),
+            _vm._v(" "),
+            _c(
+              "ul",
+              {
+                staticClass: "list-unstyled components",
+                attrs: { id: "side_menu" }
+              },
+              [
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/home" } }, [
+                      _c("object", {
+                        attrs: {
+                          type: "image/svg+xml",
+                          data: "/storage/sidebar_icons/ic_home.svg"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Главная страница")])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/disk" } }, [
+                      _c("object", {
+                        attrs: {
+                          type: "image/svg+xml",
+                          data: "/storage/sidebar_icons/ic_cloud_download.svg"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Диск")])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/mail" } }, [
+                      _c("object", {
+                        attrs: {
+                          type: "image/svg+xml",
+                          data: "/storage/sidebar_icons/ic_email.svg"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Почта")])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/calendar" } }, [
+                      _c("object", {
+                        attrs: {
+                          type: "image/svg+xml",
+                          data: "/storage/sidebar_icons/ic_today.svg"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Календарь")])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  {
+                    class: _vm.photosOpen ? "group-tab-open" : "",
+                    staticStyle: { cursor: "pointer", "user-select": "none" },
+                    on: {
+                      click: function($event) {
+                        _vm.photosOpen = !_vm.photosOpen
+                      }
+                    }
+                  },
+                  [_vm._m(1)]
+                ),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "group-tabs",
+                    style: "display: " + (_vm.photosOpen ? "block" : "none")
+                  },
+                  [
+                    _c(
+                      "li",
+                      [
+                        _c("router-link", { attrs: { to: "/photos" } }, [
+                          _c("object", {
+                            attrs: {
+                              type: "image/svg+xml",
+                              data: "/storage/sidebar_icons/ic_people.svg"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Фото")])
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c("router-link", { attrs: { to: "/albums" } }, [
+                          _c("object", {
+                            attrs: {
+                              type: "image/svg+xml",
+                              data:
+                                "/storage/sidebar_icons/photos/ic_albums.svg"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Альбомы")])
+                        ])
+                      ],
+                      1
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "li",
+                      [
+                        _c("router-link", { attrs: { to: "/studio" } }, [
+                          _c("object", {
+                            attrs: {
+                              type: "image/svg+xml",
+                              data:
+                                "/storage/sidebar_icons/ic_business_center.svg"
+                            }
+                          }),
+                          _vm._v(" "),
+                          _c("span", [_vm._v("Креативная студия")])
+                        ])
+                      ],
+                      1
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/contacts" } }, [
+                      _c("object", {
+                        attrs: {
+                          type: "image/svg+xml",
+                          data: "/storage/sidebar_icons/ic_people.svg"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Контакты")])
+                    ])
+                  ],
+                  1
+                ),
+                _vm._v(" "),
+                _c(
+                  "li",
+                  [
+                    _c("router-link", { attrs: { to: "/manage" } }, [
+                      _c("object", {
+                        attrs: {
+                          type: "image/svg+xml",
+                          data: "/storage/sidebar_icons/ic_business_center.svg"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("span", [_vm._v("Управление")])
+                    ])
+                  ],
+                  1
+                )
+              ]
+            )
+          ]
+        ),
+        _vm._v(" "),
+        _c("div", { staticClass: "main_content" }, [
+          _c("nav", { staticClass: "navbar navbar-light" }, [
+            _c(
+              "div",
+              { staticClass: "user_block" },
+              [
+                _c("div", { staticClass: "user_menu-wrapper" }, [
+                  _c("div"),
+                  _vm._v(" "),
+                  _c(
+                    "ul",
+                    {
+                      staticClass: "user_menu",
+                      class: _vm.userMenuOpen ? "user_menu-opened" : ""
+                    },
+                    [
+                      _c(
+                        "li",
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: "user/profile/" } },
+                            [_vm._v("Мой профиль")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        [
+                          _c(
+                            "router-link",
+                            { attrs: { to: "user/profile/security" } },
+                            [_vm._v("Настройки безопасности")]
+                          )
+                        ],
+                        1
+                      ),
+                      _vm._v(" "),
+                      _c(
+                        "li",
+                        [
+                          _c(
+                            "router-link",
+                            {
+                              attrs: { to: "/authorization" },
+                              on: { click: _vm.logout }
+                            },
+                            [_vm._v("Выход из системы")]
+                          )
+                        ],
+                        1
+                      )
+                    ]
+                  )
+                ]),
+                _vm._v(" "),
+                _c("router-link", { attrs: { to: "/user/profile" } }, [
+                  _vm._v(
+                    "\n                        " +
+                      _vm._s(_vm.name) +
+                      "\n                        "
+                  ),
+                  _c("img", {
+                    attrs: { src: "/storage/avatars/" + _vm.avatar }
+                  })
+                ]),
+                _vm._v(" "),
+                _c("div", {
+                  staticClass: "toggle_user-menu",
+                  on: {
+                    click: function($event) {
+                      _vm.userMenuOpen = !_vm.userMenuOpen
+                    }
+                  }
+                })
+              ],
+              1
+            )
+          ]),
+          _vm._v(" "),
+          _c(
+            "main",
+            [_c("router-view", { staticStyle: { position: "relative" } })],
+            1
+          )
+        ])
+      ],
+      1
+    ),
+    _vm._v(" "),
+    _vm._m(2)
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -41989,7 +42004,7 @@ var render = function() {
             expression: "isSelected"
           }
         ],
-        attrs: { type: "checkbox", id: "sel-group" },
+        attrs: { type: "checkbox" },
         domProps: {
           checked: Array.isArray(_vm.isSelected)
             ? _vm._i(_vm.isSelected, null) > -1
@@ -42018,9 +42033,7 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { staticClass: "group-date", attrs: { for: "sel-group" } }, [
-        _vm._v(_vm._s(_vm.title))
-      ])
+      _c("label", { staticClass: "group-date" }, [_vm._v(_vm._s(_vm.title))])
     ]),
     _vm._v(" "),
     _c(
@@ -60920,8 +60933,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
