@@ -1,8 +1,8 @@
 <template>
     <div class="group">
         <div class="group-selector">
-            <input type="checkbox" id="sel-group" v-model="isSelected">
-            <label for="sel-group" class="group-date">{{ title }}</label>
+            <input type="checkbox" v-model="isSelected">
+            <label class="group-date">{{ title }}</label>
         </div>
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
