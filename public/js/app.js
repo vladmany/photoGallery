@@ -3801,9 +3801,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SuccessModalWindow",
+  name: "SelectionErrorModal",
   showed: true,
   methods: {
     close: function close() {
@@ -42640,32 +42639,25 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c(
-          "div",
-          { staticClass: "window-content" },
-          [
-            _c("h1", [_vm._v("Загрузка фото завершена")]),
-            _vm._v(" "),
-            _c("span", { staticClass: "d-block" }, [
-              _vm._v("Загруженные фото:")
-            ]),
-            _vm._v(" "),
-            _vm._l(this.$store.state.successUploadFiles, function(filename) {
-              return _c("span", { staticClass: "error-file d-block" }, [
-                _vm._v(_vm._s(filename))
-              ])
-            }),
-            _vm._v(" "),
-            _c("div", { staticClass: "window-buttons d-flex" }, [
-              _c(
-                "button",
-                { staticClass: "window-btn-ok", on: { click: _vm.close } },
-                [_vm._v("Продолжить")]
-              )
-            ])
-          ],
-          2
-        )
+        _c("div", { staticClass: "window-content" }, [
+          _c("h1", [_vm._v("Ошибка загрузки фото")]),
+          _vm._v(" "),
+          _c("span", { staticClass: "d-block" }, [
+            _vm._v(
+              "Выбранное количество фото не должно превышать " +
+                _vm._s(this.$store.state.maxFilesToUpload) +
+                " шт."
+            )
+          ]),
+          _vm._v(" "),
+          _c("div", { staticClass: "window-buttons d-flex" }, [
+            _c(
+              "button",
+              { staticClass: "window-btn-ok", on: { click: _vm.close } },
+              [_vm._v("Продолжить")]
+            )
+          ])
+        ])
       ])
     ])
   ])
