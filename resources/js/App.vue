@@ -97,7 +97,7 @@
                 </div>
             </nav>
             <main>
-                <router-view style="position:fixed; width:100%;"></router-view>
+                <router-view style="position: fixed; width: 100%"></router-view>
             </main>
         </div>
         <div class="footer_wrapper">
