@@ -10,6 +10,7 @@
             <GroupPhoto v-for="(elements, title) in groups"
                         :elements="elements" :title="title"
                         :key="title" />
+<!--            <Paginator></Paginator>-->
         </div>
         <div v-else class="placeholder">
             <h2>Здесь вы можете добавить свои фотографии</h2>
@@ -26,10 +27,14 @@
     import ErrorsModalWindow from "../Upload/ErrorsModalWindow";
     import UploadPhotosComponent from "../Upload/UploadPhotosComponent";
     import Checkbox from "../../Global/Checkbox";
+    import Paginator from "../../Global/Paginator"
 
     export default {
         name: "AllPhoto",
-        components: {Checkbox, Section, GroupPhoto, ErrorsModalWindow, UploadPhotosComponent},
+        components: {
+            Checkbox, Section,
+            GroupPhoto, ErrorsModalWindow,
+            UploadPhotosComponent, Paginator},
         props: {
             paginateCount: {
                 type: Number,
