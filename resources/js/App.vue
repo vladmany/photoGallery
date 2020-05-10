@@ -171,8 +171,6 @@
     import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
     import SuccessModalWindow from "./components/Photo/Upload/SuccessModalWindow";
     import SelectionErrorModal from "./components/Photo/Upload/SelectionErrorModal";
-
-
     export default {
         components: {SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
@@ -186,7 +184,6 @@
         },
         methods: {
             logout() {
-
             }
         },
         watch: {
@@ -201,7 +198,6 @@
     nav {
         background-color: #fff;
     }
-
     #sidebar {
         top: 0;
         left: 0;
@@ -311,7 +307,6 @@
         max-width: 160px;
         margin-left:20px;
     }
-
     #sidebar .toggle_sidebar {
         cursor: pointer;
         display: block;
@@ -326,7 +321,6 @@
         padding: 4px;
         transition: transform .3s ;
     }
-
     .user_block {
         position: relative;
         margin-left: auto;
@@ -341,7 +335,6 @@
         text-align: right;
         color: #999999;
         position: relative;
-
     }
     .user_block img{
         margin-left: 20px;
@@ -391,7 +384,6 @@
         align-items: center;
         width: 100%;
         padding: 0 50px;
-
     }
     .user_menu a {
         font-style: normal;
@@ -449,7 +441,6 @@
         font-size: 14px;
         line-height: 30px;
         color: #B3B3B3;
-
     }
     footer ul {
         list-style: none;

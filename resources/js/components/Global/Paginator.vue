@@ -28,7 +28,7 @@
     }
 </script>
 
-<style>
+<style scoped>
     ul {
         padding: 0;
     }
@@ -44,6 +44,7 @@
         border: 1px solid red;
         border-left: none;
     }
+    .active,
     .one-page:hover {
         color: #000;
         background-color: #F5F5F5;
@@ -56,5 +57,8 @@
     .next {
         border-bottom-right-radius: 3px;
         border-top-right-radius: 3px;
+    }
+    .disable {
+
     }
 </style>

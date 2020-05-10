@@ -22,6 +22,7 @@ Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth.redire
 Route::post('/auth/callback', 'Auth\LoginController@callback')->name('auth.callback');
 
 Route::apiResource('all-photos', 'Api\PhotoController');
+Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/albums', 'Api\AlbumController');
 //        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
 Route::post('/photos/upload', 'Api\PhotoController@store')->name('photos.upload');

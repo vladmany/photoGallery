@@ -8,8 +8,14 @@ class Album extends Model
 {
     protected $fillable = ['name'];
     protected $attributes = [
-        'url'=> 'none-url'
+        'url'=> 'none-url',
+        'cover' => '/storage/albums/placeholderAlbum.png'
     ];
+
+    public function photos()
+    {
+        return $this->belongsToMany(Photo::class);
+    }
 
     public function add(array $data): self
     {
