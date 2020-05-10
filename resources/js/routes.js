@@ -8,6 +8,7 @@ import BlockOnePhoto from "./components/Photo/onePhoto/BlockOnePhoto";
 import OnePhoto from "./components/Photo/onePhoto/OnePhoto";
 // import AllAlbums from "./components/Album/AllAlbums";
 import BlockAlbumList from "./components/Album/BlockAlbumList";
+import OneAlbum from "./components/Album/OneAlbum";
 
 export default new VueRouter({
     routes: [
@@ -18,9 +19,15 @@ export default new VueRouter({
         // }
 
         {
-            path: "/albums",
+            path: `/albums`,
             component: BlockAlbumList,
             name: "BlockAlbumList",
+        },
+        {
+            path: '/album/:id',
+            component: OneAlbum,
+            name: 'OneAlbum',
+            props: true
         },
         {
             path: '/photos',

@@ -2,13 +2,15 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import AddPhoto from './modules/AddPhoto'
 import ListPhoto from './modules/ListPhoto'
+import ListAlbum from './modules/ListAlbum'
 
 Vue.use(Vuex)
 
 export default new Vuex.Store({
     modules: {
         AddPhoto,
-        ListPhoto
+        ListPhoto,
+        ListAlbum,
     },
     state: {
         isUploadError: false,
@@ -18,7 +20,7 @@ export default new Vuex.Store({
         successUploadFiles: [],
         isSelectFilesError: false,
         maxFilesToUpload: 15,
-        AllAlbums: []
+        // AllAlbums: []
     },
     getters: {
 

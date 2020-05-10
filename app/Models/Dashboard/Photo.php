@@ -8,12 +8,12 @@ use Illuminate\Support\Facades\Storage;
 
 class Photo extends Model
 {
-    protected $fillable = ['name', 'kind_id', 'user_id', 'album_id', 'kind_id', 'width', 'height', 'url', 'size', 'extension', 'path'];
-
-    public function Album()
+    public function albums()
     {
-        return $this->belongsTo(Album::class);
+        return $this->belongsToMany(Album::class);
     }
+
+    protected $fillable = ['name', 'kind_id', 'user_id', 'album_id', 'kind_id', 'width', 'height', 'url', 'size', 'extension', 'path'];
 
     public function add(array $data): self
     {

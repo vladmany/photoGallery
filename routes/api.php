@@ -21,8 +21,11 @@ use Illuminate\Support\Facades\Route;
 Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth.redirect');
 Route::post('/auth/callback', 'Auth\LoginController@callback')->name('auth.callback');
 
-Route::apiResource('all-photos', 'Api\PhotoController');
-Route::apiResource('/albums', 'Api\AlbumController');
+Route::apiResources([
+    '/all-photos' => 'Api\PhotoController',
+    '/albums' => 'Api\AlbumController',
+    '/photo-album' => 'Api\AlbumPhotoController',
+]);
 //        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
 Route::post('/photos/upload', 'Api\PhotoController@store')->name('photos.upload');
 Route::post('/albums/create', 'Api\AlbumController@store')->name('albums.create');

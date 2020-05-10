@@ -2,7 +2,6 @@
     <div>
         <modal-create-album v-if="isInfoPopupVisible" @closeModal="CloseModal"></modal-create-album>
         <button  @click="modalCreate" class="btn btn-primary btn-lg">Добавить альбом</button>
-        <AllAlbums></AllAlbums>
     </div>
 
 </template>

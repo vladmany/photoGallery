@@ -11,6 +11,11 @@ class Album extends Model
         'url'=> 'none-url'
     ];
 
+    public function photos()
+    {
+        return $this->belongsToMany(Photo::class);
+    }
+
     public function add(array $data): self
     {
         $file = new self();
