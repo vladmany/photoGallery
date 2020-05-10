@@ -1,5 +1,6 @@
 <template>
     <div class="photo-wrap">
+        ывыфв
         <img :src="photo.url" :alt="photo.name">
     </div>
 </template>

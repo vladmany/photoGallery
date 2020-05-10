@@ -1,43 +1,35 @@
 <template>
-    <div class="photos-wrap">
-        <div class="main-panel">
-            <div class="upload">
-                <UploadPhotosComponent />
-            </div>
-            <div class="actions-panel"></div>
-        </div>
-        <div class="" v-if="photos.length > 0">
-            <div class="d-flex flex-column justify-content-between align-content-between">
-                <div>
-                    <GroupPhoto v-for="(elements, title) in groups"
+    <div class="" v-if="photos.length > 0">
+        <div class="d-flex flex-column justify-content-between align-content-between">
+            <div>
+                <GroupPhoto v-for="(elements, title) in groups"
                             :elements="elements" :title="title"
                             :key="title" />
-                </div>
-                <div>
-                    <paginate
-                        :page-count="pages"
-                        :page-range="3"
-                        :margin-pages="2"
-                        :click-handler="onChangePage"
-                        :prev-text="'&#10094;'"
-                        :next-text="'&#10095;'"
-                        :prev-class="'one-page prev'"
-                        :next-class="'one-page next'"
-                        :container-class="'paginate'"
-                        :page-class="'one-page'">
-                    </paginate>
-<!--                    <jw-pagination :items="photos" @changePage="onChangePage"-->
-<!--                                :pageSize="paginateCount"-->
-<!--                                :labels="customLabels"-->
-<!--                                :styles="customStyles"-->
-<!--                    />-->
-                </div>
+            </div>
+            <div>
+                <paginate
+                    :page-count="pages"
+                    :page-range="3"
+                    :margin-pages="2"
+                    :click-handler="onChangePage"
+                    :prev-text="'&#10094;'"
+                    :next-text="'&#10095;'"
+                    :prev-class="'one-page prev'"
+                    :next-class="'one-page next'"
+                    :container-class="'paginate'"
+                    :page-class="'one-page'">
+                </paginate>
+                <!--                    <jw-pagination :items="photos" @changePage="onChangePage"-->
+                <!--                                :pageSize="paginateCount"-->
+                <!--                                :labels="customLabels"-->
+                <!--                                :styles="customStyles"-->
+                <!--                    />-->
             </div>
         </div>
-        <div v-else class="placeholder">
-            <h2>Здесь вы можете добавить свои фотографии</h2>
-            <img src="/storage/photos/placeholder.png">
-        </div>
+    </div>
+    <div v-else class="placeholder">
+        <h2>Здесь вы можете добавить свои фотографии</h2>
+        <img src="/storage/photos/placeholder.png">
     </div>
 </template>
 
@@ -106,23 +98,6 @@
 </script>
 
 <style scoped>
-    .photos-wrap {
-        width: 100%;
-    }
-    .main-panel {
-        display: flex;
-        height: 90px;
-        width: 100%;
-        border-bottom: 2px solid #F5F5F5;
-    }
-    .upload {
-        display: flex;
-        max-width: 214px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        border-right: 2px solid #F5F5F5;
-    }
     .placeholder {
         display: flex;
         flex-direction: column;
