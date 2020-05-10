@@ -3443,7 +3443,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    console.log(this.photos);
     this.$store.dispatch('getPhotos');
   }
 });
