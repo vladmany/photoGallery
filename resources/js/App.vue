@@ -1,104 +1,108 @@
 <template>
-    <div class="wrapper">
-        <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
-        <success-modal-window v-if="this.$store.state.isSuccessUpload"></success-modal-window>
-        <selection-error-modal v-if="this.$store.state.isSelectFilesError"></selection-error-modal>
-        <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
-            <a class="navbar-brand">
-                <img src="/storage/navbar_logo.png" alt="navbar_logo">
-            </a>
-            <div @click="sidebarOpen = !sidebarOpen" class="p-3"><div class="toggle_sidebar" :class="sidebarOpen ? 'toggled' : ''"></div></div>
-            <ul id="side_menu" class="list-unstyled components">
-                <li>
-                    <router-link to="/home" >
-                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_home.svg"></object>
-                        <span>Главная страница</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/disk" >
-                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_cloud_download.svg"></object>
-                        <span>Диск</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/mail" >
-                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_email.svg"></object>
-                        <span>Почта</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/calendar" >
-                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_today.svg"></object>
-                        <span>Календарь</span>
-                    </router-link>
-                </li>
-                <li @click="photosOpen = !photosOpen" :class="photosOpen ? 'group-tab-open' : ''" style="cursor: pointer; user-select: none">
-                    <a>
-                        <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_camera_alt.svg"></object>
-                        <span>Фотографии</span>
-                    </a>
-                </li>
-                <div class="group-tabs" :style="'display: ' + (photosOpen ? 'block' : 'none')">
+    <div>
+        <div class="wrapper">
+            <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
+            <success-modal-window v-if="this.$store.state.isSuccessUpload"></success-modal-window>
+            <selection-error-modal v-if="this.$store.state.isSelectFilesError"></selection-error-modal>
+            <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
+                <a class="navbar-brand">
+                    <img src="/storage/navbar_logo.png" alt="navbar_logo">
+                </a>
+                <div @click="sidebarOpen = !sidebarOpen" class="p-3"><div class="toggle_sidebar" :class="sidebarOpen ? 'toggled' : ''"></div></div>
+                <ul id="side_menu" class="list-unstyled components">
                     <li>
-                        <router-link to="/photos" >
+                        <router-link to="/home" >
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_home.svg"></object>
+                            <span>Главная страница</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/disk" >
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_cloud_download.svg"></object>
+                            <span>Диск</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/mail" >
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_email.svg"></object>
+                            <span>Почта</span>
+                        </router-link>
+                    </li>
+                    <li>
+                        <router-link to="/calendar" >
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_today.svg"></object>
+                            <span>Календарь</span>
+                        </router-link>
+                    </li>
+                    <li @click="photosOpen = !photosOpen" :class="photosOpen ? 'group-tab-open' : ''" style="cursor: pointer; user-select: none">
+                        <a>
+                            <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_camera_alt.svg"></object>
+                            <span>Фотографии</span>
+                        </a>
+                    </li>
+                    <div class="group-tabs" :style="'display: ' + (photosOpen ? 'block' : 'none')">
+                        <li>
+                            <router-link to="/photos" >
+                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
+                                <span>Фото</span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/albums" >
+                                <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_albums.svg"></object>
+                                <span>Альбомы</span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/studio" >
+                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
+                                <span>Креативная студия</span>
+                            </router-link>
+                        </li>
+                    </div>
+                    <li>
+                        <router-link to="/contacts" >
                             <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
-                            <span>Фото</span>
+                            <span>Контакты</span>
                         </router-link>
                     </li>
                     <li>
-                        <router-link to="/albums" >
-                            <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_albums.svg"></object>
-                            <span>Альбомы</span>
-                        </router-link>
-                    </li>
-                    <li>
-                        <router-link to="/studio" >
+                        <router-link to="/manage" >
                             <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
-                            <span>Креативная студия</span>
+                            <span>Управление</span>
                         </router-link>
                     </li>
-                </div>
-                <li>
-                    <router-link to="/contacts" >
-                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
-                        <span>Контакты</span>
-                    </router-link>
-                </li>
-                <li>
-                    <router-link to="/manage" >
-                        <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
-                        <span>Управление</span>
-                    </router-link>
-                </li>
 
-            </ul>
-        </nav>
-        <div class="main_content">
-            <nav class="navbar navbar-light">
-                <div class="user_block">
-                    <ul class="user_menu" :class="userMenuOpen ? 'user_menu-opened' : ''">
-                        <li>
-                            <router-link to="user/profile/">Мой профиль</router-link>
-                        </li>
-                        <li>
-                            <router-link to="user/profile/security">Настройки безопасности</router-link>
-                        </li>
-                        <li>
-                            <router-link to="/authorization" @click="logout">Выход из системы</router-link>
-                        </li>
-                    </ul>
-                    <router-link to="/user/profile">
-                        {{ name }}
-                        <img :src="'/storage/avatars/' + avatar">
-                    </router-link>
-                    <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
-
-                </div>
+                </ul>
             </nav>
-            <main>
-                <router-view style="position: fixed; width: 100%"></router-view>
-            </main>
+            <div class="main_content">
+                <nav class="navbar navbar-light">
+                    <div class="user_block">
+                        <div class="user_menu-wrapper">
+                            <div></div>
+                            <ul class="user_menu" :class="userMenuOpen ? 'user_menu-opened' : ''">
+                                <li>
+                                    <router-link to="user/profile/">Мой профиль</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="user/profile/security">Настройки безопасности</router-link>
+                                </li>
+                                <li>
+                                    <router-link to="/authorization" @click="logout">Выход из системы</router-link>
+                                </li>
+                            </ul>
+                        </div>
+                        <router-link to="/user/profile">
+                            {{ name }}
+                            <img :src="'/storage/avatars/' + avatar">
+                        </router-link>
+                        <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
+                    </div>
+                </nav>
+                <main>
+                    <router-view style="position: relative"></router-view>
+                </main>
+            </div>
         </div>
         <div class="footer_wrapper">
             <footer class="container">
@@ -156,6 +160,7 @@
             </footer>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -285,7 +290,7 @@
     }
     .wrapper {
         display: flex;
-        flex-wrap: wrap;
+        flex-wrap: nowrap;
         position: relative;
     }
     .main_content {
@@ -334,6 +339,30 @@
     .user_block img{
         margin-left: 20px;
     }
+
+    .user_menu-wrapper {
+        max-height: 0px;
+        overflow: hidden;
+        transition: max-height .7s ease-in-out;
+        position: absolute;
+        left: -20%;
+        transform: translateY(100%);
+        bottom: -8px;
+        z-index: 9;
+    }
+
+    .user_menu-wrapper > div:first-child {
+        display: block;
+        position: relative;
+        width: 0;
+        height: 0;
+        margin-left: auto;
+        right: 30px;
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        border-bottom: 9px solid #fff;
+    }
+
     .user_menu {
         position: absolute;
         background: #fff;
