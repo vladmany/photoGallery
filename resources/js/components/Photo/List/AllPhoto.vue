@@ -10,7 +10,7 @@
             <GroupPhoto v-for="(elements, title) in groups"
                         :elements="elements" :title="title"
                         :key="title" />
-<!--            <Paginator></Paginator>-->
+            <Paginator :elements="photos"></Paginator>
         </div>
         <div v-else class="placeholder">
             <h2>Здесь вы можете добавить свои фотографии</h2>

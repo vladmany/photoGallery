@@ -1,6 +1,7 @@
 <template>
     <div>
         <paginate
+            v-model="elements"
             :page-count="20"
             :page-range="2"
             :margin-pages="2"
@@ -18,7 +19,13 @@
 
 <script>
     export default {
-        name: "Paginator"
+        name: "Paginator",
+        props: {
+            elements: {
+                required: true,
+                type: Array,
+            }
+        },
     }
 </script>
 

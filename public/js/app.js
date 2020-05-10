@@ -3296,8 +3296,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Paginator"
+  name: "Paginator",
+  props: {
+    elements: {
+      required: true,
+      type: Array
+    }
+  }
 });
 
 /***/ }),
@@ -41900,6 +41907,13 @@ var render = function() {
           "next-class": "one-page next",
           "container-class": "paginate",
           "page-class": "one-page"
+        },
+        model: {
+          value: _vm.elements,
+          callback: function($$v) {
+            _vm.elements = $$v
+          },
+          expression: "elements"
         }
       }),
       _vm._v(" "),
@@ -42040,7 +42054,7 @@ var render = function() {
               })
             }),
             _vm._v(" "),
-            _c("Paginator")
+            _c("Paginator", { attrs: { elements: _vm.photos } })
           ],
           2
         )
