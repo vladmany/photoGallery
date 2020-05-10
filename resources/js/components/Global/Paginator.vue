@@ -1,19 +1,18 @@
 <template>
     <div>
-        <paginate
-            v-model="elements"
-            :page-count="20"
-            :page-range="2"
-            :margin-pages="2"
-            :click-handler="photoPaginator"
-            :prev-text="'&#10094;'"
-            :next-text="'&#10095;'"
-            :prev-class="'one-page prev'"
-            :next-class="'one-page next'"
-            :container-class="'paginate'"
-            :page-class="'one-page'">
-        </paginate>
-        <p class="bg-secondary"></p>
+<!--        <paginate-->
+<!--            v-model="elements"-->
+<!--            :page-count="20"-->
+<!--            :page-range="2"-->
+<!--            :margin-pages="2"-->
+<!--            :click-handler="photoPaginator"-->
+<!--            :prev-text="'&#10094;'"-->
+<!--            :next-text="'&#10095;'"-->
+<!--            :prev-class="'one-page prev'"-->
+<!--            :next-class="'one-page next'"-->
+<!--            :container-class="'paginate'"-->
+<!--            :page-class="'one-page'">-->
+<!--        </paginate>-->
     </div>
 </template>
 

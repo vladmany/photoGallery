@@ -4,7 +4,7 @@
             <h1>Фото</h1>
         </template>
         <template v-slot:content>
-            <AllPhoto></AllPhoto>
+            <AllPhoto :paginate-count="3"></AllPhoto>
         </template>
     </Section>
 </template>

@@ -3296,7 +3296,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Paginator",
   props: {
@@ -3451,6 +3450,28 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
@@ -3466,8 +3487,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     Section: _Global_Section__WEBPACK_IMPORTED_MODULE_0__["default"],
     GroupPhoto: _GroupPhoto__WEBPACK_IMPORTED_MODULE_1__["default"],
     ErrorsModalWindow: _Upload_ErrorsModalWindow__WEBPACK_IMPORTED_MODULE_4__["default"],
-    UploadPhotosComponent: _Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_5__["default"],
-    Paginator: _Global_Paginator__WEBPACK_IMPORTED_MODULE_7__["default"]
+    UploadPhotosComponent: _Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
     paginateCount: {
@@ -3475,10 +3495,35 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       "default": 20
     }
   },
+  data: function data() {
+    return {
+      pages: 0
+    };
+  },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])(['photos', 'groups'])),
   watch: {
     photos: function photos() {
-      this.$store.dispatch('makeGroups');
+      this.setPages();
+      this.onChangePage(1);
+    }
+  },
+  methods: {
+    onChangePage: function onChangePage(page) {
+      var perPage = this.paginateCount;
+      var from = page * perPage - perPage;
+      var to = page * perPage;
+      var pageOfItems = this.photos.slice(from, to);
+      this.$store.dispatch('makeGroups', pageOfItems);
+    },
+    setPages: function setPages() {
+      var pages = [];
+      var numberOfPages = Math.ceil(this.photos.length / this.paginateCount);
+
+      for (var index = 1; index <= numberOfPages; index++) {
+        pages.push(index);
+      }
+
+      this.pages = pages.length;
     }
   },
   created: function created() {
@@ -8849,7 +8894,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.photos-wrap[data-v-3198fdaa] {\n    width: 100%;\n}\n.main-panel[data-v-3198fdaa] {\n    display: flex;\n    height: 90px;\n    width: 100%;\n    border-bottom: 2px solid #F5F5F5;\n}\n.upload[data-v-3198fdaa] {\n    display: flex;\n    max-width: 214px;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    border-right: 2px solid #F5F5F5;\n}\n.placeholder[data-v-3198fdaa] {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.placeholder span[data-v-3198fdaa] {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    /* identical to box height, or 125% */\n\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img[data-v-3198fdaa] {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\n", ""]);
+exports.push([module.i, "\n.photos-wrap[data-v-3198fdaa] {\n    width: 100%;\n}\n.main-panel[data-v-3198fdaa] {\n    display: flex;\n    height: 90px;\n    width: 100%;\n    border-bottom: 2px solid #F5F5F5;\n}\n.upload[data-v-3198fdaa] {\n    display: flex;\n    max-width: 214px;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    border-right: 2px solid #F5F5F5;\n}\n.placeholder[data-v-3198fdaa] {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.placeholder span[data-v-3198fdaa] {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    /* identical to box height, or 125% */\n\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img[data-v-3198fdaa] {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\nul[data-v-3198fdaa] {\n    padding: 0;\n}\nul[data-v-3198fdaa], li[data-v-3198fdaa] {\n    list-style: none;\n}\n.paginate[data-v-3198fdaa] {\n    display: flex;\n}\n.one-page[data-v-3198fdaa] {\n    padding: 10px 15px;\n    color: #666;\n    border: 1px solid red;\n    border-left: none;\n}\n.one-page:hover ~ .disable[data-v-3198fdaa] {\n    color: #000;\n    background-color: red;\n    /*#F5F5F5*/\n}\n.prev[data-v-3198fdaa] {\n    border-bottom-left-radius: 3px;\n    border-top-left-radius: 3px;\n    border-left: 1px solid red;\n}\n.next[data-v-3198fdaa] {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n}\nli.active > a[data-v-3198fdaa] {\n    background-color: red;\n}\n", ""]);
 
 // exports
 
@@ -19957,6 +20002,17 @@ if ( typeof noGlobal === "undefined" ) {
 return jQuery;
 } );
 
+
+/***/ }),
+
+/***/ "./node_modules/jw-vue-pagination/lib/JwPagination.js":
+/*!************************************************************!*\
+  !*** ./node_modules/jw-vue-pagination/lib/JwPagination.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports=function(e){var t={};function s(r){if(t[r])return t[r].exports;var a=t[r]={i:r,l:!1,exports:{}};return e[r].call(a.exports,a,a.exports,s),a.l=!0,a.exports}return s.m=e,s.c=t,s.d=function(e,t,r){s.o(e,t)||Object.defineProperty(e,t,{enumerable:!0,get:r})},s.r=function(e){"undefined"!=typeof Symbol&&Symbol.toStringTag&&Object.defineProperty(e,Symbol.toStringTag,{value:"Module"}),Object.defineProperty(e,"__esModule",{value:!0})},s.t=function(e,t){if(1&t&&(e=s(e)),8&t)return e;if(4&t&&"object"==typeof e&&e&&e.__esModule)return e;var r=Object.create(null);if(s.r(r),Object.defineProperty(r,"default",{enumerable:!0,value:e}),2&t&&"string"!=typeof e)for(var a in e)s.d(r,a,function(t){return e[t]}.bind(null,a));return r},s.n=function(e){var t=e&&e.__esModule?function(){return e.default}:function(){return e};return s.d(t,"a",t),t},s.o=function(e,t){return Object.prototype.hasOwnProperty.call(e,t)},s.p="",s(s.s=1)}([function(e,t,s){"use strict";e.exports=function(e,t,s,r){void 0===t&&(t=1),void 0===s&&(s=10),void 0===r&&(r=10);var a,n,i=Math.ceil(e/s);if(t<1?t=1:t>i&&(t=i),i<=r)a=1,n=i;else{var l=Math.floor(r/2),o=Math.ceil(r/2)-1;t<=l?(a=1,n=r):t+o>=i?(a=i-r+1,n=i):(a=t-l,n=t+o)}var c=(t-1)*s,u=Math.min(c+s-1,e-1),p=Array.from(Array(n+1-a).keys()).map(function(e){return a+e});return{totalItems:e,currentPage:t,pageSize:s,totalPages:i,startPage:a,endPage:n,startIndex:c,endIndex:u,pages:p}}},function(e,t,s){"use strict";s.r(t);var r=function(){var e=this,t=e.$createElement,s=e._self._c||t;return e.pager.pages&&e.pager.pages.length?s("ul",{staticClass:"pagination",style:e.ulStyles},[s("li",{staticClass:"page-item first",class:{disabled:1===e.pager.currentPage},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(1)}}},[e._v(e._s(e.labels.first))])]),e._v(" "),s("li",{staticClass:"page-item previous",class:{disabled:1===e.pager.currentPage},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.currentPage-1)}}},[e._v(e._s(e.labels.previous))])]),e._v(" "),e._l(e.pager.pages,function(t){return s("li",{key:t,staticClass:"page-item page-number",class:{active:e.pager.currentPage===t},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(s){return e.setPage(t)}}},[e._v(e._s(t))])])}),e._v(" "),s("li",{staticClass:"page-item next",class:{disabled:e.pager.currentPage===e.pager.totalPages},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.currentPage+1)}}},[e._v(e._s(e.labels.next))])]),e._v(" "),s("li",{staticClass:"page-item last",class:{disabled:e.pager.currentPage===e.pager.totalPages},style:e.liStyles},[s("a",{staticClass:"page-link",style:e.aStyles,on:{click:function(t){return e.setPage(e.pager.totalPages)}}},[e._v(e._s(e.labels.last))])])],2):e._e()};r._withStripped=!0;var a=s(0),n=s.n(a);function i(e,t){var s=Object.keys(e);if(Object.getOwnPropertySymbols){var r=Object.getOwnPropertySymbols(e);t&&(r=r.filter(function(t){return Object.getOwnPropertyDescriptor(e,t).enumerable})),s.push.apply(s,r)}return s}function l(e){for(var t=1;t<arguments.length;t++){var s=null!=arguments[t]?arguments[t]:{};t%2?i(s,!0).forEach(function(t){o(e,t,s[t])}):Object.getOwnPropertyDescriptors?Object.defineProperties(e,Object.getOwnPropertyDescriptors(s)):i(s).forEach(function(t){Object.defineProperty(e,t,Object.getOwnPropertyDescriptor(s,t))})}return e}function o(e,t,s){return t in e?Object.defineProperty(e,t,{value:s,enumerable:!0,configurable:!0,writable:!0}):e[t]=s,e}var c={first:"First",last:"Last",previous:"Previous",next:"Next"},u={margin:0,padding:0,display:"inline-block"},p={listStyle:"none",display:"inline",textAlign:"center"},g={cursor:"pointer",padding:"6px 12px",display:"block",float:"left"};var f=function(e,t,s,r,a,n,i,l){var o,c="function"==typeof e?e.options:e;if(t&&(c.render=t,c.staticRenderFns=s,c._compiled=!0),r&&(c.functional=!0),n&&(c._scopeId="data-v-"+n),i?(o=function(e){(e=e||this.$vnode&&this.$vnode.ssrContext||this.parent&&this.parent.$vnode&&this.parent.$vnode.ssrContext)||"undefined"==typeof __VUE_SSR_CONTEXT__||(e=__VUE_SSR_CONTEXT__),a&&a.call(this,e),e&&e._registeredComponents&&e._registeredComponents.add(i)},c._ssrRegister=o):a&&(o=l?function(){a.call(this,this.$root.$options.shadowRoot)}:a),o)if(c.functional){c._injectStyles=o;var u=c.render;c.render=function(e,t){return o.call(t),u(e,t)}}else{var p=c.beforeCreate;c.beforeCreate=p?[].concat(p,o):[o]}return{exports:e,options:c}}({props:{items:{type:Array,required:!0},initialPage:{type:Number,default:1},pageSize:{type:Number,default:10},maxPages:{type:Number,default:10},labels:{type:Object,default:function(){return c}},styles:{type:Object},disableDefaultStyles:{type:Boolean,default:!1}},data:function(){return{pager:{},ulStyles:{},liStyles:{},aStyles:{}}},created:function(){if(!this.$listeners.changePage)throw'Missing required event listener: "changePage"';this.disableDefaultStyles||(this.ulStyles=u,this.liStyles=p,this.aStyles=g),this.styles&&(this.ulStyles=l({},this.ulStyles,{},this.styles.ul),this.liStyles=l({},this.liStyles,{},this.styles.li),this.aStyles=l({},this.aStyles,{},this.styles.a)),this.setPage(this.initialPage)},methods:{setPage:function(e){var t=this.items,s=this.pageSize,r=this.maxPages,a=n()(t.length,e,s,r),i=t.slice(a.startIndex,a.endIndex+1);this.pager=a,this.$emit("changePage",i)}},watch:{items:function(){this.setPage(this.initialPage)}}},r,[],!1,null,null,null);f.options.__file="src/JwPagination.vue";t.default=f.exports}]);
 
 /***/ }),
 
@@ -41892,35 +41948,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("paginate", {
-        attrs: {
-          "page-count": 20,
-          "page-range": 2,
-          "margin-pages": 2,
-          "click-handler": _vm.photoPaginator,
-          "prev-text": "&#10094;",
-          "next-text": "&#10095;",
-          "prev-class": "one-page prev",
-          "next-class": "one-page next",
-          "container-class": "paginate",
-          "page-class": "one-page"
-        },
-        model: {
-          value: _vm.elements,
-          callback: function($$v) {
-            _vm.elements = $$v
-          },
-          expression: "elements"
-        }
-      }),
-      _vm._v(" "),
-      _c("p", { staticClass: "bg-secondary" })
-    ],
-    1
-  )
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -42043,21 +42071,48 @@ var render = function() {
     ]),
     _vm._v(" "),
     _vm.photos.length > 0
-      ? _c(
-          "div",
-          {},
-          [
-            _vm._l(_vm.groups, function(elements, title) {
-              return _c("GroupPhoto", {
-                key: title,
-                attrs: { elements: elements, title: title }
-              })
-            }),
-            _vm._v(" "),
-            _c("Paginator", { attrs: { elements: _vm.photos } })
-          ],
-          2
-        )
+      ? _c("div", {}, [
+          _c(
+            "div",
+            {
+              staticClass:
+                "d-flex flex-column justify-content-between align-content-between"
+            },
+            [
+              _c(
+                "div",
+                _vm._l(_vm.groups, function(elements, title) {
+                  return _c("GroupPhoto", {
+                    key: title,
+                    attrs: { elements: elements, title: title }
+                  })
+                }),
+                1
+              ),
+              _vm._v(" "),
+              _c(
+                "div",
+                [
+                  _c("paginate", {
+                    attrs: {
+                      "page-count": _vm.pages,
+                      "page-range": 3,
+                      "margin-pages": 2,
+                      "click-handler": _vm.onChangePage,
+                      "prev-text": "&#10094;",
+                      "next-text": "&#10095;",
+                      "prev-class": "one-page prev",
+                      "next-class": "one-page next",
+                      "container-class": "paginate",
+                      "page-class": "one-page"
+                    }
+                  })
+                ],
+                1
+              )
+            ]
+          )
+        ])
       : _c("div", { staticClass: "placeholder" }, [
           _c("h2", [_vm._v("Здесь вы можете добавить свои фотографии")]),
           _vm._v(" "),
@@ -42099,7 +42154,7 @@ var render = function() {
       {
         key: "content",
         fn: function() {
-          return [_c("AllPhoto")]
+          return [_c("AllPhoto", { attrs: { "paginate-count": 3 } })]
         },
         proxy: true
       }
@@ -59226,6 +59281,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _chenfengyuan_vue_carousel__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(_chenfengyuan_vue_carousel__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! vuejs-paginate */ "./node_modules/vuejs-paginate/dist/index.js");
 /* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(vuejs_paginate__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! jw-vue-pagination */ "./node_modules/jw-vue-pagination/lib/JwPagination.js");
+/* harmony import */ var jw_vue_pagination__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(jw_vue_pagination__WEBPACK_IMPORTED_MODULE_9__);
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -59237,7 +59294,9 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Section', _components_Global_Section__WEBPACK_IMPORTED_MODULE_6__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('jw-pagination', jw_vue_pagination__WEBPACK_IMPORTED_MODULE_9___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('paginate', vuejs_paginate__WEBPACK_IMPORTED_MODULE_8___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component(_chenfengyuan_vue_carousel__WEBPACK_IMPORTED_MODULE_7___default.a.name, _chenfengyuan_vue_carousel__WEBPACK_IMPORTED_MODULE_7___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
@@ -61120,14 +61179,14 @@ var actions = {
       commit('getPhotos', res.data);
     });
   },
-  makeGroups: function makeGroups(_ref2) {
+  makeGroups: function makeGroups(_ref2, items) {
     var state = _ref2.state,
         commit = _ref2.commit;
     var weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
     var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     var groups = {};
     var key = 'created_at';
-    state.photos.forEach(function (item) {
+    items.forEach(function (item) {
       var val = item[key].split('T')[0];
       var date = new Date(val);
       var weekday = weekdays[date.getDay()];
@@ -61140,8 +61199,8 @@ var actions = {
 
       groups[ret].push(item);
     });
-    var keys = Object.keys(groups);
-    keys.reverse();
+    var keys = Object.keys(groups); // keys.reverse();
+
     var desc_groups = {};
 
     for (var _i2 = 0, _keys = keys; _i2 < _keys.length; _i2++) {

@@ -50,10 +50,10 @@ let actions = {
     getPhotos({ commit }) {
         axios.get('api/all-photos')
             .then(res => {
-                commit('getPhotos', res.data)
+                commit('getPhotos', res.data);
             })
     },
-    makeGroups({ state, commit }) {
+    makeGroups({ state, commit }, items) {
         let weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб',];
         let months = [
             'января', 'февраля', 'марта', 'апреля',
@@ -63,7 +63,7 @@ let actions = {
 
         let groups = {};
         let key = 'created_at';
-        state.photos.forEach(item => {
+        items.forEach(item => {
             let val = item[key].split('T')[0];
             let date = new Date(val);
             let weekday = weekdays[date.getDay()];
@@ -76,7 +76,7 @@ let actions = {
         });
 
         let keys = Object.keys(groups);
-        keys.reverse();
+        // keys.reverse();
         let desc_groups = {};
 
         for(key of keys) {

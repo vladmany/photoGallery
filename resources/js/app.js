@@ -9,10 +9,12 @@ import axios from 'axios'
 import Section from "./components/Global/Section";
 import VueCarousel from '@chenfengyuan/vue-carousel';
 import Paginate from 'vuejs-paginate'
+import JwPagination from 'jw-vue-pagination';
 
 
 Vue.component('Section', Section);
 
+Vue.component('jw-pagination', JwPagination);
 Vue.component('paginate', Paginate)
 Vue.component(VueCarousel.name, VueCarousel);
 

@@ -21,7 +21,7 @@ class PhotoController extends Controller
     public function index()
     {
 //        dd(Photo::all());
-        return Photo::all();
+        return Photo::orderBy('created_at', 'desc')->get();
     }
 
     /**
