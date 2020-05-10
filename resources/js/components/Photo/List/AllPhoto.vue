@@ -26,11 +26,6 @@
                         :container-class="'paginate'"
                         :page-class="'one-page'">
                     </paginate>
-<!--                    <jw-pagination :items="photos" @changePage="onChangePage"-->
-<!--                                :pageSize="paginateCount"-->
-<!--                                :labels="customLabels"-->
-<!--                                :styles="customStyles"-->
-<!--                    />-->
                 </div>
             </div>
         </div>
@@ -105,7 +100,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     .photos-wrap {
         width: 100%;
     }
@@ -165,24 +160,27 @@
     .one-page {
         padding: 10px 15px;
         color: #666;
-        border: 1px solid red;
+        border: 1px solid #F5F5F5;
         border-left: none;
     }
-    .one-page:hover ~ .disable {
+    .active,
+    .one-page:hover {
         color: #000;
-        background-color: red;
-        /*#F5F5F5*/
+        background-color: #F5F5F5;
     }
     .prev {
         border-bottom-left-radius: 3px;
         border-top-left-radius: 3px;
-        border-left: 1px solid red;
+        border-left: 1px solid #F5F5F5;
     }
     .next {
         border-bottom-right-radius: 3px;
         border-top-right-radius: 3px;
     }
-    li.active > a {
-        background-color: red;
+    .disabled,
+    .disabled:hover,
+    .disabled > a {
+        cursor: default;
+        color: #F5F5F5;
     }
 </style>
