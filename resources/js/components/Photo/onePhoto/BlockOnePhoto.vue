@@ -6,7 +6,7 @@
         <template v-slot:content>
             <div>
                 <p class="pl-5">Панель инструментов</p>
-                <OnePhoto :id="id"></OnePhoto>
+                <SliderPhoto :id="id"></SliderPhoto>
             </div>
         </template>
     </Section>
@@ -15,10 +15,11 @@
 <script>
     import OnePhoto from "./OnePhoto";
     import Section from "../../Global/Section";
+    import SliderPhoto from "./SliderPhoto";
 
     export default {
         name: "BlockOnePhoto",
-        components: { OnePhoto, Section },
+        components: {SliderPhoto, OnePhoto, Section },
         props: {
             id: {
                 required: true,

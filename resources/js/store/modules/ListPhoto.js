@@ -6,7 +6,11 @@ let getters = {
     photos: state => state.photos,
     groups: state => state.groups,
     photo: state => id =>
-        state.photos.find(photo => photo.id === id)
+        state.photos.find(photo => photo.id === id),
+    groupByPhoto: state => id => {
+        state.groups.find((key, photo) => photo.id === id)
+    }
+
 }
 let mutations = {
     getPhotos:(state, payload) => {
