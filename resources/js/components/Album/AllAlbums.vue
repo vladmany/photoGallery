@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="container body-wrapper">
-            <div class="row pt-4 pb-2 album" v-for="(album, index) in albums">
+            <div class="row pt-4 pb-2 album" v-for="album in albums">
                 <div class="col-2 col-md-1 align-self-center d-flex justify-content-center text-center">
                     <input type="checkbox" class="checkbox-album text-center">
                 </div>
@@ -19,14 +19,19 @@
                     <p class="text-center"><img src="/ico-user.png">Пользователи с доступом<img src="/ico-select.png"></p>
                 </div>
             </div>
+            <!--<div class="" v-if="albums.length > 0">
+                <GroupPhoto v-for="(albums, index) in groups"
+                            :elements="elements" :title="title"
+                            :key="title" />
+            </div>-->
         </div>
-        <noAlbums v-if="NoAlbum"></noAlbums>
     </div>
 
 </template>
 
 <script>
     import noAlbums from "./noAlbums";
+    import {mapGetters} from "vuex";
     export default {
         components: {noAlbums},
         comments: {
@@ -35,12 +40,17 @@
         name: "AllAlbums",
         data(){
             return{
-                albums:[],
+                //albums:[],
                 monthes:["января","февраля","марта","апреля","мая","июня","июля","августа","сентября","октября","ноября","декабря"],
                 date:'',
                 NoAlbum: true
 
             }
+        },
+        computed: {
+            ...mapGetters([
+                'albums'
+            ]),
         },
         methods:{
             getAlbums(){
@@ -58,8 +68,14 @@
                 else this.NoAlbum = false;
             },
         },
+        props: {
+            elements: {
+                required: true,
+                type: Array
+            }
+        },
         created() {
-            this.getAlbums()
+            this.$store.dispatch('getAlbums');
         },
         updated() {
             this.emptyAlbums()

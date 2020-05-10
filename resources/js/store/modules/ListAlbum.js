@@ -23,6 +23,12 @@ let actions = {
                 commit('getPhotos', res.data)
             })
     },
+    getAlbums({ commit }) {
+        axios.get('api/all-albums')
+            .then(res => {
+                commit('getAlbums', res.data)
+            })
+    },
     makeGroups({ state, commit }) {
         let weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб',];
         let months = [

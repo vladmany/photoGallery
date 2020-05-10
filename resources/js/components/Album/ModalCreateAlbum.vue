@@ -56,7 +56,7 @@
                 axios.post('api/albums/create', newAlbum)
                     .then(response => {
                         this.closeModal()
-                        this.$store.dispatch('AllPhotos');}
+                        this.$store.dispatch('getAlbums');}
                     )
                     .catch(error =>{
                         if(error.response.status == 422){

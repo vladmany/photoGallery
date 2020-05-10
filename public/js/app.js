@@ -2995,6 +2995,17 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _noAlbums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./noAlbums */ "./resources/js/components/Album/noAlbums.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
 //
 //
 //
@@ -3023,6 +3034,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
     noAlbums: _noAlbums__WEBPACK_IMPORTED_MODULE_0__["default"]
@@ -3033,12 +3045,13 @@ __webpack_require__.r(__webpack_exports__);
   name: "AllAlbums",
   data: function data() {
     return {
-      albums: [],
+      //albums:[],
       monthes: ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
       date: '',
       NoAlbum: true
     };
   },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['albums'])),
   methods: {
     getAlbums: function getAlbums() {
       var _this = this;
@@ -3055,8 +3068,14 @@ __webpack_require__.r(__webpack_exports__);
       if (this.albums.length === 0) this.NoAlbum = true;else this.NoAlbum = false;
     }
   },
+  props: {
+    elements: {
+      required: true,
+      type: Array
+    }
+  },
   created: function created() {
-    this.getAlbums();
+    this.$store.dispatch('getAlbums');
   },
   updated: function updated() {
     this.emptyAlbums();
@@ -3078,6 +3097,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Index__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Index */ "./resources/js/components/Album/Index.vue");
 /* harmony import */ var _ModalCreateAlbum__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ModalCreateAlbum */ "./resources/js/components/Album/ModalCreateAlbum.vue");
 /* harmony import */ var _Create_CreateAlbum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Create/CreateAlbum */ "./resources/js/components/Album/Create/CreateAlbum.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 //
 //
 //
@@ -3107,7 +3127,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
+
 
 
 
@@ -3299,7 +3319,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/albums/create', newAlbum).then(function (response) {
         _this.closeModal();
 
-        _this.$store.dispatch('AllPhotos');
+        _this.$store.dispatch('getAlbums');
       })["catch"](function (error) {
         if (error.response.status == 422) {
           _this.errors = error.response.data.errors;
@@ -41581,60 +41601,52 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    { staticClass: "wrapper" },
-    [
-      _c(
-        "div",
-        { staticClass: "container body-wrapper" },
-        _vm._l(_vm.albums, function(album, index) {
-          return _c("div", { staticClass: "row pt-4 pb-2 album" }, [
-            _vm._m(0, true),
-            _vm._v(" "),
-            _vm._m(1, true),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "col-12 col-md-5 col-xl-2 align-self-stretch text-center"
-              },
-              [
-                _c("p", { staticClass: "pl-3" }, [_vm._v(_vm._s(album.name))]),
-                _vm._v(" "),
-                _vm._m(2, true)
-              ]
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              {
-                staticClass:
-                  "col-12 col-md-6 col-xl-2 align-self-end text-center"
-              },
-              [
-                _c("p", { staticClass: "ml-md-5" }, [
-                  _c("img", { attrs: { src: "/ico_calendar.png" } }),
-                  _vm._v(
-                    _vm._s(_vm.formatDate(album.created_at)) +
-                      " " +
-                      _vm._s(_vm.date)
-                  )
-                ])
-              ]
-            ),
-            _vm._v(" "),
-            _vm._m(3, true)
-          ])
-        }),
-        0
-      ),
-      _vm._v(" "),
-      _vm.NoAlbum ? _c("noAlbums") : _vm._e()
-    ],
-    1
-  )
+  return _c("div", { staticClass: "wrapper" }, [
+    _c(
+      "div",
+      { staticClass: "container body-wrapper" },
+      _vm._l(_vm.albums, function(album) {
+        return _c("div", { staticClass: "row pt-4 pb-2 album" }, [
+          _vm._m(0, true),
+          _vm._v(" "),
+          _vm._m(1, true),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass:
+                "col-12 col-md-5 col-xl-2 align-self-stretch text-center"
+            },
+            [
+              _c("p", { staticClass: "pl-3" }, [_vm._v(_vm._s(album.name))]),
+              _vm._v(" "),
+              _vm._m(2, true)
+            ]
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            {
+              staticClass: "col-12 col-md-6 col-xl-2 align-self-end text-center"
+            },
+            [
+              _c("p", { staticClass: "ml-md-5" }, [
+                _c("img", { attrs: { src: "/ico_calendar.png" } }),
+                _vm._v(
+                  _vm._s(_vm.formatDate(album.created_at)) +
+                    " " +
+                    _vm._s(_vm.date)
+                )
+              ])
+            ]
+          ),
+          _vm._v(" "),
+          _vm._m(3, true)
+        ])
+      }),
+      0
+    )
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -41743,7 +41755,7 @@ var render = function() {
                 "div",
                 { staticClass: "main-panel" },
                 [
-                  _c("AllAlbums"),
+                  _c("AllAlbums", { attrs: { elements: _vm.elements } }),
                   _vm._v(" "),
                   _c("div", { staticClass: "actions-panel" })
                 ],
@@ -61097,6 +61109,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/AddPhoto */ "./resources/js/store/modules/AddPhoto.js");
 /* harmony import */ var _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/ListPhoto */ "./resources/js/store/modules/ListPhoto.js");
+/* harmony import */ var _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/ListAlbum */ "./resources/js/store/modules/ListAlbum.js");
+
 
 
 
@@ -61105,7 +61119,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 /* harmony default export */ __webpack_exports__["default"] = (new vuex__WEBPACK_IMPORTED_MODULE_1__["default"].Store({
   modules: {
     AddPhoto: _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__["default"],
-    ListPhoto: _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__["default"]
+    ListPhoto: _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__["default"],
+    ListAlbum: _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__["default"]
   },
   state: {
     isUploadError: false,
@@ -61145,14 +61160,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     hideSelectError: function hideSelectError(state) {
       state.isSelectFilesError = false;
-    },
-    getAlbums: function getAlbums() {
-      var _this = this;
-
-      axios.get('api/albums').then(function (r) {
-        return _this.albums = r.data;
-      });
     }
+    /*getAlbums() {
+        axios.get('api/albums')
+            .then(r => this.albums = r.data)
+    }*/
+
   },
   actions: {}
 }));
@@ -61189,6 +61202,89 @@ var mutations = {
   }
 };
 var actions = {};
+/* harmony default export */ __webpack_exports__["default"] = ({
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/ListAlbum.js":
+/*!*************************************************!*\
+  !*** ./resources/js/store/modules/ListAlbum.js ***!
+  \*************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  albums: []
+};
+var getters = {
+  albums: function albums(state) {
+    return state.albums;
+  }
+};
+var mutations = {
+  getAlbums: function getAlbums(state, payload) {
+    state.albums = payload;
+  }
+};
+var actions = {
+  addPhoto: function addPhoto(payload) {
+    axios.post('api/all-photos', {
+      photo: payload.photo
+    }).then(function (res) {
+      console.log(res.data);
+    });
+  },
+  getPhotos: function getPhotos(_ref) {
+    var commit = _ref.commit;
+    axios.get('api/all-photos').then(function (res) {
+      commit('getPhotos', res.data);
+    });
+  },
+  getAlbums: function getAlbums(_ref2) {
+    var commit = _ref2.commit;
+    axios.get('api/all-albums').then(function (res) {
+      commit('getAlbums', res.data);
+    });
+  },
+  makeGroups: function makeGroups(_ref3) {
+    var state = _ref3.state,
+        commit = _ref3.commit;
+    var weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
+    var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    var groups = {};
+    var key = 'created_at';
+    state.photos.forEach(function (item) {
+      var val = item[key].split('T')[0];
+      var date = new Date(val);
+      var weekday = weekdays[date.getDay()];
+      var month = months[date.getMonth()];
+      var ret = "".concat(weekday, ", ").concat(date.getDate(), " ").concat(month);
+
+      if (!groups[ret]) {
+        groups[ret] = [];
+      }
+
+      groups[ret].push(item);
+    });
+    var keys = Object.keys(groups);
+    keys.reverse();
+    var desc_groups = {};
+
+    for (var _i = 0, _keys = keys; _i < _keys.length; _i++) {
+      key = _keys[_i];
+      desc_groups[key] = groups[key];
+    }
+
+    commit('makeGroups', desc_groups);
+  }
+};
 /* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   getters: getters,

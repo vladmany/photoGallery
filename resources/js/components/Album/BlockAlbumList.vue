@@ -12,16 +12,15 @@
                             </div>
 
 
-
                 </div>
                 <div class="main-panel">
-                        <AllAlbums></AllAlbums>
+                        <AllAlbums :elements="elements"></AllAlbums>
                     <div class="actions-panel"></div>
                 </div>
-                <!--<div v-else class="placeholder">
-                    <h2>Здесь вы можете добавить свои альбомы</h2>
-                    <img src="/storage/photos/placeholder.png">
-                </div>-->
+
+
+
+
             </div>
 
         </template>
@@ -33,6 +32,7 @@
     import Index from "./Index";
     import ModalCreateAlbum from "./ModalCreateAlbum";
     import CreateAlbum from "./Create/CreateAlbum";
+    import {mapGetters} from "vuex";
 
 
     export default {
@@ -52,7 +52,7 @@
                 this.isInfoPopupVisible = false;
 
             },
-        }
+        },
     }
 </script>
 
