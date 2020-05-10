@@ -19,9 +19,7 @@
         },
         data: function () {
             return {
-                album: {
-                    name: '',
-                },
+                album: {},
                 isInfoPopupVisible:false
             }
         },
@@ -33,19 +31,6 @@
                 this.isInfoPopupVisible = false;
 
             },
-            saveForm() {
-                event.preventDefault();
-                var app = this;
-                var newAlbum = app.album;
-                axios.post('api/albums/create', newAlbum)
-                    .then(function (resp) {
-                        app.$router.push({path: '/'});
-                    })
-                    .catch(function (resp) {
-                        console.log(resp);
-                        alert("Could not create album");
-                    });
-            }
         }
     }
 </script>

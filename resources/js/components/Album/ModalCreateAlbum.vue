@@ -15,6 +15,7 @@
                                     <div class="col-xs-12 form-group">
                                         <label class="control-label" for="name">Добавить название альбома</label>
                                         <input type="text" id="name" v-model="album.name" class="form-control input">
+                                        <span v-if="errors.name" class="error">{{errors.name[0]}}</span>
                                     </div>
                                 <div class="window-buttons d-flex pt-3">
                                     <button class="window-btn-ok">Добавить</button>
@@ -43,10 +44,8 @@
         },
         data: function () {
             return {
-                album: {
-                    name: '',
-                },
-
+                album: {},
+                errors:[]
             }
         },
         methods: {
@@ -55,13 +54,15 @@
                 var app = this;
                 var newAlbum = app.album;
                 axios.post('api/albums/create', newAlbum)
-                    .then(
-                        this.$emit('closeModal'),
-                        this.$store.commit('getAlbums'),
+                    .then(response => {
+                        this.closeModal()
+                        this.$store.dispatch('AllPhotos');}
                     )
-                    .catch(function (resp) {
-                        console.log(resp);
-                        alert("Не могу создать альбом");
+                    .catch(error =>{
+                        if(error.response.status == 422){
+                            this.errors = error.response.data.errors
+                            return false;
+                        }
                     });
             },
             closeModal(){
