@@ -43,7 +43,8 @@
                 step: false,
                 height: 0,
                 width: 0,
-                formData: new FormData()
+                formData: new FormData(),
+                successFiles: []
             }
         },
         methods: {
@@ -56,7 +57,7 @@
             },
             sendFiles(e) {
                 let photos = $(e.target);
-                if (photos.prop('files').length >= 1)
+                if ((photos.prop('files').length > 0) && (photos.prop('files').length < 16))
                 {
                     this.steps = (this.$refs.photo.files.length > 10) ? 10 : this.$refs.photo.files.length;
                     this.step = 0
@@ -80,7 +81,11 @@
                                 }
                             }));
                         this.formData.append('photo[' + res.length + ']', file);
+                        this.successFiles.push(file.name)
                     }
+                } else
+                    if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
+                        this.$store.commit('showSelectError')
                 }
             },
             validate(file) {
@@ -88,14 +93,12 @@
                 {
                     this.$store.commit('setUploadErrorMessage', 'Превышает объем  загружаемого фото. Объем загружаемого файла не должен превышать 16 МВ')
                     this.$store.commit('setUploadErrorFile',file.name)
-                    console.log('Есть ошибка')
                     return false
                 }
                 if (!['bmp','gif','jpeg','jpg','png','tiff'].includes(file.type.split('/').pop()))
                 {
                     this.$store.commit('setUploadErrorMessage', 'Не соответствует формат загружаемых фото. Рекомендуемые форматы - BMP; GIF; JPG; PNG; TIFF')
                     this.$store.commit('setUploadErrorFile',file.name)
-                    console.log('Есть ошибка')
                     return false
                 }
 
@@ -125,13 +128,13 @@
                         this.$store.commit('setUploadErrorFile',file.name)
                         return false
                     }
-                    }, 250);
+                }, 250);
 
                 return true
             }
         },
         created() {
-            // let vm = this;
+            let vm = this;
             document.addEventListener('mouseup', function (e) {
                 let container = $(".upload-methods");
 
@@ -145,14 +148,21 @@
                 if ((this.step !== false) && (this.steps !== false))
                 {
                     if ((this.step === this.steps) && (this.step !== false) && (this.steps !== false)) {
-                            axios.post('/api/photos/upload', this.formData, { // !!!!!!!!!!!!!!!!!!!
-                                headers: {
-                                    'Content-Type': 'multipart/form-data'
-                                }
-                            })
+                        axios.post('api/photos/upload', this.formData, {
+                            headers: {
+                                'Content-Type': 'multipart/form-data'
+                            }
+                        })
                             .then(response => {
                                 this.formData = new FormData() // Сброс
                                 this.$store.dispatch('getPhotos');
+                                if (this.successFiles.length > 0)
+                                {
+                                    this.$store.commit('setUploadSuccessFile', this.successFiles)
+                                    this.$store.commit('showUploadSuccess')
+                                    console.log(this.$store.state.successUploadFiles)
+                                }
+
                             })
                             .catch(error => {
                                 if (error.response.status === 422)
@@ -161,12 +171,12 @@
                                     for (let key in error.response.data.errors) {
                                         errors.push(error.response.data.errors[key][0])
                                     }
-                                    this.$store.commit('setUploadErrorMessage',errors)
+                                    this.$store.commit('setUploadErrorMessages',errors)
                                     let fileNames = [];
                                     let files = this.$refs.photo.prop('files')
                                     for(let i = 0; i < files.length; i++)
                                         fileNames.push(files[i].name)
-                                    this.$store.commit('setUploadErrorFile', fileNames)
+                                    this.$store.commit('setUploadErrorFiles', fileNames)
                                     this.$store.commit('showUploadError');
                                     this.$refs.photo.val('')
                                 }
@@ -199,6 +209,7 @@
                                     }
                                 }));
                             this.formData.append('photo[' + res.length + ']', file);
+                            this.successFiles.push(file.name)
                         }
 
                     } else {
@@ -216,6 +227,13 @@
                 this.steps = false;
                 this.step = false;
                 this.$store.commit('hideUploadError');
+            })
+            this.$root.$on('closeSuccess', () => {
+                this.successFiles = []
+                this.$store.commit('hideUploadSuccess')
+            })
+            this.$root.$on('closeSelError', () => {
+                this.$store.commit('hideSelectError')
             })
         }
     }
@@ -239,16 +257,20 @@
     }
 
     .upload-methods {
+        z-index: 999;
         display: none;
+        position: absolute;
         max-width: 255px;
+        width: 100%;
         max-height: 120px;
+        height: 100%;
         margin-top: 7px;
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
     }
 
     .upload-methods .from-computer, .upload-methods .from-disk {
-        padding: 0;
+        padding-left: 27px;
         margin: 0;
         max-width: 255px;
         width: 100%;
@@ -274,8 +296,8 @@
         margin: 0;
     }
 
-    .upload-methods .from-computer {
-        border-bottom: 2px solid #F5F5F5;
+    button.from-disk {
+        border-top: 2px solid #F5F5F5!important;
     }
 
     .inputfile {

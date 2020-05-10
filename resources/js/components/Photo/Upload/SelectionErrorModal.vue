@@ -2,7 +2,7 @@
     <div>
         <div class="outside-the-window">
             <div class="window animated fadeInDown">
-                <button class="close-window-btn" @click="closeWindow()">
+                <button class="close-window-btn" @click="close">
                     <svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
                         <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="14" height="14">
                             <path fill-rule="evenodd" clip-rule="evenodd" d="M19.0667 8.15535L17.8447 6.93335L13 11.778L8.15535 6.93335L6.93335 8.15535L11.778 13L6.93335 17.8447L8.15535 19.0667L13 14.222L17.8447 19.0667L19.0667 17.8447L14.222 13L19.0667 8.15535Z" fill="white"/>
@@ -13,14 +13,11 @@
                     </svg>
                 </button>
                 <div class="window-content">
-                    <h1>Загрузка фото</h1>
-                    <span>{{ this.$store.state.UploadErrorMessage }}</span>
-                    <span class="d-block">Не удается загрузить фото:</span>
-                    <span class="error-file d-block">{{ this.$store.state.UploadErrorFile }}</span>
+                    <h1>Ошибка загрузки фото</h1>
+                    <span class="d-block">Выбранное количество фото не должно превышать {{ this.$store.state.maxFilesToUpload }} шт.</span>
 
                     <div class="window-buttons d-flex">
-                        <button class="window-btn-ok" @click="apply()">Продолжить</button>
-                        <button class="window-btn-cancel" @click="cancel()">Отменить</button>
+                        <button class="window-btn-ok" @click="close">Продолжить</button>
                     </div>
                 </div>
             </div>
@@ -31,14 +28,11 @@
 
 <script>
     export default {
-        name: "ErrorsModalWindow",
+        name: "SelectionErrorModal",
         showed: true,
         methods: {
-            apply() {
-                this.$root.$emit('continueUpload')
-            },
-            cancel() {
-                this.$root.$emit('cancelUpload')
+            close() {
+                this.$root.$emit('closeSelError')
             }
         }
     }

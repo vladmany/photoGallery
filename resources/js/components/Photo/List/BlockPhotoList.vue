@@ -10,15 +10,11 @@
 </template>
 
 <script>
-    import Section from "../../Global/Section";
     import AllPhoto from "./AllPhoto";
 
     export default {
         name: "BlockPhotoList",
-        components: {
-            AllPhoto,
-            Section,
-        }
+        components: {AllPhoto,}
     }
 </script>
 

@@ -1,43 +1,13 @@
 let state = {
-    photos: [],
-    groups: {},
+    albums: [],
 }
 let getters = {
-    photos: state => state.photos,
-    groups: state => state.groups,
-    photo: state => id =>
-        state.photos.find(photo => photo.id === id),
-    groupByPhoto: state => id => {
-        let group = {};
-        let ind = 0;
-        for(let key of Object.keys(state.groups)) {
-            let br = false;
-            for(let elem of state.groups[key]) {
-                if(elem.id === id) {
-                    group = state.groups[key];
-                    ind = state.groups[key].indexOf(elem);
-                    br = true;
-                    break;
-                }
-            }
-            if (br) break;
-        }
-        let arr = [];
-        for(let val of group) {
-            arr.push(val.url);
-        }
-
-        return [ind, arr];
-    }
-
+    albums: state => state.albums,
 }
 let mutations = {
-    getPhotos:(state, payload) => {
-        state.photos = payload
+    getAlbums:(state, payload) => {
+        state.albums = payload
     },
-    makeGroups:(state, payload) => {
-        state.groups = payload
-    }
 }
 let actions = {
     addPhoto: payload => {
