@@ -30,14 +30,20 @@
         <template v-slot:button>
             <div class="row">
                 <div class="col-12 col-md-2">
-                    <route-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id }}">
-                        <span class="btn btn-primary btn-lg">Добавить фото</span>
-                    </route-link>
+                    <router-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id } }">
+                        <span class="btn btn-primary btn-lg text-nowrap">Добавить фото</span>
+                    </router-link>
                 </div>
             </div>
         </template>
         <template v-slot:content>
-            <AllPhotoAlbum :paginate-count="20" :album-id="album.id"></AllPhotoAlbum>
+            <div class="row">
+                <div class="col-12">
+                    <h2 class="text-center">{{ album.name }}</h2>
+                </div>
+                <AllPhotoAlbum :paginate-count="20" :album-id="album.id" class="col-12"></AllPhotoAlbum >
+            </div>
+
         </template>
     </Section>
 

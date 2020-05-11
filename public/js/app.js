@@ -3247,12 +3247,57 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/Upload/UploadPhotosComponent */ "./resources/js/components/Photo/Upload/UploadPhotosComponent.vue");
+/* harmony import */ var _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Photo/List/AllPhoto */ "./resources/js/components/Photo/List/AllPhoto.vue");
 //
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AddPhotoToAlbum"
+  name: "AddPhotoToAlbum",
+  components: {
+    UploadPhotosComponent: _Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
+    AllPhoto: _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_2__["default"]
+  },
+  methods: {
+    save: function save() {}
+  },
+  computed: {
+    album: function album() {
+      return this.$store.getters['ListAlbum/album'](this.id);
+    }
+  }
 });
 
 /***/ }),
@@ -3392,6 +3437,12 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AllPhotoAlbum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AllPhotoAlbum */ "./resources/js/components/Album/List/AllPhotoAlbum.vue");
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -42312,7 +42363,64 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("Section", {
+    scopedSlots: _vm._u([
+      {
+        key: "title",
+        fn: function() {
+          return [_c("span", [_vm._v("Фото")])]
+        },
+        proxy: true
+      },
+      {
+        key: "button",
+        fn: function() {
+          return [_c("upload-photos-component")]
+        },
+        proxy: true
+      },
+      {
+        key: "content",
+        fn: function() {
+          return [
+            _c(
+              "div",
+              { staticClass: "row" },
+              [
+                _c("div", { staticClass: "col-12" }, [
+                  _c("div", { staticClass: "row justify-content-between" }, [
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("p", [_vm._v("Назад")])
+                    ]),
+                    _vm._v(" "),
+                    _c("div", { staticClass: "col-12" }, [
+                      _c("span", { on: { click: _vm.save } }, [
+                        _vm._v("Сохранить")
+                      ])
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-12" }, [
+                  _c("h2", { staticClass: "text-center text-uppercase" }, [
+                    _vm._v(
+                      "\n                    Добавить фото в " +
+                        _vm._s(_vm.album.name) +
+                        "\n                "
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("AllPhoto", { attrs: { "paginate-count": 20 } })
+              ],
+              1
+            )
+          ]
+        },
+        proxy: true
+      }
+    ])
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -42513,7 +42621,7 @@ var render = function() {
                 { staticClass: "col-12 col-md-2" },
                 [
                   _c(
-                    "route-link",
+                    "router-link",
                     {
                       attrs: {
                         to: {
@@ -42523,9 +42631,11 @@ var render = function() {
                       }
                     },
                     [
-                      _c("span", { staticClass: "btn btn-primary btn-lg" }, [
-                        _vm._v("Добавить фото")
-                      ])
+                      _c(
+                        "span",
+                        { staticClass: "btn btn-primary btn-lg text-nowrap" },
+                        [_vm._v("Добавить фото")]
+                      )
                     ]
                   )
                 ],
@@ -42540,9 +42650,23 @@ var render = function() {
         key: "content",
         fn: function() {
           return [
-            _c("AllPhotoAlbum", {
-              attrs: { "paginate-count": 20, "album-id": _vm.album.id }
-            })
+            _c(
+              "div",
+              { staticClass: "row" },
+              [
+                _c("div", { staticClass: "col-12" }, [
+                  _c("h2", { staticClass: "text-center" }, [
+                    _vm._v(_vm._s(_vm.album.name))
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("AllPhotoAlbum", {
+                  staticClass: "col-12",
+                  attrs: { "paginate-count": 20, "album-id": _vm.album.id }
+                })
+              ],
+              1
+            )
           ]
         },
         proxy: true
@@ -62201,7 +62325,8 @@ __webpack_require__.r(__webpack_exports__);
   }, {
     path: '/album/:id/add',
     component: _components_Album_List_AddPhotoToAlbum__WEBPACK_IMPORTED_MODULE_6__["default"],
-    name: 'AddPhotoToAlbum'
+    name: 'AddPhotoToAlbum',
+    props: true
   }, {
     path: '/photos',
     component: _components_Photo_List_PhotoIndex__WEBPACK_IMPORTED_MODULE_1__["default"],
