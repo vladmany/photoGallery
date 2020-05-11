@@ -1,11 +1,12 @@
 <template>
     <div class="d-flex">
-        <label class="photo_element">
-            <input type="checkbox" class="mx-1 mb-1" v-model="isSelected">
+        <div class="photo_element">
+            <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'photo-' + photo.id" v-model="isSelected">
+            <label :for="'photo-' + photo.id"></label>
             <router-link :to="{ name: 'OnePhoto', params: { id: photo.id } }">
                 <img :src="photo.url" :alt="photo.name" class="one-photo">
             </router-link>
-        </label>
+        </div>
     </div>
 </template>
 
