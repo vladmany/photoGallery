@@ -26,6 +26,16 @@
                 type: Boolean,
             }
         },
+        watch: {
+            isSelected() {
+                if(this.isSelected) {
+                    this.$store.dispatch('addPhoto', this.photo.id);
+                } else {
+                    this.$store.dispatch('delPhoto', this.photo.id);
+                }
+                // console.log(this.$store.getters.selectedPhotos);
+            }
+        }
     }
 </script>
 
