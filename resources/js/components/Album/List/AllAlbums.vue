@@ -31,31 +31,17 @@
 
 <script>
     import noAlbums from "./noAlbums";
-    import {mapGetters} from "vuex";
+    import { mapGetters } from "vuex";
 
     export default {
         components: {noAlbums},
-        comments: {
-            noAlbums
-        },
         name: "AllAlbums",
-        data() {
-            return {
-                date: '',
-                NoAlbum: true
-
-            }
-        },
         computed: {
             ...mapGetters({
                 albums: 'ListAlbum/albums',
             }),
         },
         methods: {
-            // getAlbums() {
-            //     axios.get('api/albums')
-            //         .then(r => this.albums = r.data)
-            // },
             formatDate(date) {
                 let months = [
                     "января", "февраля", "марта",
@@ -63,19 +49,10 @@
                         "августа", "сентября", "октября",
                         "ноября", "декабря"
                     ]
-
                 let dat = date.split('T')[0];
                 dat = new Date(dat)
 
                 return `${dat.getDate()} ${months[dat.getMonth()]} ${dat.getFullYear()}`
-
-                // this.date = created_at.getDate() + ' ' + this.monthes[created_at.getMonth()] + ' ' + created_at.getFullYear();
-
-            },
-            emptyAlbums() {
-                if (this.albums.length === 0)
-                    this.NoAlbum = true;
-                else this.NoAlbum = false;
             },
         },
         props: {
@@ -83,19 +60,10 @@
                 required: true,
                 type: Object,
             },
-            elements: {
-                required: true,
-                type: Array
-            }
         },
         created() {
             this.$store.dispatch('ListAlbum/getAlbums');
         },
-        // updated() {
-        //     this.emptyAlbums()
-        // },
-
-
     }
 </script>
 
