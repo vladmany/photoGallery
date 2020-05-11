@@ -20,11 +20,6 @@
                     :container-class="'paginate'"
                     :page-class="'one-page'">
                 </paginate>
-                <!--                    <jw-pagination :items="photos" @changePage="onChangePage"-->
-                <!--                                :pageSize="paginateCount"-->
-                <!--                                :labels="customLabels"-->
-                <!--                                :styles="customStyles"-->
-                <!--                    />-->
             </div>
         </div>
     </div>
@@ -63,10 +58,10 @@
             }
         },
         computed: {
-            ...mapGetters([
-                'photos',
-                'groups'
-            ])
+            ...mapGetters({
+                photos: 'ListPhoto/photos',
+                groups: 'ListPhoto/groups',
+            })
         },
         watch: {
             photos() {
@@ -81,7 +76,7 @@
                 let to = (page * perPage);
                 let pageOfItems = this.photos.slice(from, to);
 
-                this.$store.dispatch('makeGroups', pageOfItems);
+                this.$store.dispatch('ListPhoto/makeGroups', pageOfItems);
             },
             setPages () {
                 let pages =[]
@@ -93,7 +88,7 @@
             },
         },
         created() {
-            this.$store.dispatch('getPhotos');
+            this.$store.dispatch('ListPhoto/getPhotos');
         },
     }
 </script>
