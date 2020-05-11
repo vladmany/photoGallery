@@ -3247,9 +3247,8 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/Upload/UploadPhotosComponent */ "./resources/js/components/Photo/Upload/UploadPhotosComponent.vue");
-/* harmony import */ var _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../Photo/List/AllPhoto */ "./resources/js/components/Photo/List/AllPhoto.vue");
+/* harmony import */ var _Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Photo/Upload/UploadPhotosComponent */ "./resources/js/components/Photo/Upload/UploadPhotosComponent.vue");
+/* harmony import */ var _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/List/AllPhoto */ "./resources/js/components/Photo/List/AllPhoto.vue");
 //
 //
 //
@@ -3281,14 +3280,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AddPhotoToAlbum",
   components: {
-    UploadPhotosComponent: _Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
-    AllPhoto: _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_2__["default"]
+    UploadPhotosComponent: _Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_0__["default"],
+    AllPhoto: _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    id: {
+      required: true,
+      type: Number
+    }
   },
   methods: {
     save: function save() {}
@@ -3916,6 +3920,17 @@ __webpack_require__.r(__webpack_exports__);
     isSelected: {
       required: true,
       type: Boolean
+    }
+  },
+  watch: {
+    isSelected: function isSelected() {
+      if (this.isSelected) {
+        this.$store.dispatch('addPhoto', this.photo.id);
+      } else {
+        this.$store.dispatch('delPhoto', this.photo.id);
+      }
+
+      console.log(this.$store.getters.selectedPhotos);
     }
   }
 });
@@ -42310,11 +42325,22 @@ var render = function() {
               [
                 _c("div", { staticClass: "col-12" }, [
                   _c("div", { staticClass: "row justify-content-between" }, [
-                    _c("div", { staticClass: "col-12" }, [
-                      _c("p", [_vm._v("Назад")])
+                    _c("div", { staticClass: "col-12 col-lg-6" }, [
+                      _c(
+                        "a",
+                        {
+                          attrs: { href: "#" },
+                          on: {
+                            click: function($event) {
+                              return _vm.$router.go(-1)
+                            }
+                          }
+                        },
+                        [_vm._v("Назад")]
+                      )
                     ]),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-12" }, [
+                    _c("div", { staticClass: "col-12 col-lg-6" }, [
                       _c("span", { on: { click: _vm.save } }, [
                         _vm._v("Сохранить")
                       ])
@@ -62127,6 +62153,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/AddPhoto */ "./resources/js/store/modules/AddPhoto.js");
 /* harmony import */ var _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/ListPhoto */ "./resources/js/store/modules/ListPhoto.js");
 /* harmony import */ var _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/ListAlbum */ "./resources/js/store/modules/ListAlbum.js");
+/* harmony import */ var _modules_Globals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Globals */ "./resources/js/store/modules/Globals.js");
+
 
 
 
@@ -62137,7 +62165,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   modules: {
     AddPhoto: _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__["default"],
     ListPhoto: _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ListAlbum: _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__["default"]
+    ListAlbum: _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Globals: _modules_Globals__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   state: {
     isUploadError: false,
@@ -62221,6 +62250,86 @@ var mutations = {
 var actions = {};
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/Globals.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/Globals.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  selected: {
+    photos: [],
+    // добавлять id
+    albums: [] // добавлять id
+
+  }
+};
+var getters = {
+  selectedPhotos: function selectedPhotos(state) {
+    return state.selected.photos;
+  },
+  selectedAlbums: function selectedAlbums(state) {
+    return state.selected.albums;
+  }
+};
+var mutations = {
+  addPhoto: function addPhoto(state, val) {
+    return state.selected.photos.push(val);
+  },
+  delPhoto: function delPhoto(state, val) {
+    for (var i = 0; i < state.selected.photos.length; i++) {
+      if (state.selected.photos[i] === val) {
+        state.selected.photos.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
+  },
+  addAlbum: function addAlbum(state, val) {
+    return state.selected.albums.push(val);
+  },
+  delAlbum: function delAlbum(state, val) {
+    for (var i = 0; i < state.selected.albums.length; i++) {
+      if (state.selected.albums[i] === val) {
+        state.selected.albums.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
+  }
+};
+var actions = {
+  addPhoto: function addPhoto(_ref, val) {
+    var commit = _ref.commit;
+    commit('addPhoto', val);
+  },
+  delPhoto: function delPhoto(_ref2, val) {
+    var commit = _ref2.commit;
+    commit('delPhoto', val);
+  },
+  addAlbum: function addAlbum(_ref3, val) {
+    var commit = _ref3.commit;
+    commit('addAlbum', val);
+  },
+  delAlbum: function delAlbum(_ref4, val) {
+    var commit = _ref4.commit;
+    commit('delAlbum', val);
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   getters: getters,
   mutations: mutations,
@@ -62400,6 +62509,7 @@ var actions = {
         commit = _ref2.commit;
     var weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
     var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
+    if (!items) items = state.photos;
     var groups = {};
     var key = 'created_at';
     items.forEach(function (item) {

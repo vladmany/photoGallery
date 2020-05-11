@@ -60,7 +60,7 @@ let actions = {
             'мая', 'июня', 'июля', 'августа',
             'сентября', 'октября', 'ноября', 'декабря',
         ];
-
+        if(!items) items = state.photos;
         let groups = {};
         let key = 'created_at';
         items.forEach(item => {

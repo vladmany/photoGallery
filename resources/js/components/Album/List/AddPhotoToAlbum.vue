@@ -10,10 +10,10 @@
             <div class="row">
                 <div class="col-12">
                     <div class="row justify-content-between">
-                        <div class="col-12">
-                            <p>Назад</p>
+                        <div class="col-12 col-lg-6">
+                            <a @click="$router.go(-1)" href="#">Назад</a>
                         </div>
-                        <div class="col-12">
+                        <div class="col-12 col-lg-6">
                             <span @click="save">Сохранить</span>
                         </div>
                     </div>
@@ -30,13 +30,18 @@
 </template>
 
 <script>
-    import { mapGetters } from 'vuex'
     import UploadPhotosComponent from "../../Photo/Upload/UploadPhotosComponent";
     import AllPhoto from "../../Photo/List/AllPhoto";
 
     export default {
         name: "AddPhotoToAlbum",
         components: {UploadPhotosComponent, AllPhoto,},
+        props: {
+            id: {
+                required: true,
+                type: Number
+            }
+        },
         methods: {
             save() {
 
@@ -46,7 +51,7 @@
             album() {
                 return this.$store.getters['ListAlbum/album'](this.id);
             }
-        }
+        },
     }
 </script>
 
