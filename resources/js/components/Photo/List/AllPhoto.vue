@@ -154,6 +154,7 @@
         margin-bottom: 0;
         user-select: none;
         outline: none;
+        margin-top: 53px;
     }
     .one-page {
         width: 60px;
