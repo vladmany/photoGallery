@@ -1,12 +1,12 @@
 <template>
     <div class="" v-if="photos.length > 0">
-        <div class="d-flex flex-column justify-content-between align-content-between">
-            <div>
+        <div class="photo-wrapper">
+            <div class="photo-content">
                 <GroupPhoto v-for="(elements, title) in groups"
                             :elements="elements" :title="title"
                             :key="title" />
             </div>
-            <div>
+            <div class="photo-paginate">
                 <paginate
                     :page-count="pages"
                     :page-range="3"
@@ -128,6 +128,20 @@
         margin-left: auto
     }
 
+    .photo-wrapper {
+        min-height: 710px;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .photo-wrapper .photo-content {
+        flex: 1 0 auto;
+    }
+
+    .photo-wrapper .photo-paginate {
+        flex: 0 0 auto;
+    }
+
     ul {
         padding: 0;
     }
@@ -136,25 +150,33 @@
     }
     .paginate {
         display: flex;
-        margin-bottom: 0px;
+        margin-bottom: 0;
+        user-select: none;
+        outline: none;
     }
     .one-page {
-        padding: 10px 15px;
+        width: 60px;
+        height: 60px;
         color: #666;
-        border-left: none;
+        border-left: 2px solid #DADADA;
+
     }
     .one-page a {
-        width: 100%;
-        height: 100%;
+        display: block; /* Ссылка как блочный элемент */
+        text-align: center; /* Выравнивание по центру */
+        height: 100%; /* Высота на весь слой */
+        line-height: 60px;
+        outline: none;
     }
     .one-page:hover ~ .disable {
         color: #000;
 
     }
     .prev {
-        border-bottom-left-radius: 3px;
-        border-top-left-radius: 3px;
+        /*border-bottom-left-radius: 3px;*/
+        /*border-top-left-radius: 3px;*/
         color: #D8D8D8;
+        border-left: none;
     }
     .next {
         border-bottom-right-radius: 3px;
@@ -163,5 +185,6 @@
     }
     li.active > a {
         /*background-color: red;*/
+        background: #FAFAFA;
     }
 </style>

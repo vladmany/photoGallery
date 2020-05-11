@@ -7,7 +7,7 @@
 
 <script>
 
-    import ModalCreateAlbum from "../ModalCreateAlbum";
+    import ModalCreateAlbum from "./ModalCreateAlbum";
     export default {
         name: "CreateAlbum",
         components: {ModalCreateAlbum},

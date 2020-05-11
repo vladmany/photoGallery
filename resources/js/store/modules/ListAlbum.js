@@ -1,8 +1,11 @@
 let state = {
     albums: [],
+    album:{}
 }
 let getters = {
     albums: state => state.albums,
+    album: state => id =>
+        state.albums.find(album => album.id === id),
 }
 let mutations = {
     getAlbums:(state, payload) => {

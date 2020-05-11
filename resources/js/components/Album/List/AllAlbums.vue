@@ -9,7 +9,10 @@
                     <img :src="album.cover" class="img-cover">
                 </div>
                 <div class="align-self-stretch text-center">
-                    <p class="pl-3">{{ album.name}}</p>
+                    <router-link
+                        :to="{ name: 'OneAlbum', params: { id: album.id } }">
+                        {{ album.name}}
+                    </router-link>
                     <button class="btn pr-md-4"><img src="/storage/albums/ico-dell.png">Удалить</button>
                 </div>
                 <div class="align-self-end text-center ml-4 mr-5">
@@ -67,6 +70,10 @@
             },
         },
         props: {
+            album: {
+                required: true,
+                type: Object,
+            },
             elements: {
                 required: true,
                 type: Array
