@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth.redirect');
-Route::post('/auth/callback', 'Auth\LoginController@callback')->name('auth.callback');
+Route::get('/auth/firstredirect', 'Auth\LoginController@redirect')->name('auth.redirect');
+Route::post('/auth/redirect', 'Auth\LoginController@callback')->name('auth.callback');
 
-Route::view('/{any}','spa')->where('any', '.*');
+Route::view('/{any}','spa')->where('any', '.*'); # ->middleware('auth')

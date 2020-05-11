@@ -32,7 +32,8 @@ class LoginController extends Controller
     {
         $query = http_build_query([
             'client_id' => 15,//запросить у Богдана и вынести в конфиг
-            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',//урл куда оправит сайт Богдана после успешной
+            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/redirect',
+            //урл куда оправит сайт Богдана после успешной
             'response_type' => 'code',
             'scope' => '',
         ]);
@@ -45,6 +46,8 @@ class LoginController extends Controller
 
     public function callback(Request $request)
     {
+//        dd($request);
+
         //заюзать use GuzzleHttp\Client;
         $http = new Client();
 
@@ -53,7 +56,7 @@ class LoginController extends Controller
                 'grant_type' => 'authorization_code',
                 'client_id' => 15, //данные которые выдаст Богдан. вынести в конфиг
                 'client_secret' => 'S9qfCC612r1EhwviAq6Ca24EqM3xuetvFEzL3Qj9',//данные которые выдаст Богдан. вынести в конфиг
-                'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
+                'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/redirect',
                 'code' => $request->code,
             ],
         ]);
