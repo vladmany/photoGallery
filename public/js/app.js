@@ -3345,12 +3345,33 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+/* harmony import */ var _Photo_List_GroupPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/List/GroupPhoto */ "./resources/js/components/Photo/List/GroupPhoto.vue");
 //
 //
 //
 //
+//
+//
+//
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "AllPhotoAlbum"
+  name: "AllPhotoAlbum",
+  components: {
+    GroupPhoto: _Photo_List_GroupPhoto__WEBPACK_IMPORTED_MODULE_1__["default"]
+  },
+  props: {
+    albumId: {
+      required: true,
+      type: Number
+    }
+  },
+  computed: {
+    photos: function photos() {
+      return this.$store.getters['ListAlbum/photosByAlbum'](this.albumId);
+    }
+  }
 });
 
 /***/ }),
@@ -3424,7 +3445,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     album: function album() {
-      return this.$store.getters['ListAlbum/album'](id);
+      return this.$store.getters['ListAlbum/album'](this.id);
     }
   }
 });
@@ -3780,8 +3801,9 @@ __webpack_require__.r(__webpack_exports__);
   },
   props: {
     title: {
-      required: true,
-      type: String
+      required: false,
+      type: String,
+      "default": ''
     },
     elements: {
       required: true,
@@ -42353,7 +42375,9 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("GroupPhoto", {
+    attrs: { elements: _vm.photos, "group-id": _vm.albumId }
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -42424,7 +42448,7 @@ var render = function() {
         fn: function() {
           return [
             _c("AllPhotoAlbum", {
-              attrs: { "paginate-count": 20, id: _vm.album.id }
+              attrs: { "paginate-count": 20, "album-id": _vm.album.id }
             })
           ]
         },
@@ -42734,66 +42758,71 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "group" }, [
-    _c("div", { staticClass: "group-selector" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.isSelected,
-            expression: "isSelected"
-          }
-        ],
-        staticClass: "custom-checkbox",
-        attrs: { type: "checkbox", id: "group-" + _vm.groupId },
-        domProps: {
-          checked: Array.isArray(_vm.isSelected)
-            ? _vm._i(_vm.isSelected, null) > -1
-            : _vm.isSelected
-        },
-        on: {
-          change: function($event) {
-            var $$a = _vm.isSelected,
-              $$el = $event.target,
-              $$c = $$el.checked ? true : false
-            if (Array.isArray($$a)) {
-              var $$v = null,
-                $$i = _vm._i($$a, $$v)
-              if ($$el.checked) {
-                $$i < 0 && (_vm.isSelected = $$a.concat([$$v]))
-              } else {
-                $$i > -1 &&
-                  (_vm.isSelected = $$a
-                    .slice(0, $$i)
-                    .concat($$a.slice($$i + 1)))
+  return _vm.elements.length > 0
+    ? _c("div", { staticClass: "group" }, [
+        _c("div", { staticClass: "group-selector" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.isSelected,
+                expression: "isSelected"
               }
-            } else {
-              _vm.isSelected = $$c
+            ],
+            staticClass: "custom-checkbox",
+            attrs: { type: "checkbox", id: "group-" + _vm.groupId },
+            domProps: {
+              checked: Array.isArray(_vm.isSelected)
+                ? _vm._i(_vm.isSelected, null) > -1
+                : _vm.isSelected
+            },
+            on: {
+              change: function($event) {
+                var $$a = _vm.isSelected,
+                  $$el = $event.target,
+                  $$c = $$el.checked ? true : false
+                if (Array.isArray($$a)) {
+                  var $$v = null,
+                    $$i = _vm._i($$a, $$v)
+                  if ($$el.checked) {
+                    $$i < 0 && (_vm.isSelected = $$a.concat([$$v]))
+                  } else {
+                    $$i > -1 &&
+                      (_vm.isSelected = $$a
+                        .slice(0, $$i)
+                        .concat($$a.slice($$i + 1)))
+                  }
+                } else {
+                  _vm.isSelected = $$c
+                }
+              }
             }
-          }
-        }
-      }),
-      _vm._v(" "),
-      _c(
-        "label",
-        { staticClass: "group-date", attrs: { for: "group-" + _vm.groupId } },
-        [_vm._v(_vm._s(_vm.title))]
-      )
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "group-content" },
-      _vm._l(_vm.elements, function(photo) {
-        return _c("OnePhoto", {
-          key: photo.id,
-          attrs: { photo: photo, "is-selected": _vm.isSelected }
-        })
-      }),
-      1
-    )
-  ])
+          }),
+          _vm._v(" "),
+          _c(
+            "label",
+            {
+              staticClass: "group-date",
+              attrs: { for: "group-" + _vm.groupId }
+            },
+            [_vm._v(_vm._s(_vm.title))]
+          )
+        ]),
+        _vm._v(" "),
+        _c(
+          "div",
+          { staticClass: "group-content" },
+          _vm._l(_vm.elements, function(photo) {
+            return _c("OnePhoto", {
+              key: photo.id,
+              attrs: { photo: photo, "is-selected": _vm.isSelected }
+            })
+          }),
+          1
+        )
+      ])
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -62083,6 +62112,17 @@ var getters = {
       return state.albums.find(function (album) {
         return album.id === id;
       });
+    };
+  },
+  photosByAlbum: function photosByAlbum(state, getters) {
+    return function (id) {
+      var album = getters.album(id);
+
+      if (album) {
+        return album.photos;
+      }
+
+      return false;
     };
   }
 };

@@ -37,7 +37,7 @@
             </div>
         </template>
         <template v-slot:content>
-            <AllPhotoAlbum :paginate-count="20" :id="album.id"></AllPhotoAlbum>
+            <AllPhotoAlbum :paginate-count="20" :album-id="album.id"></AllPhotoAlbum>
         </template>
     </Section>
 
@@ -56,7 +56,7 @@
         },
         computed: {
             album() {
-                return this.$store.getters['ListAlbum/album'](id);
+                return this.$store.getters['ListAlbum/album'](this.id);
             }
         }
     }
