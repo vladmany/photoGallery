@@ -3347,6 +3347,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
 /* harmony import */ var _Photo_List_GroupPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/List/GroupPhoto */ "./resources/js/components/Photo/List/GroupPhoto.vue");
+/* harmony import */ var _noAlbums__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./noAlbums */ "./resources/js/components/Album/List/noAlbums.vue");
 //
 //
 //
@@ -3354,12 +3355,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllPhotoAlbum",
   components: {
-    GroupPhoto: _Photo_List_GroupPhoto__WEBPACK_IMPORTED_MODULE_1__["default"]
+    GroupPhoto: _Photo_List_GroupPhoto__WEBPACK_IMPORTED_MODULE_1__["default"],
+    noAlbums: _noAlbums__WEBPACK_IMPORTED_MODULE_2__["default"]
   },
   props: {
     albumId: {
@@ -42375,9 +42381,17 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("GroupPhoto", {
-    attrs: { elements: _vm.photos, "group-id": _vm.albumId }
-  })
+  return _c(
+    "div",
+    [
+      _vm.photos.length > 0
+        ? _c("GroupPhoto", {
+            attrs: { elements: _vm.photos, "group-id": _vm.albumId }
+          })
+        : _c("noAlbums")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
