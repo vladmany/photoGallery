@@ -3645,6 +3645,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -3745,6 +3746,10 @@ __webpack_require__.r(__webpack_exports__);
     elements: {
       required: true,
       type: Array
+    },
+    groupId: {
+      required: true,
+      type: Number
     }
   },
   data: function data() {
@@ -3803,6 +3808,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Global_Checkbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Global/Checkbox */ "./resources/js/components/Global/Checkbox.vue");
+//
 //
 //
 //
@@ -9130,7 +9136,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.placeholder {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.placeholder span {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    /* identical to box height, or 125% */\n\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\n.photo-wrapper {\n    min-height: 710px;\n    display: flex;\n    flex-direction: column;\n}\n.photo-wrapper .photo-content {\n    flex: 1 0 auto;\n}\n.photo-wrapper .photo-paginate {\n    flex: 0 0 auto;\n}\nul {\n    padding: 0;\n}\nul, li {\n    list-style: none;\n}\n.paginate {\n    display: flex;\n    margin-bottom: 0;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    outline: none;\n}\n.one-page {\n    width: 60px;\n    height: 60px;\n    color: #666;\n    border-left: 2px solid #DADADA;\n}\n.one-page a {\n    display: block; /* Ссылка как блочный элемент */\n    text-align: center; /* Выравнивание по центру */\n    height: 100%; /* Высота на весь слой */\n    line-height: 60px;\n    outline: none;\n}\n.one-page:hover ~ .disable {\n    color: #000;\n}\n.prev {\n    /*border-bottom-left-radius: 3px;*/\n    /*border-top-left-radius: 3px;*/\n    color: #D8D8D8;\n    border-left: none;\n}\n.next {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n    color: #D8D8D8;\n}\nli.active > a {\n    /*background-color: red;*/\n    background: #FAFAFA;\n}\n", ""]);
+exports.push([module.i, "\n.placeholder {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.placeholder span {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    /* identical to box height, or 125% */\n\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\n.photo-wrapper {\n    min-height: 710px;\n    display: flex;\n    flex-direction: column;\n}\n.photo-wrapper .photo-content {\n    flex: 1 0 auto;\n}\n.photo-wrapper .photo-paginate {\n    flex: 0 0 auto;\n}\nul {\n    padding: 0;\n}\nul, li {\n    list-style: none;\n}\n.paginate {\n    display: flex;\n    margin-bottom: 0;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    outline: none;\n}\n.one-page {\n    width: 60px;\n    height: 60px;\n    color: #666;\n    border-left: 2px solid #DADADA;\n}\n.one-page a {\n    display: block; /* Ссылка как блочный элемент */\n    text-align: center; /* Выравнивание по центру */\n    height: 100%; /* Высота на весь слой */\n    line-height: 60px;\n    outline: none;\n}\n.one-page:hover ~ .disable {\n    color: #000;\n}\n.prev {\n    /*border-bottom-left-radius: 3px;*/\n    /*border-top-left-radius: 3px;*/\n    color: #D8D8D8;\n    border-left: none;\n}\n.next {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n    color: #D8D8D8;\n}\nli.active > a {\n    /*background-color: red;*/\n    background: #FAFAFA;\n}\n.custom-checkbox {\n    position: absolute;\n    z-index: -1;\n    opacity: 0;\n}\n.custom-checkbox+label {\n    display: inline-flex;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.custom-checkbox+label::before {\n    content: '';\n    display: inline-block;\n    width: 16px;\n    height: 16px;\n    flex-shrink: 0;\n    flex-grow: 0;\n    border: 1px solid #adb5bd;\n    border-radius: 0.25em;\n    margin-right: 0.5em;\n    background-repeat: no-repeat;\n    background-position: center center;\n    background-size: 50% 50%;\n}\n.photo_element .custom-checkbox+label {\n    position: absolute;\n    margin-top: 6px;\n    margin-left: 6px;\n}\n.custom-checkbox:checked+label::before {\n    border-color: #0b76ef;\n    background-color: #0b76ef;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e\");\n}\n.custom-checkbox:not(:disabled):not(:checked)+label::before {\n    background: #ffffff;\n}\n.custom-checkbox:not(:disabled):active+label::before {\n    background-color: #b3d7ff;\n    border-color: #b3d7ff;\n}\n\n/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */\n.custom-checkbox:focus:not(:checked)+label::before {\n    border-color: #80bdff;\n}\n/* стили для чекбокса, находящегося в состоянии disabled */\n.custom-checkbox:disabled+label::before {\n    background-color: #e9ecef;\n}\n", ""]);
 
 // exports
 
@@ -9149,7 +9155,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.group[data-v-17c70368] {\n    display: flex;\n    flex-direction: column;\n    margin-top: 53px;\n}\n.group-selector[data-v-17c70368] {\n    display: flex;\n    flex-direction: row;\n}\n.group-selector input[type=checkbox][data-v-17c70368] {\n    display: flex;\n    transform:scale(1.5);\n    margin-top: 7px;\n    margin-right: 4px;\n}\n.group-date[data-v-17c70368] {\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 30px;\n    text-align: center;\n    color: #999999;\n}\n.group-content[data-v-17c70368] {\n    display: flex;\n    flex-direction: row;\n    /*justify-content: space-between;*/\n    flex-wrap: wrap;\n}\nul[data-v-17c70368] {\n    padding: 0;\n}\nul[data-v-17c70368], li[data-v-17c70368] {\n    list-style: none;\n}\n.paginate[data-v-17c70368] {\n    display: flex;\n}\n.one-page[data-v-17c70368] {\n    padding: 10px 15px;\n    color: #666;\n    border: 1px solid #F5F5F5;\n    border-left: none;\n}\n.active[data-v-17c70368],\n.one-page[data-v-17c70368]:hover {\n    color: #000;\n    background-color: #F5F5F5;\n}\n.prev[data-v-17c70368] {\n    border-bottom-left-radius: 3px;\n    border-top-left-radius: 3px;\n    border-left: 1px solid #F5F5F5;\n}\n.next[data-v-17c70368] {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n}\n.disabled[data-v-17c70368],\n.disabled[data-v-17c70368]:hover,\n.disabled > a[data-v-17c70368] {\n    cursor: default;\n    color: #F5F5F5;\n}\n", ""]);
+exports.push([module.i, "\n.group[data-v-17c70368] {\n    display: flex;\n    flex-direction: column;\n    margin-top: 53px;\n    margin-left: 90px;\n}\n/*.group-selector {*/\n/*    display: flex;*/\n/*    flex-direction: row;*/\n/*    margin-left: 12px;*/\n/*}*/\n/*.group-selector input[type=checkbox] {*/\n/*    display: flex;*/\n/*    transform:scale(1.5);*/\n/*    margin-top: 7px;*/\n/*    margin-right: 4px;*/\n/*}*/\n.group-date[data-v-17c70368] {\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 16px;\n    line-height: 30px;\n    text-align: center;\n    color: #999999;\n    padding-left: 13px;\n}\n.group-content[data-v-17c70368] {\n    display: flex;\n    flex-direction: row;\n    /*justify-content: space-between;*/\n    flex-wrap: wrap;\n}\nlabel[data-v-17c70368] {\n    margin: 0;\n}\nul[data-v-17c70368] {\n    padding: 0;\n}\nul[data-v-17c70368], li[data-v-17c70368] {\n    list-style: none;\n}\n.paginate[data-v-17c70368] {\n    display: flex;\n}\n.one-page[data-v-17c70368] {\n    padding: 10px 15px;\n    color: #666;\n    border: 1px solid #F5F5F5;\n    border-left: none;\n}\n.active[data-v-17c70368],\n.one-page[data-v-17c70368]:hover {\n    color: #000;\n    background-color: #F5F5F5;\n}\n.prev[data-v-17c70368] {\n    border-bottom-left-radius: 3px;\n    border-top-left-radius: 3px;\n    border-left: 1px solid #F5F5F5;\n}\n.next[data-v-17c70368] {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n}\n.disabled[data-v-17c70368],\n.disabled[data-v-17c70368]:hover,\n.disabled > a[data-v-17c70368] {\n    cursor: default;\n    color: #F5F5F5;\n}\n", ""]);
 
 // exports
 
@@ -42627,10 +42633,10 @@ var render = function() {
           _c(
             "div",
             { staticClass: "photo-content" },
-            _vm._l(_vm.groups, function(elements, title) {
+            _vm._l(_vm.groups, function(elements, title, index) {
               return _c("GroupPhoto", {
                 key: title,
-                attrs: { elements: elements, title: title }
+                attrs: { elements: elements, title: title, groupId: index }
               })
             }),
             1
@@ -42698,7 +42704,8 @@ var render = function() {
             expression: "isSelected"
           }
         ],
-        attrs: { type: "checkbox" },
+        staticClass: "custom-checkbox",
+        attrs: { type: "checkbox", id: "group-" + _vm.groupId },
         domProps: {
           checked: Array.isArray(_vm.isSelected)
             ? _vm._i(_vm.isSelected, null) > -1
@@ -42727,9 +42734,11 @@ var render = function() {
         }
       }),
       _vm._v(" "),
-      _c("label", { staticClass: "group-date pl-3" }, [
-        _vm._v(_vm._s(_vm.title))
-      ])
+      _c(
+        "label",
+        { staticClass: "group-date", attrs: { for: "group-" + _vm.groupId } },
+        [_vm._v(_vm._s(_vm.title))]
+      )
     ]),
     _vm._v(" "),
     _c(
@@ -42786,7 +42795,7 @@ var render = function() {
       {
         key: "content",
         fn: function() {
-          return [_c("AllPhoto", { attrs: { "paginate-count": 3 } })]
+          return [_c("AllPhoto", { attrs: { "paginate-count": 20 } })]
         },
         proxy: true
       }
@@ -42817,7 +42826,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "d-flex" }, [
     _c(
-      "label",
+      "div",
       { staticClass: "photo_element" },
       [
         _c("input", {
@@ -42829,8 +42838,8 @@ var render = function() {
               expression: "isSelected"
             }
           ],
-          staticClass: "mx-1 mb-1",
-          attrs: { type: "checkbox" },
+          staticClass: "mx-1 mb-1 custom-checkbox",
+          attrs: { type: "checkbox", id: "photo-" + _vm.photo.id },
           domProps: {
             checked: Array.isArray(_vm.isSelected)
               ? _vm._i(_vm.isSelected, null) > -1
@@ -42858,6 +42867,8 @@ var render = function() {
             }
           }
         }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "photo-" + _vm.photo.id } }),
         _vm._v(" "),
         _c(
           "router-link",

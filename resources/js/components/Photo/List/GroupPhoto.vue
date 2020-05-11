@@ -1,8 +1,8 @@
 <template>
     <div class="group">
         <div class="group-selector">
-            <input type="checkbox" v-model="isSelected">
-            <label class="group-date pl-3">{{ title }}</label>
+            <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
+            <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
         </div>
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
@@ -27,6 +27,10 @@
             elements: {
                 required: true,
                 type: Array
+            },
+            groupId: {
+                required: true,
+                type: Number
             }
         },
         data() {
@@ -42,17 +46,19 @@
         display: flex;
         flex-direction: column;
         margin-top: 53px;
+        margin-left: 90px;
     }
-    .group-selector {
-        display: flex;
-        flex-direction: row;
-    }
-    .group-selector input[type=checkbox] {
-        display: flex;
-        transform:scale(1.5);
-        margin-top: 7px;
-        margin-right: 4px;
-    }
+    /*.group-selector {*/
+    /*    display: flex;*/
+    /*    flex-direction: row;*/
+    /*    margin-left: 12px;*/
+    /*}*/
+    /*.group-selector input[type=checkbox] {*/
+    /*    display: flex;*/
+    /*    transform:scale(1.5);*/
+    /*    margin-top: 7px;*/
+    /*    margin-right: 4px;*/
+    /*}*/
     .group-date {
         font-family: 'Roboto', sans-serif;
         font-style: normal;
@@ -61,6 +67,7 @@
         line-height: 30px;
         text-align: center;
         color: #999999;
+        padding-left: 13px;
     }
     .group-content {
         display: flex;
@@ -68,6 +75,11 @@
         /*justify-content: space-between;*/
         flex-wrap: wrap;
     }
+
+    label {
+        margin: 0;
+    }
+
     ul {
         padding: 0;
     }
