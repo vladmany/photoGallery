@@ -4,10 +4,7 @@
             <h1>Просмотр фото</h1>
         </template>
         <template v-slot:content>
-            <div>
-                <p class="pl-5">Панель инструментов</p>
-                <SliderPhoto :id="id"></SliderPhoto>
-            </div>
+            <SliderPhoto :id="id"></SliderPhoto>
         </template>
     </Section>
 </template>
@@ -17,7 +14,7 @@
     import SliderPhoto from "./SliderPhoto";
 
     export default {
-        name: "BlockOnePhoto",
+        name: "ViewIndex",
         components: {SliderPhoto, OnePhoto },
         props: {
             id: {
