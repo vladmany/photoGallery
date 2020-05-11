@@ -1,10 +1,10 @@
 <template>
     <div>
-        <GroupPhoto v-if="photos.length > 0"
-                    :elements="photos"
-                    :group-id="albumId"
-        ></GroupPhoto>
-        <div v-else="noPhotos" class="noPhotos content">
+        <AllPhoto v-if="photos.length > 0"
+                :photos="photos"
+                :paginate-count="20"
+        ></AllPhoto>
+        <div v-else class="noPhotos content">
 
             <template>
                 <div class="pt-4">
@@ -25,10 +25,11 @@
     import {mapGetters} from 'vuex'
     import GroupPhoto from "../../Photo/List/GroupPhoto";
     import noAlbums from "./noAlbums";
+    import AllPhoto from "../../Photo/List/AllPhoto";
 
     export default {
         name: "AllPhotoAlbum",
-        components: {GroupPhoto, noAlbums},
+        components: {AllPhoto, GroupPhoto, noAlbums},
         props: {
             albumId: {
                 required: true,
@@ -36,6 +37,9 @@
             }
         },
         computed: {
+            // ...mapGetters({
+            //     photos: 'ListPhoto/photos',
+            // }),
             photos() {
                 return this.$store.getters['ListAlbum/photosByAlbum'](this.albumId);
             }
