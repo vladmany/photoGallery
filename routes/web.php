@@ -13,4 +13,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::view('/{any}','spa')->where('any', '.*')->middleware('auth');
+Route::view('/{any}','spa')->where('any', '.*');
