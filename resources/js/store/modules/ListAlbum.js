@@ -7,6 +7,13 @@ let getters = {
     albums: state => state.albums,
     album: state => id =>
         state.albums.find(album => album.id === id),
+    photosByAlbum: (state, getters) => id => {
+        let album = getters.album(id);
+        if (album) {
+            return album.photos;
+        }
+        return false;
+    }
 }
 let mutations = {
     getAlbums:(state, payload) => {
