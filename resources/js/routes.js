@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 import Albums from "./components/Album/Index";
 // import Index from "./components/Album/Index";
 // import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
-import BlockPhotoList from "./components/Photo/List/BlockPhotoList";
+// import BlockPhotoList from "./components/Photo/List/BlockPhotoList";
+import IndexPhoto from "./components/Photo/List/Index"
 import BlockOnePhoto from "./components/Photo/onePhoto/BlockOnePhoto";
 import OnePhoto from "./components/Photo/onePhoto/OnePhoto";
 // import AllAlbums from "./components/Album/AllAlbums";
@@ -19,7 +20,7 @@ export default new VueRouter({
         // }
 
         {
-            path: `/albums`,
+            path: "/albums",
             component: BlockAlbumList,
             name: "BlockAlbumList",
         },
@@ -31,8 +32,8 @@ export default new VueRouter({
         },
         {
             path: '/photos',
-            component: BlockPhotoList,
-            name: 'BlockPhotoList',
+            component: IndexPhoto,
+            name: 'IndexPhoto',
             alias: '/',
         },
         {

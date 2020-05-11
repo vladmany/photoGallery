@@ -100,7 +100,7 @@
                     </div>
                 </nav>
                 <main>
-                    <router-view style="position: relative"></router-view>
+                    <router-view style="position: relative; background-color: #FAFAFA"></router-view>
                 </main>
             </div>
         </div>

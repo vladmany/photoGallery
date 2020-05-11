@@ -1,38 +1,35 @@
 <template>
-    <div class="photos-wrap">
-        <div class="main-panel">
-            <div class="upload">
-                <UploadPhotosComponent />
-            </div>
-            <div class="actions-panel"></div>
-        </div>
-        <div class="" v-if="photos.length > 0">
-            <div class="d-flex flex-column justify-content-between align-content-between">
-                <div>
-                    <GroupPhoto v-for="(elements, title) in groups"
+    <div class="" v-if="photos.length > 0">
+        <div class="d-flex flex-column justify-content-between align-content-between">
+            <div>
+                <GroupPhoto v-for="(elements, title) in groups"
                             :elements="elements" :title="title"
                             :key="title" />
-                </div>
-                <div>
-                    <paginate
-                        :page-count="pages"
-                        :page-range="3"
-                        :margin-pages="2"
-                        :click-handler="onChangePage"
-                        :prev-text="'&#10094;'"
-                        :next-text="'&#10095;'"
-                        :prev-class="'one-page prev'"
-                        :next-class="'one-page next'"
-                        :container-class="'paginate'"
-                        :page-class="'one-page'">
-                    </paginate>
-                </div>
+            </div>
+            <div>
+                <paginate
+                    :page-count="pages"
+                    :page-range="3"
+                    :margin-pages="2"
+                    :click-handler="onChangePage"
+                    :prev-text="'&#129120;'"
+                    :next-text="'&#129122;'"
+                    :prev-class="'one-page prev'"
+                    :next-class="'one-page next'"
+                    :container-class="'paginate'"
+                    :page-class="'one-page'">
+                </paginate>
+                <!--                    <jw-pagination :items="photos" @changePage="onChangePage"-->
+                <!--                                :pageSize="paginateCount"-->
+                <!--                                :labels="customLabels"-->
+                <!--                                :styles="customStyles"-->
+                <!--                    />-->
             </div>
         </div>
-        <div v-else class="placeholder">
-            <h2>Здесь вы можете добавить свои фотографии</h2>
-            <img src="/storage/photos/placeholder.png">
-        </div>
+    </div>
+    <div v-else class="placeholder">
+        <h2>Здесь вы можете добавить свои фотографии</h2>
+        <img src="/storage/photos/placeholder.png">
     </div>
 </template>
 
@@ -101,23 +98,6 @@
 </script>
 
 <style>
-    .photos-wrap {
-        width: 100%;
-    }
-    .main-panel {
-        display: flex;
-        height: 90px;
-        width: 100%;
-        border-bottom: 2px solid #F5F5F5;
-    }
-    .upload {
-        display: flex;
-        max-width: 214px;
-        width: 100%;
-        justify-content: center;
-        align-items: center;
-        border-right: 2px solid #F5F5F5;
-    }
     .placeholder {
         display: flex;
         flex-direction: column;
@@ -156,31 +136,32 @@
     }
     .paginate {
         display: flex;
+        margin-bottom: 0px;
     }
     .one-page {
         padding: 10px 15px;
         color: #666;
-        border: 1px solid #F5F5F5;
         border-left: none;
     }
-    .active,
-    .one-page:hover {
+    .one-page a {
+        width: 100%;
+        height: 100%;
+    }
+    .one-page:hover ~ .disable {
         color: #000;
-        background-color: #F5F5F5;
+
     }
     .prev {
         border-bottom-left-radius: 3px;
         border-top-left-radius: 3px;
-        border-left: 1px solid #F5F5F5;
+        color: #D8D8D8;
     }
     .next {
         border-bottom-right-radius: 3px;
         border-top-right-radius: 3px;
+        color: #D8D8D8;
     }
-    .disabled,
-    .disabled:hover,
-    .disabled > a {
-        cursor: default;
-        color: #F5F5F5;
+    li.active > a {
+        /*background-color: red;*/
     }
 </style>
