@@ -18,9 +18,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth.redirect');
-Route::post('/auth/callback', 'Auth\LoginController@callback')->name('auth.callback');
-
 Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/albums', 'Api\AlbumController');
