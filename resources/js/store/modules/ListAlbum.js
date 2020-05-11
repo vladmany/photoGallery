@@ -63,7 +63,7 @@ let actions = {
         }
 
         commit('makeGroups', desc_groups);
-    }
+    },
 }
 
 export default {

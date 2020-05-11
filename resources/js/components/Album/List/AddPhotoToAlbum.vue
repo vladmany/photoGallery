@@ -50,7 +50,7 @@
         },
         methods: {
             save() {
-
+                this.$store.dispatch('savePhotosToAlbum', this.id);
             }
         },
         computed: {

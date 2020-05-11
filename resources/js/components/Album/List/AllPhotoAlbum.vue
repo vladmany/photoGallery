@@ -37,9 +37,6 @@
             }
         },
         computed: {
-            // ...mapGetters({
-            //     photos: 'ListPhoto/photos',
-            // }),
             photos() {
                 return this.$store.getters['ListAlbum/photosByAlbum'](this.albumId);
             }
