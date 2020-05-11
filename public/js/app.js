@@ -9092,7 +9092,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main-wrapper[data-v-c656c9f8] {\n    margin: 25px 48px 30px 48px;\n}\n.bread-crumbs[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    line-height: 30px;\n    color: #CCCCCC;\n}\n.main-title[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 300;\n    font-size: 36px;\n    line-height: 90px;\n    color: #808080\n}\n.card-wrapper[data-v-c656c9f8] {\n    width: 100%;\n    background: #FFFFFF;\n    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);\n    border-radius: 6px;\n}\n.card-panel[data-v-c656c9f8] {\n    display: flex;\n    height: 90px;\n    width: 100%;\n    border-bottom: 2px solid #F5F5F5;\n}\n.card-button[data-v-c656c9f8] {\n    display: flex;\n    max-width: 214px;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    border-right: 2px solid #F5F5F5;\n}\n", ""]);
+exports.push([module.i, "\n.main-wrapper[data-v-c656c9f8] {\n    margin: 25px 48px 30px 48px;\n}\n.bread-crumbs[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    line-height: 30px;\n    color: #CCCCCC;\n}\n.main-title[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 300;\n    font-size: 36px;\n    line-height: 90px;\n    color: #808080\n}\n.card-wrapper[data-v-c656c9f8] {\n    width: 100%;\n    background: #FFFFFF;\n    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);\n    border-radius: 6px;\n}\n.card-panel[data-v-c656c9f8] {\n    display: flex;\n    height: 90px;\n    width: 100%;\n    border-bottom: 2px solid #F5F5F5;\n}\n.card-button[data-v-c656c9f8] {\n    display: flex;\n    max-width: 214px;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    border-right: 2px solid #F5F5F5;\n}\n.card-content[data-v-c656c9f8] {\n    height: 710px;\n    /*height: 100%;*/\n}\n", ""]);
 
 // exports
 
@@ -9130,7 +9130,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.placeholder {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.placeholder span {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    /* identical to box height, or 125% */\n\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\nul {\n    padding: 0;\n}\nul, li {\n    list-style: none;\n}\n.paginate {\n    display: flex;\n    margin-bottom: 0px;\n}\n.one-page {\n    padding: 10px 15px;\n    color: #666;\n    border-left: none;\n}\n.one-page a {\n    width: 100%;\n    height: 100%;\n}\n.one-page:hover ~ .disable {\n    color: #000;\n}\n.prev {\n    border-bottom-left-radius: 3px;\n    border-top-left-radius: 3px;\n    color: #D8D8D8;\n}\n.next {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n    color: #D8D8D8;\n}\nli.active > a {\n    /*background-color: red;*/\n}\n", ""]);
+exports.push([module.i, "\n.placeholder {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.placeholder span {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    /* identical to box height, or 125% */\n\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\n.photo-wrapper {\n    min-height: 710px;\n    display: flex;\n    flex-direction: column;\n}\n.photo-wrapper .photo-content {\n    flex: 1 0 auto;\n}\n.photo-wrapper .photo-paginate {\n    flex: 0 0 auto;\n}\nul {\n    padding: 0;\n}\nul, li {\n    list-style: none;\n}\n.paginate {\n    display: flex;\n    margin-bottom: 0;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    outline: none;\n}\n.one-page {\n    width: 60px;\n    height: 60px;\n    color: #666;\n    border-left: 2px solid #DADADA;\n}\n.one-page a {\n    display: block; /* Ссылка как блочный элемент */\n    text-align: center; /* Выравнивание по центру */\n    height: 100%; /* Высота на весь слой */\n    line-height: 60px;\n    outline: none;\n}\n.one-page:hover ~ .disable {\n    color: #000;\n}\n.prev {\n    /*border-bottom-left-radius: 3px;*/\n    /*border-top-left-radius: 3px;*/\n    color: #D8D8D8;\n    border-left: none;\n}\n.next {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n    color: #D8D8D8;\n}\nli.active > a {\n    /*background-color: red;*/\n    background: #FAFAFA;\n}\n", ""]);
 
 // exports
 
@@ -42623,46 +42623,41 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _vm.photos.length > 0
     ? _c("div", {}, [
-        _c(
-          "div",
-          {
-            staticClass:
-              "d-flex flex-column justify-content-between align-content-between"
-          },
-          [
-            _c(
-              "div",
-              _vm._l(_vm.groups, function(elements, title) {
-                return _c("GroupPhoto", {
-                  key: title,
-                  attrs: { elements: elements, title: title }
-                })
-              }),
-              1
-            ),
-            _vm._v(" "),
-            _c(
-              "div",
-              [
-                _c("paginate", {
-                  attrs: {
-                    "page-count": _vm.pages,
-                    "page-range": 3,
-                    "margin-pages": 2,
-                    "click-handler": _vm.onChangePage,
-                    "prev-text": "&#129120;",
-                    "next-text": "&#129122;",
-                    "prev-class": "one-page prev",
-                    "next-class": "one-page next",
-                    "container-class": "paginate",
-                    "page-class": "one-page"
-                  }
-                })
-              ],
-              1
-            )
-          ]
-        )
+        _c("div", { staticClass: "photo-wrapper" }, [
+          _c(
+            "div",
+            { staticClass: "photo-content" },
+            _vm._l(_vm.groups, function(elements, title) {
+              return _c("GroupPhoto", {
+                key: title,
+                attrs: { elements: elements, title: title }
+              })
+            }),
+            1
+          ),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "photo-paginate" },
+            [
+              _c("paginate", {
+                attrs: {
+                  "page-count": _vm.pages,
+                  "page-range": 3,
+                  "margin-pages": 2,
+                  "click-handler": _vm.onChangePage,
+                  "prev-text": "&#129120;",
+                  "next-text": "&#129122;",
+                  "prev-class": "one-page prev",
+                  "next-class": "one-page next",
+                  "container-class": "paginate",
+                  "page-class": "one-page"
+                }
+              })
+            ],
+            1
+          )
+        ])
       ])
     : _c("div", { staticClass: "placeholder" }, [
         _c("h2", [_vm._v("Здесь вы можете добавить свои фотографии")]),
