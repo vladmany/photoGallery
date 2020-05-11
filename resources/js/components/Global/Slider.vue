@@ -1,12 +1,14 @@
 <template>
     <div class="slider">
-        <span class="prev" @click="prev">&#10094;</span>
-        <transition-group name="fade" tag="div" class="center-block mx-auto">
-            <div v-for="i in [currentIndex]" :key="i" class="text-center">
+        <transition-group name="fade" tag="div" class="photo-wrapper">
+            <div v-for="i in [currentIndex]" :key="i" class="d-flex">
                 <img :src="currentImg" />
             </div>
         </transition-group>
-        <span class="next" @click="next">&#10095;</span>
+        <div class="arrows">
+            <span class="prev" @click="prev">&#10094;</span>
+            <span class="next" @click="next">&#10095;</span>
+        </div>
     </div>
 </template>
 <script>
@@ -71,15 +73,43 @@
         opacity: 0;
     }
 
+    .photo-wrapper {
+        max-width: 700px;
+        width: 100%;
+        max-height: 602px;
+        height: 100%;
+        margin-right: auto;
+        margin-left: auto;
+        justify-content: center;
+    }
+
+    .photo-wrapper div {
+        margin-right: auto;
+        margin-left: auto;
+
+    }
+
     img {
-        height:auto;
-        width:100%
+        max-width: 700px;
+        width: 100%;
+        max-height: 602px;
+        /*height: 100%;*/
+    }
+
+    .arrows {
+        display: flex;
+        position: absolute;
+        top: 50%;
+        flex-direction: row;
+        justify-content: space-between;
+        max-width: 800px;
+        width: 100%;
     }
 
     .prev, .next {
         cursor: pointer;
-        position: absolute;
-        top: 40%;
+        /*position: absolute;*/
+        /*top: 50%;*/
         width: 40px;
         height: 40px;
         padding: 11px;
@@ -96,11 +126,11 @@
     }
 
     .next {
-        right: 0;
+        /*right: 133px;*/
     }
 
     .prev {
-        left: 0;
+        /*left: 133px;*/
     }
 
     .prev:hover, .next:hover {
@@ -113,9 +143,7 @@
     }
     .slider {
         position: relative;
-    }
-    .center-block {
-        /*max-width: 600px;*/
-        width: 60%;
+        display: flex;
+        justify-content: center;
     }
 </style>
