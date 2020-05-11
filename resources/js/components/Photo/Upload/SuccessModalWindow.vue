@@ -13,8 +13,9 @@
                     </svg>
                 </button>
                 <div class="window-content">
-                    <h1>Ошибка загрузки фото</h1>
-                    <span class="d-block">Выбранное количество фото не должно превышать {{ this.$store.state.maxFilesToUpload }} шт.</span>
+                    <h1>Загрузка фото завершена</h1>
+                    <span class="d-block">Загруженные фото:</span>
+                    <span v-for="filename in this.$store.state.successUploadFiles" class="error-file d-block">{{ filename }}</span>
 
                     <div class="window-buttons d-flex">
                         <button class="window-btn-ok" @click="close">Продолжить</button>
@@ -28,7 +29,7 @@
 
 <script>
     export default {
-        name: "SelectionErrorModal",
+        name: "SuccessModalWindow",
         showed: true,
         methods: {
             close() {

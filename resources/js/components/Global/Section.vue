@@ -79,7 +79,6 @@
         border-right: 2px solid #F5F5F5;
     }
     .card-content {
-        /*height: 710px;*/
-        /*height: 100%;*/
+        min-height: 710px;
     }
 </style>

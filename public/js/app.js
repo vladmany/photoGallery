@@ -3648,6 +3648,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
 
 
 
@@ -3988,8 +3990,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "SelectionErrorModal",
+  name: "SuccessModalWindow",
   showed: true,
   methods: {
     close: function close() {
@@ -4082,7 +4085,7 @@ var height;
 
       var photos = $(e.target);
 
-      if (photos.prop('files').length > 0 && photos.prop('files').length < 16) {
+      if (photos.prop('files').length > 0 && photos.prop('files').length < this.$store.state.maxFilesToUpload) {
         this.steps = this.$refs.photo.files.length > 10 ? 10 : this.$refs.photo.files.length;
         this.step = 0;
         var files = this.$refs.photo.files;
@@ -4108,9 +4111,10 @@ var height;
           this.formData.append('photo[' + res.length + ']', file);
           this.successFiles.push(file.name);
         }
-      } else if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
-        this.$store.commit('showSelectError');
-      }
+      } // if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
+      //         this.$store.commit('showSelectError')
+      // }
+
     },
     validate: function validate(file) {
       var _this2 = this;
@@ -9096,7 +9100,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.main-wrapper[data-v-c656c9f8] {\n    margin: 25px 48px 30px 48px;\n}\n.bread-crumbs[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    line-height: 30px;\n    color: #CCCCCC;\n}\n.main-title[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 300;\n    font-size: 36px;\n    line-height: 90px;\n    color: #808080\n}\n.card-wrapper[data-v-c656c9f8] {\n    width: 100%;\n    background: #FFFFFF;\n    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);\n    border-radius: 6px;\n}\n.card-panel[data-v-c656c9f8] {\n    display: flex;\n    height: 90px;\n    width: 100%;\n    border-bottom: 2px solid #F5F5F5;\n}\n.card-button[data-v-c656c9f8] {\n    display: flex;\n    max-width: 214px;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    border-right: 2px solid #F5F5F5;\n}\n.card-content[data-v-c656c9f8] {\n    /*height: 710px;*/\n    /*height: 100%;*/\n}\n", ""]);
+exports.push([module.i, "\n.main-wrapper[data-v-c656c9f8] {\n    margin: 25px 48px 30px 48px;\n}\n.bread-crumbs[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    line-height: 30px;\n    color: #CCCCCC;\n}\n.main-title[data-v-c656c9f8] {\n    font-family: 'Roboto', serif;\n    font-style: normal;\n    font-weight: 300;\n    font-size: 36px;\n    line-height: 90px;\n    color: #808080\n}\n.card-wrapper[data-v-c656c9f8] {\n    width: 100%;\n    background: #FFFFFF;\n    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);\n    border-radius: 6px;\n}\n.card-panel[data-v-c656c9f8] {\n    display: flex;\n    height: 90px;\n    width: 100%;\n    border-bottom: 2px solid #F5F5F5;\n}\n.card-button[data-v-c656c9f8] {\n    display: flex;\n    max-width: 214px;\n    width: 100%;\n    justify-content: center;\n    align-items: center;\n    border-right: 2px solid #F5F5F5;\n}\n.card-content[data-v-c656c9f8] {\n    min-height: 710px;\n}\n", ""]);
 
 // exports
 
@@ -9134,7 +9138,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.placeholder {\n    display: flex;\n    flex-direction: column;\n    justify-content: center;\n}\n.placeholder span {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    /* identical to box height, or 125% */\n\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\n.photo-wrapper {\n    min-height: 710px;\n    display: flex;\n    flex-direction: column;\n}\n.photo-wrapper .photo-content {\n    flex: 1 0 auto;\n}\n.photo-wrapper .photo-paginate {\n    flex: 0 0 auto;\n}\nul {\n    padding: 0;\n}\nul, li {\n    list-style: none;\n}\n.paginate {\n    display: flex;\n    margin-bottom: 0;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    outline: none;\n    margin-top: 53px;\n}\n.one-page {\n    width: 60px;\n    height: 60px;\n    color: #666;\n    border-left: 2px solid #DADADA;\n}\n.one-page a {\n    display: block; /* Ссылка как блочный элемент */\n    text-align: center; /* Выравнивание по центру */\n    height: 100%; /* Высота на весь слой */\n    line-height: 60px;\n    outline: none;\n}\n.one-page:hover ~ .disable {\n    color: #000;\n}\n.prev {\n    /*border-bottom-left-radius: 3px;*/\n    /*border-top-left-radius: 3px;*/\n    color: #D8D8D8;\n    border-left: none;\n}\n.next {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n    color: #D8D8D8;\n}\nli.active > a {\n    /*background-color: red;*/\n    background: #FAFAFA;\n}\n.custom-checkbox {\n    position: absolute;\n    z-index: -1;\n    opacity: 0;\n}\n.custom-checkbox+label {\n    display: inline-flex;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.custom-checkbox+label::before {\n    content: '';\n    display: inline-block;\n    width: 16px;\n    height: 16px;\n    flex-shrink: 0;\n    flex-grow: 0;\n    border: 1px solid #adb5bd;\n    border-radius: 0.25em;\n    margin-right: 0.5em;\n    background-repeat: no-repeat;\n    background-position: center center;\n    background-size: 50% 50%;\n}\n.photo_element .custom-checkbox+label {\n    position: absolute;\n    margin-top: 6px;\n    margin-left: 6px;\n}\n.custom-checkbox:checked+label::before {\n    border-color: #0b76ef;\n    background-color: #0b76ef;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e\");\n}\n.custom-checkbox:not(:disabled):not(:checked)+label::before {\n    background: #ffffff;\n}\n.custom-checkbox:not(:disabled):active+label::before {\n    background-color: #b3d7ff;\n    border-color: #b3d7ff;\n}\n\n/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */\n.custom-checkbox:focus:not(:checked)+label::before {\n    border-color: #80bdff;\n}\n/* стили для чекбокса, находящегося в состоянии disabled */\n.custom-checkbox:disabled+label::before {\n    background-color: #e9ecef;\n}\n", ""]);
+exports.push([module.i, "\n.placeholder-wrapper {\n    display: flex;\n    justify-content: center;\n    align-items: center;\n    min-height: 710px;\n}\n.placeholder span {\n    margin-top: 60px;\n    margin-bottom: 50px;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 900;\n    font-size: 24px;\n    line-height: 30px;\n    text-align: center;\n    letter-spacing: 2px;\n\n    color: #666666;\n}\n.placeholder img {\n    display: flex;\n    max-width: 420px;\n    width: 100%;\n    max-height: 256px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto\n}\n.photo-wrapper {\n    min-height: 710px;\n    display: flex;\n    flex-direction: column;\n}\n.photo-wrapper .photo-content {\n    flex: 1 0 auto;\n}\n.photo-wrapper .photo-paginate {\n    flex: 0 0 auto;\n}\nul {\n    padding: 0;\n}\nul, li {\n    list-style: none;\n}\n.paginate {\n    display: flex;\n    margin-bottom: 0;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    outline: none;\n    margin-top: 53px;\n}\n.one-page {\n    width: 60px;\n    height: 60px;\n    color: #666;\n    border-left: 2px solid #DADADA;\n}\n.one-page a {\n    display: block; /* Ссылка как блочный элемент */\n    text-align: center; /* Выравнивание по центру */\n    height: 100%; /* Высота на весь слой */\n    line-height: 60px;\n    outline: none;\n}\n.one-page:hover ~ .disable {\n    color: #000;\n}\n.prev {\n    /*border-bottom-left-radius: 3px;*/\n    /*border-top-left-radius: 3px;*/\n    color: #D8D8D8;\n    border-left: none;\n}\n.next {\n    border-bottom-right-radius: 3px;\n    border-top-right-radius: 3px;\n    color: #D8D8D8;\n}\nli.active > a {\n    /*background-color: red;*/\n    background: #FAFAFA;\n}\n.custom-checkbox {\n    position: absolute;\n    z-index: -1;\n    opacity: 0;\n}\n.custom-checkbox+label {\n    display: inline-flex;\n    align-items: center;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.custom-checkbox+label::before {\n    content: '';\n    display: inline-block;\n    width: 16px;\n    height: 16px;\n    flex-shrink: 0;\n    flex-grow: 0;\n    border: 1px solid #adb5bd;\n    border-radius: 0.25em;\n    margin-right: 0.5em;\n    background-repeat: no-repeat;\n    background-position: center center;\n    background-size: 50% 50%;\n}\n.photo_element .custom-checkbox+label {\n    position: absolute;\n    margin-top: 6px;\n    margin-left: 6px;\n}\n.custom-checkbox:checked+label::before {\n    border-color: #0b76ef;\n    background-color: #0b76ef;\n    background-image: url(\"data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23fff' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e\");\n}\n.custom-checkbox:not(:disabled):not(:checked)+label::before {\n    background: #ffffff;\n}\n.custom-checkbox:not(:disabled):active+label::before {\n    background-color: #b3d7ff;\n    border-color: #b3d7ff;\n}\n\n/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */\n.custom-checkbox:focus:not(:checked)+label::before {\n    border-color: #80bdff;\n}\n/* стили для чекбокса, находящегося в состоянии disabled */\n.custom-checkbox:disabled+label::before {\n    background-color: #e9ecef;\n}\n", ""]);
 
 // exports
 
@@ -42662,13 +42666,20 @@ var render = function() {
           )
         ])
       ])
-    : _c("div", { staticClass: "placeholder" }, [
-        _c("h2", [_vm._v("Здесь вы можете добавить свои фотографии")]),
-        _vm._v(" "),
-        _c("img", { attrs: { src: "/storage/photos/placeholder.png" } })
-      ])
+    : _c("div", { staticClass: "placeholder-wrapper" }, [_vm._m(0)])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "placeholder" }, [
+      _c("span", [_vm._v("Здесь вы можете добавить свои фотографии")]),
+      _vm._v(" "),
+      _c("img", { attrs: { src: "/storage/photos/placeholder.png" } })
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -43204,25 +43215,32 @@ var render = function() {
           ]
         ),
         _vm._v(" "),
-        _c("div", { staticClass: "window-content" }, [
-          _c("h1", [_vm._v("Ошибка загрузки фото")]),
-          _vm._v(" "),
-          _c("span", { staticClass: "d-block" }, [
-            _vm._v(
-              "Выбранное количество фото не должно превышать " +
-                _vm._s(this.$store.state.maxFilesToUpload) +
-                " шт."
-            )
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "window-buttons d-flex" }, [
-            _c(
-              "button",
-              { staticClass: "window-btn-ok", on: { click: _vm.close } },
-              [_vm._v("Продолжить")]
-            )
-          ])
-        ])
+        _c(
+          "div",
+          { staticClass: "window-content" },
+          [
+            _c("h1", [_vm._v("Загрузка фото завершена")]),
+            _vm._v(" "),
+            _c("span", { staticClass: "d-block" }, [
+              _vm._v("Загруженные фото:")
+            ]),
+            _vm._v(" "),
+            _vm._l(this.$store.state.successUploadFiles, function(filename) {
+              return _c("span", { staticClass: "error-file d-block" }, [
+                _vm._v(_vm._s(filename))
+              ])
+            }),
+            _vm._v(" "),
+            _c("div", { staticClass: "window-buttons d-flex" }, [
+              _c(
+                "button",
+                { staticClass: "window-btn-ok", on: { click: _vm.close } },
+                [_vm._v("Продолжить")]
+              )
+            ])
+          ],
+          2
+        )
       ])
     ])
   ])
