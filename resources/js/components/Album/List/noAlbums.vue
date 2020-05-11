@@ -4,9 +4,8 @@
             <p class="main-text pt-2 pt-md-3 pt-lg-4">Создать новый альбом</p>
         </div>
         <div class="text-center">
-            <img src="/placeholder.png" class="img-bord">
+            <img src="/storage/albums/placeholderNoAlbums.png" class="img-bord">
         </div>
-
     </div>
 </template>
 

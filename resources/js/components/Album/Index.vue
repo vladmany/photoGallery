@@ -7,8 +7,8 @@
 </template>
 
 <script>
-    import ModalCreateAlbum from "./ModalCreateAlbum";
-    import AllAlbums from "./AllAlbums";
+    import ModalCreateAlbum from "./Create/ModalCreateAlbum";
+    import AllAlbums from "./List/AllAlbums";
     export default {
         name: "Index",
         components: {AllAlbums, ModalCreateAlbum},
