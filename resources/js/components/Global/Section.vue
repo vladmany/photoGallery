@@ -78,7 +78,4 @@
         align-items: center;
         border-right: 2px solid #F5F5F5;
     }
-    .card-content {
-        padding: 10px;
-    }
 </style>

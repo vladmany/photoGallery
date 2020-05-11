@@ -12,8 +12,8 @@
                     :page-range="3"
                     :margin-pages="2"
                     :click-handler="onChangePage"
-                    :prev-text="'&#10094;'"
-                    :next-text="'&#10095;'"
+                    :prev-text="'&#129120;'"
+                    :next-text="'&#129122;'"
                     :prev-class="'one-page prev'"
                     :next-class="'one-page next'"
                     :container-class="'paginate'"
@@ -97,7 +97,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     .placeholder {
         display: flex;
         flex-direction: column;
@@ -136,28 +136,32 @@
     }
     .paginate {
         display: flex;
+        margin-bottom: 0px;
     }
     .one-page {
         padding: 10px 15px;
         color: #666;
-        border: 1px solid red;
         border-left: none;
+    }
+    .one-page a {
+        width: 100%;
+        height: 100%;
     }
     .one-page:hover ~ .disable {
         color: #000;
-        background-color: red;
-        /*#F5F5F5*/
+
     }
     .prev {
         border-bottom-left-radius: 3px;
         border-top-left-radius: 3px;
-        border-left: 1px solid red;
+        color: #D8D8D8;
     }
     .next {
         border-bottom-right-radius: 3px;
         border-top-right-radius: 3px;
+        color: #D8D8D8;
     }
     li.active > a {
-        background-color: red;
+        /*background-color: red;*/
     }
 </style>

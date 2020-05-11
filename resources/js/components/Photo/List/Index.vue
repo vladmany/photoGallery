@@ -7,7 +7,7 @@
             <upload-photos-component/>
         </template>
         <template v-slot:content>
-            <AllPhoto :paginate-count="20"></AllPhoto>
+            <AllPhoto :paginate-count="3"></AllPhoto>
         </template>
     </Section>
 </template>
