@@ -1,5 +1,5 @@
 <template>
-    <div class="group">
+    <div v-if="elements.length > 0" class="group">
         <div class="group-selector">
             <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
             <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
@@ -22,7 +22,8 @@
         props: {
             title: {
                 required: false,
-                type: String
+                type: String,
+                default: ''
             },
             elements: {
                 required: true,
