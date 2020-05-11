@@ -28,11 +28,6 @@ class LoginController extends Controller
 
     protected $redirectTo = RouteServiceProvider::HOME;
 
-    public function __construct()
-    {
-        $this->middleware('guest')->except('logout');
-    }
-
     public function redirect()
     {
         $query = http_build_query([
@@ -45,7 +40,7 @@ class LoginController extends Controller
         /*
         team1-group-project.azurewebsites.net - урл Богдана, его тоже вынести в конфиг
         */
-        return redirect(env('PASSPORT_PROVIDER_URI').'/oauth/authorize?' . $query);
+        return redirect('https://'.env('PASSPORT_PROVIDER_URI').'/oauth/authorize?' . $query);
     }
 
     public function callback(Request $request)
@@ -53,7 +48,7 @@ class LoginController extends Controller
         //заюзать use GuzzleHttp\Client;
         $http = new Client();
 
-        $response = $http->post(env('PASSPORT_PROVIDER_URI').'/oauth/token', [
+        $response = $http->post('http://'.env('PASSPORT_PROVIDER_URI').'/oauth/token', [
             'form_params' => [
                 'grant_type' => 'authorization_code',
                 'client_id' => env('PASSPORT_CLIENT_ID'), //данные которые выдаст Богдан. вынести в конфиг
@@ -72,7 +67,7 @@ class LoginController extends Controller
 
             // получение данных пользователя
             $ch = curl_init();
-            $url = env('PASSPORT_PROVIDER_URI').'/api/user';
+            $url = 'http://'.env('PASSPORT_PROVIDER_URI').'/api/user';
             $header = array(
                 'Authorization: Bearer ' . $access_token
             );
@@ -86,10 +81,10 @@ class LoginController extends Controller
 
             $response = json_decode($result, true);//данные о user пришедшие от Богдана
 
-            $user = User::query()->where('email', $response['email'])->first();
+            $myuser = User::query()->where('email', $response['email'])->first();
 
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
-            if(!$user)
+            if(!$myuser)
             {
                 $user = User::firstOrCreate([
                         'email' => $response['email'],
@@ -98,15 +93,22 @@ class LoginController extends Controller
                         'token' => $access->access_token
                     ]
                 );
+                $Rres = Auth::login($user);
+                return response()->redirectTo(RouteServiceProvider::HOME);
             }
 
 //авторизовать пользователя
-            $user->update(['token' => $access->access_token]);
-            $Rres = Auth::login($user);
+            $myuser->update(['token' => $access->access_token]);
+            $Rres = Auth::login($myuser);
 
 //перекинуть в личны кабинет
             return response()->redirectTo(RouteServiceProvider::HOME);
         }
+    }
+
+    public function __construct()
+    {
+        $this->middleware('guest')->except('logout');
     }
 
     public function logout(Request $request)
