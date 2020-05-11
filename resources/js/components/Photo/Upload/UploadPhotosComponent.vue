@@ -57,7 +57,7 @@
             },
             sendFiles(e) {
                 let photos = $(e.target);
-                if ((photos.prop('files').length > 0) && (photos.prop('files').length < 16))
+                if ((photos.prop('files').length > 0) && (photos.prop('files').length < this.$store.state.maxFilesToUpload))
                 {
                     this.steps = (this.$refs.photo.files.length > 10) ? 10 : this.$refs.photo.files.length;
                     this.step = 0
@@ -83,10 +83,10 @@
                         this.formData.append('photo[' + res.length + ']', file);
                         this.successFiles.push(file.name)
                     }
-                } else
-                    if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
-                        this.$store.commit('showSelectError')
                 }
+                // if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
+                //         this.$store.commit('showSelectError')
+                // }
             },
             validate(file) {
                 if (file.size > 16000000)

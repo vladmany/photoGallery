@@ -23,9 +23,11 @@
             </div>
         </div>
     </div>
-    <div v-else class="placeholder">
-        <h2>Здесь вы можете добавить свои фотографии</h2>
-        <img src="/storage/photos/placeholder.png">
+    <div v-else class="placeholder-wrapper">
+        <div class="placeholder">
+            <span>Здесь вы можете добавить свои фотографии</span>
+            <img src="/storage/photos/placeholder.png">
+        </div>
     </div>
 </template>
 
@@ -94,10 +96,11 @@
 </script>
 
 <style>
-    .placeholder {
+    .placeholder-wrapper {
         display: flex;
-        flex-direction: column;
         justify-content: center;
+        align-items: center;
+        min-height: 710px;
     }
     .placeholder span {
         margin-top: 60px;
@@ -107,8 +110,6 @@
         font-weight: 900;
         font-size: 24px;
         line-height: 30px;
-        /* identical to box height, or 125% */
-
         text-align: center;
         letter-spacing: 2px;
 
