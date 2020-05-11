@@ -2,14 +2,14 @@
     <div class="wrapper">
         <div class="header">
             <div class="name-album">
-                //Name albums :D
+<!--                //Name albums :D-->
             </div>
             <div class="main-panel">
                 <upload-photos-component></upload-photos-component>
             </div>
         </div>
         <div v-if="noPhotos">
-            //Images ;D
+<!--            Images ;D-->
         </div>
         <div v-else="noPhotos" class="noPhotos content">
             <div class="pt-4">

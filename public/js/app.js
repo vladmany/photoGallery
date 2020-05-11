@@ -3165,7 +3165,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post('api/albums/create', newAlbum).then(function (response) {
         _this.closeModal();
 
-        _this.$store.dispatch('getAlbums');
+        _this.$store.dispatch('ListAlbum/getAlbums');
       })["catch"](function (error) {
         if (error.response.status == 422) {
           _this.errors = error.response.data.errors;
@@ -3298,24 +3298,23 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "AllAlbums",
   data: function data() {
     return {
-      //albums:[],
-      monthes: ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
       date: '',
       NoAlbum: true
     };
   },
-  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])(['albums'])),
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
+    albums: 'ListAlbum/albums'
+  })),
   methods: {
-    getAlbums: function getAlbums() {
-      var _this = this;
-
-      axios.get('api/albums').then(function (r) {
-        return _this.albums = r.data;
-      });
-    },
-    formatDate: function formatDate(created_at) {
-      created_at = new Date(created_at);
-      this.date = created_at.getDate() + ' ' + this.monthes[created_at.getMonth()] + ' ' + created_at.getFullYear();
+    // getAlbums() {
+    //     axios.get('api/albums')
+    //         .then(r => this.albums = r.data)
+    // },
+    formatDate: function formatDate(date) {
+      var months = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+      var dat = date.split('T')[0];
+      dat = new Date(dat);
+      return "".concat(dat.getDate(), " ").concat(months[dat.getMonth()], " ").concat(dat.getFullYear()); // this.date = created_at.getDate() + ' ' + this.monthes[created_at.getMonth()] + ' ' + created_at.getFullYear();
     },
     emptyAlbums: function emptyAlbums() {
       if (this.albums.length === 0) this.NoAlbum = true;else this.NoAlbum = false;
@@ -3332,11 +3331,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   created: function created() {
-    this.$store.dispatch('getAlbums');
-  },
-  updated: function updated() {
-    this.emptyAlbums();
-  }
+    this.$store.dispatch('ListAlbum/getAlbums');
+  } // updated() {
+  //     this.emptyAlbums()
+  // },
+
 });
 
 /***/ }),
@@ -42218,7 +42217,7 @@ var render = function() {
       { staticClass: "body-wrapper" },
       [
         _vm._l(_vm.albums, function(album) {
-          return _c("div", { staticClass: "album pt-3 pb-3" }, [
+          return _c("div", { key: album.id, staticClass: "album pt-3 pb-3" }, [
             _vm._m(0, true),
             _vm._v(" "),
             _c("div", { staticClass: "text-center mr-5" }, [
@@ -42258,11 +42257,7 @@ var render = function() {
                 _c("img", {
                   attrs: { src: "/storage/albums/ico_calendar.png" }
                 }),
-                _vm._v(
-                  _vm._s(_vm.formatDate(album.created_at)) +
-                    " " +
-                    _vm._s(_vm.date)
-                )
+                _vm._v(_vm._s(_vm.formatDate(album.created_at)))
               ])
             ]),
             _vm._v(" "),
@@ -42270,7 +42265,7 @@ var render = function() {
           ])
         }),
         _vm._v(" "),
-        _vm.NoAlbum ? _c("no-albums") : _vm._e()
+        _vm.albums.length == 0 ? _c("no-albums") : _vm._e()
       ],
       2
     )

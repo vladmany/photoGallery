@@ -1,7 +1,7 @@
 <template>
     <div class="wrapper">
         <div class="body-wrapper">
-            <div class="album pt-3 pb-3" v-for="album in albums">
+            <div v-if="albums.length > 0" v-for="album in albums" :key="album.id" class="album pt-3 pb-3" >
                 <div class="align-self-center d-flex justify-content-center text-center ml-4 mr-4">
                     <input type="checkbox" class="checkbox-album text-center">
                 </div>
@@ -16,14 +16,14 @@
                     <button class="btn pr-md-4"><img src="/storage/albums/ico-dell.png">Удалить</button>
                 </div>
                 <div class="align-self-end text-center ml-4 mr-5">
-                    <p class="ml-md-5"><img src="/storage/albums/ico_calendar.png">{{ formatDate(album.created_at)}} {{date}}</p>
+                    <p class="ml-md-5"><img src="/storage/albums/ico_calendar.png">{{ formatDate(album.created_at)}}</p>
                 </div>
                 <div class="align-self-end text-center">
                     <p class="text-center"><img src="/storage/albums/ico-user.png">Пользователи с доступом<img src="/storage/albums/ico-select.png">
                     </p>
                 </div>
             </div>
-            <no-albums v-if="NoAlbum"></no-albums>
+            <no-albums v-else></no-albums>
         </div>
     </div>
 
@@ -41,26 +41,35 @@
         name: "AllAlbums",
         data() {
             return {
-                //albums:[],
-                monthes: ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"],
                 date: '',
                 NoAlbum: true
 
             }
         },
         computed: {
-            ...mapGetters([
-                'albums'
-            ]),
+            ...mapGetters({
+                albums: 'ListAlbum/albums',
+            }),
         },
         methods: {
-            getAlbums() {
-                axios.get('api/albums')
-                    .then(r => this.albums = r.data)
-            },
-            formatDate(created_at) {
-                created_at = new Date(created_at)
-                this.date = created_at.getDate() + ' ' + this.monthes[created_at.getMonth()] + ' ' + created_at.getFullYear();
+            // getAlbums() {
+            //     axios.get('api/albums')
+            //         .then(r => this.albums = r.data)
+            // },
+            formatDate(date) {
+                let months = [
+                    "января", "февраля", "марта",
+                        "апреля", "мая", "июня", "июля",
+                        "августа", "сентября", "октября",
+                        "ноября", "декабря"
+                    ]
+
+                let dat = date.split('T')[0];
+                dat = new Date(dat)
+
+                return `${dat.getDate()} ${months[dat.getMonth()]} ${dat.getFullYear()}`
+
+                // this.date = created_at.getDate() + ' ' + this.monthes[created_at.getMonth()] + ' ' + created_at.getFullYear();
 
             },
             emptyAlbums() {
@@ -80,11 +89,11 @@
             }
         },
         created() {
-            this.$store.dispatch('getAlbums');
+            this.$store.dispatch('ListAlbum/getAlbums');
         },
-        updated() {
-            this.emptyAlbums()
-        },
+        // updated() {
+        //     this.emptyAlbums()
+        // },
 
 
     }
