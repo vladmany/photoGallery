@@ -1,67 +1,67 @@
 <template>
-    <div class="wrapper">
-        <div class="header">
-            <div class="name-album">
-                //Name albums :D
+<!--    <div class="wrapper">-->
+<!--        <div class="header">-->
+<!--            <div class="name-album">-->
+<!--&lt;!&ndash;                //Name albums :D&ndash;&gt;-->
+<!--            </div>-->
+<!--            <div class="main-panel">-->
+<!--                <upload-photos-component></upload-photos-component>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--        <div v-if="noPhotos">-->
+<!--&lt;!&ndash;            Images ;D&ndash;&gt;-->
+<!--        </div>-->
+<!--        <div v-else="noPhotos" class="noPhotos content">-->
+<!--            <div class="pt-4">-->
+<!--                <p class="album-name">Альбом 1</p>-->
+<!--            </div>-->
+<!--            <div class="text-center">-->
+<!--                <img src="/storage/albums/placeholderNoPhotosInAlbums.png" class="img-bord">-->
+<!--            </div>-->
+<!--                <div class="text-empty">-->
+<!--                <p>Альбом пуст</p>-->
+<!--            </div>-->
+<!--        </div>-->
+<!--    </div>-->
+    <Section>
+        <template v-slot:title>
+            <span>{{ album.name }}</span>
+        </template>
+        <template v-slot:button>
+            <div class="row">
+                <div class="col-12 col-md-2">
+                    <route-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id }}">
+                        <span class="btn btn-primary btn-lg">Добавить фото</span>
+                    </route-link>
+                </div>
             </div>
-            <div class="main-panel">
-                <upload-photos-component></upload-photos-component>
-            </div>
-        </div>
-        <div v-if="noPhotos">
-            //Images ;D
-        </div>
-        <div v-else="noPhotos" class="noPhotos content">
-            <div class="pt-4">
-                <p class="album-name">Альбом 1</p>
-            </div>
-            <div class="text-center">
-                <img src="/storage/albums/placeholderNoPhotosInAlbums.png" class="img-bord">
-            </div>
-                <div class="text-empty">
-                <p>Альбом пуст</p>
-            </div>
-        </div>
-    </div>
+        </template>
+        <template v-slot:content>
+            <AllPhotoAlbum :paginate-count="20" :album-id="album.id"></AllPhotoAlbum>
+        </template>
+    </Section>
+
 </template>
 
 <script>
-    import UploadPhotosComponent from "../../Photo/Upload/UploadPhotosComponent";
+    import AllPhotoAlbum from "./AllPhotoAlbum";
     export default {
         name: "OneAlbum",
-        components: {UploadPhotosComponent},
-        data: function () {
-            return {
-                noPhotos: false
+        components: { AllPhotoAlbum },
+        props: {
+            id: {
+                required: true,
+                type: Number,
             }
         },
+        computed: {
+            album() {
+                return this.$store.getters['ListAlbum/album'](this.id);
+            }
+        }
     }
 </script>
 
 <style scoped>
-    .wrapper{
-        width: 100%;
-        display: flex;
-        background-color: #ffffff !important;
-        flex-direction: column;
-    }
-    .album-name .text-empty{
-        color: #666;
-    }
-    .album-name{
-        font-size: 24px;
-        align-items: center;
-    }
-    .text-empty{
-        font-size: 16px;
-    }
-    .noPhotos div{
-        text-align: center;
-    }
-    .img-bord {
-        max-width: 540px;
-        max-height: 330px;
-        width: 100%;
-        height: 100%;
-    }
+
 </style>

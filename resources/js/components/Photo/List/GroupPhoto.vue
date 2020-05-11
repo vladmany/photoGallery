@@ -1,5 +1,5 @@
 <template>
-    <div class="group">
+    <div v-if="elements.length > 0" class="group">
         <div class="group-selector">
             <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
             <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script>
+<script>п
     import OnePhoto from './OnePhoto'
 
     export default {
@@ -21,8 +21,9 @@
         components: { OnePhoto },
         props: {
             title: {
-                required: true,
-                type: String
+                required: false,
+                type: String,
+                default: ''
             },
             elements: {
                 required: true,

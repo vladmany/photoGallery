@@ -6,8 +6,9 @@ import VueRouter from 'vue-router'
 import IndexPhoto from "./components/Photo/List/PhotoIndex"
 import IndexViewPhoto from "./components/Photo/View/ViewIndex";
 import OnePhoto from "./components/Photo/View/OnePhoto";
-import BlockAlbumList from "./components/Album/BlockAlbumList";
+import AlbumIndex from "./components/Album/AlbumIndex";
 import OneAlbum from "./components/Album/List/OneAlbum";
+import AddPhotoToAlbum from "./components/Album/List/AddPhotoToAlbum";
 
 export default new VueRouter({
     routes: [
@@ -19,14 +20,19 @@ export default new VueRouter({
 
         {
             path: "/albums",
-            component: BlockAlbumList,
-            name: "BlockAlbumList",
+            component: AlbumIndex,
+            name: "AlbumIndex",
         },
         {
             path: '/album/:id',
             component: OneAlbum,
             name: 'OneAlbum',
             props: true
+        },
+        {
+            path: '/album/:id/add',
+            component: AddPhotoToAlbum,
+            name: 'AddPhotoToAlbum',
         },
         {
             path: '/photos',
