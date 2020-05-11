@@ -20,9 +20,9 @@
 </template>
 
 <script>
-    import AllAlbums from "./AllAlbums";
+    import AllAlbums from "./List/AllAlbums";
     import Index from "./Index";
-    import ModalCreateAlbum from "./ModalCreateAlbum";
+    import ModalCreateAlbum from "./Create/ModalCreateAlbum";
     import CreateAlbum from "./Create/CreateAlbum";
 
     export default {
