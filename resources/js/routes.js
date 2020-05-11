@@ -33,6 +33,7 @@ export default new VueRouter({
             path: '/album/:id/add',
             component: AddPhotoToAlbum,
             name: 'AddPhotoToAlbum',
+            props: true
         },
         {
             path: '/photos',

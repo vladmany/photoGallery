@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script>п
+<script>
     import OnePhoto from './OnePhoto'
 
     export default {
