@@ -31,8 +31,8 @@ class LoginController extends Controller
     public function redirect()
     {
         $query = http_build_query([
-            'client_id' => env('PASSPORT_CLIENT_ID'),//запросить у Богдана и вынести в конфиг
-            'redirect_uri' => env('HOST5').'/auth/callback',//урл куда оправит сайт Богдана после успешной
+            'client_id' => 15,//запросить у Богдана и вынести в конфиг
+            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',//урл куда оправит сайт Богдана после успешной
             'response_type' => 'code',
             'scope' => '',
         ]);
@@ -40,7 +40,7 @@ class LoginController extends Controller
         /*
         team1-group-project.azurewebsites.net - урл Богдана, его тоже вынести в конфиг
         */
-        return redirect('https://'.env('PASSPORT_PROVIDER_URI').'/oauth/authorize?' . $query);
+        return redirect('https://team1-group-project.azurewebsites.net/oauth/authorize?' . $query);
     }
 
     public function callback(Request $request)
@@ -48,12 +48,12 @@ class LoginController extends Controller
         //заюзать use GuzzleHttp\Client;
         $http = new Client();
 
-        $response = $http->post('http://'.env('PASSPORT_PROVIDER_URI').'/oauth/token', [
+        $response = $http->post('http://team1-group-project.azurewebsites.net/oauth/token', [
             'form_params' => [
                 'grant_type' => 'authorization_code',
-                'client_id' => env('PASSPORT_CLIENT_ID'), //данные которые выдаст Богдан. вынести в конфиг
-                'client_secret' => env('PASSPORT_CLIENT_SECRET'),//данные которые выдаст Богдан. вынести в конфиг
-                'redirect_uri' => env('HOST5').'/auth/callback',
+                'client_id' => 15, //данные которые выдаст Богдан. вынести в конфиг
+                'client_secret' => 'S9qfCC612r1EhwviAq6Ca24EqM3xuetvFEzL3Qj9',//данные которые выдаст Богдан. вынести в конфиг
+                'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
                 'code' => $request->code,
             ],
         ]);
@@ -67,7 +67,7 @@ class LoginController extends Controller
 
             // получение данных пользователя
             $ch = curl_init();
-            $url = 'http://'.env('PASSPORT_PROVIDER_URI').'/api/user';
+            $url = 'http://team1-group-project.azurewebsites.net/api/user';
             $header = array(
                 'Authorization: Bearer ' . $access_token
             );
