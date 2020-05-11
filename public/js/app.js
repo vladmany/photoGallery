@@ -3249,6 +3249,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Photo_Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Photo/Upload/UploadPhotosComponent */ "./resources/js/components/Photo/Upload/UploadPhotosComponent.vue");
 /* harmony import */ var _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/List/AllPhoto */ "./resources/js/components/Photo/List/AllPhoto.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3280,6 +3287,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3297,11 +3310,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     save: function save() {}
   },
-  computed: {
+  computed: _objectSpread(_objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
+    photos: 'ListPhoto/photos'
+  })), {}, {
     album: function album() {
       return this.$store.getters['ListAlbum/album'](this.id);
     }
-  }
+  })
 });
 
 /***/ }),
@@ -3394,9 +3409,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
-/* harmony import */ var _Photo_List_GroupPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/List/GroupPhoto */ "./resources/js/components/Photo/List/GroupPhoto.vue");
-/* harmony import */ var _noAlbums__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./noAlbums */ "./resources/js/components/Album/List/noAlbums.vue");
+/* harmony import */ var _noAlbums__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./noAlbums */ "./resources/js/components/Album/List/noAlbums.vue");
+/* harmony import */ var _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../Photo/List/AllPhoto */ "./resources/js/components/Photo/List/AllPhoto.vue");
 //
 //
 //
@@ -3407,14 +3421,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "AllPhotoAlbum",
   components: {
-    GroupPhoto: _Photo_List_GroupPhoto__WEBPACK_IMPORTED_MODULE_1__["default"],
-    noAlbums: _noAlbums__WEBPACK_IMPORTED_MODULE_2__["default"]
+    AllPhoto: _Photo_List_AllPhoto__WEBPACK_IMPORTED_MODULE_1__["default"],
+    noAlbums: _noAlbums__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   props: {
     albumId: {
@@ -3424,7 +3437,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   computed: {
     photos: function photos() {
-      return this.$store.getters['ListAlbum/photosByAlbum'](this.albumId);
+      var ret = this.$store.getters['ListAlbum/photosByAlbum'](this.albumId);
+      return ret;
     }
   }
 });
@@ -3783,6 +3797,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     UploadPhotosComponent: _Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   props: {
+    photos: {
+      required: true,
+      type: Object
+    },
     paginateCount: {
       type: Number,
       "default": 20
@@ -3794,7 +3812,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
-    photos: 'ListPhoto/photos',
     groups: 'ListPhoto/groups'
   })),
   watch: {
@@ -3804,7 +3821,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     }
   },
   methods: {
-    onChangePage: function onChangePage(page) {
+    onChangePage: function onChangePage() {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var perPage = this.paginateCount;
       var from = page * perPage - perPage;
       var to = page * perPage;
@@ -3821,9 +3839,6 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.pages = pages.length;
     }
-  },
-  created: function created() {
-    this.$store.dispatch('ListPhoto/getPhotos');
   }
 });
 
@@ -3928,9 +3943,8 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch('addPhoto', this.photo.id);
       } else {
         this.$store.dispatch('delPhoto', this.photo.id);
-      }
+      } // console.log(this.$store.getters.selectedPhotos);
 
-      console.log(this.$store.getters.selectedPhotos);
     }
   }
 });
@@ -3948,6 +3962,13 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AllPhoto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AllPhoto */ "./resources/js/components/Photo/List/AllPhoto.vue");
 /* harmony import */ var _Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../Upload/UploadPhotosComponent */ "./resources/js/components/Photo/Upload/UploadPhotosComponent.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3962,6 +3983,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -3969,6 +3994,12 @@ __webpack_require__.r(__webpack_exports__);
   components: {
     UploadPhotosComponent: _Upload_UploadPhotosComponent__WEBPACK_IMPORTED_MODULE_1__["default"],
     AllPhoto: _AllPhoto__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
+    photos: 'ListPhoto/photos'
+  })),
+  created: function created() {
+    this.$store.dispatch('ListPhoto/getPhotos');
   }
 });
 
@@ -4311,7 +4342,7 @@ var height;
           }).then(function (response) {
             _this3.formData = new FormData(); // Сброс
 
-            _this3.$store.dispatch('getPhotos');
+            _this3.$store.dispatch('ListPhoto/getPhotos');
 
             if (_this3.successFiles.length > 0) {
               _this3.$store.commit('setUploadSuccessFile', _this3.successFiles);
@@ -42323,27 +42354,38 @@ var render = function() {
               "div",
               { staticClass: "row" },
               [
-                _c("div", { staticClass: "col-12" }, [
+                _c("div", { staticClass: "col-12 px-3" }, [
                   _c("div", { staticClass: "row justify-content-between" }, [
-                    _c("div", { staticClass: "col-12 col-lg-6" }, [
-                      _c(
-                        "a",
-                        {
-                          attrs: { href: "#" },
-                          on: {
-                            click: function($event) {
-                              return _vm.$router.go(-1)
+                    _c(
+                      "div",
+                      { staticClass: "col-12 col-lg-6" },
+                      [
+                        _c(
+                          "router-link",
+                          {
+                            attrs: {
+                              to: {
+                                name: "OneAlbum",
+                                props: { id: _vm.album.id }
+                              }
                             }
-                          }
-                        },
-                        [_vm._v("Назад")]
-                      )
-                    ]),
+                          },
+                          [
+                            _vm._v(
+                              "\n                            Назад\n                        "
+                            )
+                          ]
+                        )
+                      ],
+                      1
+                    ),
                     _vm._v(" "),
                     _c("div", { staticClass: "col-12 col-lg-6" }, [
-                      _c("span", { on: { click: _vm.save } }, [
-                        _vm._v("Сохранить")
-                      ])
+                      _c(
+                        "span",
+                        { staticClass: "text-right", on: { click: _vm.save } },
+                        [_vm._v("Сохранить")]
+                      )
                     ])
                   ])
                 ]),
@@ -42358,7 +42400,9 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("AllPhoto", { attrs: { "paginate-count": 20 } })
+                _c("AllPhoto", {
+                  attrs: { photos: _vm.photos, "paginate-count": 20 }
+                })
               ],
               1
             )
@@ -42519,8 +42563,8 @@ var render = function() {
     "div",
     [
       _vm.photos.length > 0
-        ? _c("GroupPhoto", {
-            attrs: { elements: _vm.photos, "group-id": _vm.albumId }
+        ? _c("AllPhoto", {
+            attrs: { photos: _vm.photos, "paginate-count": 20 }
           })
         : _c("noAlbums")
     ],
@@ -43116,7 +43160,11 @@ var render = function() {
       {
         key: "content",
         fn: function() {
-          return [_c("AllPhoto", { attrs: { "paginate-count": 20 } })]
+          return [
+            _c("AllPhoto", {
+              attrs: { photos: _vm.photos, "paginate-count": 20 }
+            })
+          ]
         },
         proxy: true
       }
@@ -62249,7 +62297,6 @@ var mutations = {
 };
 var actions = {};
 /* harmony default export */ __webpack_exports__["default"] = ({
-  namespaced: true,
   state: state,
   getters: getters,
   mutations: mutations,
@@ -62382,7 +62429,7 @@ var mutations = {
 var actions = {
   getAlbums: function getAlbums(_ref) {
     var commit = _ref.commit;
-    axios.get('api/all-albums').then(function (res) {
+    axios.get('/api/all-albums').then(function (res) {
       commit('getAlbums', res.data);
     });
   }
@@ -62492,7 +62539,7 @@ var mutations = {
 };
 var actions = {
   addPhoto: function addPhoto(payload) {
-    axios.post('api/all-photos', {
+    axios.post('/api/all-photos', {
       photo: payload.photo
     }).then(function (res) {
       console.log(res.data);
@@ -62500,7 +62547,7 @@ var actions = {
   },
   getPhotos: function getPhotos(_ref) {
     var commit = _ref.commit;
-    axios.get('api/all-photos').then(function (res) {
+    axios.get('/api/all-photos').then(function (res) {
       commit('getPhotos', res.data);
     });
   },
@@ -62509,7 +62556,6 @@ var actions = {
         commit = _ref2.commit;
     var weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
     var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-    if (!items) items = state.photos;
     var groups = {};
     var key = 'created_at';
     items.forEach(function (item) {

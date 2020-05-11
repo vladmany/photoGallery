@@ -155,7 +155,7 @@
                         })
                             .then(response => {
                                 this.formData = new FormData() // Сброс
-                                this.$store.dispatch('getPhotos');
+                                this.$store.dispatch('ListPhoto/getPhotos');
                                 if (this.successFiles.length > 0)
                                 {
                                     this.$store.commit('setUploadSuccessFile', this.successFiles)

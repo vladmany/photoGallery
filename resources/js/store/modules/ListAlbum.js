@@ -22,7 +22,7 @@ let mutations = {
 }
 let actions = {
     getAlbums({ commit }) {
-        axios.get('api/all-albums')
+        axios.get('/api/all-albums')
             .then(res => {
                 commit('getAlbums', res.data)
             })
