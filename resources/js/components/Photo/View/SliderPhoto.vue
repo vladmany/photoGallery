@@ -7,6 +7,7 @@
 
 <script>
     import Slider from "../../Global/Slider";
+    import ListPhoto from "../../../store/modules/ListPhoto";
 
     export default {
         name: "SliderPhoto",
@@ -24,7 +25,7 @@
         },
         computed: {
             imagesind() {
-                let ret = this.$store.getters.groupByPhoto(this.id);
+                let ret = this.$store.getters['ListPhoto/groupByPhoto'](this.id);
                 return ret;
             },
             images() {

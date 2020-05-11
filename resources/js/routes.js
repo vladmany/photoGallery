@@ -3,8 +3,8 @@ import VueRouter from 'vue-router'
 
 // import UploadPhotosComponent from "./components/Photo/Upload/UploadPhotosComponent";
 // import BlockPhotoList from "./components/Photo/List/BlockPhotoList";
-import IndexPhoto from "./components/Photo/List/Index"
-import IndexViewPhoto from "./components/Photo/View/Index";
+import IndexPhoto from "./components/Photo/List/PhotoIndex"
+import IndexViewPhoto from "./components/Photo/View/ViewIndex";
 import OnePhoto from "./components/Photo/View/OnePhoto";
 import BlockAlbumList from "./components/Album/BlockAlbumList";
 import OneAlbum from "./components/Album/List/OneAlbum";

@@ -26,11 +26,6 @@
                 type: Boolean,
             }
         },
-        // data() {
-        //     return {
-        //         isSelected: false,
-        //     }
-        // },
     }
 </script>
 
