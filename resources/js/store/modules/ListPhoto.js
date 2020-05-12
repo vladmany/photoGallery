@@ -28,8 +28,18 @@ let getters = {
         }
 
         return [ind, arr];
-    }
+    },
+    getPhotoIndex: state => (items, id) => {
+        let ind = 0;
+        for(let item of items) {
+            if(item.id === id) {
+                break;
+            }
+            ind++;
+        }
 
+        return ind;
+    }
 }
 let mutations = {
     getPhotos:(state, payload) => {
@@ -83,7 +93,8 @@ let actions = {
         }
 
         commit('makeGroups', desc_groups);
-    }
+    },
+
 }
 
 export default {

@@ -4732,19 +4732,12 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       type: Object
     }
   },
-  data: function data() {
-    return {};
-  },
   computed: {
-    imagesind: function imagesind() {
-      var ret = this.$store.getters['ListPhoto/groupByPhoto'](this.id);
-      return ret;
-    },
     images: function images() {
-      return this.imagesind[1];
+      return this.$store.getters['ListPhoto/photos'];
     },
     start: function start() {
-      return this.imagesind[0];
+      return this.$store.getters['ListPhoto/getPhotoIndex'](this.images, this.id);
     },
     slides: function slides() {
       var ret = [];
@@ -4755,7 +4748,10 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var image = _step.value;
-          ret.push("<div><img src=\"".concat(image, "\"></div>"));
+          ret.push(image.url // `<div>
+          //     <img class="img-fluid" src="${ image.url }">
+          // </div>`
+          );
         }
       } catch (err) {
         _iterator.e(err);
@@ -4765,8 +4761,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
       return ret;
     }
-  },
-  created: function created() {}
+  }
 });
 
 /***/ }),
@@ -42457,6 +42452,7 @@ var render = function() {
             "main",
             [
               _c("router-view", {
+                key: _vm.$route.fullPath,
                 staticStyle: {
                   position: "relative",
                   "background-color": "#FAFAFA"
@@ -44772,7 +44768,7 @@ var render = function() {
     "div",
     [
       _c("Slider", {
-        attrs: { images: _vm.images, "current-index": _vm.start }
+        attrs: { images: _vm.slides, "current-index": _vm.start }
       })
     ],
     1
@@ -63976,6 +63972,32 @@ var getters = {
       }
 
       return [ind, arr];
+    };
+  },
+  getPhotoIndex: function getPhotoIndex(state) {
+    return function (items, id) {
+      var ind = 0;
+
+      var _iterator3 = _createForOfIteratorHelper(items),
+          _step3;
+
+      try {
+        for (_iterator3.s(); !(_step3 = _iterator3.n()).done;) {
+          var item = _step3.value;
+
+          if (item.id === id) {
+            break;
+          }
+
+          ind++;
+        }
+      } catch (err) {
+        _iterator3.e(err);
+      } finally {
+        _iterator3.f();
+      }
+
+      return ind;
     };
   }
 };
