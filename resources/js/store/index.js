@@ -62,10 +62,13 @@ export default new Vuex.Store({
     },
     actions: {
         savePhotosToAlbum({ getters }, albumId) {
-                axios.post('/api/albums-photos', {
-                    photos: getters['Global/selectedPhotos'],
-                    album: albumId
-                }).then(res => console.log(res.data))
+            let photos = getters['Globals/selectedPhotos'];
+            // console.log(photos);
+
+            axios.post('/api/albums-photos', {
+                photos: photos,
+                album: albumId
+            }).then(res => console.log(res.data))
         }
 
     }

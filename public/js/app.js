@@ -43053,7 +43053,7 @@ var render = function() {
               "div",
               { staticClass: "row" },
               [
-                _c("div", { staticClass: "col-12 px-3" }, [
+                _c("div", { staticClass: "col-12 py-3" }, [
                   _c("div", { staticClass: "row justify-content-between" }, [
                     _c(
                       "div",
@@ -43079,12 +43079,10 @@ var render = function() {
                       1
                     ),
                     _vm._v(" "),
-                    _c("div", { staticClass: "col-12 col-lg-6" }, [
-                      _c(
-                        "span",
-                        { staticClass: "text-right", on: { click: _vm.save } },
-                        [_vm._v("Сохранить")]
-                      )
+                    _c("div", { staticClass: "col-12 col-lg-6 text-right" }, [
+                      _c("span", { on: { click: _vm.save } }, [
+                        _vm._v("Сохранить")
+                      ])
                     ])
                   ])
                 ]),
@@ -63516,8 +63514,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   actions: {
     savePhotosToAlbum: function savePhotosToAlbum(_ref, albumId) {
       var getters = _ref.getters;
+      var photos = getters['Globals/selectedPhotos']; // console.log(photos);
+
       axios.post('/api/albums-photos', {
-        photos: getters['Global/selectedPhotos'],
+        photos: photos,
         album: albumId
       }).then(function (res) {
         return console.log(res.data);
