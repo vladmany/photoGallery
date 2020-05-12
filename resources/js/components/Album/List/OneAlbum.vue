@@ -39,7 +39,7 @@
         <template v-slot:content>
             <div class="row">
                 <div class="col-12">
-                    <h2 class="text-center">{{ album.name }}</h2>
+                    <p class="text-center album-name mt-2 mt-md-4 mt-5 mb-2 mb-md-4 mb-5">{{ album.name }}</p>
                 </div>
                 <AllPhotoAlbum :paginate-count="20" :album-id="album.id" class="col-12"></AllPhotoAlbum >
             </div>
@@ -69,5 +69,10 @@
 </script>
 
 <style scoped>
-
+    .album-name {
+        font-size: 24px;
+        align-items: center;
+        font-weight: bolder;
+        color: #666666;
+    }
 </style>
