@@ -7,32 +7,32 @@
         <div class="action create">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_create.svg"></object>
         </div>
-        <div class="action add_to_album" @click="addToAlbum">
+        <div class="action add_to_album" :class="selectedPhotos" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
-        <div class="action download" @click="download">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_download.svg"></object>
-        </div>
-        <div class="action change_date" @click="changeDate">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>
-        </div>
-        <div class="action to_favorite" @click="toFavorite">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>
-        </div>
-        <div class="action turn_image" @click="turnImage">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
-        </div>
-        <div class="action image_correction" @click="imageCorrection">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
-        </div>
-        <div class="action delete_image" @click="deleteImages">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
-        </div>
+<!--        <div class="action download" @click="download">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_download.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action change_date" @click="changeDate">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action to_favorite" @click="toFavorite">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action turn_image" @click="turnImage">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action image_correction" @click="imageCorrection">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action delete_image" @click="deleteImages">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>-->
+<!--        </div>-->
     </div>
 </template>
 
 <script>
-    import ListPhoto from "../../../store/modules/ListPhoto";
+    // import ListPhoto from "../../../store/modules/ListPhoto";
 
     export default {
         name: "Actions",
