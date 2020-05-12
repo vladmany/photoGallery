@@ -9,16 +9,18 @@
             </div>
         </template>
         <template v-slot:actions>
-                <!--<action-all-albums></action-all-albums>--->
-<!--                <search-albums></search-albums>-->
+            <div class="right-panel">
+                <action-all-albums></action-all-albums>
+                <search-albums></search-albums>
+            </div>
         </template>
-        <template v-slot:content>
+        <!--<template v-slot:content>
             <div class="albums-wrap">
                 <div class="main-panel">
                     <AllAlbums></AllAlbums>
                 </div>
             </div>
-        </template>
+        </template>-->
     </Section>
 </template>
 
@@ -52,14 +54,22 @@
 </script>
 
 <style scoped>
+
     .top-panel {
         width: 100%;
         max-width: 1110px;
         background: #ffffff;
-
-
     }
 
+    .right-panel{
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        align-self: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+    }
     .albums-wrap {
         width: 100%;
     }

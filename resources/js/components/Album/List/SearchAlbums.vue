@@ -1,7 +1,7 @@
 <template>
     <div class="search-panel">
-        <input type="text" placeholder="Искать здесь...">
-        <button type="submit"><object type="image/svg+xml" data="/storage/albums/actions/ic_search.svg"></object></button>
+        <input type="text" placeholder="Найти альбом">
+        <button type="submit"><img src="/storage/albums/actions/ic_search.png"></button>
     </div>
 </template>
 
@@ -15,9 +15,12 @@
     * {box-sizing: border-box;}
     .search-panel {
         position: relative;
-        width: 300px;
-        margin: 0 auto;
-        background: #A3D0C3;
+        max-width: 100%;
+        width: 350px;
+        background: #ffffff;
+        height: 35px;
+        display: flex;
+        align-self: center;
     }
     input, button {
         border: none;
@@ -25,12 +28,11 @@
         background: transparent;
     }
     input {
+
         width: 100%;
-        height: 42px;
-        padding-left: 15px;
     }
     button {
-        height: 42px;
+        height: 35px;
         width: 42px;
         position: absolute;
         top: 0;
