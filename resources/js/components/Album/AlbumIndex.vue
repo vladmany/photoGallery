@@ -3,16 +3,17 @@
         <template v-slot:title>
             <h1 class="pl-3">Альбомы</h1>
         </template>
+        <template v-slot:button>
+            <div class="top-panel">
+                <div>
+                    <CreateAlbum></CreateAlbum>
+                </div>
+            </div>
+        </template>
         <template v-slot:content>
             <div class="albums-wrap">
-                <div class="top-panel">
-                    <div class="create-button col-12 col-sm-6 col-lg-3 pt-3 pb-3">
-                        <CreateAlbum></CreateAlbum>
-                    </div>
-                </div>
                 <div class="main-panel">
-                    <AllAlbums :elements="elements"></AllAlbums>
-                    <div class="actions-panel"></div>
+                    <AllAlbums></AllAlbums>
                 </div>
             </div>
         </template>
@@ -51,9 +52,7 @@
         width: 100%;
         max-width: 1110px;
         background: #ffffff;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        border-color: #DADADA;
+
 
     }
 
