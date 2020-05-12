@@ -3,16 +3,19 @@
         <template v-slot:title>
             <h1 class="pl-3">Альбомы</h1>
         </template>
+        <template v-slot:button>
+            <div class="top-panel">
+                <CreateAlbum></CreateAlbum>
+            </div>
+        </template>
+        <template v-slot:actions>
+                <!--<action-all-albums></action-all-albums>--->
+<!--                <search-albums></search-albums>-->
+        </template>
         <template v-slot:content>
             <div class="albums-wrap">
-                <div class="top-panel">
-                    <div class="create-button col-12 col-sm-6 col-lg-3 pt-3 pb-3">
-                        <CreateAlbum></CreateAlbum>
-                    </div>
-                </div>
                 <div class="main-panel">
-                    <AllAlbums :elements="elements"></AllAlbums>
-                    <div class="actions-panel"></div>
+                    <AllAlbums></AllAlbums>
                 </div>
             </div>
         </template>
@@ -24,10 +27,12 @@
     import Index from "./Index";
     import ModalCreateAlbum from "./Create/ModalCreateAlbum";
     import CreateAlbum from "./Create/CreateAlbum";
+    import ActionAllAlbums from "./List/ActionAllAlbums";
+    import SearchAlbums from "./List/SearchAlbums";
 
     export default {
         name: "BlockAlbumList",
-        components: {CreateAlbum, AllAlbums, Index, ModalCreateAlbum},
+        components: {SearchAlbums, ActionAllAlbums, CreateAlbum, AllAlbums, Index, ModalCreateAlbum},
         data: function () {
             return {
                 album: {},
@@ -51,9 +56,7 @@
         width: 100%;
         max-width: 1110px;
         background: #ffffff;
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        border-color: #DADADA;
+
 
     }
 

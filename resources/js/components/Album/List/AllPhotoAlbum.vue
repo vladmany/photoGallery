@@ -1,21 +1,15 @@
 <template>
     <div>
         <AllPhoto v-if="photos.length > 0"
-                :photos="photos"
-                :paginate-count="20"
+                  :photos="photos"
+                  :paginate-count="20"
         ></AllPhoto>
         <div v-else class="noPhotos content">
-
-            <template>
-                <div class="pt-4">
-                    <span class="album-name">Name</span>
-                </div>
-            </template>
             <div class="text-center">
                 <img src="/storage/albums/placeholderNoPhotosInAlbums.png" class="img-bord">
             </div>
-            <div class="text-empty">
-                <p>Альбом пуст</p>
+            <div class="mt-2 mt-md-5 mt-lg-5">
+                <p class="text-empty">Альбом пуст</p>
             </div>
         </div>
     </div>
@@ -45,22 +39,23 @@
 </script>
 
 <style scoped>
-    .noPhotos{
+    .noPhotos {
         width: 100%;
     }
-    .noPhotos div{
+
+    .noPhotos div {
         text-align: center;
     }
-    .album-name .text-empty{
+
+    .text-empty {
         color: #666;
+        font-weight: medium;
     }
-    .album-name{
-        font-size: 24px;
-        align-items: center;
-    }
-    .text-empty{
+
+    .text-empty {
         font-size: 16px;
     }
+
     .img-bord {
         max-width: 540px;
         max-height: 330px;

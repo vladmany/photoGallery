@@ -8,23 +8,23 @@
                 <div class="text-center mr-5">
                     <img :src="album.cover" class="img-cover">
                 </div>
-                <div class="align-self-stretch text-center">
+                <div class="text-center d-flex flex-column name-album">
                     <router-link
                         :to="{ name: 'OneAlbum', params: { id: album.id } }">
-                        {{ album.name}}
+                        <p class="pt-1">{{ album.name}}</p>
                     </router-link>
-                    <button class="btn pr-md-4"><img src="/storage/albums/ico-dell.png">Удалить</button>
+                    <button class="btn mt-auto pt-1"><img src="/storage/albums/ico-dell.png">Удалить</button>
                 </div>
-                <div class="align-self-end text-center ml-4 mr-5">
-                    <p class="ml-md-5"><img src="/storage/albums/ico_calendar.png">{{ formatDate(album.created_at)}}</p>
+                <div class="align-self-end text-center d-flex flex-column ml-4 mr-5">
+                    <p class="ml-md-5 mt-auto mb-2"><img src="/storage/albums/ico_calendar.png">{{ formatDate(album.created_at)}}</p>
                 </div>
                 <div class="align-self-end text-center">
-                    <p class="text-center"><img src="/storage/albums/ico-user.png">Пользователи с доступом<img src="/storage/albums/ico-select.png">
+                    <p class="text-center mb-2"><img src="/storage/albums/ico-user.png">Пользователи с доступом<img src="/storage/albums/ico-select.png">
                     </p>
                 </div>
             </div>
-            <no-albums v-else></no-albums>
-            <div class="album-paginate">
+            <no-albums v-if="albums.length == 0"></no-albums>
+            <div class="album-paginate" v-if="albums.length > 0">
                 <paginate
                     :page-count="pages"
                     :page-range="3"
@@ -125,6 +125,7 @@
         background-color: #ffffff;
         width: 100%;
         flex-direction: column;
+        padding-top: 35px;
     }
 
     .img-cover {
@@ -133,7 +134,7 @@
     }
 
     .album {
-        border-bottom-width: 3px;
+        border-bottom-width: 1px;
         border-bottom-style: solid;
         border-color: #DADADA;
         display: flex;
@@ -149,6 +150,9 @@
     .album-paginate {
         flex: 0 0 auto;
     }
+    .name-album{
+        font-size: 16px;
+    }
     .paginate {
         display: flex;
         margin-bottom: 0;
@@ -163,6 +167,11 @@
         border-left: 2px solid #DADADA;
 
     }
+    a{
+        color: black;
+        text-decoration: #666666;
+    }
+
     .one-page a {
         display: block; /* Ссылка как блочный элемент */
         text-align: center; /* Выравнивание по центру */
