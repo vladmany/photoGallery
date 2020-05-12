@@ -49,6 +49,10 @@
             UploadPhotosComponent
         },
         props: {
+            photos: {
+                required: true,
+                type: Object
+            },
             paginateCount: {
                 type: Number,
                 default: 20
@@ -61,7 +65,6 @@
         },
         computed: {
             ...mapGetters({
-                photos: 'ListPhoto/photos',
                 groups: 'ListPhoto/groups',
             })
         },
@@ -72,13 +75,14 @@
             }
         },
         methods: {
-            onChangePage(page) {
+            onChangePage(page = 1) {
                 let perPage = this.paginateCount;
                 let from = (page * perPage) - perPage;
                 let to = (page * perPage);
                 let pageOfItems = this.photos.slice(from, to);
 
                 this.$store.dispatch('ListPhoto/makeGroups', pageOfItems);
+
             },
             setPages () {
                 let pages =[]
@@ -88,9 +92,6 @@
                 }
                 this.pages = pages.length;
             },
-        },
-        created() {
-            this.$store.dispatch('ListPhoto/getPhotos');
         },
     }
 </script>

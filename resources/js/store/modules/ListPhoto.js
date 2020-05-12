@@ -41,14 +41,14 @@ let mutations = {
 }
 let actions = {
     addPhoto: payload => {
-        axios.post('api/all-photos', {
+        axios.post('/api/all-photos', {
             photo: payload.photo,
         }).then(res => {
             console.log(res.data)
         })
     },
     getPhotos({ commit }) {
-        axios.get('api/all-photos')
+        axios.get('/api/all-photos')
             .then(res => {
                 commit('getPhotos', res.data);
             })
@@ -60,7 +60,6 @@ let actions = {
             'мая', 'июня', 'июля', 'августа',
             'сентября', 'октября', 'ноября', 'декабря',
         ];
-
         let groups = {};
         let key = 'created_at';
         items.forEach(item => {

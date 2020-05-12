@@ -24,6 +24,20 @@
                 </div>
             </div>
             <no-albums v-else></no-albums>
+            <div class="album-paginate">
+                <paginate
+                    :page-count="pages"
+                    :page-range="3"
+                    :margin-pages="2"
+                    :click-handler="onChangePage"
+                    :prev-text="'&#129120;'"
+                    :next-text="'&#129122;'"
+                    :prev-class="'one-page prev'"
+                    :next-class="'one-page next'"
+                    :container-class="'paginate'"
+                    :page-class="'one-page'">
+                </paginate>
+            </div>
         </div>
     </div>
 
@@ -39,8 +53,32 @@
         computed: {
             ...mapGetters({
                 albums: 'ListAlbum/albums',
+                photos: 'ListPhoto/photos',
+                groups: 'ListAlbum/groups',
             }),
         },
+        watch: {
+            albums() {
+                this.setPages();
+                this.onChangePage(1);
+            }
+        },
+        props: {
+            album: {
+                required: true,
+                type: Object,
+            },
+            paginateCount: {
+                type: Number,
+                default: 5
+            }
+        },
+        data() {
+            return {
+                pages: 0
+            }
+        },
+
         methods: {
             formatDate(date) {
                 let months = [
@@ -54,11 +92,21 @@
 
                 return `${dat.getDate()} ${months[dat.getMonth()]} ${dat.getFullYear()}`
             },
-        },
-        props: {
-            album: {
-                required: true,
-                type: Object,
+            onChangePage(page) {
+                let perPage = this.paginateCount;
+                let from = (page * perPage) - perPage;
+                let to = (page * perPage);
+                let pageOfItems = this.albums.slice(from, to);
+
+                this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
+            },
+            setPages () {
+                let pages =[]
+                let numberOfPages = Math.ceil(this.albums.length / this.paginateCount);
+                for (let index = 1; index <= numberOfPages; index++) {
+                    pages.push(index);
+                }
+                this.pages = pages.length;
             },
         },
         created() {
@@ -97,6 +145,45 @@
     .checkbox-album {
         height: 20px;
         width: 20px;
+    }
+    .album-paginate {
+        flex: 0 0 auto;
+    }
+    .paginate {
+        display: flex;
+        margin-bottom: 0;
+        user-select: none;
+        outline: none;
+        margin-top: 53px;
+    }
+    .one-page {
+        width: 60px;
+        height: 60px;
+        color: #666;
+        border-left: 2px solid #DADADA;
+
+    }
+    .one-page a {
+        display: block; /* Ссылка как блочный элемент */
+        text-align: center; /* Выравнивание по центру */
+        height: 100%; /* Высота на весь слой */
+        line-height: 60px;
+        outline: none;
+    }
+    .one-page:hover ~ .disable {
+        color: #000;
+
+    }
+    .prev {
+        /*border-bottom-left-radius: 3px;*/
+        /*border-top-left-radius: 3px;*/
+        color: #D8D8D8;
+        border-left: none;
+    }
+    .next {
+        border-bottom-right-radius: 3px;
+        border-top-right-radius: 3px;
+        color: #D8D8D8;
     }
 
 </style>
