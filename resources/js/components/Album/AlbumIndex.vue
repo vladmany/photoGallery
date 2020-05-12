@@ -5,10 +5,12 @@
         </template>
         <template v-slot:button>
             <div class="top-panel">
-                <div>
-                    <CreateAlbum></CreateAlbum>
-                </div>
+                <CreateAlbum></CreateAlbum>
             </div>
+        </template>
+        <template v-slot:actions>
+                <!--<action-all-albums></action-all-albums>--->
+                <search-albums></search-albums>
         </template>
         <template v-slot:content>
             <div class="albums-wrap">
@@ -25,10 +27,12 @@
     import Index from "./Index";
     import ModalCreateAlbum from "./Create/ModalCreateAlbum";
     import CreateAlbum from "./Create/CreateAlbum";
+    import ActionAllAlbums from "./List/ActionAllAlbums";
+    import SearchAlbums from "./List/SearchAlbums";
 
     export default {
         name: "BlockAlbumList",
-        components: {CreateAlbum, AllAlbums, Index, ModalCreateAlbum},
+        components: {SearchAlbums, ActionAllAlbums, CreateAlbum, AllAlbums, Index, ModalCreateAlbum},
         data: function () {
             return {
                 album: {},

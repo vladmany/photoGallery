@@ -125,6 +125,7 @@
         background-color: #ffffff;
         width: 100%;
         flex-direction: column;
+        padding-top: 35px;
     }
 
     .img-cover {
@@ -133,7 +134,7 @@
     }
 
     .album {
-        border-bottom-width: 3px;
+        border-bottom-width: 1px;
         border-bottom-style: solid;
         border-color: #DADADA;
         display: flex;
