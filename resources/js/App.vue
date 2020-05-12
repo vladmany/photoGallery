@@ -1,9 +1,11 @@
 <template>
     <div>
         <div class="wrapper">
-            <errors-modal-window v-if="this.$store.state.isUploadError"></errors-modal-window>
-            <success-modal-window v-if="this.$store.state.isSuccessUpload"></success-modal-window>
-            <selection-error-modal v-if="this.$store.state.isSelectFilesError"></selection-error-modal>
+            <errors-modal-window v-if="this.$store.state.isUploadError"/>
+            <success-modal-window v-if="this.$store.state.isSuccessUpload"/>
+            <selection-error-modal v-if="this.$store.state.isSelectFilesError"/>
+            <add-photo-to-album-modal-window/>
+
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
                     <img src="/storage/navbar_logo.png" alt="navbar_logo">
@@ -171,8 +173,11 @@
     import ErrorsModalWindow from "./components/Photo/Upload/ErrorsModalWindow";
     import SuccessModalWindow from "./components/Photo/Upload/SuccessModalWindow";
     import SelectionErrorModal from "./components/Photo/Upload/SelectionErrorModal";
+    import AddPhotoToAlbumModalWindow from "./components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum";
+    import ModalWindow from "./components/Global/ModalWindow";
     export default {
-        components: {SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
+        components: {
+            ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
             return {
                 name : 'Анна Кононенко',

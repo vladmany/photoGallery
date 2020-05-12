@@ -22,7 +22,7 @@
     import AllPhoto from "./AllPhoto";
     import UploadPhotosComponent from "../Upload/UploadPhotosComponent";
     import { mapGetters } from 'vuex'
-    import Actions from "./Actions";
+    import Actions from "./Actions/ActionsIndex";
 
     export default {
         name: "PhotoIndex",
