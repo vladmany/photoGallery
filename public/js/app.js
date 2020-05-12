@@ -3725,8 +3725,35 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "Actions"
+  name: "Actions",
+  methods: {
+    addToAlbum: function addToAlbum() {
+      console.log(this.$store.state.Globals.selected.photos);
+    }
+  }
 });
 
 /***/ }),
@@ -42903,16 +42930,54 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "actions" }, [
-    _c(
-      "div",
-      {
-        staticClass: "action add_to_album available",
+    _c("div", { staticClass: "action select_all" }, [
+      _c("input", {
+        directives: [
+          {
+            name: "model",
+            rawName: "v-model",
+            value: _vm.isSelected,
+            expression: "isSelected"
+          }
+        ],
+        staticClass: "custom-checkbox",
+        attrs: { type: "checkbox", id: "all-selector" },
+        domProps: {
+          checked: Array.isArray(_vm.isSelected)
+            ? _vm._i(_vm.isSelected, null) > -1
+            : _vm.isSelected
+        },
         on: {
-          click: function($event) {
-            return _vm.console.log("TEST")
+          change: function($event) {
+            var $$a = _vm.isSelected,
+              $$el = $event.target,
+              $$c = $$el.checked ? true : false
+            if (Array.isArray($$a)) {
+              var $$v = null,
+                $$i = _vm._i($$a, $$v)
+              if ($$el.checked) {
+                $$i < 0 && (_vm.isSelected = $$a.concat([$$v]))
+              } else {
+                $$i > -1 &&
+                  (_vm.isSelected = $$a
+                    .slice(0, $$i)
+                    .concat($$a.slice($$i + 1)))
+              }
+            } else {
+              _vm.isSelected = $$c
+            }
           }
         }
-      },
+      }),
+      _vm._v(" "),
+      _c("label", { attrs: { for: "all-selector" } })
+    ]),
+    _vm._v(" "),
+    _vm._m(0),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action add_to_album", on: { click: _vm.addToAlbum } },
       [
         _c("object", {
           attrs: {
@@ -42923,7 +42988,82 @@ var render = function() {
       ]
     ),
     _vm._v(" "),
-    _vm._m(0)
+    _c("div", { staticClass: "action download", on: { click: _vm.download } }, [
+      _c("object", {
+        attrs: {
+          type: "image/svg+xml",
+          data: "/storage/photos/actions/ic_download.svg"
+        }
+      })
+    ]),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action change_date", on: { click: _vm.changeDate } },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_change_date.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action to_favorite", on: { click: _vm.toFavorite } },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_add_to_favorite.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action turn_image", on: { click: _vm.turnImage } },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_turn.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "action image_correction",
+        on: { click: _vm.imageCorrection }
+      },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_photo_correction.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_delete.svg"
+          }
+        })
+      ]
+    )
   ])
 }
 var staticRenderFns = [
@@ -42931,11 +43071,11 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "action add_to_album" }, [
+    return _c("div", { staticClass: "action create" }, [
       _c("object", {
         attrs: {
           type: "image/svg+xml",
-          data: "/storage/photos/actions/ic_add_to_album.svg"
+          data: "/storage/photos/actions/ic_create.svg"
         }
       })
     ])
@@ -62360,6 +62500,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./modules/AddPhoto */ "./resources/js/store/modules/AddPhoto.js");
 /* harmony import */ var _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./modules/ListPhoto */ "./resources/js/store/modules/ListPhoto.js");
 /* harmony import */ var _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./modules/ListAlbum */ "./resources/js/store/modules/ListAlbum.js");
+/* harmony import */ var _modules_Globals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Globals */ "./resources/js/store/modules/Globals.js");
+
 
 
 
@@ -62370,7 +62512,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   modules: {
     AddPhoto: _modules_AddPhoto__WEBPACK_IMPORTED_MODULE_2__["default"],
     ListPhoto: _modules_ListPhoto__WEBPACK_IMPORTED_MODULE_3__["default"],
-    ListAlbum: _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__["default"]
+    ListAlbum: _modules_ListAlbum__WEBPACK_IMPORTED_MODULE_4__["default"],
+    Globals: _modules_Globals__WEBPACK_IMPORTED_MODULE_5__["default"]
   },
   state: {
     isUploadError: false,
@@ -62454,6 +62597,86 @@ var mutations = {
 var actions = {};
 /* harmony default export */ __webpack_exports__["default"] = ({
   namespaced: true,
+  state: state,
+  getters: getters,
+  mutations: mutations,
+  actions: actions
+});
+
+/***/ }),
+
+/***/ "./resources/js/store/modules/Globals.js":
+/*!***********************************************!*\
+  !*** ./resources/js/store/modules/Globals.js ***!
+  \***********************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+var state = {
+  selected: {
+    photos: [],
+    // добавлять id
+    albums: [] // добавлять id
+
+  }
+};
+var getters = {
+  selectedPhotos: function selectedPhotos(state) {
+    return state.selected.photos;
+  },
+  selectedAlbums: function selectedAlbums(state) {
+    return state.selected.albums;
+  }
+};
+var mutations = {
+  addPhoto: function addPhoto(state, val) {
+    return state.selected.photos.push(val);
+  },
+  delPhoto: function delPhoto(state, val) {
+    for (var i = 0; i < state.selected.photos.length; i++) {
+      if (state.selected.photos[i] === val) {
+        state.selected.photos.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
+  },
+  addAlbum: function addAlbum(state, val) {
+    return state.selected.albums.push(val);
+  },
+  delAlbum: function delAlbum(state, val) {
+    for (var i = 0; i < state.selected.albums.length; i++) {
+      if (state.selected.albums[i] === val) {
+        state.selected.albums.splice(i, 1);
+        return true;
+      }
+    }
+
+    return false;
+  }
+};
+var actions = {
+  addPhoto: function addPhoto(_ref, val) {
+    var commit = _ref.commit;
+    commit('addPhoto', val);
+  },
+  delPhoto: function delPhoto(_ref2, val) {
+    var commit = _ref2.commit;
+    commit('delPhoto', val);
+  },
+  addAlbum: function addAlbum(_ref3, val) {
+    var commit = _ref3.commit;
+    commit('addAlbum', val);
+  },
+  delAlbum: function delAlbum(_ref4, val) {
+    var commit = _ref4.commit;
+    commit('delAlbum', val);
+  }
+};
+/* harmony default export */ __webpack_exports__["default"] = ({
   state: state,
   getters: getters,
   mutations: mutations,
