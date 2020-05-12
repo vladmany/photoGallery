@@ -24,15 +24,15 @@
             }
         },
         computed: {
-            imagesind() {
-                let ret = this.$store.getters['ListPhoto/groupByPhoto'](this.id);
-                return ret;
-            },
+            // imagesind() {
+            //     let ret = this.$store.getters['ListPhoto/groupByPhoto'](this.id);
+            //     return ret;
+            // },
             images() {
-                return this.imagesind[1];
+                return this.$store.getters['ListPhoto/photos'];
             },
             start() {
-                return this.imagesind[0];
+                return this.$store.getters['ListPhoto/getPhotoIndex'](this.ind);
             },
             slides(){
                 let ret = [];

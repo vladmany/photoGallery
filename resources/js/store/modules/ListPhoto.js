@@ -28,6 +28,17 @@ let getters = {
         }
 
         return [ind, arr];
+    },
+    getPhotoIndex(state, items, id) {
+        let ind = 0;
+        for(let item of items) {
+            if(item.id === id) {
+                ind = items.indexOf(item);
+                break;
+            }
+        }
+
+        return ind;
     }
 
 }
