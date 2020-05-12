@@ -42604,7 +42604,7 @@ var render = function() {
       {
         key: "actions",
         fn: function() {
-          return [_c("search-albums")]
+          return undefined
         },
         proxy: true
       },
