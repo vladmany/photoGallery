@@ -3904,6 +3904,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _store_modules_ListPhoto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../store/modules/ListPhoto */ "./resources/js/store/modules/ListPhoto.js");
 //
 //
 //
@@ -3937,11 +3938,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Actions",
   methods: {
-    addToAlbum: function addToAlbum() {
-      console.log(this.$store.state.Globals.selected.photos);
+    addToAlbum: function addToAlbum() {// console.log(this.$store.state.Globals.selected.photos)
+    }
+  },
+  data: function data() {
+    return {
+      isSelected: false
+    };
+  },
+  watch: {
+    isSelected: function isSelected() {
+      this.$store.dispatch('ListPhoto/selectAllPhotos', this.isSelected);
     }
   }
 });
@@ -4079,6 +4090,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _OnePhoto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OnePhoto */ "./resources/js/components/Photo/List/OnePhoto.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4094,6 +4112,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "GroupPhoto",
@@ -4119,6 +4138,14 @@ __webpack_require__.r(__webpack_exports__);
     return {
       isSelected: false
     };
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
+    selectAll: 'ListPhoto/selectAllPhotos'
+  })),
+  watch: {
+    selectAll: function selectAll() {
+      this.isSelected = this.selectAll;
+    }
   }
 });
 
@@ -43771,116 +43798,10 @@ var render = function() {
       }),
       _vm._v(" "),
       _c("label", { attrs: { for: "all-selector" } })
-    ]),
-    _vm._v(" "),
-    _vm._m(0),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action add_to_album", on: { click: _vm.addToAlbum } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/photos/actions/ic_add_to_album.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c("div", { staticClass: "action download", on: { click: _vm.download } }, [
-      _c("object", {
-        attrs: {
-          type: "image/svg+xml",
-          data: "/storage/photos/actions/ic_download.svg"
-        }
-      })
-    ]),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action change_date", on: { click: _vm.changeDate } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/photos/actions/ic_change_date.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action to_favorite", on: { click: _vm.toFavorite } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/photos/actions/ic_add_to_favorite.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action turn_image", on: { click: _vm.turnImage } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/photos/actions/ic_turn.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "action image_correction",
-        on: { click: _vm.imageCorrection }
-      },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/photos/actions/ic_photo_correction.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/photos/actions/ic_delete.svg"
-          }
-        })
-      ]
-    )
+    ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "action create" }, [
-      _c("object", {
-        attrs: {
-          type: "image/svg+xml",
-          data: "/storage/photos/actions/ic_create.svg"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -63662,12 +63583,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
   },
   actions: {
-    savePhotosToAlbum: function savePhotosToAlbum(_ref, albumId) {// axios.post('/api/****', {
-      //     photos: getters['Global/selectedPhotos'],
-      //     album: albumId
-      // }).then(res => console.log(res.data))
-
+    savePhotosToAlbum: function savePhotosToAlbum(_ref, albumId) {
       var getters = _ref.getters;
+      axios.post('/api/albums-photos', {
+        photos: getters['Global/selectedPhotos'],
+        album: albumId
+      }).then(function (res) {
+        return console.log(res.data);
+      });
     }
   }
 }));
@@ -63907,7 +63830,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
 
 var state = {
   photos: [],
-  groups: {}
+  groups: {},
+  selectAllPhotos: false
 };
 var getters = {
   photos: function photos(state) {
@@ -63915,6 +63839,9 @@ var getters = {
   },
   groups: function groups(state) {
     return state.groups;
+  },
+  selectAllPhotos: function selectAllPhotos(state) {
+    return state.selectAllPhotos;
   },
   photo: function photo(state) {
     return function (id) {
@@ -64007,6 +63934,9 @@ var mutations = {
   },
   makeGroups: function makeGroups(state, payload) {
     state.groups = payload;
+  },
+  selectAllPhotos: function selectAllPhotos(state, payload) {
+    return state.selectAllPhotos = payload;
   }
 };
 var actions = {
@@ -64053,6 +63983,10 @@ var actions = {
     }
 
     commit('makeGroups', desc_groups);
+  },
+  selectAllPhotos: function selectAllPhotos(_ref3, isselect) {
+    var commit = _ref3.commit;
+    return commit('selectAllPhotos', isselect);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -64083,8 +64017,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

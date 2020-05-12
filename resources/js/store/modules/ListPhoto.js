@@ -1,10 +1,12 @@
 let state = {
     photos: [],
     groups: {},
+    selectAllPhotos: false,
 }
 let getters = {
     photos: state => state.photos,
     groups: state => state.groups,
+    selectAllPhotos: state => state.selectAllPhotos,
     photo: state => id =>
         state.photos.find(photo => photo.id === id),
     groupByPhoto: state => id => {
@@ -47,7 +49,9 @@ let mutations = {
     },
     makeGroups:(state, payload) => {
         state.groups = payload
-    }
+    },
+    selectAllPhotos:(state, payload) =>
+        state.selectAllPhotos = payload
 }
 let actions = {
     addPhoto: payload => {
@@ -94,7 +98,8 @@ let actions = {
 
         commit('makeGroups', desc_groups);
     },
-
+    selectAllPhotos:({ commit }, isselect) =>
+        commit('selectAllPhotos', isselect),
 }
 
 export default {

@@ -15,6 +15,7 @@
 
 <script>
     import OnePhoto from './OnePhoto'
+    import { mapGetters } from 'vuex'
 
     export default {
         name: "GroupPhoto",
@@ -37,6 +38,16 @@
         data() {
             return {
                 isSelected: false,
+            }
+        },
+        computed: {
+            ...mapGetters({
+                selectAll: 'ListPhoto/selectAllPhotos'
+            })
+        },
+        watch: {
+            selectAll() {
+                this.isSelected = this.selectAll;
             }
         }
     }
