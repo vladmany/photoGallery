@@ -23,6 +23,7 @@ Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/albums', 'Api\AlbumController');
 //        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
 Route::post('/photos/upload', 'Api\PhotoController@store')->name('photos.upload');
+Route::post('/photos/add-to-album', 'Api\PhotoController@addToAlbum')->name('photos.addToAlbum');
 Route::post('/albums/create', 'Api\AlbumController@store')->name('albums.create');
 Route::post('/albums/index', 'Api\AlbumController@index')->name('albums.index');
 Route::get('/collages', 'Api\PhotoController@collageIndex')->name('collages');
