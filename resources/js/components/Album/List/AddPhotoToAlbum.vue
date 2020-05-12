@@ -16,7 +16,7 @@
                             </router-link>
                         </div>
                         <div class="col-12 col-lg-6 text-right">
-                            <span @click="save">Сохранить</span>
+                            <a href="#" @click.prevent="save">Сохранить</a>
                         </div>
                     </div>
                 </div>
@@ -51,6 +51,7 @@
         methods: {
             save() {
                 this.$store.dispatch('savePhotosToAlbum', this.id);
+                this.$router.push({name: 'OneAlbum', params: { id: this.id}});
             }
         },
         computed: {
