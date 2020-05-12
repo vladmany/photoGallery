@@ -1,21 +1,21 @@
 <template>
-    <div class="actions">
-        <div class="action change_album" @click="changeAlbum">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>
-        </div>
-        <div class="action to_provide_access" @click="toProvideAccess">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
-        </div>
-        <div class="action turn_download" @click="turnDownload">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
-        </div>
-        <div class="action change_date" @click="ChangeDate">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_date.svg"></object>
-        </div>
-        <div class="action delete_image" @click="deleteImages">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
-        </div>
-    </div>
+<!--    <div class="actions">-->
+<!--        <div class="action change_album" @click="changeAlbum">-->
+<!--            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action to_provide_access" @click="toProvideAccess">-->
+<!--            <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action turn_download" @click="turnDownload">-->
+<!--            <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action change_date" @click="ChangeDate">-->
+<!--            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_date.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action delete_image" @click="deleteImages">-->
+<!--            <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>-->
+<!--        </div>-->
+<!--    </div>-->
 </template>
 
 <script>

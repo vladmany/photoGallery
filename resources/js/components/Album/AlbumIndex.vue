@@ -10,7 +10,7 @@
         </template>
         <template v-slot:actions>
                 <!--<action-all-albums></action-all-albums>--->
-                <search-albums></search-albums>
+<!--                <search-albums></search-albums>-->
         </template>
         <template v-slot:content>
             <div class="albums-wrap">

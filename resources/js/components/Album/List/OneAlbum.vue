@@ -37,7 +37,7 @@
             </div>
         </template>
         <template v-slot:actions>
-            <action-one-album></action-one-album>
+            <ActionOneAlbum></ActionOneAlbum>
         </template>
         <template v-slot:content>
             <div class="row">

@@ -42479,7 +42479,6 @@ var render = function() {
             "main",
             [
               _c("router-view", {
-                key: _vm.$route.fullPath,
                 staticStyle: {
                   position: "relative",
                   "background-color": "#FAFAFA"
@@ -43006,75 +43005,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "actions" }, [
-    _c(
-      "div",
-      { staticClass: "action change_album", on: { click: _vm.changeAlbum } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_change_album.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "action to_provide_access",
-        on: { click: _vm.toProvideAccess }
-      },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_provide_access.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action turn_download", on: { click: _vm.turnDownload } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_download.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action change_date", on: { click: _vm.ChangeDate } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_change_date.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_delete.svg"
-          }
-        })
-      ]
-    )
-  ])
+  return _c("div")
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43449,7 +43380,7 @@ var render = function() {
       {
         key: "actions",
         fn: function() {
-          return [_c("action-one-album")]
+          return [_c("ActionOneAlbum")]
         },
         proxy: true
       },
