@@ -21,6 +21,7 @@ use Illuminate\Support\Facades\Route;
 Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/albums', 'Api\AlbumController');
+Route::apiResource('/albums-photos', 'Api\AlbumPhotoController');
 //        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
 Route::post('/photos/upload', 'Api\PhotoController@store')->name('photos.upload');
 Route::post('/albums/create', 'Api\AlbumController@store')->name('albums.create');
