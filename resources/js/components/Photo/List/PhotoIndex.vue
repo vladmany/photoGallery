@@ -6,6 +6,9 @@
         <template v-slot:button>
             <upload-photos-component/>
         </template>
+        <template v-slot:actions>
+            <actions/>
+        </template>
         <template v-slot:content>
             <AllPhoto
                 :photos="photos"
@@ -19,10 +22,11 @@
     import AllPhoto from "./AllPhoto";
     import UploadPhotosComponent from "../Upload/UploadPhotosComponent";
     import { mapGetters } from 'vuex'
+    import Actions from "./Actions";
 
     export default {
         name: "PhotoIndex",
-        components: {UploadPhotosComponent, AllPhoto,},
+        components: {Actions, UploadPhotosComponent, AllPhoto,},
         computed: {
             ...mapGetters({
                 photos: 'ListPhoto/photos',

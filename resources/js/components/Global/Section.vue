@@ -80,5 +80,6 @@
     }
     .card-content {
         min-height: 710px;
+        align-items: center;
     }
 </style>

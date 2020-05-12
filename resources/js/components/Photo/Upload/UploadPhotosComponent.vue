@@ -160,7 +160,6 @@
                                 {
                                     this.$store.commit('setUploadSuccessFile', this.successFiles)
                                     this.$store.commit('showUploadSuccess')
-                                    console.log(this.$store.state.successUploadFiles)
                                 }
 
                             })
