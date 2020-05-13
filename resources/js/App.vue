@@ -1,9 +1,10 @@
 <template>
     <div>
         <div class="wrapper">
-            <errors-modal-window v-if="this.$store.state.isUploadError"/>
-            <success-modal-window v-if="this.$store.state.isSuccessUpload"/>
-            <selection-error-modal v-if="this.$store.state.isSelectFilesError"/>
+<!--            <errors-modal-window v-if="this.$store.state.isUploadError"/>-->
+<!--            <success-modal-window v-if="this.$store.state.isSuccessUpload"/>-->
+<!--            <selection-error-modal v-if="this.$store.state.isSelectFilesError"/>-->
+            <selection-files-error-modal/>
             <upload-photos-modal/>
             <add-photo-to-album-modal-window/>
 
@@ -177,8 +178,10 @@
     import AddPhotoToAlbumModalWindow from "./components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum";
     import ModalWindow from "./components/Global/ModalWindow";
     import UploadPhotosModal from "./components/Photo/Upload/Modals/UploadPhotos";
+    import SelectionFilesErrorModal from "./components/Photo/Upload/Modals/SelectionFilesError";
     export default {
         components: {
+            SelectionFilesErrorModal,
             UploadPhotosModal,
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {

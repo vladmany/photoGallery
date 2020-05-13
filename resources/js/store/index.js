@@ -27,6 +27,8 @@ export default new Vuex.Store({
 
         // Загрузка фото 2.0
         isUploadPhotos: false,
+        filesToUpload: [],
+        filesOrder: [],
         //---------------
 
         // Добавление фото в альбом(на стрнице фото)
@@ -77,6 +79,12 @@ export default new Vuex.Store({
         },
         hideUploadPhotos(state) {
             state.isUploadPhotos = false
+        },
+        setFilesToUpload(state, data) {
+            state.filesToUpload = data
+        },
+        setFilesOrder(state, data) {
+            state.filesOrder = data
         },
         //--------------
 
