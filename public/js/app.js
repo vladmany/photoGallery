@@ -3695,6 +3695,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5206,6 +5211,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5218,6 +5228,10 @@ __webpack_require__.r(__webpack_exports__);
     id: {
       required: true,
       type: Number
+    }
+  },
+  methods: {
+    back: function back() {// this.$router.go(-1);
     }
   }
 });
@@ -44063,6 +44077,16 @@ var render = function() {
           return [
             _c(
               "div",
+              [
+                _c("router-link", { attrs: { to: { name: "AlbumIndex" } } }, [
+                  _vm._v("\n                Назад\n            ")
+                ])
+              ],
+              1
+            ),
+            _vm._v(" "),
+            _c(
+              "div",
               { staticClass: "row" },
               [
                 _c("div", { staticClass: "col-12" }, [
@@ -45831,7 +45855,7 @@ var render = function() {
       {
         key: "content",
         fn: function() {
-          return [_c("SliderPhoto", { attrs: { id: _vm.id } })]
+          return [_c("div", [_c("SliderPhoto", { attrs: { id: _vm.id } })], 1)]
         },
         proxy: true
       }
@@ -65579,8 +65603,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

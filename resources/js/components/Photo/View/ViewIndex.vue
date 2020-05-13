@@ -4,7 +4,12 @@
             <h1>Просмотр фото</h1>
         </template>
         <template v-slot:content>
-            <SliderPhoto :id="id"></SliderPhoto>
+<!--            <div>-->
+<!--                <a href="#" @click.prevent="back">Назад</a>-->
+<!--            </div>-->
+            <div>
+                <SliderPhoto :id="id"></SliderPhoto>
+            </div>
         </template>
     </Section>
 </template>
@@ -22,6 +27,11 @@
                 type: Number
             }
         },
+        methods: {
+            back() {
+                // this.$router.go(-1);
+            }
+        }
     }
 
 </script>
