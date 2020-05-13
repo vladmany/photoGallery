@@ -41,6 +41,24 @@
                 // if (this.$store.getters.selectedPhotos.length > 0) {
                 //     this.$store.commit('showAddPhotoToAlbum')
                 // }
+            },
+            download() {
+
+            },
+            changeDate() {
+
+            },
+            toFavorite() {
+
+            },
+            turnImage() {
+
+            },
+            imageCorrection() {
+
+            },
+            deleteImages() {
+
             }
         },
         computed: {

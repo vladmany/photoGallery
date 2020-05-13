@@ -4047,7 +4047,13 @@ __webpack_require__.r(__webpack_exports__);
     addToAlbum: function addToAlbum() {// if (this.$store.getters.selectedPhotos.length > 0) {
       //     this.$store.commit('showAddPhotoToAlbum')
       // }
-    }
+    },
+    download: function download() {},
+    changeDate: function changeDate() {},
+    toFavorite: function toFavorite() {},
+    turnImage: function turnImage() {},
+    imageCorrection: function imageCorrection() {},
+    deleteImages: function deleteImages() {}
   },
   computed: {
     selectedPhotos: function selectedPhotos() {
