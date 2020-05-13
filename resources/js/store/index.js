@@ -109,13 +109,17 @@ export default new Vuex.Store({
                     album: albumId
                 })
                 .then(response => {
-                    if (this.state.isAddPhotoToAlbum)
+                    console.log('successfully album saved');
+                    dispatch('ListAlbum/getAlbums');
+                    dispatch('ListPhoto/getPhotos');
+                    if (this.state.isAddPhotoToAlbum) {
                         this.commit('hideAddPhotoToAlbum')
+                    }
                 })
                 .catch(err =>
-                    console.log('error'))
+                    console.log('error album saved'))
             }
-        }
+        },
 
     }
 })
