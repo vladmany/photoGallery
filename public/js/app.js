@@ -2793,6 +2793,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Photo_Upload_SelectionErrorModal__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./components/Photo/Upload/SelectionErrorModal */ "./resources/js/components/Photo/Upload/SelectionErrorModal.vue");
 /* harmony import */ var _components_Photo_List_Actions_AddToAlbum_Modals_AddPhotoToAlbum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum */ "./resources/js/components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum.vue");
 /* harmony import */ var _components_Global_ModalWindow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Global/ModalWindow */ "./resources/js/components/Global/ModalWindow.vue");
+/* harmony import */ var _components_Photo_Upload_Modals_UploadPhotos__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Photo/Upload/Modals/UploadPhotos */ "./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue");
+//
 //
 //
 //
@@ -2969,8 +2971,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    UploadPhotosModal: _components_Photo_Upload_Modals_UploadPhotos__WEBPACK_IMPORTED_MODULE_5__["default"],
     ModalWindow: _components_Global_ModalWindow__WEBPACK_IMPORTED_MODULE_4__["default"],
     AddPhotoToAlbumModalWindow: _components_Photo_List_Actions_AddToAlbum_Modals_AddPhotoToAlbum__WEBPACK_IMPORTED_MODULE_3__["default"],
     SelectionErrorModal: _components_Photo_Upload_SelectionErrorModal__WEBPACK_IMPORTED_MODULE_2__["default"],
@@ -4119,8 +4123,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4152,6 +4154,7 @@ __webpack_require__.r(__webpack_exports__);
     },
     close: function close() {
       this.$store.commit('hideAddPhotoToAlbum');
+      this.errors = [];
     },
     selectHead: function selectHead(e) {
       if ($(e.target).hasClass('open')) {
@@ -4547,6 +4550,39 @@ __webpack_require__.r(__webpack_exports__);
     cancel: function cancel() {
       this.$root.$emit('cancelUpload');
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Global/ModalWindow */ "./resources/js/components/Global/ModalWindow.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "UploadPhotosModal",
+  components: {
+    ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    cancel: function cancel() {}
   }
 });
 
@@ -42558,6 +42594,8 @@ var render = function() {
           ? _c("selection-error-modal")
           : _vm._e(),
         _vm._v(" "),
+        _c("upload-photos-modal"),
+        _vm._v(" "),
         _c("add-photo-to-album-modal-window"),
         _vm._v(" "),
         _c(
@@ -44382,101 +44420,92 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
 var render = function() {
-  var this$1 = this
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return this.$store.state.isAddPhotoToAlbum
-    ? _c("modal-window", {
-        attrs: {
-          title: "Добавить в альбом",
-          "close-action": function() {
-            this$1.$store.commit("hideAddPhotoToAlbum")
-          }
-        },
-        scopedSlots: _vm._u(
-          [
-            {
-              key: "content",
-              fn: function() {
-                return [
-                  _c("div", { staticClass: "content" }, [
-                    _c("label", [_vm._v("Выбрать альбом")]),
-                    _vm._v(" "),
-                    _c("div", { staticClass: "select" }, [
-                      _c("input", {
-                        staticClass: "select__input",
-                        attrs: { type: "hidden", name: "" }
-                      }),
-                      _vm._v(" "),
-                      _c(
-                        "div",
-                        {
-                          staticClass: "select__head",
-                          class: _vm.errors.length > 0 ? "is-invalid" : "",
-                          on: { click: _vm.selectHead }
-                        },
-                        [_c("span", [_vm._v("Выберите")])]
-                      ),
-                      _vm._v(" "),
-                      _c(
-                        "ul",
-                        {
-                          staticClass: "select__list",
-                          staticStyle: { display: "none" }
-                        },
-                        _vm._l(_vm.albums, function(album) {
-                          return _c(
-                            "li",
-                            {
-                              staticClass: "select__item",
-                              on: { click: _vm.selectItem }
-                            },
-                            [
-                              _c("span", { attrs: { "album-id": album.id } }, [
-                                _vm._v(_vm._s(album.name))
-                              ])
-                            ]
-                          )
-                        }),
-                        0
-                      ),
-                      _vm._v(" "),
-                      _c("div", { staticClass: "invalid-feedback" }, [
-                        _vm._v(_vm._s(_vm.errors[0]))
-                      ])
-                    ])
-                  ])
-                ]
-              },
-              proxy: true
-            },
-            {
-              key: "buttons",
-              fn: function() {
-                return [
-                  _c("c-button", {
-                    attrs: { text: "Добавить фото", action: _vm.addToAlbum }
+  return _c("modal-window", {
+    directives: [
+      {
+        name: "show",
+        rawName: "v-show",
+        value: this.$store.state.isAddPhotoToAlbum,
+        expression: "this.$store.state.isAddPhotoToAlbum"
+      }
+    ],
+    attrs: { title: "Добавить в альбом", "close-action": _vm.close },
+    scopedSlots: _vm._u([
+      {
+        key: "content",
+        fn: function() {
+          return [
+            _c("div", { staticClass: "content" }, [
+              _c("label", [_vm._v("Выбрать альбом")]),
+              _vm._v(" "),
+              _c("div", { staticClass: "select" }, [
+                _c("input", {
+                  staticClass: "select__input",
+                  attrs: { type: "hidden", name: "" }
+                }),
+                _vm._v(" "),
+                _c(
+                  "div",
+                  {
+                    staticClass: "select__head",
+                    class: _vm.errors.length > 0 ? "is-invalid" : "",
+                    on: { click: _vm.selectHead }
+                  },
+                  [_c("span", [_vm._v("Выберите")])]
+                ),
+                _vm._v(" "),
+                _c(
+                  "ul",
+                  {
+                    staticClass: "select__list",
+                    staticStyle: { display: "none" }
+                  },
+                  _vm._l(_vm.albums, function(album) {
+                    return _c(
+                      "li",
+                      {
+                        staticClass: "select__item",
+                        on: { click: _vm.selectItem }
+                      },
+                      [
+                        _c("span", { attrs: { "album-id": album.id } }, [
+                          _vm._v(_vm._s(album.name))
+                        ])
+                      ]
+                    )
                   }),
-                  _vm._v(" "),
-                  _c("c-button", {
-                    attrs: {
-                      text: "Отмена",
-                      type: "secondary",
-                      action: _vm.close
-                    }
-                  })
-                ]
-              },
-              proxy: true
-            }
-          ],
-          null,
-          false,
-          2292995335
-        )
-      })
-    : _vm._e()
+                  0
+                ),
+                _vm._v(" "),
+                _c("div", { staticClass: "invalid-feedback" }, [
+                  _vm._v(_vm._s(_vm.errors[0]))
+                ])
+              ])
+            ])
+          ]
+        },
+        proxy: true
+      },
+      {
+        key: "buttons",
+        fn: function() {
+          return [
+            _c("c-button", {
+              attrs: { text: "Добавить фото", action: _vm.addToAlbum }
+            }),
+            _vm._v(" "),
+            _c("c-button", {
+              attrs: { text: "Отмена", type: "secondary", action: _vm.close }
+            })
+          ]
+        },
+        proxy: true
+      }
+    ])
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -44917,6 +44946,34 @@ var render = function() {
       ])
     ])
   ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true&":
+/*!***********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true& ***!
+  \***********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return this.$store.state.isUploadPhotos
+    ? _c("modal-window", {
+        attrs: { title: "Загрузка фото", "close-action": _vm.cancel }
+      })
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -63896,6 +63953,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue":
+/*!**********************************************************************!*\
+  !*** ./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue ***!
+  \**********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UploadPhotos_vue_vue_type_template_id_81c13336_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true& */ "./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true&");
+/* harmony import */ var _UploadPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UploadPhotos.vue?vue&type=script&lang=js& */ "./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UploadPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UploadPhotos_vue_vue_type_template_id_81c13336_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UploadPhotos_vue_vue_type_template_id_81c13336_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "81c13336",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Photo/Upload/Modals/UploadPhotos.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UploadPhotos.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotos_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true&":
+/*!*****************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true& ***!
+  \*****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotos_vue_vue_type_template_id_81c13336_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue?vue&type=template&id=81c13336&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotos_vue_vue_type_template_id_81c13336_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UploadPhotos_vue_vue_type_template_id_81c13336_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Photo/Upload/SelectionErrorModal.vue":
 /*!**********************************************************************!*\
   !*** ./resources/js/components/Photo/Upload/SelectionErrorModal.vue ***!
@@ -64485,6 +64611,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     isSelectFilesError: false,
     maxFilesToUpload: 15,
     //---------------
+    // Загрузка фото 2.0
+    isUploadPhotos: false,
+    //---------------
     // Добавление фото в альбом(на стрнице фото)
     isAddPhotoToAlbum: false,
     //------------------------------------------
@@ -64521,6 +64650,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     hideSelectError: function hideSelectError(state) {
       state.isSelectFilesError = false;
+    },
+    //--------------
+    // Загрузка фото 2.0
+    showUploadPhotos: function showUploadPhotos(state) {
+      state.isUploadPhotos = true;
+    },
+    hideUploadPhotos: function hideUploadPhotos(state) {
+      state.isUploadPhotos = false;
     },
     //--------------
     // Добавление фото в альбом(на стрнице фото)
