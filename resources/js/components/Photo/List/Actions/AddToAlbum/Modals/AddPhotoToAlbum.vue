@@ -1,10 +1,8 @@
 <template>
     <modal-window
-        v-if="this.$store.state.isAddPhotoToAlbum"
+        v-show="this.$store.state.isAddPhotoToAlbum"
         title="Добавить в альбом"
-        :close-action="() => {
-            this.$store.commit('hideAddPhotoToAlbum')
-        }">
+        :close-action="close">
         <template v-slot:content>
             <div class="content">
                 <label>Выбрать альбом</label>
@@ -60,6 +58,7 @@
             },
             close() {
                 this.$store.commit('hideAddPhotoToAlbum')
+                this.errors = [];
             },
             selectHead(e) {
                 if ($(e.target).hasClass('open')) {

@@ -25,6 +25,10 @@ export default new Vuex.Store({
         maxFilesToUpload: 15,
         //---------------
 
+        // Загрузка фото 2.0
+        isUploadPhotos: false,
+        //---------------
+
         // Добавление фото в альбом(на стрнице фото)
         isAddPhotoToAlbum: false,
         //------------------------------------------
@@ -64,6 +68,15 @@ export default new Vuex.Store({
         },
         hideSelectError(state) {
             state.isSelectFilesError = false
+        },
+        //--------------
+
+        // Загрузка фото 2.0
+        showUploadPhotos(state) {
+            state.isUploadPhotos = true
+        },
+        hideUploadPhotos(state) {
+            state.isUploadPhotos = false
         },
         //--------------
 
