@@ -51,9 +51,11 @@ class AlbumPhotoController extends Controller
         }
 
         $photo = Photo::where('id', $coverId)->first();
-        $album = Album::where('id', $albumId)->first();
-        $album->cover = $photo->url;
-        $album->save();
+        if($photo) {
+            $album = Album::where('id', $albumId)->first();
+            $album->cover = $photo->url;
+            $album->save();
+        }
     }
 
     /**
