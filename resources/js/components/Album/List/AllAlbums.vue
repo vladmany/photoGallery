@@ -99,13 +99,14 @@
 
                 return `${dat.getDate()} ${months[dat.getMonth()]} ${dat.getFullYear()}`
             },
-            onChangePage(page) {
+            onChangePage(page = 1) {
                 let perPage = this.paginateCount;
                 let from = (page * perPage) - perPage;
                 let to = (page * perPage);
                 let pageOfItems = this.albums.slice(from, to);
 
                 this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
+
             },
             setPages() {
                 let pages = []

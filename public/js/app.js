@@ -3039,6 +3039,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 
 
 
@@ -3535,7 +3538,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       dat = new Date(dat);
       return "".concat(dat.getDate(), " ").concat(months[dat.getMonth()], " ").concat(dat.getFullYear());
     },
-    onChangePage: function onChangePage(page) {
+    onChangePage: function onChangePage() {
+      var page = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 1;
       var perPage = this.paginateCount;
       var from = page * perPage - perPage;
       var to = page * perPage;
@@ -43042,7 +43046,16 @@ var render = function() {
         fn: function() {
           return [
             _c("div", { staticClass: "albums-wrap" }, [
-              _c("div", { staticClass: "main-panel" }, [_c("AllAlbums")], 1)
+              _c(
+                "div",
+                { staticClass: "main-panel" },
+                [
+                  _c("AllAlbums", {
+                    attrs: { albums: _vm.albums, "paginate-count": 5 }
+                  })
+                ],
+                1
+              )
             ])
           ]
         },
