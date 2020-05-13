@@ -4119,6 +4119,8 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -4127,7 +4129,27 @@ __webpack_require__.r(__webpack_exports__);
     ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"],
     CButton: _Global_CButton__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {
+      errors: []
+    };
+  },
   methods: {
+    addToAlbum: function addToAlbum() {
+      this.errors = [];
+
+      if (this.selectedPhotos.length > 0) {
+        var albumId = $('.select__head span').attr('album-id');
+
+        if (albumId >= 0) {
+          this.$store.dispatch('savePhotosToAlbum', albumId);
+        } else {
+          this.errors.push('Альбом не выбран');
+        }
+      } else {
+        this.errors.push('Нету выбранных фото');
+      }
+    },
     close: function close() {
       this.$store.commit('hideAddPhotoToAlbum');
     },
@@ -4143,6 +4165,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     selectItem: function selectItem(e) {
+      this.errors = [];
       $('.select__head').removeClass('open');
       $(e.target).parent().slideUp(100);
       $(e.target).parent().prev().html($(e.target).html());
@@ -4163,7 +4186,7 @@ __webpack_require__.r(__webpack_exports__);
       return this.$store.state.ListAlbum.albums;
     },
     selectedPhotos: function selectedPhotos() {
-      return this.$store.getters.selectedPhotos.length > 0 ? 'available' : '';
+      return this.$store.getters.selectedPhotos;
     }
   }
 });
@@ -9891,7 +9914,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../../../node_
 
 
 // module
-exports.push([module.i, "\n.content[data-v-45c27a0a] {\n    display: flex;\n    flex-direction: column;\n    max-width: 380px;\n    width: 100%;\n    margin-top: 33px;\n    margin-bottom: 33px;\n}\n.content label[data-v-45c27a0a] {\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #808080;\n}\n.select[data-v-45c27a0a] {\n    position: relative;\n    display: block;\n    min-width: 220px;\n    width: 100%;\n    max-width: 400px;\n    margin-bottom: 20px;\n}\n.select span[data-v-45c27a0a] {\n    pointer-events: none;\n    color: #808080;\n}\n.select__head[data-v-45c27a0a] {\n    border: 2px solid #F5F5F5;\n    box-sizing: border-box;\n    border-radius: 4px;\n    height: 50px;\n    cursor: pointer;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #808080;\n    padding: 10px 15px;\n}\n.select__head[data-v-45c27a0a]::after {\n    width: 10px;\n    height: 6px;\n    background: #FFF url(\"data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.50495 5.78413L0.205241 1.25827C-0.0684138 0.970375 -0.0684138 0.503596 0.205241 0.215836C0.478652 -0.0719461 0.922098 -0.071946 1.19549 0.215837L5.00007 4.22052L8.80452 0.215953C9.07805 -0.0718292 9.52145 -0.0718292 9.79486 0.215953C10.0684 0.503736 10.0684 0.970492 9.79486 1.25839L5.49508 5.78425C5.35831 5.92814 5.17925 6 5.00009 6C4.82085 6 4.64165 5.928 4.50495 5.78413Z' fill='%23D8D8D8'/%3E%3C/svg%3E%0A\") no-repeat center / cover;\n    position: absolute;\n    right: 20px;\n    bottom: 50%;\n    transform: translateY(50%);\n    content: '';\n    display: block;\n    transition: .2s ease-in;\n}\n.select__head.open[data-v-45c27a0a]::after {\n    transform: translateY(50%) rotate(180deg);\n}\n.select__list[data-v-45c27a0a] {\n    display: none;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    right: 0;\n    background: #fff;\n    border: 2px solid #F5F5F5;\n    border-top: none;\n    margin-top: 5px;\n    max-height: 205px;\n    overflow-x: hidden;\n    overflow-y: auto;\n    z-index: 100;\n    margin: 0;\n    padding: 0;\n    font-size: 14px;\n    color: #424348;\n    scrollbar-color: dark;\n    scrollbar-width: thin;\n    -ms-scroll-chaining: none;\n        overscroll-behavior: contain;\n}\n.select__list[data-v-45c27a0a]::-webkit-scrollbar {\n    width: 7px;\n    background-color: #F8F9FA;\n    padding: 5px;\n}\n.select__list[data-v-45c27a0a]::-webkit-scrollbar-thumb {\n    border-radius: 10px;\n    background-color: #D9D9D9;\n}\n.select__list .select__item[data-v-45c27a0a] {\n    position: relative;\n    border-top: 1px solid rgba(224, 229, 231, 0.5);\n    padding: 10px 15px;\n    cursor: pointer;\n    list-style-type: none;\n}\n.select__list .select__item[data-v-45c27a0a]:hover {\n    background-color: rgba(224, 229, 231, 0.5);\n}\n", ""]);
+exports.push([module.i, "\n.content[data-v-45c27a0a] {\n    display: flex;\n    flex-direction: column;\n    max-width: 380px;\n    width: 100%;\n    margin-top: 33px;\n    margin-bottom: 33px;\n}\n.content label[data-v-45c27a0a] {\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #808080;\n}\n.select[data-v-45c27a0a] {\n    position: relative;\n    display: block;\n    min-width: 220px;\n    width: 100%;\n    max-width: 400px;\n    margin-bottom: 20px;\n}\n.select span[data-v-45c27a0a] {\n    pointer-events: none;\n    color: #808080;\n}\n.select__head[data-v-45c27a0a] {\n    border: 2px solid #F5F5F5;\n    box-sizing: border-box;\n    border-radius: 4px;\n    height: 50px;\n    cursor: pointer;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #808080;\n    padding: 10px 15px;\n}\n.select__head[data-v-45c27a0a]::after {\n    width: 10px;\n    height: 6px;\n    background: #FFF url(\"data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.50495 5.78413L0.205241 1.25827C-0.0684138 0.970375 -0.0684138 0.503596 0.205241 0.215836C0.478652 -0.0719461 0.922098 -0.071946 1.19549 0.215837L5.00007 4.22052L8.80452 0.215953C9.07805 -0.0718292 9.52145 -0.0718292 9.79486 0.215953C10.0684 0.503736 10.0684 0.970492 9.79486 1.25839L5.49508 5.78425C5.35831 5.92814 5.17925 6 5.00009 6C4.82085 6 4.64165 5.928 4.50495 5.78413Z' fill='%23D8D8D8'/%3E%3C/svg%3E%0A\") no-repeat center / cover;\n    position: absolute;\n    right: 20px;\n    bottom: 50%;\n    transform: translateY(50%);\n    content: '';\n    display: block;\n    transition: .2s ease-in;\n}\n.select__head.open[data-v-45c27a0a]::after {\n    transform: translateY(50%) rotate(180deg);\n}\n.select__list[data-v-45c27a0a] {\n    display: none;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    right: 0;\n    background: #fff;\n    border: 2px solid #F5F5F5;\n    border-top: none;\n    margin-top: 5px;\n    max-height: 205px;\n    overflow-x: hidden;\n    overflow-y: auto;\n    z-index: 100;\n    margin: 0;\n    padding: 0;\n    font-size: 14px;\n    color: #424348;\n    scrollbar-color: dark;\n    scrollbar-width: thin;\n    -ms-scroll-chaining: none;\n        overscroll-behavior: contain;\n}\n.select__list[data-v-45c27a0a]::-webkit-scrollbar {\n    width: 7px;\n    background-color: #F8F9FA;\n    padding: 5px;\n}\n.select__list[data-v-45c27a0a]::-webkit-scrollbar-thumb {\n    border-radius: 10px;\n    background-color: #D9D9D9;\n}\n.select__list .select__item[data-v-45c27a0a] {\n    position: relative;\n    border-top: 1px solid rgba(224, 229, 231, 0.5);\n    padding: 10px 15px;\n    cursor: pointer;\n    list-style-type: none;\n}\n.select__list .select__item[data-v-45c27a0a]:hover {\n    background-color: rgba(224, 229, 231, 0.5);\n}\n.invalid-feedback[data-v-45c27a0a] {\n    position: absolute;\n}\n.is-invalid[data-v-45c27a0a] {\n    border-color: #dc3545!important;\n}\n", ""]);
 
 // exports
 
@@ -44390,6 +44413,7 @@ var render = function() {
                         "div",
                         {
                           staticClass: "select__head",
+                          class: _vm.errors.length > 0 ? "is-invalid" : "",
                           on: { click: _vm.selectHead }
                         },
                         [_c("span", [_vm._v("Выберите")])]
@@ -44416,7 +44440,11 @@ var render = function() {
                           )
                         }),
                         0
-                      )
+                      ),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "invalid-feedback" }, [
+                        _vm._v(_vm._s(_vm.errors[0]))
+                      ])
                     ])
                   ])
                 ]
@@ -44445,7 +44473,7 @@ var render = function() {
           ],
           null,
           false,
-          3627408197
+          2292995335
         )
       })
     : _vm._e()
@@ -64511,6 +64539,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
   },
   actions: {
     savePhotosToAlbum: function savePhotosToAlbum(_ref, albumId) {
+      var _this = this;
+
       var commit = _ref.commit,
           getters = _ref.getters;
       var photos = getters.selectedPhotos;
@@ -64519,8 +64549,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         axios.post('/api/albums-photos', {
           photos: photos,
           album: albumId
-        }).then(function (res) {
-          return console.log('ok');
+        }).then(function (response) {
+          if (_this.state.isAddPhotoToAlbum) _this.commit('hideAddPhotoToAlbum');
         })["catch"](function (err) {
           return console.log('error');
         });

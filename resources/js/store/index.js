@@ -88,10 +88,12 @@ export default new Vuex.Store({
                 axios.post('/api/albums-photos', {
                     photos: photos,
                     album: albumId
-                }
-                ).then(res =>
-                    console.log('ok')
-                ).catch(err =>
+                })
+                .then(response => {
+                    if (this.state.isAddPhotoToAlbum)
+                        this.commit('hideAddPhotoToAlbum')
+                })
+                .catch(err =>
                     console.log('error'))
             }
         }

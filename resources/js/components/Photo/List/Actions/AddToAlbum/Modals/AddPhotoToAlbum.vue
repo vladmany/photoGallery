@@ -10,11 +10,13 @@
                 <label>Выбрать альбом</label>
                 <div class="select">
                     <input class="select__input" type="hidden" name="">
-                    <div @click="selectHead" class="select__head"><span>Выберите</span></div>
+                    <div @click="selectHead" class="select__head" :class="(errors.length > 0) ? 'is-invalid' : ''"><span>Выберите</span></div>
                     <ul class="select__list" style="display: none;">
                         <li v-for="album in albums" @click="selectItem" class="select__item"><span :album-id="album.id">{{ album.name }}</span></li>
                     </ul>
+                    <div class="invalid-feedback">{{ errors[0] }}</div>
                 </div>
+
             </div>
         </template>
         <template class="buttons" v-slot:buttons>
@@ -37,7 +39,25 @@
     export default {
         name: "AddPhotoToAlbumModal",
         components: {ModalWindow, CButton},
+        data() {
+            return {
+                errors: [],
+            }
+        },
         methods: {
+            addToAlbum() {
+                this.errors = []
+                if (this.selectedPhotos.length > 0) {
+                    let albumId = $('.select__head span').attr('album-id');
+                    if (albumId >= 0) {
+                        this.$store.dispatch('savePhotosToAlbum', albumId)
+                    } else {
+                        this.errors.push('Альбом не выбран')
+                    }
+                } else {
+                    this.errors.push('Нету выбранных фото')
+                }
+            },
             close() {
                 this.$store.commit('hideAddPhotoToAlbum')
             },
@@ -46,6 +66,7 @@
                     $(e.target).removeClass('open');
                     $(e.target).next().slideUp(100);
                 } else {
+
                     $('.select__head').removeClass('open');
                     $('.select__list').slideUp(100);
                     $(e.target).addClass('open');
@@ -53,6 +74,7 @@
                 }
             },
             selectItem(e) {
+                this.errors = []
                 $('.select__head').removeClass('open');
                 $(e.target).parent().slideUp(100);
                 $(e.target).parent().prev().html($(e.target).html());
@@ -74,7 +96,7 @@
 
             },
             selectedPhotos: function() {
-                return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : ''
+                return this.$store.getters.selectedPhotos
             }
         },
     }
@@ -188,5 +210,12 @@
 
     .select__list .select__item:hover {
         background-color: rgba(224, 229, 231, 0.5);
+    }
+
+    .invalid-feedback {
+        position: absolute;
+    }
+    .is-invalid {
+        border-color: #dc3545!important;
     }
 </style>
