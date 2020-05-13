@@ -12,6 +12,7 @@
                 </div>
                 <div v-if="errorMessage !== ''" class="invalid-feedback d-block">Ошибка загрузки фото: {{ errorMessage }}</div>
             </div>
+            
             <div v-else>
                 <div class="error-end" v-if="filesFinish.length <= 0">
                     <img src="/storage/photos/upload/ic_error.png">
