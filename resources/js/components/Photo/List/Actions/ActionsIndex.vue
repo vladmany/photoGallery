@@ -7,7 +7,7 @@
         <div class="action create">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_create.svg"></object>
         </div>
-        <div class="action add_to_album" @click="addToAlbum">
+        <div class="action add_to_album" :class="isSelectedPhotos" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
         <div class="action download" @click="download">
@@ -38,9 +38,9 @@
         name: "Actions",
         methods: {
             addToAlbum() {
-                // if (this.$store.getters.selectedPhotos.length > 0) {
-                //     this.$store.commit('showAddPhotoToAlbum')
-                // }
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.commit('showAddPhotoToAlbum')
+                }
             },
             download() {
 
@@ -62,7 +62,7 @@
             }
         },
         computed: {
-            selectedPhotos: function() {
+            isSelectedPhotos: function() {
                 return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : ''
             }
         },

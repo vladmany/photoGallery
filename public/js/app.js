@@ -4044,9 +4044,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Actions",
   methods: {
-    addToAlbum: function addToAlbum() {// if (this.$store.getters.selectedPhotos.length > 0) {
-      //     this.$store.commit('showAddPhotoToAlbum')
-      // }
+    addToAlbum: function addToAlbum() {
+      if (this.$store.getters.selectedPhotos.length > 0) {
+        this.$store.commit('showAddPhotoToAlbum');
+      }
     },
     download: function download() {},
     changeDate: function changeDate() {},
@@ -4056,7 +4057,7 @@ __webpack_require__.r(__webpack_exports__);
     deleteImages: function deleteImages() {}
   },
   computed: {
-    selectedPhotos: function selectedPhotos() {
+    isSelectedPhotos: function isSelectedPhotos() {
       return this.$store.getters.selectedPhotos.length > 0 ? 'available' : '';
     }
   },
@@ -44232,7 +44233,11 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "action add_to_album", on: { click: _vm.addToAlbum } },
+      {
+        staticClass: "action add_to_album",
+        class: _vm.isSelectedPhotos,
+        on: { click: _vm.addToAlbum }
+      },
       [
         _c("object", {
           attrs: {
