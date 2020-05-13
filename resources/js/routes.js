@@ -10,6 +10,7 @@ import AlbumIndex from "./components/Album/AlbumIndex";
 import OneAlbum from "./components/Album/List/OneAlbum";
 import AddPhotoToAlbum from "./components/Album/List/AddPhotoToAlbum";
 
+
 export default new VueRouter({
     routes: [
         // {

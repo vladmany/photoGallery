@@ -1,31 +1,7 @@
 <template>
-    <!--    <div class="wrapper">-->
-    <!--        <div class="header">-->
-    <!--            <div class="name-album">-->
-    <!--&lt;!&ndash;                //Name albums :D&ndash;&gt;-->
-    <!--            </div>-->
-    <!--            <div class="main-panel">-->
-    <!--                <upload-photos-component></upload-photos-component>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--        <div v-if="noPhotos">-->
-    <!--&lt;!&ndash;            Images ;D&ndash;&gt;-->
-    <!--        </div>-->
-    <!--        <div v-else="noPhotos" class="noPhotos content">-->
-    <!--            <div class="pt-4">-->
-    <!--                <p class="album-name">Альбом 1</p>-->
-    <!--            </div>-->
-    <!--            <div class="text-center">-->
-    <!--                <img src="/storage/albums/placeholderNoPhotosInAlbums.png" class="img-bord">-->
-    <!--            </div>-->
-    <!--                <div class="text-empty">-->
-    <!--                <p>Альбом пуст</p>-->
-    <!--            </div>-->
-    <!--        </div>-->
-    <!--    </div>-->
     <Section>
         <template v-slot:title>
-            <span>{{ album.name }}</span>
+            <span>Просмотр альбома</span>
         </template>
         <template v-slot:button>
             <div class="row">
