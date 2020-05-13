@@ -2794,6 +2794,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Photo_List_Actions_AddToAlbum_Modals_AddPhotoToAlbum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum */ "./resources/js/components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum.vue");
 /* harmony import */ var _components_Global_ModalWindow__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./components/Global/ModalWindow */ "./resources/js/components/Global/ModalWindow.vue");
 /* harmony import */ var _components_Photo_Upload_Modals_UploadPhotos__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Photo/Upload/Modals/UploadPhotos */ "./resources/js/components/Photo/Upload/Modals/UploadPhotos.vue");
+/* harmony import */ var _components_Album_Modals_ChangeNameAlbum__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Album/Modals/ChangeNameAlbum */ "./resources/js/components/Album/Modals/ChangeNameAlbum.vue");
+//
 //
 //
 //
@@ -2972,8 +2974,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    ChangeNameAlbum: _components_Album_Modals_ChangeNameAlbum__WEBPACK_IMPORTED_MODULE_6__["default"],
     UploadPhotosModal: _components_Photo_Upload_Modals_UploadPhotos__WEBPACK_IMPORTED_MODULE_5__["default"],
     ModalWindow: _components_Global_ModalWindow__WEBPACK_IMPORTED_MODULE_4__["default"],
     AddPhotoToAlbumModalWindow: _components_Photo_List_Actions_AddToAlbum_Modals_AddPhotoToAlbum__WEBPACK_IMPORTED_MODULE_3__["default"],
@@ -3299,12 +3303,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ActionAllAlbums"
 });
@@ -3320,6 +3318,7 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Modals_ChangeNameAlbum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modals/ChangeNameAlbum */ "./resources/js/components/Album/Modals/ChangeNameAlbum.vue");
 //
 //
 //
@@ -3340,8 +3339,24 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+
 /* harmony default export */ __webpack_exports__["default"] = ({
-  name: "ActionOneAlbum"
+  name: "ActionOneAlbum",
+  components: {
+    ChangeNameAlbum: _Modals_ChangeNameAlbum__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    changeAlbumName: function changeAlbumName() {
+      this.$store.state.isChangeNameAlbum = true;
+    },
+    CloseModalChangeNameAlbum: function CloseModalChangeNameAlbum() {
+      this.$store.state.isChangeNameAlbum = false;
+    }
+  }
 });
 
 /***/ }),
@@ -3544,7 +3559,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   data: function data() {
     return {
-      pages: 0
+      pages: 0,
+      pageOfItems: 0
     };
   },
   methods: {
@@ -3558,8 +3574,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var perPage = this.paginateCount;
       var from = page * perPage - perPage;
       var to = page * perPage;
-      var pageOfItems = this.albums.slice(from, to);
-      this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
+      this.pageOfItems = this.albums.slice(from, to); // this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
     },
     setPages: function setPages() {
       var pages = [];
@@ -3747,6 +3762,92 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "noAlbums"
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Global/ModalWindow */ "./resources/js/components/Global/ModalWindow.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "ChangeNameAlbum",
+  components: {
+    ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  data: function data() {
+    return {
+      album: {},
+      errors: []
+    };
+  },
+  methods: {
+    saveChange: function saveChange() {
+      var _this = this;
+
+      event.preventDefault();
+      var app = this;
+      var newAlbum = app.album;
+      axios.post('/api/albums/update', {
+        AlbumId: this.album.id,
+        AlbumName: this.album.name
+      }).then(function (response) {
+        _this.CloseModalChangeNameAlbum();
+
+        _this.$store.dispatch('ListAlbum/getAlbums');
+      })["catch"](function (error) {
+        if (error.response.status == 422) {
+          _this.errors = error.response.data.errors;
+          return false;
+        }
+      });
+      /*console.log("dedede");
+      this.$store.state.isChangeNameAlbum = false;*/
+    },
+    CloseModalChangeNameAlbum: function CloseModalChangeNameAlbum() {
+      this.$store.state.isChangeNameAlbum = false;
+    }
+  }
 });
 
 /***/ }),
@@ -42669,6 +42770,8 @@ var render = function() {
         _vm._v(" "),
         _c("add-photo-to-album-modal-window"),
         _vm._v(" "),
+        _c("change-name-album"),
+        _vm._v(" "),
         _c(
           "nav",
           {
@@ -43110,7 +43213,12 @@ var render = function() {
         fn: function() {
           return [
             _c("div", { staticClass: "albums-wrap" }, [
-              _c("div", { staticClass: "main-panel" }, [_c("AllAlbums")], 1)
+              _c(
+                "div",
+                { staticClass: "main-panel" },
+                [_c("AllAlbums", { attrs: { "paginate-count": 5 } })],
+                1
+              )
             ])
           ]
         },
@@ -43410,19 +43518,6 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "action change_album", on: { click: _vm.changeAlbum } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_change_album.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
       {
         staticClass: "action to_provide_access",
         on: { click: _vm.toProvideAccess }
@@ -43445,19 +43540,6 @@ var render = function() {
           attrs: {
             type: "image/svg+xml",
             data: "/storage/albums/actions/ic_download.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action change_date", on: { click: _vm.ChangeDate } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_change_date.svg"
           }
         })
       ]
@@ -43499,75 +43581,95 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "action-panel" }, [
-    _c(
-      "div",
-      { staticClass: "action change_album", on: { click: _vm.changeAlbum } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_change_album.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      {
-        staticClass: "action to_provide_access",
-        on: { click: _vm.toProvideAccess }
-      },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_provide_access.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action turn_download", on: { click: _vm.turnDownload } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_download.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action change_date", on: { click: _vm.ChangeDate } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_change_cover.svg"
-          }
-        })
-      ]
-    ),
-    _vm._v(" "),
-    _c(
-      "div",
-      { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
-      [
-        _c("object", {
-          attrs: {
-            type: "image/svg+xml",
-            data: "/storage/albums/actions/ic_delete.svg"
-          }
-        })
-      ]
-    )
-  ])
+  return _c(
+    "div",
+    { staticClass: "action-panel" },
+    [
+      _c(
+        "div",
+        {
+          staticClass: "action change_album",
+          on: { click: _vm.changeAlbumName }
+        },
+        [
+          _c(
+            "CButton",
+            {
+              staticClass: "btn-create-album",
+              attrs: { text: "Добавить альбом", action: _vm.changeAlbumName }
+            },
+            [
+              _c("img", {
+                attrs: { src: "/storage/albums/actions/ic_change_album.png" }
+              })
+            ]
+          )
+        ],
+        1
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "action to_provide_access",
+          on: { click: _vm.toProvideAccess }
+        },
+        [
+          _c("object", {
+            attrs: {
+              type: "image/svg+xml",
+              data: "/storage/albums/actions/ic_provide_access.svg"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
+          staticClass: "action turn_download",
+          on: { click: _vm.turnDownload }
+        },
+        [
+          _c("object", {
+            attrs: {
+              type: "image/svg+xml",
+              data: "/storage/albums/actions/ic_download.svg"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "action change_date", on: { click: _vm.ChangeDate } },
+        [
+          _c("object", {
+            attrs: {
+              type: "image/svg+xml",
+              data: "/storage/albums/actions/ic_change_cover.svg"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
+        [
+          _c("object", {
+            attrs: {
+              type: "image/svg+xml",
+              data: "/storage/albums/actions/ic_delete.svg"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _c("change-name-album")
+    ],
+    1
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -43712,7 +43814,7 @@ var render = function() {
     "div",
     { staticClass: "wrapper" },
     [
-      _vm._l(_vm.albums, function(album) {
+      _vm._l(_vm.pageOfItems, function(album) {
         return _vm.albums.length > 0
           ? _c("div", { key: album.id, staticClass: "pt-3 pb-3 album" }, [
               _vm._m(0, true),
@@ -44072,6 +44174,120 @@ var staticRenderFns = [
     ])
   }
 ]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true&":
+/*!*******************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true& ***!
+  \*******************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var this$1 = this
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _vm.$store.state.isChangeNameAlbum
+    ? _c("modal-window", {
+        attrs: {
+          title: "Изменить название альбома",
+          "close-action": function() {
+            this$1.$store.commit("hideChangeNameAlbum")
+          }
+        },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "content",
+              fn: function() {
+                return [
+                  _c(
+                    "form",
+                    {
+                      on: {
+                        submit: function($event) {
+                          return _vm.saveChange()
+                        }
+                      }
+                    },
+                    [
+                      _c("div", { staticClass: "col-xs-12 form-group" }, [
+                        _c(
+                          "label",
+                          {
+                            staticClass: "control-label",
+                            attrs: { for: "name" }
+                          },
+                          [_vm._v("Переименовать альбом")]
+                        ),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.album.name,
+                              expression: "album.name"
+                            }
+                          ],
+                          staticClass: "form-control input",
+                          attrs: { type: "text", id: "name" },
+                          domProps: { value: _vm.album.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.album, "name", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.errors.name
+                          ? _c("span", { staticClass: "create-error" }, [
+                              _vm._v(_vm._s(_vm.errors.name[0]))
+                            ])
+                          : _vm._e()
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "window-buttons d-flex pt-3" }, [
+                        _c("button", { staticClass: "window-btn-ok" }, [
+                          _vm._v("Добавить")
+                        ]),
+                        _vm._v(" "),
+                        _c(
+                          "button",
+                          {
+                            staticClass: "window-btn-cancel",
+                            on: { click: _vm.CloseModalChangeNameAlbum }
+                          },
+                          [_vm._v("Отменить")]
+                        )
+                      ])
+                    ]
+                  )
+                ]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          false,
+          3346274337
+        )
+      })
+    : _vm._e()
+}
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -63030,6 +63246,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Album/Modals/ChangeNameAlbum.vue":
+/*!******************************************************************!*\
+  !*** ./resources/js/components/Album/Modals/ChangeNameAlbum.vue ***!
+  \******************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ChangeNameAlbum_vue_vue_type_template_id_8f4b0794_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true& */ "./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true&");
+/* harmony import */ var _ChangeNameAlbum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChangeNameAlbum.vue?vue&type=script&lang=js& */ "./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _ChangeNameAlbum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ChangeNameAlbum_vue_vue_type_template_id_8f4b0794_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ChangeNameAlbum_vue_vue_type_template_id_8f4b0794_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "8f4b0794",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Album/Modals/ChangeNameAlbum.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeNameAlbum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChangeNameAlbum.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeNameAlbum_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true&":
+/*!*************************************************************************************************************!*\
+  !*** ./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true& ***!
+  \*************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeNameAlbum_vue_vue_type_template_id_8f4b0794_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Album/Modals/ChangeNameAlbum.vue?vue&type=template&id=8f4b0794&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeNameAlbum_vue_vue_type_template_id_8f4b0794_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChangeNameAlbum_vue_vue_type_template_id_8f4b0794_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Global/CButton.vue":
 /*!****************************************************!*\
   !*** ./resources/js/components/Global/CButton.vue ***!
@@ -64789,6 +65074,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     // Добавление фото в альбом(на стрнице фото)
     isAddPhotoToAlbum: false,
     //------------------------------------------
+    // Изменение имени альбома(на стрнице детального просмотра альбома)
+    isChangeNameAlbum: false,
+    //------------------------------------------
     // Альбомы
     AllAlbums: [] //--------
 
@@ -64838,6 +65126,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     hideAddPhotoToAlbum: function hideAddPhotoToAlbum(state) {
       state.isAddPhotoToAlbum = false;
+    },
+    hideChangeNameAlbum: function hideChangeNameAlbum(state) {
+      state.isChangeNameAlbum = false;
     } //------------------------------------------
 
     /*getAlbums() {
@@ -65054,9 +65345,6 @@ var getters = {
 var mutations = {
   getAlbums: function getAlbums(state, payload) {
     state.albums = payload;
-  },
-  makeGroups: function makeGroups(state, payload) {
-    state.groups = payload;
   }
 };
 var actions = {
@@ -65065,37 +65353,6 @@ var actions = {
     axios.get('/api/all-albums').then(function (res) {
       commit('getAlbums', res.data);
     });
-  },
-  makeGroups: function makeGroups(_ref2, items) {
-    var state = _ref2.state,
-        commit = _ref2.commit;
-    var weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
-    var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
-    var groups = {};
-    var key = 'created_at';
-    items.forEach(function (item) {
-      var val = item[key].split('T')[0];
-      var date = new Date(val);
-      var weekday = weekdays[date.getDay()];
-      var month = months[date.getMonth()];
-      var ret = "".concat(weekday, ", ").concat(date.getDate(), " ").concat(month);
-
-      if (!groups[ret]) {
-        groups[ret] = [];
-      }
-
-      groups[ret].push(item);
-    });
-    var keys = Object.keys(groups); // keys.reverse();
-
-    var desc_groups = {};
-
-    for (var _i = 0, _keys = keys; _i < _keys.length; _i++) {
-      key = _keys[_i];
-      desc_groups[key] = groups[key];
-    }
-
-    commit('makeGroups', desc_groups);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -65324,8 +65581,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

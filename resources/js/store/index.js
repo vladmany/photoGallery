@@ -33,6 +33,9 @@ export default new Vuex.Store({
         isAddPhotoToAlbum: false,
         //------------------------------------------
 
+        // Изменение имени альбома(на стрнице детального просмотра альбома)
+        isChangeNameAlbum: false,
+        //------------------------------------------
         // Альбомы
         AllAlbums: []
         //--------
@@ -86,6 +89,9 @@ export default new Vuex.Store({
         },
         hideAddPhotoToAlbum(state) {
             state.isAddPhotoToAlbum = false
+        },
+        hideChangeNameAlbum(state) {
+            state.isChangeNameAlbum = false
         }
         //------------------------------------------
 
