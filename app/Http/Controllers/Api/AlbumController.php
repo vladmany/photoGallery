@@ -50,9 +50,9 @@ class AlbumController extends Controller
      * @param  \App\Models\Dashboard\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(AlbumRequest $request, $id)
+    public function update(AlbumRequest $request, $album)
     {
-        dd($request->all());
+        //dd($request->all());
         $data = $request->only(['AlbumId', 'AlbumName']);
         $albumName = $data['AlbumName'];
         $albumId = $data['AlbumId'];

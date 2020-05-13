@@ -45,13 +45,9 @@
         methods: {
             saveChange() {
                 event.preventDefault();
-                var app = this;
-                var newAlbum = app.album;
                 axios.post('/api/albums/update', {
                     AlbumId:this.album.id,
                     AlbumName:this.album.name
-
-
                 })
                     .then(response => {
                         this.CloseModalChangeNameAlbum()
@@ -59,7 +55,7 @@
                     )
                     .catch(error =>{
                         if(error.response.status == 422){
-                            this.errors = error.response.data.errors
+                            this.errors = error.response.data.errors +'ddd'+this.album.name;
                             return false;
                         }
                     });

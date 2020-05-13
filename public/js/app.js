@@ -3826,8 +3826,6 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
 
       event.preventDefault();
-      var app = this;
-      var newAlbum = app.album;
       axios.post('/api/albums/update', {
         AlbumId: this.album.id,
         AlbumName: this.album.name
@@ -3837,7 +3835,7 @@ __webpack_require__.r(__webpack_exports__);
         _this.$store.dispatch('ListAlbum/getAlbums');
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          _this.errors = error.response.data.errors;
+          _this.errors = error.response.data.errors + 'ddd' + _this.album.name;
           return false;
         }
       });
