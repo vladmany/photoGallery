@@ -20,6 +20,9 @@ let mutations = {
         }
         return false
     },
+    clearPhotos:(state) => {
+        state.selected.photos = []
+    },
     addAlbum:(state, val) =>
         state.selected.albums.push(val),
     delAlbum:(state, val) => {
@@ -30,7 +33,10 @@ let mutations = {
             }
         }
         return false
-    }
+    },
+    clearAlbums:(state) => {
+        state.selected.albums = []
+    },
 
 }
 let actions = {
@@ -39,6 +45,9 @@ let actions = {
     },
     delPhoto({ commit }, val) {
         commit('delPhoto', val)
+    },
+    clearPhotos({ commit }) {
+      commit('clearPhotos')
     },
     addAlbum({ commit }, val) {
         commit('addAlbum', val)

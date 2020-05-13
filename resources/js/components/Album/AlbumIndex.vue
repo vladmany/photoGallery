@@ -4,23 +4,23 @@
             <h1 class="pl-3">Альбомы</h1>
         </template>
         <template v-slot:button>
-            <div class="top-panel">
+
                 <CreateAlbum></CreateAlbum>
-            </div>
+
         </template>
         <template v-slot:actions>
-            <div class="right-panel">
+            <div class="panel">
                 <action-all-albums></action-all-albums>
                 <search-albums></search-albums>
             </div>
         </template>
-        <!--<template v-slot:content>
+        <template v-slot:content>
             <div class="albums-wrap">
                 <div class="main-panel">
                     <AllAlbums></AllAlbums>
                 </div>
             </div>
-        </template>-->
+        </template>
     </Section>
 </template>
 
@@ -54,22 +54,14 @@
 </script>
 
 <style scoped>
-
     .top-panel {
         width: 100%;
         max-width: 1110px;
         background: #ffffff;
+
+
     }
 
-    .right-panel{
-        width: 100%;
-        height: 100%;
-        display: flex;
-        flex-direction: row;
-        align-self: center;
-        justify-content: space-between;
-        flex-wrap: wrap;
-    }
     .albums-wrap {
         width: 100%;
     }
@@ -88,6 +80,26 @@
         border-left-width: 2px;
         border-left-style: solid;
         border-color: #DADADA;
+    }
+    .panel {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        align-items: center;
+        min-height: 92px;
+    }
+    @media (min-width: 1055px) {
+        .panel {
+            justify-content: space-between;
+        }
+    }
+    @media (max-width: 1054px){
+        .panel{
+            justify-content: center;
+        }
+
     }
 
     .upload {

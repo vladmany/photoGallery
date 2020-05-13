@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Dashboard\AlbumPhotoStore;
 use App\Models\Dashboard\AlbumPhoto;
 use Illuminate\Http\Request;
 
@@ -25,11 +26,24 @@ class AlbumPhotoController extends Controller
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AlbumPhotoStore $request)
     {
-        dd($request->all());
+        $data = $request->only(['photos', 'album']);
+        $photos = $data['photos'];
+        $albumId = $data['album'];
+        foreach($photos as $photoId) {
+            $dbPhoto = AlbumPhoto::where('album_id', $albumId)
+                ->where('photo_id', $photoId)
+                ->get();
+
+            if(count($dbPhoto) == 0) {
+                AlbumPhoto::create([
+                    'album_id' => $albumId,
+                    'photo_id' => $photoId,
+                ]);
+            }
+        }
     }
 
     /**

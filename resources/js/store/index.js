@@ -25,6 +25,10 @@ export default new Vuex.Store({
         maxFilesToUpload: 15,
         //---------------
 
+        // Загрузка фото 2.0
+        isUploadPhotos: false,
+        //---------------
+
         // Добавление фото в альбом(на стрнице фото)
         isAddPhotoToAlbum: false,
         //------------------------------------------
@@ -67,6 +71,15 @@ export default new Vuex.Store({
         },
         //--------------
 
+        // Загрузка фото 2.0
+        showUploadPhotos(state) {
+            state.isUploadPhotos = true
+        },
+        hideUploadPhotos(state) {
+            state.isUploadPhotos = false
+        },
+        //--------------
+
         // Добавление фото в альбом(на стрнице фото)
         showAddPhotoToAlbum(state) {
             state.isAddPhotoToAlbum = true
@@ -82,14 +95,20 @@ export default new Vuex.Store({
         }*/
     },
     actions: {
-        savePhotosToAlbum({ getters }, albumId) {
-            let photos = getters['Globals/selectedPhotos'];
-            // console.log(photos);
-
-            axios.post('/api/albums-photos', {
-                photos: photos,
-                album: albumId
-            }).then(res => console.log(res.data))
+        savePhotosToAlbum({ commit, getters }, albumId) {
+            let photos = getters.selectedPhotos;
+            if(photos && albumId) {
+                axios.post('/api/albums-photos', {
+                    photos: photos,
+                    album: albumId
+                })
+                .then(response => {
+                    if (this.state.isAddPhotoToAlbum)
+                        this.commit('hideAddPhotoToAlbum')
+                })
+                .catch(err =>
+                    console.log('error'))
+            }
         }
 
     }

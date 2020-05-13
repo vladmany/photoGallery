@@ -15,12 +15,13 @@
     * {box-sizing: border-box;}
     .search-panel {
         position: relative;
-        max-width: 100%;
-        width: 350px;
+        width: 100%;
+        max-width: 285px;
         background: #ffffff;
         height: 35px;
         display: flex;
         align-self: center;
+        justify-content: center;
     }
     input, button {
         border: none;

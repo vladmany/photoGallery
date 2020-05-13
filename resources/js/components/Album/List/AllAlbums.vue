@@ -1,34 +1,34 @@
 <template>
     <div class="wrapper">
         <div v-if="albums.length > 0" v-for="album in albums" :key="album.id" class="pt-3 pb-3 album">
-                <div class="align-self-center justify-content-center text-center ml-4 mr-4">
-                    <input type="checkbox" class="checkbox-album text-center">
-                </div>
-                <div class="text-center">
+            <div class="align-self-center justify-content-center text-center ml-4 mr-4">
+                <input type="checkbox" class="checkbox-album text-center">
+            </div>
+            <div class="align-items-center">
+                <router-link
+                    :to="{ name: 'OneAlbum', params: { id: album.id } }">
+                    <img :src="album.cover" class="img-cover">
+                </router-link>
+            </div>
+            <div class="right-info">
+                <div class="name-album pt-2 pl-lg-5">
                     <router-link
                         :to="{ name: 'OneAlbum', params: { id: album.id } }">
-                        <img :src="album.cover" class="img-cover">
+                        <p class="name-album">{{ album.name}}</p>
                     </router-link>
                 </div>
-                <div class="right-info">
-                    <div class="name-album">
-                        <router-link
-                            :to="{ name: 'OneAlbum', params: { id: album.id } }">
-                            <p class="text-center name-album">{{ album.name}}</p>
-                        </router-link>
+                <div class="second-info pl-lg-5">
+                    <div class="text-center">
+                        <p class="text-center"><img src="/storage/albums/ico_calendar.png">{{
+                            formatDate(album.created_at)}}</p>
                     </div>
-                    <div class="second-info">
-                        <div class="text-center">
-                            <p class="text-center"><img src="/storage/albums/ico_calendar.png">{{
-                                formatDate(album.created_at)}}</p>
-                        </div>
-                        <div class="text-center">
-                            <p class="text-center"><img src="/storage/albums/ico-user.png">Пользователи с
-                                доступом<img src="/storage/albums/ico-select.png">
-                            </p>
-                        </div>
+                    <div class="text-center pr-lg-5">
+                        <p class="text-center"><img src="/storage/albums/ico-user.png">Пользователи с
+                            доступом<img src="/storage/albums/ico-select.png">
+                        </p>
                     </div>
                 </div>
+            </div>
         </div>
         <no-albums v-if="albums.length == 0"></no-albums>
         <div class="album-paginate" v-if="albums.length > 0">
@@ -139,12 +139,13 @@
         flex-direction: row;
         flex-wrap: wrap;
         background-color: #ffffff;
+        justify-content: center;
     }
 
     .second-info {
         display: flex;
         flex-direction: row;
-        justify-content: space-around;
+        justify-content: space-between;
         flex-wrap: wrap;
 
     }
@@ -168,7 +169,21 @@
         font-size: 16px;
         word-wrap: break-word;
     }
+    @media (max-width: 1332px) {
+        .name-album{
+            text-align: center;
+        }
+    }
+    @media (min-width: 1333px) {
+        .name-album{
+            text-align: left;
+        }
+    }
+    .right-info{
+        max-width: 800px;
+        width: 100%;
 
+    }
     .paginate {
         display: flex;
         margin-bottom: 0;

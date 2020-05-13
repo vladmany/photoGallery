@@ -4,6 +4,7 @@
             <errors-modal-window v-if="this.$store.state.isUploadError"/>
             <success-modal-window v-if="this.$store.state.isSuccessUpload"/>
             <selection-error-modal v-if="this.$store.state.isSelectFilesError"/>
+            <upload-photos-modal/>
             <add-photo-to-album-modal-window/>
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
@@ -175,8 +176,10 @@
     import SelectionErrorModal from "./components/Photo/Upload/SelectionErrorModal";
     import AddPhotoToAlbumModalWindow from "./components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum";
     import ModalWindow from "./components/Global/ModalWindow";
+    import UploadPhotosModal from "./components/Photo/Upload/Modals/UploadPhotos";
     export default {
         components: {
+            UploadPhotosModal,
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
             return {

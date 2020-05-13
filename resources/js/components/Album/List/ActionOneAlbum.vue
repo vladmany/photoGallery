@@ -1,5 +1,5 @@
 <template>
-    <div class="actions">
+    <div class="action-panel">
         <div class="action change_album" @click="changeAlbum">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>
         </div>
@@ -25,26 +25,26 @@
 </script>
 
 <style scoped>
-    .actions {
+    .action-panel {
         display: flex;
+        flex-direction: row;
         align-items: center;
-        max-height: 93px;
+        min-height: 93px;
         height: 100%;
         max-width: 203px;
         width: 100%;
-        align-self: center;
     }
 
-    .action.available object {
+    .action-panel.available object {
         filter: brightness(75%);
         pointer-events: none;
     }
 
-    .action.available:hover object {
+    .action-panel.available:hover object {
         filter: brightness(50%);
     }
 
-    .action.available:hover {
+    .action-panel.available:hover {
         cursor: pointer;
     }
 
@@ -52,7 +52,7 @@
         margin-left: 28px;
     }
 
-    .actions div:not(:first-child) {
+    .action-panel div:not(:first-child) {
         margin-left: 15px;
     }
 </style>
