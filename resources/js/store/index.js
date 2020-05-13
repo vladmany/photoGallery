@@ -35,6 +35,9 @@ export default new Vuex.Store({
         isAddPhotoToAlbum: false,
         //------------------------------------------
 
+        // Изменение имени альбома(на стрнице детального просмотра альбома)
+        isChangeNameAlbum: false,
+        //------------------------------------------
         // Альбомы
         AllAlbums: []
         //--------
@@ -94,6 +97,9 @@ export default new Vuex.Store({
         },
         hideAddPhotoToAlbum(state) {
             state.isAddPhotoToAlbum = false
+        },
+        hideChangeNameAlbum(state) {
+            state.isChangeNameAlbum = false
         }
         //------------------------------------------
 
@@ -111,13 +117,17 @@ export default new Vuex.Store({
                     album: albumId
                 })
                 .then(response => {
-                    if (this.state.isAddPhotoToAlbum)
+                    console.log('successfully album saved');
+                    dispatch('ListAlbum/getAlbums');
+                    dispatch('ListPhoto/getPhotos');
+                    if (this.state.isAddPhotoToAlbum) {
                         this.commit('hideAddPhotoToAlbum')
+                    }
                 })
                 .catch(err =>
-                    console.log('error'))
+                    console.log('error album saved'))
             }
-        }
+        },
 
     }
 })

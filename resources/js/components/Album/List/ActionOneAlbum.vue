@@ -1,7 +1,10 @@
 <template>
     <div class="action-panel">
-        <div class="action change_album" @click="changeAlbum">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>
+        <div class="action change_album" @click="changeAlbumName">
+            <!--<object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>-->
+            <CButton text="Добавить альбом" :action="changeAlbumName" class="btn-create-album">
+                <img src="/storage/albums/actions/ic_change_album.png">
+            </CButton>
         </div>
         <div class="action to_provide_access" @click="toProvideAccess">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
@@ -15,12 +18,24 @@
         <div class="action delete_image" @click="deleteImages">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
         </div>
+        <change-name-album></change-name-album>
     </div>
 </template>
 
 <script>
+    import ChangeNameAlbum from "../Modals/ChangeNameAlbum";
     export default {
-        name: "ActionOneAlbum"
+        name: "ActionOneAlbum",
+        components: {ChangeNameAlbum},
+        methods: {
+            changeAlbumName(){
+                this.$store.state.isChangeNameAlbum = true;
+            },
+            CloseModalChangeNameAlbum(){
+                this.$store.state.isChangeNameAlbum = false;
+
+            },
+        }
     }
 </script>
 

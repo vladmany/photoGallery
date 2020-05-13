@@ -1,6 +1,6 @@
 <template>
     <div class="wrapper">
-        <div v-if="albums.length > 0" v-for="album in albums" :key="album.id" class="pt-3 pb-3 album">
+        <div v-if="albums.length > 0" v-for="album in pageOfItems" :key="album.id" class="pt-3 pb-3 album">
             <div class="align-self-center justify-content-center text-center ml-4 mr-4">
                 <input type="checkbox" class="checkbox-album text-center">
             </div>
@@ -82,7 +82,8 @@
         },
         data() {
             return {
-                pages: 0
+                pages: 0,
+                pageOfItems: 0
             }
         },
 
@@ -103,9 +104,9 @@
                 let perPage = this.paginateCount;
                 let from = (page * perPage) - perPage;
                 let to = (page * perPage);
-                let pageOfItems = this.albums.slice(from, to);
+                this.pageOfItems = this.albums.slice(from, to);
 
-                this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
+                // this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
             },
             setPages() {
                 let pages = []

@@ -37,6 +37,12 @@ let mutations = {
     clearAlbums:(state) => {
         state.selected.albums = []
     },
+    clearSelectedPhotos:(state) => {
+        state.selected.photos = [];
+    },
+    // clearSelectedAlbums:(state) => {
+    //     state.selected.albums = [];
+    // }
 
 }
 let actions = {
