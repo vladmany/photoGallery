@@ -6,6 +6,7 @@
             <selection-error-modal v-if="this.$store.state.isSelectFilesError"/>
             <upload-photos-modal/>
             <add-photo-to-album-modal-window/>
+            <change-name-album/>
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
@@ -177,8 +178,10 @@
     import AddPhotoToAlbumModalWindow from "./components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum";
     import ModalWindow from "./components/Global/ModalWindow";
     import UploadPhotosModal from "./components/Photo/Upload/Modals/UploadPhotos";
+    import ChangeNameAlbum from "./components/Album/Modals/ChangeNameAlbum";
     export default {
         components: {
+            ChangeNameAlbum,
             UploadPhotosModal,
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
