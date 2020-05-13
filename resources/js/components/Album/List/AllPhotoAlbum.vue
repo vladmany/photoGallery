@@ -34,6 +34,10 @@
             photos() {
                 return this.$store.getters['ListAlbum/photosByAlbum'](this.albumId);
             }
+        },
+        created() {
+            this.$store.dispatch('ListAlbum/getAlbums');
+            this.$store.dispatch('ListPhoto/getPhotos');
         }
     }
 </script>

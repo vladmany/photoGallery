@@ -30,7 +30,6 @@ let actions = {
         axios.get('/api/all-albums')
             .then(res => {
                 commit('getAlbums', res.data)
-                return res.data
             })
     },
     makeGroups({ state, commit }, items) {

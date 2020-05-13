@@ -192,13 +192,20 @@
         },
         methods: {
             logout() {
+            },
+            getAllData() {
+                this.$store.dispatch('ListPhoto/getPhotos');
+                this.$store.dispatch('ListAlbum/getAlbums');
             }
         },
         watch: {
             photosOpen () {
                 console.log('Изменилось')
             }
-        }
+        },
+        created() {
+            this.getAllData();
+        },
     }
 </script>
 

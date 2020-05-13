@@ -2991,12 +2991,19 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
-    logout: function logout() {}
+    logout: function logout() {},
+    getAllData: function getAllData() {
+      this.$store.dispatch('ListPhoto/getPhotos');
+      this.$store.dispatch('ListAlbum/getAlbums');
+    }
   },
   watch: {
     photosOpen: function photosOpen() {
       console.log('Изменилось');
     }
+  },
+  created: function created() {
+    this.getAllData();
   }
 });
 
@@ -3393,6 +3400,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
 
 
 
@@ -3411,6 +3419,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   methods: {
     save: function save() {
       this.$store.dispatch('savePhotosToAlbum', this.id);
+      this.$store.commit('clearSelectedPhotos');
+      this.$store.dispatch('ListAlbum/getAlbums');
+      this.$store.dispatch('ListPhoto/getPhotos');
       this.$router.push({
         name: 'OneAlbum',
         params: {
@@ -3425,7 +3436,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     album: function album() {
       return this.$store.getters['ListAlbum/album'](this.id);
     }
-  })
+  }),
+  created: function created() {
+    this.$store.dispatch('ListPhoto/getPhotos');
+    console.log(this.photos);
+  }
 });
 
 /***/ }),
@@ -3615,6 +3630,10 @@ __webpack_require__.r(__webpack_exports__);
     photos: function photos() {
       return this.$store.getters['ListAlbum/photosByAlbum'](this.albumId);
     }
+  },
+  created: function created() {
+    this.$store.dispatch('ListAlbum/getAlbums');
+    this.$store.dispatch('ListPhoto/getPhotos');
   }
 });
 
@@ -4269,6 +4288,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     paginateCount: {
       type: Number,
       "default": 20
+    },
+    reverseGroup: {
+      type: Boolean,
+      "default": false
     }
   },
   data: function data() {
@@ -4292,7 +4315,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       var from = page * perPage - perPage;
       var to = page * perPage;
       var pageOfItems = this.photos.slice(from, to);
-      this.$store.dispatch('ListPhoto/makeGroups', pageOfItems);
+      this.$store.dispatch('ListPhoto/makeGroups', {
+        items: pageOfItems,
+        reverse: this.reverseGroup
+      });
     },
     setPages: function setPages() {
       var pages = [];
@@ -4304,6 +4330,10 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
       this.pages = pages.length;
     }
+  },
+  created: function created() {
+    this.setPages();
+    this.onChangePage(1);
   }
 });
 
@@ -9923,7 +9953,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.fade-enter-active[data-v-ae295bdc],\n.fade-leave-active[data-v-ae295bdc] {\n    /*transition: all 0.9s ease;*/\n    overflow: hidden;\n    visibility: visible;\n    position: absolute;\n    width:100%;\n    opacity: 1;\n}\n.fade-enter[data-v-ae295bdc],\n.fade-leave-to[data-v-ae295bdc] {\n    visibility: hidden;\n    width:100%;\n    opacity: 0;\n}\n.photo-wrapper[data-v-ae295bdc] {\n    max-width: 700px;\n    width: 100%;\n    max-height: 602px;\n    height: 100%;\n    margin-right: auto;\n    margin-left: auto;\n    justify-content: center;\n}\n.photo-wrapper div[data-v-ae295bdc] {\n    margin-right: auto;\n    margin-left: auto;\n}\nimg[data-v-ae295bdc] {\n    max-width: 700px;\n    width: 100%;\n    max-height: 602px;\n    /*height: 100%;*/\n}\n.arrows[data-v-ae295bdc] {\n    display: flex;\n    position: absolute;\n    top: 50%;\n    flex-direction: row;\n    justify-content: space-between;\n    max-width: 800px;\n    width: 100%;\n}\n.prev[data-v-ae295bdc], .next[data-v-ae295bdc] {\n    cursor: pointer;\n    /*position: absolute;*/\n    /*top: 50%;*/\n    width: 40px;\n    height: 40px;\n    padding: 11px;\n    padding-left: 15px;\n    padding-top: 9px;\n    color: white;\n    font-weight: bold;\n    font-size: 14px;\n    transition: 0.7s ease;\n    border-radius: 50%;\n    /*text-decoration: none;*/\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    background-color: rgba(0,0,0,0.2);\n}\n.next[data-v-ae295bdc] {\n    /*right: 133px;*/\n}\n.prev[data-v-ae295bdc] {\n    /*left: 133px;*/\n}\n.prev[data-v-ae295bdc]:hover, .next[data-v-ae295bdc]:hover {\n    background-color: rgba(0,0,0,0.9);\n}\n.one-slide[data-v-ae295bdc] {\n    width: 200px;\n    height: 200px;\n}\n.slider[data-v-ae295bdc] {\n    position: relative;\n    display: flex;\n    justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.one-photo[data-v-ae295bdc] {\n    max-height: 500px;\n}\n.fade-enter-active[data-v-ae295bdc],\n.fade-leave-active[data-v-ae295bdc] {\n    /*transition: all 0.9s ease;*/\n    overflow: hidden;\n    visibility: visible;\n    position: absolute;\n    width:100%;\n    opacity: 1;\n}\n.fade-enter[data-v-ae295bdc],\n.fade-leave-to[data-v-ae295bdc] {\n    visibility: hidden;\n    width:100%;\n    opacity: 0;\n}\n.photo-wrapper[data-v-ae295bdc] {\n    /*max-width: 700px;*/\n    /*width: 100%;*/\n    /*max-height: 602px;*/\n    /*height: 100%;*/\n    margin-right: auto;\n    margin-left: auto;\n    justify-content: center;\n}\n.photo-wrapper div[data-v-ae295bdc] {\n    margin-right: auto;\n    margin-left: auto;\n}\nimg[data-v-ae295bdc] {\n    /*max-width: 700px;*/\n    /*width: 100%;*/\n    /*max-height: 602px;*/\n    /*height: 100%;*/\n}\n.arrows[data-v-ae295bdc] {\n    display: flex;\n    position: absolute;\n    top: 50%;\n    flex-direction: row;\n    justify-content: space-between;\n    max-width: 800px;\n    width: 100%;\n}\n.prev[data-v-ae295bdc], .next[data-v-ae295bdc] {\n    cursor: pointer;\n    /*position: absolute;*/\n    /*top: 50%;*/\n    width: 40px;\n    height: 40px;\n    padding: 11px;\n    padding-left: 15px;\n    padding-top: 9px;\n    color: white;\n    font-weight: bold;\n    font-size: 14px;\n    transition: 0.7s ease;\n    border-radius: 50%;\n    /*text-decoration: none;*/\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    background-color: rgba(0,0,0,0.2);\n}\n.next[data-v-ae295bdc] {\n    /*right: 133px;*/\n}\n.prev[data-v-ae295bdc] {\n    /*left: 133px;*/\n}\n.prev[data-v-ae295bdc]:hover, .next[data-v-ae295bdc]:hover {\n    background-color: rgba(0,0,0,0.9);\n}\n.one-slide[data-v-ae295bdc] {\n    width: 200px;\n    height: 200px;\n}\n.slider[data-v-ae295bdc] {\n    position: relative;\n    display: flex;\n    justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -10018,7 +10048,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.one-photo[data-v-19175685] {\n    width: 80px;\n    height: 80px;\n}\n.photo_element[data-v-19175685] {\n    margin: 7px;\n}\n.photo_element input[type=checkbox][data-v-19175685] {\n    display: flex;\n    position: absolute;\n    transform:scale(1.5);\n    margin-top: 6px;\n    margin-left: 6px!important;\n}\n", ""]);
+exports.push([module.i, "\n.one-photo[data-v-19175685] {\n    max-height: 100px;\n}\n.photo_element[data-v-19175685] {\n    margin: 7px;\n}\n.photo_element input[type=checkbox][data-v-19175685] {\n    display: flex;\n    position: absolute;\n    transform:scale(1.5);\n    margin-top: 6px;\n    margin-left: 6px!important;\n}\n", ""]);
 
 // exports
 
@@ -43640,7 +43670,11 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("AllPhoto", {
-                  attrs: { photos: _vm.photos, "paginate-count": 20 }
+                  attrs: {
+                    photos: _vm.photos,
+                    "paginate-count": 20,
+                    "reverse-group": true
+                  }
                 })
               ],
               1
@@ -44322,7 +44356,10 @@ var render = function() {
         { staticClass: "photo-wrapper", attrs: { name: "fade", tag: "div" } },
         _vm._l([_vm.currentIndex], function(i) {
           return _c("div", { key: i, staticClass: "d-flex" }, [
-            _c("img", { attrs: { src: _vm.currentImg } })
+            _c("img", {
+              staticClass: "img-fluid one-photo",
+              attrs: { src: _vm.currentImg }
+            })
           ])
         }),
         0
@@ -44862,7 +44899,7 @@ var render = function() {
           },
           [
             _c("img", {
-              staticClass: "one-photo",
+              staticClass: "img-fluid  one-photo",
               attrs: { src: _vm.photo.url, alt: _vm.photo.name }
             })
           ]
@@ -64822,9 +64859,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           photos: photos,
           album: albumId
         }).then(function (response) {
-          if (_this.state.isAddPhotoToAlbum) _this.commit('hideAddPhotoToAlbum');
+          console.log('successfully album saved');
+          dispatch('ListAlbum/getAlbums');
+          dispatch('ListPhoto/getPhotos');
+
+          if (_this.state.isAddPhotoToAlbum) {
+            _this.commit('hideAddPhotoToAlbum');
+          }
         })["catch"](function (err) {
-          return console.log('error');
+          return console.log('error album saved');
         });
       }
     }
@@ -64929,7 +64972,13 @@ var mutations = {
   },
   clearAlbums: function clearAlbums(state) {
     state.selected.albums = [];
-  }
+  },
+  clearSelectedPhotos: function clearSelectedPhotos(state) {
+    state.selected.photos = [];
+  } // clearSelectedAlbums:(state) => {
+  //     state.selected.albums = [];
+  // }
+
 };
 var actions = {
   addPhoto: function addPhoto(_ref, val) {
@@ -65015,7 +65064,6 @@ var actions = {
     var commit = _ref.commit;
     axios.get('/api/all-albums').then(function (res) {
       commit('getAlbums', res.data);
-      return res.data;
     });
   },
   makeGroups: function makeGroups(_ref2, items) {
@@ -65200,13 +65248,26 @@ var actions = {
       commit('getPhotos', res.data);
     });
   },
-  makeGroups: function makeGroups(_ref2, items) {
+  makeGroups: function makeGroups(_ref2, payload) {
     var state = _ref2.state,
         commit = _ref2.commit;
+    var items = payload.items;
+    var reverse = payload.reverse;
     var weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб'];
     var months = ['января', 'февраля', 'марта', 'апреля', 'мая', 'июня', 'июля', 'августа', 'сентября', 'октября', 'ноября', 'декабря'];
     var groups = {};
     var key = 'created_at';
+    items.sort(function (a, b) {
+      if (a[key] > b[key]) {
+        return -1;
+      }
+
+      if (a[key] < b[key]) {
+        return 1;
+      }
+
+      return 0;
+    });
     items.forEach(function (item) {
       var val = item[key].split('T')[0];
       var date = new Date(val);
@@ -65220,8 +65281,7 @@ var actions = {
 
       groups[ret].push(item);
     });
-    var keys = Object.keys(groups); // keys.reverse();
-
+    var keys = Object.keys(groups);
     var desc_groups = {};
 
     for (var _i2 = 0, _keys = keys; _i2 < _keys.length; _i2++) {
@@ -65264,8 +65324,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

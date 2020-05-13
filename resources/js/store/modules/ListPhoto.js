@@ -67,7 +67,9 @@ let actions = {
                 commit('getPhotos', res.data);
             })
     },
-    makeGroups({ state, commit }, items) {
+    makeGroups({ state, commit }, payload) {
+        let items = payload.items;
+        let reverse = payload.reverse;
         let weekdays = ['вс', 'пн', 'вт', 'ср', 'чт', 'пт', 'сб',];
         let months = [
             'января', 'февраля', 'марта', 'апреля',
@@ -76,6 +78,18 @@ let actions = {
         ];
         let groups = {};
         let key = 'created_at';
+
+        items.sort(
+            function( a, b ) {
+                if ( a[key] > b[key] ){
+                    return -1;
+                }
+                if ( a[key] < b[key] ){
+                    return 1;
+                }
+                return 0;
+        })
+
         items.forEach(item => {
             let val = item[key].split('T')[0];
             let date = new Date(val);
@@ -89,7 +103,6 @@ let actions = {
         });
 
         let keys = Object.keys(groups);
-        // keys.reverse();
         let desc_groups = {};
 
         for(key of keys) {

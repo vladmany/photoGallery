@@ -4,7 +4,7 @@
             <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'photo-' + photo.id" v-model="isSelected">
             <label :for="'photo-' + photo.id"></label>
             <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id } }">
-                <img :src="photo.url" :alt="photo.name" class="one-photo">
+                <img :src="photo.url" :alt="photo.name" class="img-fluid  one-photo">
             </router-link>
         </div>
     </div>
@@ -41,8 +41,7 @@
 
 <style scoped>
     .one-photo {
-        width: 80px;
-        height: 80px;
+        max-height: 100px;
     }
 
     .photo_element {

@@ -2,9 +2,9 @@
     <div class="" v-if="photos.length > 0">
         <div class="photo-wrapper">
             <div class="photo-content">
-                <GroupPhoto v-for="(elements, title, index) in groups"
-                            :elements="elements" :title="title"
-                            :key="title"
+                <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
+                            :elements="elements"
+                            :title="title"
                             :groupId="index"/>
             </div>
             <div class="photo-paginate">
@@ -56,6 +56,10 @@
             paginateCount: {
                 type: Number,
                 default: 20
+            },
+            reverseGroup: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
@@ -81,7 +85,10 @@
                 let to = (page * perPage);
                 let pageOfItems = this.photos.slice(from, to);
 
-                this.$store.dispatch('ListPhoto/makeGroups', pageOfItems);
+                this.$store.dispatch('ListPhoto/makeGroups', {
+                    items: pageOfItems,
+                    reverse: this.reverseGroup,
+                });
 
             },
             setPages () {
@@ -93,6 +100,10 @@
                 this.pages = pages.length;
             },
         },
+        created() {
+            this.setPages();
+            this.onChangePage(1);
+        }
     }
 </script>
 
