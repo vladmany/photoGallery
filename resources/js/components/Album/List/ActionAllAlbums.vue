@@ -34,7 +34,7 @@
         align-items: center;
         max-height: 93px;
         height: 100%;
-        max-width: 244px;
+        max-width: 285px;
         width: 100%;
         align-self: center;
     }
