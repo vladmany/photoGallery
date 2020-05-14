@@ -67130,7 +67130,8 @@ var getters = {
       var album = getters.album(id);
 
       if (album) {
-        return album.photos;
+        var photos = album.photos;
+        return photos;
       }
 
       return false;

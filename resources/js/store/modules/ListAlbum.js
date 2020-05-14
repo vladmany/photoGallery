@@ -13,7 +13,8 @@ let getters = {
     photosByAlbum: (state, getters) => id => {
         let album = getters.album(id);
         if (album) {
-            return album.photos;
+            let photos = album.photos;
+            return photos;
         }
         return false;
     }
