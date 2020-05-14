@@ -10,7 +10,9 @@ import Section from "./components/Global/Section";
 import VueCarousel from '@chenfengyuan/vue-carousel';
 import Paginate from 'vuejs-paginate'
 import JwPagination from 'jw-vue-pagination';
+import Toasted from 'vue-toasted';
 
+Vue.use(Toasted)
 
 Vue.component('Section', Section);
 

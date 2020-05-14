@@ -34,6 +34,7 @@ class AlbumPhotoController extends Controller
         $data = $request->only(['photos', 'album']);
         $photos = $data['photos'];
         $albumId = $data['album'];
+        $successPhotos = [];
 
         $coverId = -1;
         foreach($photos as $photoId) {
@@ -47,6 +48,7 @@ class AlbumPhotoController extends Controller
                     'album_id' => $albumId,
                     'photo_id' => $photoId,
                 ]);
+                array_push($successPhotos,$photoId);
             }
         }
 
@@ -56,6 +58,8 @@ class AlbumPhotoController extends Controller
             $album->cover = $photo->url;
             $album->save();
         }
+
+        return response()->json($successPhotos);
     }
 
     /**
