@@ -82,6 +82,7 @@
             },
         },
         created() {
+            this.$store.dispatch('ListPhoto/getPhotos');
             this.$store.dispatch('ListAlbum/getAlbums');
         },
     }
