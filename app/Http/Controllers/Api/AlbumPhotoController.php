@@ -18,7 +18,9 @@ class AlbumPhotoController extends Controller
     public function index()
     {
         $objects = AlbumPhoto::with('albums')
-            ->with('photos')
+            ->with(['photos' => function ($query) {
+                    $query->orderBy('created_at', 'desc');
+                }])
             ->get();
 
         return $objects;

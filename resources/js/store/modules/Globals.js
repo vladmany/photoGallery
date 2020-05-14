@@ -7,6 +7,9 @@ let state = {
 let getters = {
     selectedPhotos: (state) => state.selected.photos,
     selectedAlbums: (state) => state.selected.albums,
+    isSelectedAlbum: (state, getters) => id => {
+        return getters.selectedAlbums.includes(id);
+    },
 }
 let mutations = {
     addPhoto:(state, val) =>
