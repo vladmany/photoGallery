@@ -4642,6 +4642,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   })),
   created: function created() {
     this.$store.dispatch('ListPhoto/getPhotos');
+    this.$store.dispatch('clearPhotos');
   }
 });
 
@@ -66481,6 +66482,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           // dispatch('ListPhoto/getPhotos');
 
           if (_this.state.isAddPhotoToAlbum) {
+            _this.dispatch('clearPhotos');
+
             _this.commit('hideAddPhotoToAlbum');
 
             if (response.data.length <= 0) {

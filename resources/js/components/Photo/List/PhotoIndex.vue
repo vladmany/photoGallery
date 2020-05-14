@@ -34,6 +34,7 @@
         },
         created() {
             this.$store.dispatch('ListPhoto/getPhotos');
+            this.$store.dispatch('clearPhotos');
         },
     }
 </script>

@@ -122,6 +122,7 @@ export default new Vuex.Store({
                     // dispatch('ListAlbum/getAlbums');
                     // dispatch('ListPhoto/getPhotos');
                     if (this.state.isAddPhotoToAlbum) {
+                        this.dispatch('clearPhotos');
                         this.commit('hideAddPhotoToAlbum')
                         if (response.data.length <= 0) {
                             Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
