@@ -180,11 +180,10 @@
     import ModalWindow from "./components/Global/ModalWindow";
     import UploadPhotosModal from "./components/Photo/Upload/Modals/UploadPhotos";
     import SelectionFilesErrorModal from "./components/Photo/Upload/Modals/SelectionFilesError";
-    import ChangeNameAlbum from "./components/Album/Modals/ChangeNameAlbum";
+
     export default {
         components: {
             SelectionFilesErrorModal,
-            ChangeNameAlbum,
             UploadPhotosModal,
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {

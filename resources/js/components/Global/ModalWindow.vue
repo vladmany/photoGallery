@@ -11,6 +11,7 @@
                             <rect x="1.7334" y="1.7334" width="22.5333" height="22.5333"/>
                         </g>
                     </svg>
+<!--                    <object type="image/svg+xml" data="/storage/photos/ic_computer.svg"></object>-->
                 </button>
                 <div class="window-content">
                     <span class="title">{{title}}</span>

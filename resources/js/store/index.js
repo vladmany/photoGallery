@@ -100,6 +100,9 @@ export default new Vuex.Store({
         hideAddPhotoToAlbum(state) {
             state.isAddPhotoToAlbum = false
         },
+        showChangeNameAlbum(state) {
+            state.isChangeNameAlbum = true
+        },
         hideChangeNameAlbum(state) {
             state.isChangeNameAlbum = false
         },
