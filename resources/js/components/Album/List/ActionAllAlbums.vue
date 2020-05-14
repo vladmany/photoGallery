@@ -4,13 +4,13 @@
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
             <label for="all-selector"></label>
         </div>
-        <div class="action to_provide_access" @click="toProvideAccess">
+        <div class="action to_provide_access">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
         </div>
-        <div class="action turn_download" @click="turnDownload">
+        <div class="action turn_download">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
-        <div class="action delete_image" @click="deleteImages">
+        <div class="action delete_image">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
         </div>
     </div>
@@ -18,7 +18,17 @@
 
 <script>
     export default {
-        name: "ActionAllAlbums"
+        name: "ActionAllAlbums",
+        data() {
+            return {
+                isSelected: false
+            }
+        },
+        watch: {
+            isSelected() {
+                this.$store.dispatch('ListAlbum/selectAllAlbums', this.isSelected);
+            }
+        }
     }
 </script>
 
