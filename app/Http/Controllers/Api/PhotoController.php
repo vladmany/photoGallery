@@ -8,6 +8,7 @@ use App\Models\Dashboard\Photo;
 use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
@@ -36,28 +37,26 @@ class PhotoController extends Controller
     {
 //        dd('ДАДОВА!');
 ////        dd($request->allFiles('photo'));
+        $userId = Auth::check() ? Auth::id() : 1;
+
         if($request->hasFile('photo')) {
 //            dd('ЕСТЬ ФАЙЛЫ');
-            foreach($request->file('photo') as $file) {
-//                $file = $file;
-                $kindId = $request->all()['kind'] ?? 1;
-                $date = Carbon::now()->format('Y_m_d');
-                $data = [];
-
-                $data['user_id'] = 1;
-                $data['size'] = $file->getSize();
-                $data['name'] = $file->getClientOriginalName();
-                $data['path'] = $file->store("/images/{$date}", 'public');
-                $data['extension'] = $file->getClientOriginalExtension();
-                $data['url'] = Storage::url($data['path']);
-                $imageSize = getimagesize($file);
-                $data['width'] = $imageSize[0];
-                $data['height'] = $imageSize[2];
-                $data['kind_id'] = $kindId;
+            $file = $request->file('photo');
+            $kindId = $request->all()['kind'] ?? 1;
+            $date = Carbon::now()->format('Y_m_d');
+            $data = [];
+            $data['user_id'] = $userId;
+            $data['size'] = $file->getSize();
+            $data['name'] = $file->getClientOriginalName();
+            $data['path'] = $file->store("/images/{$date}", 'public');
+            $data['extension'] = $file->getClientOriginalExtension();
+            $data['url'] = Storage::url($data['path']);
+            $imageSize = getimagesize($file);
+            $data['width'] = $imageSize[0];
+            $data['height'] = $imageSize[2];
+            $data['kind_id'] = $kindId;
 //                dd(Photo::all());
-                Photo::create($data);
-        }
-
+            Photo::create($data);
         }
 
     }

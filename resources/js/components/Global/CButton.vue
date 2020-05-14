@@ -1,6 +1,6 @@
 <template>
     <div>
-        <button :class="type" @click="action">{{text}}</button>
+        <button :class="type + (state ? '' : ' disabled')" @click="action">{{text}}</button>
     </div>
 </template>
 
@@ -21,6 +21,10 @@
             text: {
                 type: String,
                 default: 'Продолжить'
+            },
+            state: {
+                type: Boolean,
+                default: true
             }
         },
     }
@@ -46,11 +50,21 @@
         margin-right: 10px;
     }
 
+    button.primary.disabled {
+        background-color: rgba(24, 117, 240, 0.62);
+        pointer-events: none;
+    }
+
     button.secondary {
         font-weight: 900;
         font-size: 12px;
         line-height: 50px;
         color: #B3B3B3;
         background-color: #ffffff;
+    }
+
+    button.secondary.disabled {
+        color: rgb(225, 225, 225);
+        pointer-events: none;
     }
 </style>

@@ -28,6 +28,7 @@
                 <AllPhoto
                     :photos="photos"
                     :paginate-count="20"
+                    :reverse-group="true"
                 ></AllPhoto>
             </div>
         </template>
@@ -51,6 +52,9 @@
         methods: {
             save() {
                 this.$store.dispatch('savePhotosToAlbum', this.id);
+                this.$store.commit('clearSelectedPhotos');
+                this.$store.dispatch('ListAlbum/getAlbums');
+                this.$store.dispatch('ListPhoto/getPhotos');
                 this.$router.push({name: 'OneAlbum', params: { id: this.id}});
             }
         },
@@ -62,6 +66,10 @@
                 return this.$store.getters['ListAlbum/album'](this.id);
             },
         },
+        created() {
+            this.$store.dispatch('ListPhoto/getPhotos');
+            console.log(this.photos);
+        }
     }
 </script>
 

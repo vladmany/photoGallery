@@ -1,11 +1,13 @@
 <template>
     <div>
         <div class="wrapper">
-            <errors-modal-window v-if="this.$store.state.isUploadError"/>
-            <success-modal-window v-if="this.$store.state.isSuccessUpload"/>
-            <selection-error-modal v-if="this.$store.state.isSelectFilesError"/>
+<!--            <errors-modal-window v-if="this.$store.state.isUploadError"/>-->
+<!--            <success-modal-window v-if="this.$store.state.isSuccessUpload"/>-->
+<!--            <selection-error-modal v-if="this.$store.state.isSelectFilesError"/>-->
+            <selection-files-error-modal/>
             <upload-photos-modal/>
             <add-photo-to-album-modal-window/>
+            <change-name-album/>
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
@@ -177,8 +179,12 @@
     import AddPhotoToAlbumModalWindow from "./components/Photo/List/Actions/AddToAlbum/Modals/AddPhotoToAlbum";
     import ModalWindow from "./components/Global/ModalWindow";
     import UploadPhotosModal from "./components/Photo/Upload/Modals/UploadPhotos";
+    import SelectionFilesErrorModal from "./components/Photo/Upload/Modals/SelectionFilesError";
+    import ChangeNameAlbum from "./components/Album/Modals/ChangeNameAlbum";
     export default {
         components: {
+            SelectionFilesErrorModal,
+            ChangeNameAlbum,
             UploadPhotosModal,
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
@@ -192,13 +198,20 @@
         },
         methods: {
             logout() {
+            },
+            getAllData() {
+                this.$store.dispatch('ListPhoto/getPhotos');
+                this.$store.dispatch('ListAlbum/getAlbums');
             }
         },
         watch: {
             photosOpen () {
                 console.log('Изменилось')
             }
-        }
+        },
+        created() {
+            this.getAllData();
+        },
     }
 </script>
 

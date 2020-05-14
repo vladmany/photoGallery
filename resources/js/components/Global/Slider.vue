@@ -2,7 +2,7 @@
     <div class="slider">
         <transition-group name="fade" tag="div" class="photo-wrapper">
             <div v-for="i in [currentIndex]" :key="i" class="d-flex">
-                <img :src="currentImg" />
+                <img class="img-fluid one-photo" :src="currentImg" />
             </div>
         </transition-group>
         <div class="arrows">
@@ -36,7 +36,7 @@
 
         methods: {
             startSlide: function() {
-            //     this.timer = setInterval(this.next, 4000);
+                //     this.timer = setInterval(this.next, 4000);
             },
 
             next: function() {
@@ -56,6 +56,9 @@
 </script>
 
 <style scoped>
+    .one-photo {
+        max-height: 500px;
+    }
     .fade-enter-active,
     .fade-leave-active {
         /*transition: all 0.9s ease;*/
@@ -74,10 +77,10 @@
     }
 
     .photo-wrapper {
-        max-width: 700px;
-        width: 100%;
-        max-height: 602px;
-        height: 100%;
+        /*max-width: 700px;*/
+        /*width: 100%;*/
+        /*max-height: 602px;*/
+        /*height: 100%;*/
         margin-right: auto;
         margin-left: auto;
         justify-content: center;
@@ -86,13 +89,12 @@
     .photo-wrapper div {
         margin-right: auto;
         margin-left: auto;
-
     }
 
     img {
-        max-width: 700px;
-        width: 100%;
-        max-height: 602px;
+        /*max-width: 700px;*/
+        /*width: 100%;*/
+        /*max-height: 602px;*/
         /*height: 100%;*/
     }
 

@@ -5,14 +5,7 @@
             <form action="/photoGallery/public/index.php/api/photos/upload" method="post" class="from-computer-form">
                 <input type="file" name="photo" id="photo" ref="photo" class="inputfile inputfile-1" @change="sendFiles" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
                 <label for="photo" class="from-computer" @click="switchShowMethods">
-                    <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="7" width="24" height="16">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M23 21C24.1 21 25 20.1 25 19V9C25 7.9 24.1 7 23 7H7C5.9 7 5 7.9 5 9V19C5 20.1 5.9 21 7 21H3V23H27V21H23ZM7 9H23V19H7V9Z" fill="white"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <rect x="2" y="2" width="26" height="26" fill="#D8D8D8"/>
-                        </g>
-                    </svg>
+                    <object type="image/svg+xml" data="/storage/photos/ic_computer.svg"></object>
                     <span>С компьютера</span>
                 </label>
             </form>
@@ -38,13 +31,7 @@
         name: "UploadPhotosComponent",
         data() {
             return {
-                showMethods: false,
-                steps: false,
-                step: false,
-                height: 0,
-                width: 0,
-                formData: new FormData(),
-                successFiles: []
+
             }
         },
         methods: {
@@ -53,187 +40,67 @@
                 methods.css('display', methods.css('display') === 'none' ? 'flex' : 'none')
             },
             cancelUpload() {
-
             },
             sendFiles(e) {
                 let photos = $(e.target);
+                console.log(photos.prop('files').length)
+                console.log(this.$store.state.maxFilesToUpload)
                 if ((photos.prop('files').length > 0) && (photos.prop('files').length < this.$store.state.maxFilesToUpload))
                 {
-                    this.steps = (this.$refs.photo.files.length > 10) ? 10 : this.$refs.photo.files.length;
-                    this.step = 0
-                    let files = this.$refs.photo.files;
-                    let file = files[0]
-                    if (this.validate(file) === false)
-                    {
-                        setTimeout( () => {
-                            this.$store.commit('showUploadError');
-                        }, 250);
-                        this.step++
-                    } else {
-                        this.step++
-                        this.$root.$emit('continueUpload')
-                        let res = Array.from(this.formData.entries(), ([key, prop]) => (
-                            {[key]: {
-                                    "ContentLength":
-                                        typeof prop === "string"
-                                            ? prop.length
-                                            : prop.size
-                                }
-                            }));
-                        this.formData.append('photo[' + res.length + ']', file);
-                        this.successFiles.push(file.name)
-                    }
+                    let files = Array.from(this.$refs.photo.files);
+                    this.$root.$emit('uploadPhotos',files)
+                    this.$store.commit('showUploadPhotos')
                 }
-                // if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
-                //         this.$store.commit('showSelectError')
-                // }
+                if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
+                        console.log(this.$store.commit('showSelectError'))
+                }
             },
-            validate(file) {
-                if (file.size > 16000000)
-                {
-                    this.$store.commit('setUploadErrorMessage', 'Превышает объем  загружаемого фото. Объем загружаемого файла не должен превышать 16 МВ')
-                    this.$store.commit('setUploadErrorFile',file.name)
-                    return false
-                }
-                if (!['bmp','gif','jpeg','jpg','png','tiff'].includes(file.type.split('/').pop()))
-                {
-                    this.$store.commit('setUploadErrorMessage', 'Не соответствует формат загружаемых фото. Рекомендуемые форматы - BMP; GIF; JPG; PNG; TIFF')
-                    this.$store.commit('setUploadErrorFile',file.name)
-                    return false
-                }
-
-                let reader = new FileReader();
-
-                reader.readAsDataURL(file);
-                reader.onload = evt => {
-                    let img = new Image();
-                    img.onload = () => {
-                        this.width = img.width;
-                        this.height = img.height;
-                    }
-                    img.src = evt.target.result;
-                }
-
-                reader.onerror = evt => {
-                    console.error(evt);
-                }
-
-                setTimeout( () => {
-                    if ((this.width <= 3024) && (this.height <= 4032)) {
-                        return true
-                    } else {
-
-
-                        this.$store.commit('setUploadErrorMessage', 'Не соответствует размер загружаемых фото. Размер загружаемых фото не должен превышать 3024 × 4032')
-                        this.$store.commit('setUploadErrorFile',file.name)
-                        return false
-                    }
-                }, 250);
-
-                return true
-            }
+            // validate(file) {
+            //     if (file.size > 16000000)
+            //     {
+            //         this.$store.commit('setUploadErrorMessage', 'Превышает объем  загружаемого фото. Объем загружаемого файла не должен превышать 16 МВ')
+            //         this.$store.commit('setUploadErrorFile',file.name)
+            //         return false
+            //     }
+            //     if (!['bmp','gif','jpeg','jpg','png','tiff'].includes(file.type.split('/').pop()))
+            //     {
+            //         this.$store.commit('setUploadErrorMessage', 'Не соответствует формат загружаемых фото. Рекомендуемые форматы - BMP; GIF; JPG; PNG; TIFF')
+            //         this.$store.commit('setUploadErrorFile',file.name)
+            //         return false
+            //     }
+            //     let reader = new FileReader();
+            //     reader.readAsDataURL(file);
+            //     reader.onload = evt => {
+            //         let img = new Image();
+            //         img.onload = () => {
+            //             this.width = img.width;
+            //             this.height = img.height;
+            //         }
+            //         img.src = evt.target.result;
+            //     }
+            //     reader.onerror = evt => {
+            //         console.error(evt);
+            //     }
+            //     setTimeout( () => {
+            //         if ((this.width <= 3024) && (this.height <= 4032)) {
+            //             return true
+            //         } else {
+            //             this.$store.commit('setUploadErrorMessage', 'Не соответствует размер загружаемых фото. Размер загружаемых фото не должен превышать 3024 × 4032')
+            //             this.$store.commit('setUploadErrorFile',file.name)
+            //             return false
+            //         }
+            //     }, 250);
+            //     return true
+            // }
         },
         created() {
             let vm = this;
             document.addEventListener('mouseup', function (e) {
                 let container = $(".upload-methods");
-
                 if ((container.has(e.target).length === 0) && ($(':focus').attr('class') ===! 'upload-btn' || $(':focus').attr('class') == undefined) && (container.css('display') === 'flex')){
                     container.css('display','none')
                 }
             });
-        },
-        mounted() {
-            this.$root.$on('continueUpload', () => {
-                if ((this.step !== false) && (this.steps !== false))
-                {
-                    if ((this.step === this.steps) && (this.step !== false) && (this.steps !== false)) {
-                        axios.post('api/photos/upload', this.formData, {
-                            headers: {
-                                'Content-Type': 'multipart/form-data'
-                            }
-                        })
-                            .then(response => {
-                                this.formData = new FormData() // Сброс
-                                this.$store.dispatch('ListPhoto/getPhotos');
-                                if (this.successFiles.length > 0)
-                                {
-                                    this.$store.commit('setUploadSuccessFile', this.successFiles)
-                                    this.$store.commit('showUploadSuccess')
-                                }
-
-                            })
-                            .catch(error => {
-                                if (error.response.status === 422)
-                                {
-                                    let errors = [];
-                                    for (let key in error.response.data.errors) {
-                                        errors.push(error.response.data.errors[key][0])
-                                    }
-                                    this.$store.commit('setUploadErrorMessages',errors)
-                                    let fileNames = [];
-                                    let files = this.$refs.photo.prop('files')
-                                    for(let i = 0; i < files.length; i++)
-                                        fileNames.push(files[i].name)
-                                    this.$store.commit('setUploadErrorFiles', fileNames)
-                                    this.$store.commit('showUploadError');
-                                    this.$refs.photo.val('')
-                                }
-                            });
-                    }
-                    if ((this.step < this.steps))
-                    {
-                        let files = this.$refs.photo.files;
-                        let file = files[this.step]
-
-
-                        if (this.$store.state.isUploadError === true)
-                            this.$store.commit('hideUploadError');
-
-                        if (this.validate(file) === false)
-                        {
-                            setTimeout( () => {
-                                this.$store.commit('showUploadError');
-                            }, 250);
-                            this.step++
-                        } else {
-                            this.step++
-                            this.$root.$emit('continueUpload')
-                            let res = Array.from(this.formData.entries(), ([key, prop]) => (
-                                {[key]: {
-                                        "ContentLength":
-                                            typeof prop === "string"
-                                                ? prop.length
-                                                : prop.size
-                                    }
-                                }));
-                            this.formData.append('photo[' + res.length + ']', file);
-                            this.successFiles.push(file.name)
-                        }
-
-                    } else {
-                        this.$store.commit('hideUploadError')
-                    }
-
-
-                } else {
-                    this.$root.$emit('cancelUpload')
-                }
-
-            })
-            this.$root.$on('cancelUpload', () => {
-                this.$refs.photo.value = '';
-                this.steps = false;
-                this.step = false;
-                this.$store.commit('hideUploadError');
-            })
-            this.$root.$on('closeSuccess', () => {
-                this.successFiles = []
-                this.$store.commit('hideUploadSuccess')
-            })
-            this.$root.$on('closeSelError', () => {
-                this.$store.commit('hideSelectError')
-            })
         }
     }
 </script>
@@ -254,7 +121,6 @@
         /*margin-right: 10px;*/
         text-transform: uppercase;
     }
-
     .upload-methods {
         z-index: 999;
         display: none;
@@ -267,7 +133,6 @@
         background: #FFFFFF;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
     }
-
     .upload-methods .from-computer, .upload-methods .from-disk {
         padding-left: 27px;
         margin: 0;
@@ -283,22 +148,20 @@
         line-height: 60px;
         color: #999999;
     }
-
     .from-computer-form {
         max-height: 62px;
     }
-
-    .upload-methods .from-computer svg {
+    .upload-methods .from-computer object {
+        vertical-align: middle;
+        pointer-events: none;
         min-width: 30px;
         min-height: 30px;
         padding: 0;
         margin: 0;
     }
-
     button.from-disk {
         border-top: 2px solid #F5F5F5!important;
     }
-
     .inputfile {
         width: 0.1px;
         height: 0.1px;
@@ -307,7 +170,6 @@
         position: absolute;
         z-index: -1;
     }
-
     .inputfile + label {
         max-width: 80%;
         font-size: 1.25rem;
@@ -321,18 +183,15 @@
         padding: 0.625rem 1.25rem;
         /* 10px 20px */
     }
-
     .inputfile:focus + label,
     .inputfile.has-focus + label {
         outline: 1px dotted #000;
         outline: -webkit-focus-ring-color auto 5px;
     }
-
     .inputfile + label * {
         /* pointer-events: none; */
         /* in case of FastClick lib use */
     }
-
     .inputfile + label svg {
         width: 1em;
         height: 1em;
@@ -343,9 +202,7 @@
         margin-right: 0.25em;
         /* 4px */
     }
-
     /* style 1 */
-
     .inputfile-1 + label {
         color: #fff6fe;
         background-color: #3e51d3;

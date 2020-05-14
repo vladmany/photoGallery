@@ -16,6 +16,11 @@
             <ActionOneAlbum></ActionOneAlbum>
         </template>
         <template v-slot:content>
+            <div>
+                <router-link :to="{ name: 'AlbumIndex' }" >
+                    Назад
+                </router-link>
+            </div>
             <div class="row">
                 <div class="col-12">
                     <p class="text-center album-name mt-2 mt-md-4 mt-5 mb-2 mb-md-4 mb-5">{{ album.name }}</p>

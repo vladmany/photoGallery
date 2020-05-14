@@ -17,10 +17,7 @@
         <template v-slot:content>
             <div class="albums-wrap">
                 <div class="main-panel">
-                    <AllAlbums
-                        :albums="albums"
-                        :paginate-count="5"
-                    ></AllAlbums>
+                    <AllAlbums :paginate-count="5"></AllAlbums>
                 </div>
             </div>
         </template>
