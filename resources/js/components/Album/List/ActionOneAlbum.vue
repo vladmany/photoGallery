@@ -8,6 +8,7 @@
         </div>
         <div class="action to_provide_access" @click="toProvideAccess">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
+
         </div>
         <div class="action turn_download" @click="turnDownload">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
@@ -35,7 +36,19 @@
                 this.$store.state.isChangeNameAlbum = false;
 
             },
+        },
+        props: {
+            albumId: {
+                required: true,
+                type: Number,
+            }
+        },
+        computed: {
+            album() {
+                return this.$store.getters['ListAlbum/album'](this.albumId);
+            }
         }
+
     }
 </script>
 

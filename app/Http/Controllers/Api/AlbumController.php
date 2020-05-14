@@ -50,12 +50,12 @@ class AlbumController extends Controller
      * @param  \App\Models\Dashboard\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(AlbumRequest $request, $album)
+    public function update(AlbumRequest $request)
     {
         //dd($request->all());
-        $data = $request->only(['AlbumId', 'AlbumName']);
-        $albumName = $data['AlbumName'];
-        $albumId = $data['AlbumId'];
+        $data = $request->only(['id', 'name']);
+        $albumName = $data['name'];
+        $albumId = $data['id'];
         $album = Album::where('id', $albumId)->get()->first();
         $album->name = $albumName;
         $album->save();

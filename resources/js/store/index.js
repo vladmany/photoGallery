@@ -37,6 +37,7 @@ export default new Vuex.Store({
 
         // Изменение имени альбома(на стрнице детального просмотра альбома)
         isChangeNameAlbum: false,
+        IdAlbum: 16,
         //------------------------------------------
         // Альбомы
         AllAlbums: []
@@ -100,6 +101,9 @@ export default new Vuex.Store({
         },
         hideChangeNameAlbum(state) {
             state.isChangeNameAlbum = false
+        },
+        changeActiveIdAlbum(state, val) {
+            state.IdAlbum = val
         }
         //------------------------------------------
 
@@ -128,6 +132,27 @@ export default new Vuex.Store({
                     console.log('error album saved'))
             }
         },
+        changeNameAlbum({ commit, getters }, albumName) {
+            axios.put('/api/albums/update', {
+                id:this.state.IdAlbum,
+                name:albumName
+            })
+                .then(response => {
+                    this.CloseModalChangeNameAlbum()
+                    // this.$store.dispatch('ListAlbum/getAlbums');
+                    // console.log(this.album.name);
+                    // console.log(this.$store.state.IdAlbum);
+                }
+                )
+                .catch(error =>{
+                    if(error.response.status == 422){
+                        // this.errors = error.response.data.errors;
+                        // console.log(this.album.name);
+                        // console.log(this.$store.state.IdAlbum);
+                        return false;
+                    }
+                });
+        }
 
     }
 })
