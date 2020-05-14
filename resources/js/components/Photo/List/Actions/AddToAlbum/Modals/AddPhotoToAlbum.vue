@@ -97,8 +97,19 @@
             },
             selectedPhotos: function() {
                 return this.$store.getters.selectedPhotos
+            },
+            isAddPhotoToAlbum: function () {
+                return this.$store.state.isAddPhotoToAlbum
             }
         },
+        watch: {
+            isAddPhotoToAlbum() {
+                if( !this.isAddPhotoToAlbum ) {
+                    $('.select__head').html('<span>Выберите</span>')
+                    // console.log('Закрывается модалка')
+                }
+            }
+        }
     }
 </script>
 
@@ -217,5 +228,9 @@
     }
     .is-invalid {
         border-color: #dc3545!important;
+    }
+
+    .select__head span {
+        pointer-events: none;
     }
 </style>
