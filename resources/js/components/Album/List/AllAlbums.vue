@@ -7,7 +7,7 @@
             <div class="align-items-center">
                 <router-link
                     :to="{ name: 'OneAlbum', params: { id: album.id } }">
-                    <img :src="album.cover" class="img-cover">
+                    <img :src="album.cover" class="img-fluid img-cover">
                 </router-link>
             </div>
             <div class="right-info">
@@ -32,18 +32,19 @@
         </div>
         <no-albums v-if="albums.length == 0"></no-albums>
         <div class="album-paginate" v-if="albums.length > 0">
-            <paginate
-                :page-count="pages"
-                :page-range="3"
-                :margin-pages="2"
-                :click-handler="onChangePage"
-                :prev-text="'&#129120;'"
-                :next-text="'&#129122;'"
-                :prev-class="'one-page prev'"
-                :next-class="'one-page next'"
-                :container-class="'paginate'"
-                :page-class="'one-page'">
-            </paginate>
+<!--            <paginate-->
+<!--                :page-count="pages"-->
+<!--                :page-range="3"-->
+<!--                :margin-pages="2"-->
+<!--                :click-handler="onChangePage"-->
+<!--                :prev-text="'&#129120;'"-->
+<!--                :next-text="'&#129122;'"-->
+<!--                :prev-class="'one-page prev'"-->
+<!--                :next-class="'one-page next'"-->
+<!--                :container-class="'paginate'"-->
+<!--                :page-class="'one-page'">-->
+<!--            </paginate>-->
+            <Paginator :pages="pages" :func="onChangePage"></Paginator>
         </div>
 
     </div>
@@ -52,10 +53,11 @@
 
 <script>
     import noAlbums from "./noAlbums";
+    import Paginator from "../../Global/Paginator";
     import {mapGetters} from "vuex";
 
     export default {
-        components: {noAlbums},
+        components: {noAlbums, Paginator},
         name: "AllAlbums",
         computed: {
             ...mapGetters({
@@ -152,8 +154,9 @@
     }
 
     .img-cover {
-        width: 180px;
-        height: 100px;
+        /*width: 180px;*/
+        /*height: 100px;*/
+        max-width: 180px;
     }
 
 

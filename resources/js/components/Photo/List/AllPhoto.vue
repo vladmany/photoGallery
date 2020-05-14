@@ -8,18 +8,19 @@
                             :groupId="index"/>
             </div>
             <div class="photo-paginate">
-                <paginate
-                    :page-count="pages"
-                    :page-range="3"
-                    :margin-pages="2"
-                    :click-handler="onChangePage"
-                    :prev-text="'&#129120;'"
-                    :next-text="'&#129122;'"
-                    :prev-class="'one-page prev'"
-                    :next-class="'one-page next'"
-                    :container-class="'paginate'"
-                    :page-class="'one-page'">
-                </paginate>
+<!--                <paginate-->
+<!--                    :page-count="pages"-->
+<!--                    :page-range="3"-->
+<!--                    :margin-pages="2"-->
+<!--                    :click-handler="onChangePage"-->
+<!--                    :prev-text="'&#129120;'"-->
+<!--                    :next-text="'&#129122;'"-->
+<!--                    :prev-class="'one-page prev'"-->
+<!--                    :next-class="'one-page next'"-->
+<!--                    :container-class="'paginate'"-->
+<!--                    :page-class="'one-page'">-->
+<!--                </paginate>-->
+                <Paginator :pages="pages" :func="onChangePage"></Paginator>
             </div>
         </div>
     </div>
@@ -46,7 +47,7 @@
         components: {
             Checkbox, Section,
             GroupPhoto, ErrorsModalWindow,
-            UploadPhotosComponent
+            UploadPhotosComponent, Paginator
         },
         props: {
             photos: {

@@ -50,6 +50,10 @@
             album() {
                 return this.$store.getters['ListAlbum/album'](this.id);
             }
+        },
+        created() {
+            this.$store.dispatch('ListAlbum/getAlbums');
+            this.$store.state.IdAlbum = this.id;
         }
     }
 </script>
