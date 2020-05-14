@@ -34,6 +34,8 @@
 <script>
     // import ListPhoto from "../../../store/modules/ListPhoto";
 
+    import {mapGetters} from "vuex";
+
     export default {
         name: "Actions",
         methods: {
@@ -64,7 +66,10 @@
         computed: {
             isSelectedPhotos: function() {
                 return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : ''
-            }
+            },
+            ...mapGetters({
+                selectedPhotos: 'selectedPhotos'
+            })
         },
         data() {
             return {
@@ -74,6 +79,11 @@
         watch: {
             isSelected() {
                 this.$store.dispatch('ListPhoto/selectAllPhotos', this.isSelected);
+            },
+            selectedPhotos() {
+                if (this.selectedPhotos.length === 0) {
+                    this.isSelected = false
+                }
             }
         }
     }

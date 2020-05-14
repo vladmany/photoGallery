@@ -71,6 +71,7 @@
         computed: {
             ...mapGetters({
                 groups: 'ListPhoto/groups',
+                selectedPhotos: 'selectedPhotos'
             })
         },
         watch: {

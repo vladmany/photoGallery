@@ -58,12 +58,12 @@
 
 <style scoped>
     .one-slide > .one-photo {
-        max-height: 500px;
+        max-height: 400px;
         vertical-align: middle;
     }
     .one-slide {
-        min-height: 500px;
-        line-height: 500px;
+        min-height: 400px;
+        line-height: 400px;
         text-align: center;
     }
     .fade-enter-active,

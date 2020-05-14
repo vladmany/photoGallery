@@ -12,6 +12,7 @@
 
 <script>
     import Checkbox from "../../Global/Checkbox"
+    import {mapGetters} from "vuex";
 
     export default {
         name: "OnePhoto",
@@ -34,8 +35,18 @@
                     this.$store.dispatch('delPhoto', this.photo.id);
                 }
                 // console.log(this.$store.getters.selectedPhotos);
+            },
+            selectedPhotos() {
+                if (this.selectedPhotos.length === 0) {
+                    this.isSelected = false
+                }
             }
-        }
+        },
+        computed: {
+            ...mapGetters({
+                selectedPhotos: 'selectedPhotos'
+            })
+        },
     }
 </script>
 

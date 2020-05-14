@@ -16,9 +16,6 @@
             <div v-else>
                 <div class="error-end" v-if="filesFinish.length <= 0">
                     <img src="/storage/photos/upload/ic_error.png">
-                    <embed width=200 height=200
-                           src="/storage/photos/tiffdocument.tif" type="image/tiff"
-                           negative=yes>
                     <span>Ни одного фото не было загружено</span>
                 </div>
                 <div class="success-end" v-else>

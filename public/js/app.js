@@ -4175,6 +4175,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4209,6 +4216,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 // import ListPhoto from "../../../store/modules/ListPhoto";
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "Actions",
   methods: {
@@ -4224,11 +4232,13 @@ __webpack_require__.r(__webpack_exports__);
     imageCorrection: function imageCorrection() {},
     deleteImages: function deleteImages() {}
   },
-  computed: {
+  computed: _objectSpread({
     isSelectedPhotos: function isSelectedPhotos() {
       return this.$store.getters.selectedPhotos.length > 0 ? 'available' : '';
     }
-  },
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    selectedPhotos: 'selectedPhotos'
+  })),
   data: function data() {
     return {
       isSelected: false
@@ -4237,6 +4247,11 @@ __webpack_require__.r(__webpack_exports__);
   watch: {
     isSelected: function isSelected() {
       this.$store.dispatch('ListPhoto/selectAllPhotos', this.isSelected);
+    },
+    selectedPhotos: function selectedPhotos() {
+      if (this.selectedPhotos.length === 0) {
+        this.isSelected = false;
+      }
     }
   }
 });
@@ -4456,7 +4471,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_2__["mapGetters"])({
-    groups: 'ListPhoto/groups'
+    groups: 'ListPhoto/groups',
+    selectedPhotos: 'selectedPhotos'
   })),
   watch: {
     photos: function photos() {
@@ -4555,11 +4571,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
     };
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
-    selectAll: 'ListPhoto/selectAllPhotos'
+    selectAll: 'ListPhoto/selectAllPhotos',
+    selectedPhotos: 'selectedPhotos'
   })),
   watch: {
     selectAll: function selectAll() {
       this.isSelected = this.selectAll;
+    },
+    selectedPhotos: function selectedPhotos() {
+      if (this.selectedPhotos.length === 0) {
+        this.isSelected = false;
+      }
     }
   }
 });
@@ -4576,6 +4598,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Global_Checkbox__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../Global/Checkbox */ "./resources/js/components/Global/Checkbox.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4588,6 +4617,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "OnePhoto",
@@ -4612,8 +4642,16 @@ __webpack_require__.r(__webpack_exports__);
         this.$store.dispatch('delPhoto', this.photo.id);
       } // console.log(this.$store.getters.selectedPhotos);
 
+    },
+    selectedPhotos: function selectedPhotos() {
+      if (this.selectedPhotos.length === 0) {
+        this.isSelected = false;
+      }
     }
-  }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
+    selectedPhotos: 'selectedPhotos'
+  }))
 });
 
 /***/ }),
@@ -4811,9 +4849,6 @@ function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try
 
 function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
-//
-//
-//
 //
 //
 //
@@ -10272,7 +10307,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n.one-slide > .one-photo[data-v-ae295bdc] {\n    max-height: 500px;\n    vertical-align: middle;\n}\n.one-slide[data-v-ae295bdc] {\n    min-height: 500px;\n    line-height: 500px;\n    text-align: center;\n}\n.fade-enter-active[data-v-ae295bdc],\n.fade-leave-active[data-v-ae295bdc] {\n    visibility: visible;\n}\n.fade-enter[data-v-ae295bdc],\n.fade-leave-to[data-v-ae295bdc] {\n    /*transition: visibility 0.02s ease;*/\n    visibility: hidden;\n}\n.arrows[data-v-ae295bdc] {\n    display: flex;\n    position: absolute;\n    top: 50%;\n    flex-direction: row;\n    justify-content: space-between;\n    max-width: 800px;\n    width: 100%;\n}\n.prev[data-v-ae295bdc], .next[data-v-ae295bdc] {\n    cursor: pointer;\n    width: 40px;\n    height: 40px;\n    padding: 11px;\n    padding-left: 15px;\n    padding-top: 9px;\n    color: white;\n    font-weight: bold;\n    font-size: 14px;\n    transition: 0.7s ease;\n    border-radius: 50%;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    background-color: rgba(0,0,0,0.2);\n}\n.prev[data-v-ae295bdc]:hover, .next[data-v-ae295bdc]:hover {\n    background-color: rgba(0,0,0,0.9);\n}\n.slider[data-v-ae295bdc] {\n    position: relative;\n    display: flex;\n    justify-content: center;\n}\n", ""]);
+exports.push([module.i, "\n.one-slide > .one-photo[data-v-ae295bdc] {\n    max-height: 400px;\n    vertical-align: middle;\n}\n.one-slide[data-v-ae295bdc] {\n    min-height: 400px;\n    line-height: 400px;\n    text-align: center;\n}\n.fade-enter-active[data-v-ae295bdc],\n.fade-leave-active[data-v-ae295bdc] {\n    visibility: visible;\n}\n.fade-enter[data-v-ae295bdc],\n.fade-leave-to[data-v-ae295bdc] {\n    /*transition: visibility 0.02s ease;*/\n    visibility: hidden;\n}\n.arrows[data-v-ae295bdc] {\n    display: flex;\n    position: absolute;\n    top: 50%;\n    flex-direction: row;\n    justify-content: space-between;\n    max-width: 800px;\n    width: 100%;\n}\n.prev[data-v-ae295bdc], .next[data-v-ae295bdc] {\n    cursor: pointer;\n    width: 40px;\n    height: 40px;\n    padding: 11px;\n    padding-left: 15px;\n    padding-top: 9px;\n    color: white;\n    font-weight: bold;\n    font-size: 14px;\n    transition: 0.7s ease;\n    border-radius: 50%;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    background-color: rgba(0,0,0,0.2);\n}\n.prev[data-v-ae295bdc]:hover, .next[data-v-ae295bdc]:hover {\n    background-color: rgba(0,0,0,0.9);\n}\n.slider[data-v-ae295bdc] {\n    position: relative;\n    display: flex;\n    justify-content: center;\n}\n", ""]);
 
 // exports
 
@@ -46554,16 +46589,6 @@ var render = function() {
                                 }
                               }),
                               _vm._v(" "),
-                              _c("embed", {
-                                attrs: {
-                                  width: "200",
-                                  height: "200",
-                                  src: "/storage/photos/tiffdocument.tif",
-                                  type: "image/tiff",
-                                  negative: "yes"
-                                }
-                              }),
-                              _vm._v(" "),
                               _c("span", [
                                 _vm._v("Ни одного фото не было загружено")
                               ])
@@ -46662,7 +46687,7 @@ var render = function() {
           ],
           null,
           false,
-          3798399199
+          1259439961
         )
       })
     : _vm._e()
@@ -67065,8 +67090,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
