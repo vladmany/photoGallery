@@ -4,6 +4,7 @@ import AddPhoto from './modules/AddPhoto'
 import ListPhoto from './modules/ListPhoto'
 import ListAlbum from "./modules/ListAlbum";
 import Globals from "./modules/Globals";
+import routes from "../routes";
 
 Vue.use(Vuex)
 
@@ -122,10 +123,36 @@ export default new Vuex.Store({
                 })
                 .then(response => {
                     console.log('successfully album saved');
-                    dispatch('ListAlbum/getAlbums');
-                    dispatch('ListPhoto/getPhotos');
+                    // dispatch('ListAlbum/getAlbums');
+                    // dispatch('ListPhoto/getPhotos');
                     if (this.state.isAddPhotoToAlbum) {
                         this.commit('hideAddPhotoToAlbum')
+                        if (response.data.length <= 0) {
+                            Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
+                                action : {
+                                    text : 'Закрыть',
+                                    onClick : (e, toastObject) => {
+                                        toastObject.goAway(0);
+                                    }
+                                },
+                                position: 'bottom-left',
+                                duration: 5000,
+                                keepOnHover: true
+                            });
+                        } else {
+                            Vue.toasted.show(response.data.length + ' объектов добавлены в альбом', {
+                                action : {
+                                    text : 'Посмотреть',
+                                    onClick : (e, toastObject) => {
+                                        routes.push({ name: 'OneAlbum', params: { id: +albumId } })
+                                        toastObject.goAway(0);
+                                    }
+                                },
+                                position: 'bottom-left',
+                                duration: 5000,
+                                keepOnHover: true
+                            });
+                        }
                     }
                 })
                 .catch(err =>

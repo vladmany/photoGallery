@@ -48,7 +48,8 @@
                 if (this.selectedPhotos.length > 0) {
                     let albumId = $('.select__head span').attr('album-id');
                     if (albumId >= 0) {
-                        this.$store.dispatch('savePhotosToAlbum', albumId)
+                        let res = this.$store.dispatch('savePhotosToAlbum', albumId)
+                        console.log(res)
                     } else {
                         this.errors.push('Альбом не выбран')
                     }
