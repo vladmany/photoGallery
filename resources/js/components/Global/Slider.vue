@@ -1,9 +1,10 @@
 <template>
     <div class="slider">
-        <transition-group name="fade" tag="div" class="photo-wrapper">
-            <div v-for="i in [currentIndex]" :key="i" class="d-flex">
-                <img class="img-fluid one-photo" :src="currentImg" />
-            </div>
+        <transition-group name="fade" tag="div" class="one-slide">
+            <!--            <div v-for="i in [currentIndex]" :key="i">-->
+            <img v-for="i in [currentIndex]" :key="i"
+                 class="img-fluid one-photo" :src="currentImg" />
+            <!--            </div>-->
         </transition-group>
         <div class="arrows">
             <span class="prev" @click="prev">&#10094;</span>
@@ -56,46 +57,24 @@
 </script>
 
 <style scoped>
-    .one-photo {
+    .one-slide > .one-photo {
         max-height: 500px;
+        vertical-align: middle;
+    }
+    .one-slide {
+        min-height: 500px;
+        line-height: 500px;
+        text-align: center;
     }
     .fade-enter-active,
     .fade-leave-active {
-        /*transition: all 0.9s ease;*/
-        overflow: hidden;
         visibility: visible;
-        position: absolute;
-        width:100%;
-        opacity: 1;
     }
 
     .fade-enter,
     .fade-leave-to {
+        /*transition: visibility 0.02s ease;*/
         visibility: hidden;
-        width:100%;
-        opacity: 0;
-    }
-
-    .photo-wrapper {
-        /*max-width: 700px;*/
-        /*width: 100%;*/
-        /*max-height: 602px;*/
-        /*height: 100%;*/
-        margin-right: auto;
-        margin-left: auto;
-        justify-content: center;
-    }
-
-    .photo-wrapper div {
-        margin-right: auto;
-        margin-left: auto;
-    }
-
-    img {
-        /*max-width: 700px;*/
-        /*width: 100%;*/
-        /*max-height: 602px;*/
-        /*height: 100%;*/
     }
 
     .arrows {
@@ -110,8 +89,6 @@
 
     .prev, .next {
         cursor: pointer;
-        /*position: absolute;*/
-        /*top: 50%;*/
         width: 40px;
         height: 40px;
         padding: 11px;
@@ -122,27 +99,14 @@
         font-size: 14px;
         transition: 0.7s ease;
         border-radius: 50%;
-        /*text-decoration: none;*/
         user-select: none;
         background-color: rgba(0,0,0,0.2);
-    }
-
-    .next {
-        /*right: 133px;*/
-    }
-
-    .prev {
-        /*left: 133px;*/
     }
 
     .prev:hover, .next:hover {
         background-color: rgba(0,0,0,0.9);
     }
 
-    .one-slide {
-        width: 200px;
-        height: 200px;
-    }
     .slider {
         position: relative;
         display: flex;
