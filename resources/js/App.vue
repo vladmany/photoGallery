@@ -209,7 +209,7 @@
             }
         },
         created() {
-            this.getAllData();
+            // this.getAllData();
         },
     }
 </script>
