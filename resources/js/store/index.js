@@ -39,6 +39,7 @@ export default new Vuex.Store({
         // Изменение имени альбома(на стрнице детального просмотра альбома)
         isChangeNameAlbum: false,
         IdAlbum: 16,
+        errorAlbum: [],
         //------------------------------------------
         // Альбомы
         AllAlbums: []
@@ -105,6 +106,10 @@ export default new Vuex.Store({
         },
         changeActiveIdAlbum(state, val) {
             state.IdAlbum = val
+        },
+
+        changeErrorAlbum(state, val) {
+            state.errorAlbum = val
         }
         //------------------------------------------
 
@@ -167,14 +172,15 @@ export default new Vuex.Store({
             })
                 .then(response => {
                     this.CloseModalChangeNameAlbum()
-                    // this.$store.dispatch('ListAlbum/getAlbums');
+                        //this.$store.dispatch('ListAlbum/getAlbums');
+                        this.state.dispatch('ListAlbum/getAlbums')
                     // console.log(this.album.name);
                     // console.log(this.$store.state.IdAlbum);
                 }
                 )
                 .catch(error =>{
                     if(error.response.status == 422){
-                        // this.errors = error.response.data.errors;
+                         this.state.errorAlbum = error.response.data.errors;
                         // console.log(this.album.name);
                         // console.log(this.$store.state.IdAlbum);
                         return false;

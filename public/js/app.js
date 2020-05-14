@@ -3868,27 +3868,6 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     saveChange: function saveChange() {
       this.$store.dispatch('changeNameAlbum', this.album.name);
-      /*axios.put('/api/albums/update', {
-          id:this.$store.state.IdAlbum,
-          name:this.album.name
-      })
-          .then(response => {
-              this.CloseModalChangeNameAlbum()
-              this.$store.dispatch('ListAlbum/getAlbums');
-              console.log(this.album.name);
-              console.log(this.album.id);}
-          )
-          .catch(error =>{
-              if(error.response.status == 422){
-                  this.errors = error.response.data.errors;
-                  console.log(this.album.name);
-                  console.log(this.$store.state.IdAlbum);
-                  return false;
-              }
-          });*/
-
-      /*console.log("dedede");
-      this.$store.state.isChangeNameAlbum = false;*/
     },
     CloseModalChangeNameAlbum: function CloseModalChangeNameAlbum() {
       this.$store.state.isChangeNameAlbum = false;
@@ -45368,7 +45347,9 @@ var render = function() {
                             _vm._v(" "),
                             _vm.errors.name
                               ? _c("span", { staticClass: "create-error" }, [
-                                  _vm._v(_vm._s(_vm.errors.name[0]))
+                                  _vm._v(
+                                    _vm._s(this.$store.state.errorAlbum[0])
+                                  )
                                 ])
                               : _vm._e()
                           ]),
@@ -45378,7 +45359,7 @@ var render = function() {
                             { staticClass: "window-buttons d-flex pt-3" },
                             [
                               _c("button", { staticClass: "btn btn-primary" }, [
-                                _vm._v("Добавить")
+                                _vm._v("Изменить")
                               ]),
                               _vm._v(" "),
                               _c(
@@ -45400,7 +45381,7 @@ var render = function() {
               ],
               null,
               false,
-              3689914875
+              413782480
             )
           })
         : _vm._e()
@@ -66521,6 +66502,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     // Изменение имени альбома(на стрнице детального просмотра альбома)
     isChangeNameAlbum: false,
     IdAlbum: 16,
+    errorAlbum: [],
     //------------------------------------------
     // Альбомы
     AllAlbums: [] //--------
@@ -66583,6 +66565,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     changeActiveIdAlbum: function changeActiveIdAlbum(state, val) {
       state.IdAlbum = val;
+    },
+    changeErrorAlbum: function changeErrorAlbum(state, val) {
+      state.errorAlbum = val;
     } //------------------------------------------
 
     /*getAlbums() {
@@ -66658,15 +66643,17 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         id: this.state.IdAlbum,
         name: albumName
       }).then(function (response) {
-        _this2.CloseModalChangeNameAlbum(); // this.$store.dispatch('ListAlbum/getAlbums');
-        // console.log(this.album.name);
+        _this2.CloseModalChangeNameAlbum(); //this.$store.dispatch('ListAlbum/getAlbums');
+
+
+        _this2.state.dispatch('ListAlbum/getAlbums'); // console.log(this.album.name);
         // console.log(this.$store.state.IdAlbum);
 
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          // this.errors = error.response.data.errors;
-          // console.log(this.album.name);
+          _this2.state.errorAlbum = error.response.data.errors; // console.log(this.album.name);
           // console.log(this.$store.state.IdAlbum);
+
           return false;
         }
       });
@@ -67090,8 +67077,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
