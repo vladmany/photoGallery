@@ -66459,9 +66459,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           photos: photos,
           album: albumId
         }).then(function (response) {
-          console.log('successfully album saved');
-          dispatch('ListAlbum/getAlbums');
-          dispatch('ListPhoto/getPhotos');
+          console.log('successfully album saved'); // dispatch('ListAlbum/getAlbums');
+          // dispatch('ListPhoto/getPhotos');
 
           if (_this.state.isAddPhotoToAlbum) {
             _this.commit('hideAddPhotoToAlbum');

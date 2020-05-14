@@ -118,8 +118,8 @@ export default new Vuex.Store({
                 })
                 .then(response => {
                     console.log('successfully album saved');
-                    dispatch('ListAlbum/getAlbums');
-                    dispatch('ListPhoto/getPhotos');
+                    // dispatch('ListAlbum/getAlbums');
+                    // dispatch('ListPhoto/getPhotos');
                     if (this.state.isAddPhotoToAlbum) {
                         this.commit('hideAddPhotoToAlbum')
                     }
