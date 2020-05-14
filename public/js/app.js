@@ -45313,77 +45313,22 @@ var render = function() {
                 {
                   key: "content",
                   fn: function() {
+                    return undefined
+                  },
+                  proxy: true
+                },
+                {
+                  key: "buttons",
+                  fn: function() {
                     return [
-                      _c(
-                        "form",
-                        {
-                          on: {
-                            submit: function($event) {
-                              return _vm.saveChange()
-                            }
-                          }
-                        },
-                        [
-                          _c("div", { staticClass: "col-xs-12 form-group" }, [
-                            _c("label", { staticClass: "control-label" }, [
-                              _vm._v("Переименовать альбом")
-                            ]),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.album.name,
-                                  expression: "album.name"
-                                }
-                              ],
-                              staticClass: "form-control input",
-                              attrs: { type: "text" },
-                              domProps: { value: _vm.album.name },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.album,
-                                    "name",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            }),
-                            _vm._v(" "),
-                            _vm.errors.name
-                              ? _c("span", { staticClass: "create-error" }, [
-                                  _vm._v(
-                                    _vm._s(this.$store.state.errorAlbum[0])
-                                  )
-                                ])
-                              : _vm._e()
-                          ]),
-                          _vm._v(" "),
-                          _c(
-                            "div",
-                            { staticClass: "window-buttons d-flex pt-3" },
-                            [
-                              _c("button", { staticClass: "btn btn-primary" }, [
-                                _vm._v("Изменить")
-                              ]),
-                              _vm._v(" "),
-                              _c(
-                                "button",
-                                {
-                                  staticClass: "btn btn-light",
-                                  on: { click: _vm.CloseModalChangeNameAlbum }
-                                },
-                                [_vm._v("Отменить")]
-                              )
-                            ]
-                          )
-                        ]
-                      )
+                      _c("c-button", {
+                        attrs: { text: "Изменить", action: _vm.saveChange }
+                      }),
+                      _vm._v(" "),
+                      _c("c-button", {
+                        attrs: { type: "secondary", text: "Отменить" },
+                        on: { click: _vm.CloseModalChangeNameAlbum }
+                      })
                     ]
                   },
                   proxy: true
@@ -45391,7 +45336,7 @@ var render = function() {
               ],
               null,
               false,
-              413782480
+              808951895
             )
           })
         : _vm._e()

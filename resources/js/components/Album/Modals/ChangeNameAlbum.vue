@@ -7,7 +7,7 @@
         this.$store.commit('hideChangeNameAlbum')
     }">
             <template v-slot:content>
-                <form v-on:submit="saveChange()">
+                <!--<form v-on:submit="saveChange()">
                     <div class="col-xs-12 form-group">
                         <label class="control-label">Переименовать альбом</label>
                         <input type="text" v-model="album.name" class="form-control input">
@@ -17,18 +17,18 @@
                         <button class="btn btn-primary">Изменить</button>
                         <button class="btn btn-light" @click="CloseModalChangeNameAlbum">Отменить</button>
                     </div>
-                </form>
+                </form>-->
             </template>
-            <!--<template class="buttons" v-slot:buttons>
+            <template v-slot:buttons>
                 <c-button
                     text="Изменить"
                     :action ="saveChange"
-                >Изменить</c-button>
+                />
                 <c-button
                     type="secondary"
                     text="Отменить"
-                    @click="CloseModalChangeNameAlbum">Отменить</c-button>
-            </template>-->
+                    @click="CloseModalChangeNameAlbum"/>
+            </template>
         </modal-window>
     </div>
 
