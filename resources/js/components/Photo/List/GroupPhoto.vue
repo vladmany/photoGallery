@@ -42,12 +42,18 @@
         },
         computed: {
             ...mapGetters({
-                selectAll: 'ListPhoto/selectAllPhotos'
+                selectAll: 'ListPhoto/selectAllPhotos',
+                selectedPhotos: 'selectedPhotos'
             })
         },
         watch: {
             selectAll() {
                 this.isSelected = this.selectAll;
+            },
+            selectedPhotos() {
+                if (this.selectedPhotos.length === 0) {
+                    this.isSelected = false
+                }
             }
         }
     }

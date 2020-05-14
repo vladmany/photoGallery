@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Validator;
+use ZipArchive;
 
 class PhotoController extends Controller
 {
@@ -123,5 +124,10 @@ class PhotoController extends Controller
             ->get();
 
         return $animations;
+    }
+
+    public function downloadPhotos(Request $request)
+    {
+
     }
 }
