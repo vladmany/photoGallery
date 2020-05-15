@@ -5812,10 +5812,14 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                 })["catch"](function (error) {
                   _this2.buttonState = true;
 
-                  if (error.response.status === 413) {
+                  if (error.response.status === 413 || error.response.status === 404) {
                     _this2.errorMessage = 'Максимальный размер загружаемого фото 16 МБ';
                   } else if (error.response.status === 422) {
                     _this2.errorMessage = error.response.data.errors.photo[0];
+                  }
+
+                  if (error.response.status === 401) {
+                    _this2.errorMessage = error.response.data.message;
                   }
 
                   _this2.filesFail.push(item);
