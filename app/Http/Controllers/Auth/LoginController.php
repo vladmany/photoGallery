@@ -31,9 +31,8 @@ class LoginController extends Controller
     public function redirect()
     {
         $query = http_build_query([
-            'client_id' => 15,//запросить у Богдана и вынести в конфиг
+            'client_id' => 17, //запросить у Богдана и вынести в конфиг
             'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
-            //урл куда оправит сайт Богдана после успешной
             'response_type' => 'code',
             'scope' => '',
         ]);
@@ -55,8 +54,8 @@ class LoginController extends Controller
         $response = $http->post('http://team1-group-project.azurewebsites.net/oauth/token', [
             'form_params' => [
                 'grant_type' => 'authorization_code',
-                'client_id' => 15, //данные которые выдаст Богдан. вынести в конфиг
-                'client_secret' => 'S9qfCC612r1EhwviAq6Ca24EqM3xuetvFEzL3Qj9', //данные которые выдаст Богдан. вынести в конфиг
+                'client_id' => 17, //данные которые выдаст Богдан. вынести в конфиг
+                'client_secret' => 'DJWhEfPbsKMLlEBZDeyGgoCqc4RWmnJvDne4g7Pt', //данные которые выдаст Богдан. вынести в конфиг
                 'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
                 'code' => $request->code,
             ],
