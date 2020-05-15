@@ -67,7 +67,6 @@ class LoginController extends Controller
                 'Authorization: Bearer ' . $access_token
             );
 
-
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
@@ -79,7 +78,7 @@ class LoginController extends Controller
             $myuser = User::query()->where('email', $response['email'])->first();
 
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
-            if($myuser !== [])
+            if(!$myuser)
             {
                 $user = User::firstOrCreate([
                         'email' => $response['email'],
