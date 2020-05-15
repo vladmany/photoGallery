@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
         $query = http_build_query([
             'client_id' => 15,//запросить у Богдана и вынести в конфиг
-            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/api/auth/redirect',
+            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
             //урл куда оправит сайт Богдана после успешной
             'response_type' => 'code',
             'scope' => '',
@@ -57,7 +57,7 @@ class LoginController extends Controller
                 'grant_type' => 'authorization_code',
                 'client_id' => 15, //данные которые выдаст Богдан. вынести в конфиг
                 'client_secret' => 'S9qfCC612r1EhwviAq6Ca24EqM3xuetvFEzL3Qj9', //данные которые выдаст Богдан. вынести в конфиг
-                'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/redirect',
+                'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
                 'code' => $request->code,
             ],
         ]);
@@ -85,7 +85,7 @@ class LoginController extends Controller
 
             $response = json_decode($result, true);//данные о user пришедшие от Богдана
 
-            $myuser = User::where('email', $response['email'])->first();
+            $myuser = User::query()->where('email', $response['email'])->first();
 
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
             if($myuser !== [])
