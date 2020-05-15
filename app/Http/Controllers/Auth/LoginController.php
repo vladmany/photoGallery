@@ -46,8 +46,6 @@ class LoginController extends Controller
 
     public function callback(Request $request)
     {
-        dd($request);
-
         //заюзать use GuzzleHttp\Client;
         $http = new Client();
 
