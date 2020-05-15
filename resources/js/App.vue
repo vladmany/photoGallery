@@ -180,6 +180,7 @@
     import ModalWindow from "./components/Global/ModalWindow";
     import UploadPhotosModal from "./components/Photo/Upload/Modals/UploadPhotos";
     import SelectionFilesErrorModal from "./components/Photo/Upload/Modals/SelectionFilesError";
+    import {loadProgressBar} from "axios-progress-bar";
 
     export default {
         components: {
@@ -209,7 +210,7 @@
             }
         },
         created() {
-            // this.getAllData();
+            loadProgressBar()
         },
     }
 </script>

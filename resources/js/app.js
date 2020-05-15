@@ -11,6 +11,10 @@ import VueCarousel from '@chenfengyuan/vue-carousel';
 import Paginate from 'vuejs-paginate'
 import JwPagination from 'jw-vue-pagination';
 import Toasted from 'vue-toasted';
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
+
+loadProgressBar()
 
 Vue.use(Toasted)
 

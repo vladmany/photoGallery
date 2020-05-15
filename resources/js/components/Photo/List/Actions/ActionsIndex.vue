@@ -10,7 +10,7 @@
         <div class="action add_to_album" :class="isSelectedPhotos" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
-        <div class="action download" @click="download">
+        <div class="action download" :class="isSelectedPhotos" @click="download">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_download.svg"></object>
         </div>
         <div class="action change_date" @click="changeDate">
@@ -45,7 +45,9 @@
                 }
             },
             download() {
-
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.dispatch('downloadPhotos', this.$store.getters.selectedPhotos)
+                }
             },
             changeDate() {
 

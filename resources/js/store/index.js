@@ -100,6 +100,9 @@ export default new Vuex.Store({
         hideAddPhotoToAlbum(state) {
             state.isAddPhotoToAlbum = false
         },
+        //------------------------------------------
+
+        // Изменение названия альбома
         showChangeNameAlbum(state) {
             state.isChangeNameAlbum = true
         },
@@ -109,7 +112,11 @@ export default new Vuex.Store({
         changeActiveIdAlbum(state, val) {
             state.IdAlbum = val
         }
-        //------------------------------------------
+        //----------------------------
+
+        // Скачивание фото
+
+        //----------------
 
         /*getAlbums() {
             axios.get('api/albums')
@@ -183,6 +190,26 @@ export default new Vuex.Store({
                         return false;
                     }
                 });
+        },
+        downloadPhotos({ commit, getters }, photos) {
+            axios.post('/api/photos/download', {
+                photos: photos
+            },
+            {
+                responseType: 'blob'
+            })
+            .then(response => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                let randName = Math.random().toString(36).substring(2, 15);
+                link.setAttribute('download',randName + '.' + response.data.type.split('/').pop());
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch(error => {
+
+            })
         }
 
     }

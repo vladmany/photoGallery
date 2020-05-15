@@ -7,6 +7,7 @@ use App\Http\Requests\Dashboard\PhotoRequest;
 use App\Models\Dashboard\Photo;
 use App\User;
 use Carbon\Carbon;
+use Composer\Util\Zip;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -126,8 +127,45 @@ class PhotoController extends Controller
         return $animations;
     }
 
-    public function downloadPhotos(Request $request)
+    public function download(Request $request)
     {
+        $data = $request->only(['photos']);
+
+        $photos = $data['photos'];
+
+
+        if (count($photos) > 1)
+        {
+            $zip = new ZipArchive;
+
+            $fileName = 'myNewFile.zip';
+
+            if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+            {
+                foreach ($photos as $photoId)
+                {
+                    $photoBd = Photo::all()->where('id', $photoId)->first();
+                    if ($photoBd)
+                    {
+                        $photoPath = storage_path("app/public/{$photoBd->path}");
+                        $relativeNameInZipFile = basename($photoPath);
+                        $zip->addFile($photoPath, $relativeNameInZipFile);
+                    }
+                }
+
+                $zip->close();
+            }
+            return response()->download(public_path($fileName))->deleteFileAfterSend(true);
+        }
+        else if (count($photos) == 1)
+        {
+            $photoBd = Photo::all()->where('id', $photos[0])->first();
+            if ($photoBd)
+            {
+                $photoPath = storage_path("app/public/{$photoBd->path}");
+                return response()->download($photoPath);
+            }
+        }
 
     }
 }
