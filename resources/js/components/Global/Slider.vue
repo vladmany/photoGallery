@@ -108,6 +108,7 @@
     }
 
     .slider {
+        margin-top: 100px;
         position: relative;
         display: flex;
         justify-content: center;

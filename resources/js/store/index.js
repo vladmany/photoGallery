@@ -38,6 +38,7 @@ export default new Vuex.Store({
 
         // Изменение имени альбома(на стрнице детального просмотра альбома)
         isChangeNameAlbum: false,
+        isDelAlbum: false,
         IdAlbum: 16,
         errorAlbum: [],
         //------------------------------------------
@@ -101,17 +102,29 @@ export default new Vuex.Store({
         hideAddPhotoToAlbum(state) {
             state.isAddPhotoToAlbum = false
         },
+        //------------------------------------------
+
+        // Изменение названия альбома
+        showChangeNameAlbum(state) {
+            state.isChangeNameAlbum = true
+        },
         hideChangeNameAlbum(state) {
             state.isChangeNameAlbum = false
         },
+        showDelAlbum(state) {
+            state.isDelAlbum = true
+        },
+        hideDelAlbum(state) {
+            state.isDelAlbum = false
+        },
         changeActiveIdAlbum(state, val) {
             state.IdAlbum = val
-        },
-
-        changeErrorAlbum(state, val) {
-            state.errorAlbum = val
         }
-        //------------------------------------------
+        //----------------------------
+
+        // Скачивание фото
+
+        //----------------
 
         /*getAlbums() {
             axios.get('api/albums')
@@ -166,26 +179,52 @@ export default new Vuex.Store({
             }
         },
         changeNameAlbum({ commit, getters }, albumName) {
-            axios.put('/api/albums/update', {
+            axios.post('/api/albums/update', {
                 id:this.state.IdAlbum,
                 name:albumName
             })
                 .then(response => {
-                    this.CloseModalChangeNameAlbum()
-                        //this.$store.dispatch('ListAlbum/getAlbums');
-                        this.state.dispatch('ListAlbum/getAlbums')
-                    // console.log(this.album.name);
-                    // console.log(this.$store.state.IdAlbum);
+                    this.commit('hideChangeNameAlbum');
+                    this.dispatch('ListAlbum/getAlbums');
                 }
                 )
                 .catch(error =>{
                     if(error.response.status == 422){
-                         this.state.errorAlbum = error.response.data.errors;
-                        // console.log(this.album.name);
-                        // console.log(this.$store.state.IdAlbum);
+                        this.state.errorAlbum = error.response.data.errors.name;
+                        console.log(error.response.data.errors.name[0])
                         return false;
                     }
                 });
+        },
+        deleteAlbum({ commit, getters }, albumId) {
+            axios.get('/api/album-destr', {
+                id:albumId
+            })
+                .then(response => {
+                        this.commit('hideDelAlbum');
+                        this.dispatch('ListAlbum/getAlbums');
+                    }
+                );
+        },
+        downloadPhotos({ commit, getters }, photos) {
+            axios.post('/api/photos/download', {
+                photos: photos
+            },
+            {
+                responseType: 'blob'
+            })
+            .then(response => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                let randName = Math.random().toString(36).substring(2, 15);
+                link.setAttribute('download',randName + '.' + response.data.type.split('/').pop());
+                document.body.appendChild(link);
+                link.click();
+            })
+            .catch(error => {
+
+            })
         }
 
     }

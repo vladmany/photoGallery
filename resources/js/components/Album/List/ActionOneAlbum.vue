@@ -24,7 +24,7 @@
 </template>
 
 <script>
-    import ChangeNameAlbum from "../Modals/ChangeNameAlbum";
+    import ChangeNameAlbum from "../Modals/ChangeNameAllbum";
     export default {
         name: "ActionOneAlbum",
         components: {ChangeNameAlbum},

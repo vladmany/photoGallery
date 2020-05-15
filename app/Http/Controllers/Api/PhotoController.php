@@ -7,6 +7,8 @@ use App\Http\Requests\Dashboard\PhotoRequest;
 use App\Models\Dashboard\Photo;
 use App\User;
 use Carbon\Carbon;
+use Composer\Util\Zip;
+use FilesystemIterator;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -36,8 +38,14 @@ class PhotoController extends Controller
      */
     public function store(PhotoRequest $request)
     {
-//        dd('ДАДОВА!');
-////        dd($request->allFiles('photo'));
+        if($this->getFilesSize(storage_path('app/public/images')) >= 1000000000)
+        {
+            return response()->json(array(
+                'code'      =>  401,
+                'message'   =>  'На сервере превышен максимальный объем хранения фото(1 ГБ). Обратитесь к владельцу сайта.'
+            ), 401);
+        }
+
         $userId = Auth::check() ? Auth::id() : 1;
 
         if($request->hasFile('photo')) {
@@ -60,6 +68,23 @@ class PhotoController extends Controller
             Photo::create($data);
         }
 
+    }
+
+    private function getFilesSize($path)
+    {
+        $fileSize = 0;
+        $dir = scandir($path);
+
+        foreach($dir as $file)
+        {
+            if (($file!='.') && ($file!='..'))
+                if(is_dir($path . '/' . $file))
+                    $fileSize += $this->getFilesSize($path.'/'.$file);
+                else
+                    $fileSize += filesize($path . '/' . $file);
+        }
+
+        return $fileSize;
     }
 
     /**
@@ -126,8 +151,45 @@ class PhotoController extends Controller
         return $animations;
     }
 
-    public function downloadPhotos(Request $request)
+    public function download(Request $request)
     {
+        $data = $request->only(['photos']);
+
+        $photos = $data['photos'];
+
+
+        if (count($photos) > 1)
+        {
+            $zip = new ZipArchive;
+
+            $fileName = 'myNewFile.zip';
+
+            if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+            {
+                foreach ($photos as $photoId)
+                {
+                    $photoBd = Photo::all()->where('id', $photoId)->first();
+                    if ($photoBd)
+                    {
+                        $photoPath = storage_path("app/public/{$photoBd->path}");
+                        $relativeNameInZipFile = basename($photoPath);
+                        $zip->addFile($photoPath, $relativeNameInZipFile);
+                    }
+                }
+
+                $zip->close();
+            }
+            return response()->download(public_path($fileName))->deleteFileAfterSend(true);
+        }
+        else if (count($photos) == 1)
+        {
+            $photoBd = Photo::all()->where('id', $photos[0])->first();
+            if ($photoBd)
+            {
+                $photoPath = storage_path("app/public/{$photoBd->path}");
+                return response()->download($photoPath);
+            }
+        }
 
     }
 }

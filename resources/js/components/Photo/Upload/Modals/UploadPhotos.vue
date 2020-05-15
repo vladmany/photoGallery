@@ -130,11 +130,15 @@
                 })
                 .catch(error => {
                     this.buttonState = true;
-                    if (error.response.status === 413) {
+                    // console.log(error.response)
+                    if ((error.response.status === 413) || (error.response.status === 404))  {
                         this.errorMessage = 'Максимальный размер загружаемого фото 16 МБ';
                     } else
                     if (error.response.status === 422) {
                         this.errorMessage = error.response.data.errors.photo[0];
+                    }
+                    if (error.response.status === 401) {
+                        this.errorMessage = error.response.data.message;
                     }
 
                     this.filesFail.push(item);
