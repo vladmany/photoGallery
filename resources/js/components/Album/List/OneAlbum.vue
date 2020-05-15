@@ -16,9 +16,9 @@
             <ActionOneAlbum></ActionOneAlbum>
         </template>
         <template v-slot:content>
-            <div>
+            <div class="back-button">
                 <router-link :to="{ name: 'AlbumIndex' }" >
-                    Назад
+                    <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
                 </router-link>
             </div>
             <div class="row">
@@ -64,5 +64,17 @@
         align-items: center;
         font-weight: bolder;
         color: #666666;
+    }
+    object {
+        pointer-events: none;
+        filter: brightness(75%);
+    }
+    .back-button {
+        display: flex;
+        margin-top: 15px;
+        width: 30px;
+    }
+    .back-button:hover object {
+        filter: brightness(50%);
     }
 </style>
