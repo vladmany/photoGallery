@@ -5809,11 +5809,16 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   _this2.isError = false;
                 })["catch"](function (error) {
                   _this2.buttonState = true;
+                  console.log(error.response);
 
-                  if (error.response.status === 413) {
+                  if (error.response.status === 413 || error.response.status === 404) {
                     _this2.errorMessage = 'Максимальный размер загружаемого фото 16 МБ';
                   } else if (error.response.status === 422) {
                     _this2.errorMessage = error.response.data.errors.photo[0];
+                  }
+
+                  if (error.response.status === 401) {
+                    _this2.errorMessage = error.response.data.message;
                   }
 
                   _this2.filesFail.push(item);
@@ -68105,8 +68110,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
