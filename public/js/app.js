@@ -45986,7 +45986,7 @@ var render = function() {
               expression: "isSelected"
             }
           ],
-          staticClass: "checkbox-album text-center",
+          staticClass: "checkbox-album text-center custom-checkbox",
           attrs: { type: "checkbox" },
           domProps: {
             checked: Array.isArray(_vm.isSelected)
