@@ -67642,7 +67642,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       var commit = _ref2.commit,
           getters = _ref2.getters;
-      axios.put('/api/albums/update', {
+      axios.post('/api/albums/update', {
         id: this.state.IdAlbum,
         name: albumName
       }).then(function (response) {
@@ -68110,8 +68110,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
