@@ -83,7 +83,7 @@ class LoginController extends Controller
                 $user = User::firstOrCreate([
                         'email' => $response['email'],
                         'name' => $response['name'],
-                        'password' => Hash::make('12345678'),
+                        'password' => Hash::make('qwer1234'),
                         'remember_token' => $access->access_token
                     ]
                 );
