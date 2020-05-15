@@ -41,12 +41,13 @@ class LoginController extends Controller
         /*
         team1-group-project.azurewebsites.net - урл Богдана, его тоже вынести в конфиг
         */
+
         return redirect('https://team1-group-project.azurewebsites.net/oauth/authorize?'.$query);
     }
 
     public function callback(Request $request)
     {
-//        dd($request);
+        dd($request);
 
         //заюзать use GuzzleHttp\Client;
         $http = new Client();
@@ -119,6 +120,6 @@ class LoginController extends Controller
         $this->guard()->logout();
         Auth::logout();
 
-        return redirect()->route('auth.redirect');
+        return redirect()->route('auth');
     }
 }
