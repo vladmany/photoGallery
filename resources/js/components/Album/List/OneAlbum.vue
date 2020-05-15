@@ -6,9 +6,13 @@
         <template v-slot:button>
             <div class="row">
                 <div>
-                    <router-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id } }">
-                        <span class="btn btn-primary btn-lg text-nowrap">Добавить фото</span>
-                    </router-link>
+                    <c-button
+                        text="Добавить фото"
+                        :action="addToAlbum"
+                    />
+<!--                    <router-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id } }">-->
+<!--                        <span class="btn btn-primary btn-lg text-nowrap">Добавить фото</span>-->
+<!--                    </router-link>-->
                 </div>
             </div>
         </template>
@@ -36,10 +40,12 @@
 <script>
     import AllPhotoAlbum from "./AllPhotoAlbum";
     import ActionOneAlbum from "./ActionOneAlbum";
+    import CButton from "../../Global/CButton";
+    import routes from '../../../routes';
 
     export default {
         name: "OneAlbum",
-        components: {ActionOneAlbum, AllPhotoAlbum},
+        components: {CButton, ActionOneAlbum, AllPhotoAlbum},
         props: {
             id: {
                 required: true,
@@ -54,6 +60,11 @@
         created() {
             this.$store.dispatch('ListAlbum/getAlbums');
             this.$store.state.IdAlbum = this.id;
+        },
+        methods: {
+            addToAlbum() {
+                routes.push({ name: 'AddPhotoToAlbum', params: { id: this.album.id } })
+            }
         }
     }
 </script>
