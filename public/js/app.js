@@ -4061,7 +4061,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ActionOneAlbum",
   components: {
-    ChangeNameAllbum: _Modals_ChangeNameAllbum__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ChangeNameAlbum: _Modals_ChangeNameAllbum__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
   methods: {
     changeAlbumName: function changeAlbumName() {
@@ -4610,18 +4610,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ChangeNameAlbum",
   components: {
-    CButton: _Global_CButton__WEBPACK_IMPORTED_MODULE_1__["default"],
-    ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"]
+    ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CButton: _Global_CButton__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   data: function data() {
     return {
@@ -4634,8 +4629,11 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.dispatch('changeNameAlbum', this.album.name);
     },
     CloseModalChangeNameAlbum: function CloseModalChangeNameAlbum() {
-      this.$store.state.isChangeNameAlbum = false;
+      this.$store.commit('hideChangeNameAlbum');
     }
+  },
+  created: function created() {
+    this.album.name = this.$store.getters['ListAlbum/album'](this.$store.state.IdAlbum).name;
   }
 });
 
@@ -11008,7 +11006,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.create-error[data-v-f4af82fc]{\n    color: #FF0000 !important;\n    font-size: 14px;\n}\n", ""]);
+exports.push([module.i, "\n.button-panel[data-v-f4af82fc]{\n    display: flex;\n    margin-top: 35px;\n}\n.content[data-v-f4af82fc]{\n    margin-top: 35px;\n}\n.control-label[data-v-f4af82fc]{\n    color: #808080;\n    font-size: 14px;\n}\n.create-error[data-v-f4af82fc] {\n    color: #FF0000 !important;\n    font-size: 14px;\n}\n", ""]);
 
 // exports
 
@@ -46208,7 +46206,41 @@ var render = function() {
                 {
                   key: "content",
                   fn: function() {
-                    return undefined
+                    return [
+                      _c("div", { staticClass: "content" }, [
+                        _c("label", { staticClass: "control-label" }, [
+                          _vm._v("Переименовать альбом")
+                        ]),
+                        _vm._v(" "),
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.album.name,
+                              expression: "album.name"
+                            }
+                          ],
+                          staticClass: "form-control input",
+                          attrs: { type: "text" },
+                          domProps: { value: _vm.album.name },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.album, "name", $event.target.value)
+                            }
+                          }
+                        }),
+                        _vm._v(" "),
+                        _vm.$store.state.errorAlbum[0]
+                          ? _c("span", { staticClass: "create-error" }, [
+                              _vm._v(_vm._s(_vm.$store.state.errorAlbum[0]))
+                            ])
+                          : _vm._e()
+                      ])
+                    ]
                   },
                   proxy: true
                 },
@@ -46216,8 +46248,23 @@ var render = function() {
                   key: "buttons",
                   fn: function() {
                     return [
-                      _vm._v(
-                        '\n            <с-button\n                text="Изменить"\n                :action ="saveChange"\n            />\n            <с-button\n                type="secondary"\n                text="Отменить"\n                @click="CloseModalChangeNameAlbum"/>\n        '
+                      _c(
+                        "div",
+                        { staticClass: "button-panel" },
+                        [
+                          _c("c-button", {
+                            attrs: { text: "Изменить", action: _vm.saveChange }
+                          }),
+                          _vm._v(" "),
+                          _c("c-button", {
+                            attrs: {
+                              type: "secondary",
+                              text: "Отменить",
+                              action: _vm.CloseModalChangeNameAlbum
+                            }
+                          })
+                        ],
+                        1
                       )
                     ]
                   },
@@ -46226,7 +46273,7 @@ var render = function() {
               ],
               null,
               false,
-              2140875369
+              2928400054
             )
           })
         : _vm._e()
@@ -67449,6 +67496,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     // Изменение имени альбома(на стрнице детального просмотра альбома)
     isChangeNameAlbum: false,
     IdAlbum: 16,
+    errorAlbum: [],
     //------------------------------------------
     // Альбомы
     AllAlbums: [] //--------
@@ -67593,15 +67641,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         id: this.state.IdAlbum,
         name: albumName
       }).then(function (response) {
-        _this2.CloseModalChangeNameAlbum(); // this.$store.dispatch('ListAlbum/getAlbums');
-        // console.log(this.album.name);
-        // console.log(this.$store.state.IdAlbum);
+        _this2.commit('hideChangeNameAlbum');
 
+        _this2.dispatch('ListAlbum/getAlbums');
       })["catch"](function (error) {
         if (error.response.status == 422) {
-          // this.errors = error.response.data.errors;
-          // console.log(this.album.name);
-          // console.log(this.$store.state.IdAlbum);
+          _this2.state.errorAlbum = error.response.data.errors.name;
+          console.log(error.response.data.errors.name[0]);
           return false;
         }
       });
@@ -68059,8 +68105,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
