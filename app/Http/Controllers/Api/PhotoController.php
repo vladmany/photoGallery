@@ -38,7 +38,7 @@ class PhotoController extends Controller
      */
     public function store(PhotoRequest $request)
     {
-        if($this->getFilesSize(storage_path('app/public/images')) >= 250000000)
+        if($this->getFilesSize(storage_path('app/public/images')) >= 100000000)
         {
             return response()->json(array(
                 'code'      =>  401,
