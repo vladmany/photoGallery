@@ -41,7 +41,7 @@ class LoginController extends Controller
         /*
         team1-group-project.azurewebsites.net - урл Богдана, его тоже вынести в конфиг
         */
-        return redirect('https://team1-group-project.azurewebsites.net/oauth/authorize?' . $query);
+        return redirect('https://team1-group-project.azurewebsites.net/oauth/authorize?'.$query);
     }
 
     public function callback(Request $request)
@@ -55,7 +55,7 @@ class LoginController extends Controller
             'form_params' => [
                 'grant_type' => 'authorization_code',
                 'client_id' => 15, //данные которые выдаст Богдан. вынести в конфиг
-                'client_secret' => 'S9qfCC612r1EhwviAq6Ca24EqM3xuetvFEzL3Qj9',//данные которые выдаст Богдан. вынести в конфиг
+                'client_secret' => 'S9qfCC612r1EhwviAq6Ca24EqM3xuetvFEzL3Qj9', //данные которые выдаст Богдан. вынести в конфиг
                 'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/redirect',
                 'code' => $request->code,
             ],
