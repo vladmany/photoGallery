@@ -46,7 +46,6 @@ class LoginController extends Controller
 
     public function callback(Request $request)
     {
-        dd('tyt');
         //заюзать use GuzzleHttp\Client;
         $http = new Client();
 
@@ -59,8 +58,6 @@ class LoginController extends Controller
                 'code' => $request->code,
             ],
         ]);
-
-        dd($response);
 
         $access = json_decode((string)$response->getBody());//данные с токеном. придет сам токен и время его жизни
 
