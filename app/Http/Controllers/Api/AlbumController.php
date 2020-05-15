@@ -75,6 +75,29 @@ class AlbumController extends Controller
         $user->update($request->all());*/
 
     }
+    public function myUpdate(AlbumRequest $request)
+    {
+        //dd($request->all());
+        $data = $request->only(['id', 'name']);
+        $albumName = $data['name'];
+        $albumId = $data['id'];
+        $album = Album::where('id', $albumId)->get()->first();
+        $album->name = $albumName;
+        $album->save();
+        /*$album = Album::findOrFail($id);
+        $album->update($request->all());
+
+        return album; */
+        //dd($request->all());
+        /*$this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $user = Album::findOrFail($id);
+
+        $user->update($request->all());*/
+
+    }
 
     /**
      * Remove the specified resource from storage.
