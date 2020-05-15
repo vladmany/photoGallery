@@ -130,6 +130,7 @@
                 })
                 .catch(error => {
                     this.buttonState = true;
+                    console.log(error.response)
                     if ((error.response.status === 413) || (error.response.status === 404))  {
                         this.errorMessage = 'Максимальный размер загружаемого фото 16 МБ';
                     } else
