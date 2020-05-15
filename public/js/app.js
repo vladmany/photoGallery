@@ -5808,8 +5808,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
                   if (_this2.filesOrder.length === 0) _this2.isEnd = true;
                   _this2.isError = false;
                 })["catch"](function (error) {
-                  _this2.buttonState = true;
-                  console.log(error.response);
+                  _this2.buttonState = true; // console.log(error.response)
 
                   if (error.response.status === 413 || error.response.status === 404) {
                     _this2.errorMessage = 'Максимальный размер загружаемого фото 16 МБ';
