@@ -29,12 +29,5 @@ class AuthServiceProvider extends ServiceProvider
         //
     }
 
-    protected function mapApiRoutes()
-    {
-        Route::prefix('api')
-            ->middleware('web')
-            ->namespace($this->namespace)
-            ->group(base_path('routes/api.php'));
-    }
 
 }
