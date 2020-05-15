@@ -24,10 +24,10 @@
 </template>
 
 <script>
-    import ChangeNameAllbum from "../Modals/ChangeNameAllbum";
+    import ChangeNameAlbum from "../Modals/ChangeNameAllbum";
     export default {
         name: "ActionOneAlbum",
-        components: {ChangeNameAllbum},
+        components: {ChangeNameAlbum},
         methods: {
             changeAlbumName(){
                 this.$store.state.isChangeNameAlbum = true;

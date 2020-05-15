@@ -7,27 +7,22 @@
         this.$store.commit('hideChangeNameAlbum')
     }">
             <template v-slot:content>
-                <!--<form v-on:submit="saveChange()">
-                    <div class="col-xs-12 form-group">
-                        <label class="control-label">Переименовать альбом</label>
-                        <input type="text" v-model="album.name" class="form-control input">
-                        <span v-if="errors.name" class="create-error">{{this.$store.state.errorAlbum[0]}}</span>
-                    </div>
-                    <div class="window-buttons d-flex pt-3">
-                        <button class="btn btn-primary">Изменить</button>
-                        <button class="btn btn-light" @click="CloseModalChangeNameAlbum">Отменить</button>
-                    </div>
-                </form>-->
+                <div class="content">
+                    <label class="control-label">Переименовать альбом</label>
+                    <input type="text" v-model="album.name" class="form-control input">
+                    <span v-if="$store.state.errorAlbum[0]" class="create-error">{{$store.state.errorAlbum[0]}}</span>
+                </div>
             </template>
-            <template v-slot:buttons>
-                <с-button
-                    text="Изменить"
-                    :action ="saveChange"
-                />
-                <с-button
-                    type="secondary"
-                    text="Отменить"
-                    @click="CloseModalChangeNameAlbum"/>
+            <template class="button-panel" v-slot:buttons>
+                <div class="button-panel">
+                    <c-button
+                        text="Изменить"
+                        :action="saveChange"/>
+                    <c-button
+                        type="secondary"
+                        text="Отменить"
+                        :action="CloseModalChangeNameAlbum"/>
+                </div>
             </template>
         </modal-window>
     </div>
@@ -37,29 +32,44 @@
 <script>
     import ModalWindow from "../../Global/ModalWindow";
     import CButton from "../../Global/CButton";
+
     export default {
         name: "ChangeNameAlbum",
-        components: {CButton, ModalWindow},
+        components: {ModalWindow, CButton},
         data: function () {
             return {
                 album: {},
-                errors:[]
+                errors: []
             }
         },
         methods: {
             saveChange() {
                 this.$store.dispatch('changeNameAlbum', this.album.name);
             },
-            CloseModalChangeNameAlbum(){
-                this.$store.state.isChangeNameAlbum = false;
+            CloseModalChangeNameAlbum() {
+                this.$store.commit('hideChangeNameAlbum');
 
             },
         },
+        created() {
+            this.album.name = this.$store.getters['ListAlbum/album'](this.$store.state.IdAlbum).name;
+        }
     }
 </script>
 
 <style scoped>
-    .create-error{
+    .button-panel{
+        display: flex;
+        margin-top: 35px;
+    }
+    .content{
+        margin-top: 35px;
+    }
+    .control-label{
+        color: #808080;
+        font-size: 14px;
+    }
+    .create-error {
         color: #FF0000 !important;
         font-size: 14px;
 
