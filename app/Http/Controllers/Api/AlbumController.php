@@ -87,7 +87,7 @@ class AlbumController extends Controller
         /*$album = Album::findOrFail($id);
         $album->update($request->all());
 
-        return album;*/
+        return album; */
         //dd($request->all());
         /*$this->validate($request, [
             'name' => 'required',

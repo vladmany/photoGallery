@@ -172,6 +172,7 @@ export default new Vuex.Store({
             }
         },
         changeNameAlbum({ commit, getters }, albumName) {
+            //pog
             axios.post('/api/albums/update', {
                 id:this.state.IdAlbum,
                 name:albumName
