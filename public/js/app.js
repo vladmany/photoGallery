@@ -67641,7 +67641,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       var commit = _ref2.commit,
           getters = _ref2.getters;
-      axios.post('/api/albums/update', {
+      axios.put('/api/all-albums/update', {
         id: this.state.IdAlbum,
         name: albumName
       }).then(function (response) {
