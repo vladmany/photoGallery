@@ -111,11 +111,13 @@ class AlbumController extends Controller
     }
     public function myDestroy(Request $request)
     {
-        $data = $request->all();
-        $albumName = $data['name'];
+        $data = $request->input('id');
+        dd($data);
         $albumId = $data['id'];
-        $album = Album::where('id', $albumId)->get()->first();
-        $album->name = $albumName;
-        $album->save();
+
+        Album::destroy($albumId);
+
+
+
     }
 }

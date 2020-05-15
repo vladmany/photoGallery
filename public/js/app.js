@@ -3988,6 +3988,13 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4006,18 +4013,48 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ActionAllAlbums",
   data: function data() {
     return {
-      isSelected: false
+      isSelected: false,
+      i: 0
     };
+  },
+  methods: {
+    provideAccess: function provideAccess() {
+      if (this.$store.getters.selectedAlbums.length > 0) {}
+    },
+    downloadAlbum: function downloadAlbum() {
+      if (this.$store.getters.selectedAlbums.length > 0) {}
+    },
+    deleteAlbum: function deleteAlbum() {
+      if (this.$store.getters.selectedAlbums.length > 0) {
+        console.log('ff'); //for (this.i = 0; this.$store.getters.selectedAlbums.length; this.i++) {
+
+        console.log('aa' + this.$store.getters.selectedAlbums[0]);
+        this.$store.dispatch('deleteAlbum', this.$store.getters.selectedAlbums[0]); //}
+      }
+    }
   },
   watch: {
     isSelected: function isSelected() {
       this.$store.dispatch('ListAlbum/selectAllAlbums', this.isSelected);
     }
-  }
+  },
+  selectedAlbums: function selectedAlbums() {
+    if (this.selectedAlbums.length === 0) {
+      this.isSelected = false;
+    }
+  },
+  computed: _objectSpread({
+    isSelectedAlbums: function isSelectedAlbums() {
+      return this.$store.getters.selectedAlbums.length > 0 ? 'available' : '';
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    selectedAlbums: 'selectedAlbums'
+  }))
 });
 
 /***/ }),
@@ -45457,54 +45494,59 @@ var render = function() {
       _c("label", { attrs: { for: "all-selector" } })
     ]),
     _vm._v(" "),
-    _vm._m(0),
+    _c(
+      "div",
+      {
+        staticClass: "action to_provide_access",
+        class: _vm.isSelectedAlbums,
+        on: { click: _vm.provideAccess }
+      },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/albums/actions/ic_provide_access.svg"
+          }
+        })
+      ]
+    ),
     _vm._v(" "),
-    _vm._m(1),
+    _c(
+      "div",
+      {
+        staticClass: "action turn_download",
+        class: _vm.isSelectedAlbums,
+        on: { click: _vm.downloadAlbum }
+      },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/albums/actions/ic_download.svg"
+          }
+        })
+      ]
+    ),
     _vm._v(" "),
-    _vm._m(2)
+    _c(
+      "div",
+      {
+        staticClass: "action delete_image",
+        class: _vm.isSelectedAlbums,
+        on: { click: _vm.deleteAlbum }
+      },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/albums/actions/ic_delete.svg"
+          }
+        })
+      ]
+    )
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "action to_provide_access" }, [
-      _c("object", {
-        attrs: {
-          type: "image/svg+xml",
-          data: "/storage/albums/actions/ic_provide_access.svg"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "action turn_download" }, [
-      _c("object", {
-        attrs: {
-          type: "image/svg+xml",
-          data: "/storage/albums/actions/ic_download.svg"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "action delete_image" }, [
-      _c("object", {
-        attrs: {
-          type: "image/svg+xml",
-          data: "/storage/albums/actions/ic_delete.svg"
-        }
-      })
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 
@@ -64781,14 +64823,15 @@ __webpack_require__.r(__webpack_exports__);
 /*!****************************************************************!*\
   !*** ./resources/js/components/Album/List/ActionAllAlbums.vue ***!
   \****************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ActionAllAlbums_vue_vue_type_template_id_05924b29_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActionAllAlbums.vue?vue&type=template&id=05924b29&scoped=true& */ "./resources/js/components/Album/List/ActionAllAlbums.vue?vue&type=template&id=05924b29&scoped=true&");
 /* harmony import */ var _ActionAllAlbums_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActionAllAlbums.vue?vue&type=script&lang=js& */ "./resources/js/components/Album/List/ActionAllAlbums.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _ActionAllAlbums_vue_vue_type_style_index_0_id_05924b29_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ActionAllAlbums.vue?vue&type=style&index=0&id=05924b29&scoped=true&lang=css& */ "./resources/js/components/Album/List/ActionAllAlbums.vue?vue&type=style&index=0&id=05924b29&scoped=true&lang=css&");
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _ActionAllAlbums_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _ActionAllAlbums_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+/* harmony import */ var _ActionAllAlbums_vue_vue_type_style_index_0_id_05924b29_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ActionAllAlbums.vue?vue&type=style&index=0&id=05924b29&scoped=true&lang=css& */ "./resources/js/components/Album/List/ActionAllAlbums.vue?vue&type=style&index=0&id=05924b29&scoped=true&lang=css&");
 /* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -64820,7 +64863,7 @@ component.options.__file = "resources/js/components/Album/List/ActionAllAlbums.v
 /*!*****************************************************************************************!*\
   !*** ./resources/js/components/Album/List/ActionAllAlbums.vue?vue&type=script&lang=js& ***!
   \*****************************************************************************************/
-/*! exports provided: default */
+/*! no static exports found */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -67499,6 +67542,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     //------------------------------------------
     // Изменение имени альбома(на стрнице детального просмотра альбома)
     isChangeNameAlbum: false,
+    isDelAlbum: false,
     IdAlbum: 16,
     errorAlbum: [],
     //------------------------------------------
@@ -67565,6 +67609,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     hideChangeNameAlbum: function hideChangeNameAlbum(state) {
       state.isChangeNameAlbum = false;
+    },
+    showDelAlbum: function showDelAlbum(state) {
+      state.isDelAlbum = true;
+    },
+    hideDelAlbum: function hideDelAlbum(state) {
+      state.isDelAlbum = false;
     },
     changeActiveIdAlbum: function changeActiveIdAlbum(state, val) {
       state.IdAlbum = val;
@@ -67641,7 +67691,6 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       var commit = _ref2.commit,
           getters = _ref2.getters;
-      //pog
       axios.post('/api/albums/update', {
         id: this.state.IdAlbum,
         name: albumName
@@ -67657,9 +67706,22 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         }
       });
     },
-    downloadPhotos: function downloadPhotos(_ref3, photos) {
+    deleteAlbum: function deleteAlbum(_ref3, albumId) {
+      var _this3 = this;
+
       var commit = _ref3.commit,
           getters = _ref3.getters;
+      axios.get('/api/album-destr', {
+        id: albumId
+      }).then(function (response) {
+        _this3.commit('hideDelAlbum');
+
+        _this3.dispatch('ListAlbum/getAlbums');
+      });
+    },
+    downloadPhotos: function downloadPhotos(_ref4, photos) {
+      var commit = _ref4.commit,
+          getters = _ref4.getters;
       axios.post('/api/photos/download', {
         photos: photos
       }, {
