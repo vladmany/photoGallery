@@ -31,29 +31,24 @@ class LoginController extends Controller
     public function redirect()
     {
         $query = http_build_query([
-            'client_id' => 17, //запросить у Богдана и вынести в конфиг
+            'client_id' => 17,
             'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
             'response_type' => 'code',
             'scope' => '',
         ]);
-
-        /*
-        team1-group-project.azurewebsites.net - урл Богдана, его тоже вынести в конфиг
-        */
 
         return redirect('https://team1-group-project.azurewebsites.net/oauth/authorize?'.$query);
     }
 
     public function callback(Request $request)
     {
-        //заюзать use GuzzleHttp\Client;
         $http = new Client();
 
         $response = $http->post('http://team1-group-project.azurewebsites.net/oauth/token', [
             'form_params' => [
                 'grant_type' => 'authorization_code',
                 'client_id' => 17, //данные которые выдаст Богдан. вынести в конфиг
-                'client_secret' => 'DJWhEfPbsKMLlEBZDeyGgoCqc4RWmnJvDne4g7Pt', //данные которые выдаст Богдан. вынести в конфиг
+                'client_secret' => ' DJWhEfPbsKMLlEBZDeyGgoCqc4RWmnJvDne4g7Pt', //данные которые выдаст Богдан. вынести в конфиг
                 'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
                 'code' => $request->code,
             ],
