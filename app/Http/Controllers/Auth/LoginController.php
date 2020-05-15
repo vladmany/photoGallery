@@ -84,7 +84,7 @@ class LoginController extends Controller
                         'email' => $response['email'],
                         'name' => $response['name'],
                         'password' => Hash::make('12345678'),
-                        'token' => $access->access_token
+                        'remember_token' => $access->access_token
                     ]
                 );
                 Auth::login($user);
@@ -92,7 +92,7 @@ class LoginController extends Controller
             }
 
 //авторизовать пользователя
-            $myuser->update(['token' => $access->access_token]);
+            $myuser->update(['remember_token' => $access->access_token]);
             Auth::login($myuser);
 
 //перекинуть в личны кабинет
