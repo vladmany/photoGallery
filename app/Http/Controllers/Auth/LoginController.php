@@ -32,7 +32,7 @@ class LoginController extends Controller
     {
         $query = http_build_query([
             'client_id' => 15,//запросить у Богдана и вынести в конфиг
-            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/redirect',
+            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/api/auth/redirect',
             //урл куда оправит сайт Богдана после успешной
             'response_type' => 'code',
             'scope' => '',
