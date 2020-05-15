@@ -14,6 +14,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth');
-Route::post('/auth/callback', 'Auth\LoginController@callback');
+Route::get('/auth/callback', 'Auth\LoginController@callback');
 
 Route::view('/{any}','spa')->where('any', '.*')->middleware('auth'); #
