@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="align-self-center justify-content-center text-center ml-4 mr-4">
-            <input type="checkbox" class="checkbox-album text-center custom-checkbox"
+            <input type="checkbox" class="checkbox-album text-center"
                    v-model="isSelected"
             >
         </div>
