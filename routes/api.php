@@ -30,3 +30,5 @@ Route::post('/albums/create', 'Api\AlbumController@store')->name('albums.create'
 Route::post('/albums/index', 'Api\AlbumController@index')->name('albums.index');
 Route::get('/collages', 'Api\PhotoController@collageIndex')->name('collages');
 Route::get('/animatoins', 'Api\PhotoController@animationIndex')->name('animations');
+Route::get('/album-destr', 'Api\AlbumController@myDestroy')->name('album-destr');
+Route::put('/albums/update', 'Api\AlbumController@update')->name('albums.update');
