@@ -4,9 +4,11 @@
             <h1>Просмотр фото</h1>
         </template>
         <template v-slot:content>
-<!--            <div>-->
-<!--                <a href="#" @click.prevent="back">Назад</a>-->
-<!--            </div>-->
+            <div class="back-button">
+                <router-link :to="{ name: 'IndexPhoto' }" >
+                    <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
+                </router-link>
+            </div>
             <div>
                 <SliderPhoto :id="id"></SliderPhoto>
             </div>
@@ -37,5 +39,16 @@
 </script>
 
 <style scoped>
-
+    object {
+        pointer-events: none;
+        filter: brightness(75%);
+    }
+    .back-button {
+        display: flex;
+        margin-top: 15px;
+        width: 30px;
+    }
+    .back-button:hover object {
+        filter: brightness(50%);
+    }
 </style>
