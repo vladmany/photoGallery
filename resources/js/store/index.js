@@ -38,6 +38,7 @@ export default new Vuex.Store({
 
         // Изменение имени альбома(на стрнице детального просмотра альбома)
         isChangeNameAlbum: false,
+        isDelAlbum: false,
         IdAlbum: 16,
         errorAlbum: [],
         //------------------------------------------
@@ -110,6 +111,12 @@ export default new Vuex.Store({
         hideChangeNameAlbum(state) {
             state.isChangeNameAlbum = false
         },
+        showDelAlbum(state) {
+            state.isDelAlbum = true
+        },
+        hideDelAlbum(state) {
+            state.isDelAlbum = false
+        },
         changeActiveIdAlbum(state, val) {
             state.IdAlbum = val
         }
@@ -172,7 +179,6 @@ export default new Vuex.Store({
             }
         },
         changeNameAlbum({ commit, getters }, albumName) {
-            //pog
             axios.post('/api/albums/update', {
                 id:this.state.IdAlbum,
                 name:albumName
@@ -189,6 +195,16 @@ export default new Vuex.Store({
                         return false;
                     }
                 });
+        },
+        deleteAlbum({ commit, getters }, albumId) {
+            axios.get('/api/album-destr', {
+                id:albumId
+            })
+                .then(response => {
+                        this.commit('hideDelAlbum');
+                        this.dispatch('ListAlbum/getAlbums');
+                    }
+                );
         },
         downloadPhotos({ commit, getters }, photos) {
             axios.post('/api/photos/download', {
