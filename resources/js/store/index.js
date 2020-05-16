@@ -132,7 +132,7 @@ export default new Vuex.Store({
         }*/
     },
     actions: {
-        savePhotosToAlbum({ commit, getters }, albumId) {
+        savePhotosToAlbum({ commit, getters, dispatch }, albumId) {
             let photos = getters.selectedPhotos;
             if(photos && albumId) {
                 axios.post('/api/albums-photos', {
@@ -147,17 +147,20 @@ export default new Vuex.Store({
                         this.dispatch('clearPhotos');
                         this.commit('hideAddPhotoToAlbum')
                         if (response.data.length <= 0) {
-                            Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-                                action : {
-                                    text : 'Закрыть',
-                                    onClick : (e, toastObject) => {
-                                        toastObject.goAway(0);
-                                    }
-                                },
-                                position: 'bottom-left',
-                                duration: 5000,
-                                keepOnHover: true
-                            });
+                            dispatch('showToasted', {
+                                text: 'Все объекты уже существуют в выбранном альбоме, да',
+                            })
+                            // Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
+                            //     // action : {
+                            //     //     text : 'Закрыть',
+                            //     //     onClick : (e, toastObject) => {
+                            //     //         toastObject.goAway(0);
+                            //     //     }
+                            //     // },
+                            //     position: 'bottom-left',
+                            //     duration: 5000,
+                            //     keepOnHover: true
+                            // });
                         } else {
                             Vue.toasted.show(response.data.length + ' объектов добавлены в альбом', {
                                 action : {
@@ -230,3 +233,11 @@ export default new Vuex.Store({
 
     }
 })
+
+// как пример для вставки в toasted
+// action : {
+//     text : 'Закрыть',
+//         onClick : (e, toastObject) => {
+//         toastObject.goAway(0);
+//     }
+// },

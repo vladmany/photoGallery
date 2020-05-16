@@ -1,3 +1,5 @@
+import Vue from "vue";
+
 let state = {
     selected: {
         photos: [], // добавлять id
@@ -63,6 +65,21 @@ let actions = {
     },
     delAlbum({ commit }, val) {
         commit('delAlbum', val)
+    },
+    showToasted({}, payload) {
+        let text = payload.text;
+        let action = payload.action || {};
+        Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
+            action : {
+                text : 'Закрыть',
+                onClick : (e, toastObject) => {
+                    toastObject.goAway(0);
+                }
+            },
+            position: 'bottom-left',
+            duration: 5000,
+            keepOnHover: true
+        });
     },
 }
 

@@ -67760,12 +67760,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
           if (response.data.length <= 0) {
             vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-              action: {
-                text: 'Закрыть',
-                onClick: function onClick(e, toastObject) {
-                  toastObject.goAway(0);
-                }
-              },
+              // action : {
+              //     text : 'Закрыть',
+              //     onClick : (e, toastObject) => {
+              //         toastObject.goAway(0);
+              //     }
+              // },
               position: 'bottom-left',
               duration: 5000,
               keepOnHover: true
