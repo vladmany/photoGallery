@@ -67750,46 +67750,46 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           photos: photos,
           album: albumId
         }).then(function (response) {
-          console.log('successfully album saved'); // dispatch('ListAlbum/getAlbums');
+          // console.log('successfully album saved');
+          // dispatch('ListAlbum/getAlbums');
           // dispatch('ListPhoto/getPhotos');
+          // if (this.state.isAddPhotoToAlbum) {
+          _this.dispatch('clearPhotos');
 
-          if (_this.state.isAddPhotoToAlbum) {
-            _this.dispatch('clearPhotos');
+          _this.commit('hideAddPhotoToAlbum');
 
-            _this.commit('hideAddPhotoToAlbum');
+          if (response.data.length <= 0) {
+            vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show('Все объекты уже существуют в выбранном альбоме', {
+              action: {
+                text: 'Закрыть',
+                onClick: function onClick(e, toastObject) {
+                  toastObject.goAway(0);
+                }
+              },
+              position: 'bottom-left',
+              duration: 5000,
+              keepOnHover: true
+            });
+          } else {
+            vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show(response.data.length + ' объектов добавлены в альбом', {
+              action: {
+                text: 'Посмотреть',
+                onClick: function onClick(e, toastObject) {
+                  _routes__WEBPACK_IMPORTED_MODULE_6__["default"].push({
+                    name: 'OneAlbum',
+                    params: {
+                      id: +albumId
+                    }
+                  });
+                  toastObject.goAway(0);
+                }
+              },
+              position: 'bottom-left',
+              duration: 5000,
+              keepOnHover: true
+            });
+          } // }
 
-            if (response.data.length <= 0) {
-              vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-                action: {
-                  text: 'Закрыть',
-                  onClick: function onClick(e, toastObject) {
-                    toastObject.goAway(0);
-                  }
-                },
-                position: 'bottom-left',
-                duration: 5000,
-                keepOnHover: true
-              });
-            } else {
-              vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show(response.data.length + ' объектов добавлены в альбом', {
-                action: {
-                  text: 'Посмотреть',
-                  onClick: function onClick(e, toastObject) {
-                    _routes__WEBPACK_IMPORTED_MODULE_6__["default"].push({
-                      name: 'OneAlbum',
-                      params: {
-                        id: +albumId
-                      }
-                    });
-                    toastObject.goAway(0);
-                  }
-                },
-                position: 'bottom-left',
-                duration: 5000,
-                keepOnHover: true
-              });
-            }
-          }
         })["catch"](function (err) {
           return console.log('error album saved');
         });
