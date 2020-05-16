@@ -44,8 +44,11 @@ export default new Vuex.Store({
         errorAlbum: [],
         //------------------------------------------
         // Альбомы
-        AllAlbums: []
+        AllAlbums: [],
         //--------
+
+        // Скачивание фото
+        downloadProgress: 0,
     },
     getters: {
 
@@ -120,11 +123,13 @@ export default new Vuex.Store({
         },
         changeActiveIdAlbum(state, val) {
             state.IdAlbum = val
-        }
+        },
         //----------------------------
 
         // Скачивание фото
-
+        setDownloadProgress(state, data) {
+            state.downloadProgress = data
+        }
         //----------------
 
         /*getAlbums() {
@@ -190,7 +195,7 @@ export default new Vuex.Store({
                 });
         },
         deleteAlbum({ commit, getters }, albumId) {
-            axios.get('/api/album-destr', {
+            axios.post('/api/album-destr', {
                 id:albumId
             })
                 .then(response => {
@@ -204,7 +209,11 @@ export default new Vuex.Store({
                 photos: photos
             },
             {
-                responseType: 'blob'
+                responseType: 'blob',
+                onDownloadProgress: (itemDownload) => {
+                    let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
+                    this.$store.commit('setDownloadProgress', Progress)
+                }
             })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -214,6 +223,7 @@ export default new Vuex.Store({
                 link.setAttribute('download',randName + '.' + response.data.type.split('/').pop());
                 document.body.appendChild(link);
                 link.click();
+                console.log('ТЗЕН')
             })
             .catch(error => {
 

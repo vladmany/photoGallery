@@ -117,8 +117,8 @@ class AlbumController extends Controller
     }
     public function myDestroy(Request $request)
     {
-        $data = $request->input('id');
-        dd($data);
+        $data = $request->only(['id']);
+
         $albumId = $data['id'];
 
         Album::destroy($albumId);
