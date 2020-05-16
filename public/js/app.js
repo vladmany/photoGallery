@@ -67750,46 +67750,46 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           photos: photos,
           album: albumId
         }).then(function (response) {
-          console.log('successfully album saved'); // dispatch('ListAlbum/getAlbums');
+          // console.log('successfully album saved');
+          // dispatch('ListAlbum/getAlbums');
           // dispatch('ListPhoto/getPhotos');
+          // if (this.state.isAddPhotoToAlbum) {
+          _this.dispatch('clearPhotos');
 
-          if (_this.state.isAddPhotoToAlbum) {
-            _this.dispatch('clearPhotos');
+          _this.commit('hideAddPhotoToAlbum');
 
-            _this.commit('hideAddPhotoToAlbum');
+          if (response.data.length <= 0) {
+            vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show('Все объекты уже существуют в выбранном альбоме', {
+              action: {
+                text: 'Закрыть',
+                onClick: function onClick(e, toastObject) {
+                  toastObject.goAway(0);
+                }
+              },
+              position: 'bottom-left',
+              duration: 5000,
+              keepOnHover: true
+            });
+          } else {
+            vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show(response.data.length + ' объектов добавлены в альбом', {
+              action: {
+                text: 'Посмотреть',
+                onClick: function onClick(e, toastObject) {
+                  _routes__WEBPACK_IMPORTED_MODULE_6__["default"].push({
+                    name: 'OneAlbum',
+                    params: {
+                      id: +albumId
+                    }
+                  });
+                  toastObject.goAway(0);
+                }
+              },
+              position: 'bottom-left',
+              duration: 5000,
+              keepOnHover: true
+            });
+          } // }
 
-            if (response.data.length <= 0) {
-              vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-                action: {
-                  text: 'Закрыть',
-                  onClick: function onClick(e, toastObject) {
-                    toastObject.goAway(0);
-                  }
-                },
-                position: 'bottom-left',
-                duration: 5000,
-                keepOnHover: true
-              });
-            } else {
-              vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show(response.data.length + ' объектов добавлены в альбом', {
-                action: {
-                  text: 'Посмотреть',
-                  onClick: function onClick(e, toastObject) {
-                    _routes__WEBPACK_IMPORTED_MODULE_6__["default"].push({
-                      name: 'OneAlbum',
-                      params: {
-                        id: +albumId
-                      }
-                    });
-                    toastObject.goAway(0);
-                  }
-                },
-                position: 'bottom-left',
-                duration: 5000,
-                keepOnHover: true
-              });
-            }
-          }
         })["catch"](function (err) {
           return console.log('error album saved');
         });
@@ -67820,7 +67820,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       var commit = _ref3.commit,
           getters = _ref3.getters;
-      axios.post('/api/album-destr', {
+      axios.get('/api/album-destr', {
         id: albumId
       }).then(function (response) {
         _this3.commit('hideDelAlbum');
@@ -67834,7 +67834,15 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       axios.post('/api/photos/download', {
         photos: photos
       }, {
-        responseType: 'blob'
+        responseType: 'blob',
+        onUploadProgress: function onUploadProgress(itemUpload) {
+          var Progress = Math.round(itemUpload.loaded / itemUpload.total * 100);
+          console.log('UPLOAD=' + Progress);
+        },
+        onDownloadProgress: function onDownloadProgress(itemDownload) {
+          var Progress = Math.round(itemDownload.loaded / itemDownload.total * 100);
+          console.log('DOWNLOAD=' + Progress);
+        }
       }).then(function (response) {
         var url = window.URL.createObjectURL(new Blob([response.data]));
         var link = document.createElement('a');
@@ -68281,8 +68289,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

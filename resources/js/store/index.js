@@ -140,10 +140,10 @@ export default new Vuex.Store({
                     album: albumId
                 })
                 .then(response => {
-                    console.log('successfully album saved');
+                    // console.log('successfully album saved');
                     // dispatch('ListAlbum/getAlbums');
                     // dispatch('ListPhoto/getPhotos');
-                    if (this.state.isAddPhotoToAlbum) {
+                    // if (this.state.isAddPhotoToAlbum) {
                         this.dispatch('clearPhotos');
                         this.commit('hideAddPhotoToAlbum')
                         if (response.data.length <= 0) {
@@ -172,10 +172,11 @@ export default new Vuex.Store({
                                 keepOnHover: true
                             });
                         }
-                    }
+                    // }
                 })
                 .catch(err =>
-                    console.log('error album saved'))
+                    console.log('error album saved')
+                )
             }
         },
         changeNameAlbum({ commit, getters }, albumName) {
@@ -211,7 +212,15 @@ export default new Vuex.Store({
                 photos: photos
             },
             {
-                responseType: 'blob'
+                responseType: 'blob',
+                onUploadProgress: (itemUpload) => {
+                    let Progress = Math.round((itemUpload.loaded / itemUpload.total) * 100);
+                    console.log('UPLOAD=' + Progress)
+                },
+                onDownloadProgress: (itemDownload) => {
+                    let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
+                    console.log('DOWNLOAD=' + Progress)
+                }
             })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
