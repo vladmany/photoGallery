@@ -197,7 +197,7 @@ export default new Vuex.Store({
                 });
         },
         deleteAlbum({ commit, getters }, albumId) {
-            axios.get('/api/album-destr', {
+            axios.post('/api/album-destr', {
                 id:albumId
             })
                 .then(response => {

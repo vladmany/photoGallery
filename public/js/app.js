@@ -67820,7 +67820,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       var commit = _ref3.commit,
           getters = _ref3.getters;
-      axios.get('/api/album-destr', {
+      axios.post('/api/album-destr', {
         id: albumId
       }).then(function (response) {
         _this3.commit('hideDelAlbum');
@@ -68281,8 +68281,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
