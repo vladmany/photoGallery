@@ -13,14 +13,19 @@
         <div class="action delete_image" :class="isSelectedAlbums" @click="deleteAlbum">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
         </div>
+        <del-albums></del-albums>
     </div>
 </template>
 
 <script>
     import {mapGetters} from "vuex";
+    import DelAlbums from "../Modals/DelAlbums";
+    import ModalWindow from "../../Global/ModalWindow";
+    import CButton from "../../Global/CButton";
 
     export default {
         name: "ActionAllAlbums",
+        components: {ModalWindow, CButton, DelAlbums},
         data() {
             return {
                 isSelected: false,
@@ -38,11 +43,7 @@
             },
             deleteAlbum() {
                 if (this.$store.getters.selectedAlbums.length > 0) {
-                    console.log('ff');
-                    //for (this.i = 0; this.$store.getters.selectedAlbums.length; this.i++) {
-                        console.log('aa'+this.$store.getters.selectedAlbums[0]);
-                        this.$store.dispatch('deleteAlbum', this.$store.getters.selectedAlbums[0])
-                    //}
+                    this.$store.commit('showDelAlbum');
                 }
             }
         },
