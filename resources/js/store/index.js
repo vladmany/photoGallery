@@ -211,7 +211,11 @@ export default new Vuex.Store({
                 photos: photos
             },
             {
-                responseType: 'blob'
+                responseType: 'blob',
+                onUploadProgress: (itemUpload) => {
+                    let Progress = Math.round((itemUpload.loaded / itemUpload.total) * 100);
+                    console.log(Progress)
+                }
             })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
