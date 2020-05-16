@@ -67794,7 +67794,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           } else {
             var payload = {
               text: response.data.length + ' объектов добавлены в альбом',
-              action: {
+              action: _this.state.isAddPhotoToAlbum ? {
                 text: 'Посмотреть',
                 onClick: function onClick(e, toastObject) {
                   _routes__WEBPACK_IMPORTED_MODULE_6__["default"].push({
@@ -67805,7 +67805,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
                   });
                   toastObject.goAway(0);
                 }
-              }
+              } : {}
             };
             dispatch('showToasted', payload);
           } // }

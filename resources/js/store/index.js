@@ -154,13 +154,13 @@ export default new Vuex.Store({
                         } else {
                             let payload = {
                                 text: response.data.length + ' объектов добавлены в альбом',
-                                action : {
+                                action: (this.state.isAddPhotoToAlbum) ? {
                                     text : 'Посмотреть',
                                     onClick : (e, toastObject) => {
                                         routes.push({ name: 'OneAlbum', params: { id: +albumId } })
                                         toastObject.goAway(0);
                                     }
-                                },
+                                } : {},
                             };
                             dispatch('showToasted', payload);
                         }
