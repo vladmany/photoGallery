@@ -30,7 +30,13 @@ class AlbumController extends Controller
      */
     public function store(AlbumRequest $request)
     {
-        $data = Album::create($request->all());
+        $albumCount = (string)(Album::all()->count()+1);
+        $url = 'http://gallery/album/'.base64_encode($albumCount);
+        $data = $request->all();
+        $data['url'] = $url;
+
+        $data = Album::create($data);
+
         return $data;
     }
 
@@ -55,12 +61,12 @@ class AlbumController extends Controller
     public function update(AlbumRequest $request)
     {
         //dd($request->all());
-        $data = $request->only(['id', 'name']);
-        $albumName = $data['name'];
-        $albumId = $data['id'];
-        $album = Album::where('id', $albumId)->get()->first();
-        $album->name = $albumName;
-        $album->save();
+//        $data = $request->only(['id', 'name']);
+//        $albumName = $data['name'];
+//        $albumId = $data['id'];
+//        $album = Album::where('id', $albumId)->get()->first();
+//        $album->name = $albumName;
+//        $album->save();
         /*$album = Album::findOrFail($id);
         $album->update($request->all());
 

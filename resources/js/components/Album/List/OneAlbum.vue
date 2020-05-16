@@ -27,9 +27,9 @@
             </div>
             <div class="row">
                 <div class="col-12">
-                    <p class="text-center album-name mt-2 mt-md-4 mt-5 mb-2 mb-md-4 mb-5">{{ album.name }}</p>
+                    <p class="text-center album-name mt-2 mt-md-4 mt-5 mb-2 mb-md-4 mb-5">{{ albumName }}</p>
                 </div>
-                <AllPhotoAlbum :paginate-count="20" :album-id="album.id" class="col-12"></AllPhotoAlbum>
+                <AllPhotoAlbum :paginate-count="20" :album-id="id" class="col-12"></AllPhotoAlbum>
             </div>
 
         </template>
@@ -55,6 +55,9 @@
         computed: {
             album() {
                 return this.$store.getters['ListAlbum/album'](this.id);
+            },
+            albumName() {
+                return this.album ? this.album.name : ''
             }
         },
         created() {
@@ -63,9 +66,9 @@
         },
         methods: {
             addToAlbum() {
-                routes.push({ name: 'AddPhotoToAlbum', params: { id: this.album.id } })
-            }
-        }
+                routes.push({ name: 'AddPhotoToAlbum', params: { id: this.id } })
+            },
+        },
     }
 </script>
 

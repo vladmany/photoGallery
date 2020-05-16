@@ -5,23 +5,30 @@ let state = {
     selectAllAlbums: false,
 }
 let getters = {
-    albums: state => state.albums,
+    albums: state => {
+        if(!state.albums) {
+            return JSON.parse(localStorage.getItem('albums'))
+        }
+
+        return state.albums
+    },
     groups: state => state.groups,
     selectAllAlbums: state => state.selectAllAlbums,
-    album: state => id =>
-        state.albums.find(album => album.id === id),
+    album: (state, getters) => id =>
+        getters.albums.find(album => album.id === id)
+    ,
     photosByAlbum: (state, getters) => id => {
         let album = getters.album(id);
         if (album) {
-            let photos = album.photos;
-            return photos;
+            return album.photos;
         }
         return false;
     }
 }
 let mutations = {
     getAlbums:(state, payload) => {
-        state.albums = payload
+        state.albums = payload;
+        localStorage.setItem('albums', JSON.stringify(payload))
     },
     selectAllAlbums:(state, payload) =>
         state.selectAllAlbums = payload

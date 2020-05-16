@@ -15,7 +15,7 @@
         props: {
             id: {
                 required: true,
-                type: Object,
+                type: Number,
             }
         },
         computed: {
@@ -28,12 +28,7 @@
             slides() {
                 let ret = [];
                 for(let image of this.images) {
-                    ret.push(
-                        image.url
-                        // `<div>
-                        //     <img class="img-fluid" src="${ image.url }">
-                        // </div>`
-                    )
+                    ret.push(image.url)
                 }
 
                 return ret;

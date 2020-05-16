@@ -1,10 +1,8 @@
 <template>
     <div class="slider">
         <transition-group name="fade" tag="div" class="one-slide">
-            <!--            <div v-for="i in [currentIndex]" :key="i">-->
             <img v-for="i in [currentIndex]" :key="i"
                  class="img-fluid one-photo" :src="currentImg" />
-            <!--            </div>-->
         </transition-group>
         <div class="arrows">
             <span class="prev" @click="prev">&#10094;</span>
@@ -49,10 +47,11 @@
         },
 
         computed: {
-            currentImg: function() {
+            currentImg() {
                 return this.images[Math.abs(this.currentIndex) % this.images.length];
             }
-        }
+        },
+
     };
 </script>
 

@@ -4466,6 +4466,9 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     album: function album() {
       return this.$store.getters['ListAlbum/album'](this.id);
+    },
+    albumName: function albumName() {
+      return this.album ? this.album.name : '';
     }
   },
   created: function created() {
@@ -4477,7 +4480,7 @@ __webpack_require__.r(__webpack_exports__);
       _routes__WEBPACK_IMPORTED_MODULE_3__["default"].push({
         name: 'AddPhotoToAlbum',
         params: {
-          id: this.album.id
+          id: this.id
         }
       });
     }
@@ -4906,8 +4909,6 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
 //
 //
 //
@@ -6185,7 +6186,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   props: {
     id: {
       required: true,
-      type: Object
+      type: Number
     }
   },
   computed: {
@@ -6204,10 +6205,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       try {
         for (_iterator.s(); !(_step = _iterator.n()).done;) {
           var image = _step.value;
-          ret.push(image.url // `<div>
-          //     <img class="img-fluid" src="${ image.url }">
-          // </div>`
-          );
+          ret.push(image.url);
         }
       } catch (err) {
         _iterator.e(err);
@@ -46077,13 +46075,13 @@ var render = function() {
                       staticClass:
                         "text-center album-name mt-2 mt-md-4 mt-5 mb-2 mb-md-4 mb-5"
                     },
-                    [_vm._v(_vm._s(_vm.album.name))]
+                    [_vm._v(_vm._s(_vm.albumName))]
                   )
                 ]),
                 _vm._v(" "),
                 _c("AllPhotoAlbum", {
                   staticClass: "col-12",
-                  attrs: { "paginate-count": 20, "album-id": _vm.album.id }
+                  attrs: { "paginate-count": 20, "album-id": _vm.id }
                 })
               ],
               1
@@ -67575,22 +67573,52 @@ __webpack_require__.r(__webpack_exports__);
     path: '/album/:id',
     component: _components_Album_List_OneAlbum__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'OneAlbum',
-    props: true
+    props: function props(route) {
+      var id = Number.parseInt(route.params.id, 10);
+
+      if (Number.isNaN(id)) {
+        return 0;
+      }
+
+      return {
+        id: id
+      };
+    }
   }, {
     path: '/album/:id/add',
     component: _components_Album_List_AddPhotoToAlbum__WEBPACK_IMPORTED_MODULE_6__["default"],
     name: 'AddPhotoToAlbum',
-    props: true
+    props: function props(route) {
+      var id = Number.parseInt(route.params.id, 10);
+
+      if (Number.isNaN(id)) {
+        return 0;
+      }
+
+      return {
+        id: id
+      };
+    }
   }, {
     path: '/photos',
     component: _components_Photo_List_PhotoIndex__WEBPACK_IMPORTED_MODULE_1__["default"],
     name: 'IndexPhoto',
-    alias: '/'
+    alias: ['/', '/home']
   }, {
     path: '/photo/:id',
     component: _components_Photo_View_ViewIndex__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'IndexViewPhoto',
-    props: true
+    props: function props(route) {
+      var id = Number.parseInt(route.params.id, 10);
+
+      if (Number.isNaN(id)) {
+        return 0;
+      }
+
+      return {
+        id: id
+      };
+    }
   }, {
     path: '/manipul'
   }],
@@ -67742,7 +67770,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       var _this = this;
 
       var commit = _ref.commit,
-          getters = _ref.getters;
+          getters = _ref.getters,
+          dispatch = _ref.dispatch;
       var photos = getters.selectedPhotos;
 
       if (photos && albumId) {
@@ -67759,19 +67788,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           _this.commit('hideAddPhotoToAlbum');
 
           if (response.data.length <= 0) {
-            vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-              // action : {
-              //     text : 'Закрыть',
-              //     onClick : (e, toastObject) => {
-              //         toastObject.goAway(0);
-              //     }
-              // },
-              position: 'bottom-left',
-              duration: 5000,
-              keepOnHover: true
+            dispatch('showToasted', {
+              text: 'Все объекты уже существуют в выбранном альбоме, да'
             });
           } else {
-            vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show(response.data.length + ' объектов добавлены в альбом', {
+            var payload = {
+              text: response.data.length + ' объектов добавлены в альбом',
               action: {
                 text: 'Посмотреть',
                 onClick: function onClick(e, toastObject) {
@@ -67783,11 +67805,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
                   });
                   toastObject.goAway(0);
                 }
-              },
-              position: 'bottom-left',
-              duration: 5000,
-              keepOnHover: true
-            });
+              }
+            };
+            dispatch('showToasted', payload);
           } // }
 
         })["catch"](function (err) {
@@ -67846,7 +67866,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       })["catch"](function (error) {});
     }
   }
-}));
+})); // как пример для вставки в toasted
+// action : {
+//     text : 'Закрыть',
+//         onClick : (e, toastObject) => {
+//         toastObject.goAway(0);
+//     }
+// },
 
 /***/ }),
 
@@ -67898,6 +67924,11 @@ var actions = {};
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_0__);
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+
 var state = {
   selected: {
     photos: [],
@@ -67979,6 +68010,18 @@ var actions = {
   delAlbum: function delAlbum(_ref5, val) {
     var commit = _ref5.commit;
     commit('delAlbum', val);
+  },
+  showToasted: function showToasted(_ref6, payload) {
+    _objectDestructuringEmpty(_ref6);
+
+    var text = payload.text;
+    var action = payload.action || {};
+    vue__WEBPACK_IMPORTED_MODULE_0___default.a.toasted.show(text, {
+      action: action,
+      position: 'bottom-left',
+      duration: 5000,
+      keepOnHover: true
+    });
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -68007,6 +68050,10 @@ var state = {
 };
 var getters = {
   albums: function albums(state) {
+    if (!state.albums) {
+      return JSON.parse(localStorage.getItem('albums'));
+    }
+
     return state.albums;
   },
   groups: function groups(state) {
@@ -68015,9 +68062,9 @@ var getters = {
   selectAllAlbums: function selectAllAlbums(state) {
     return state.selectAllAlbums;
   },
-  album: function album(state) {
+  album: function album(state, getters) {
     return function (id) {
-      return state.albums.find(function (album) {
+      return getters.albums.find(function (album) {
         return album.id === id;
       });
     };
@@ -68027,8 +68074,7 @@ var getters = {
       var album = getters.album(id);
 
       if (album) {
-        var photos = album.photos;
-        return photos;
+        return album.photos;
       }
 
       return false;
@@ -68038,6 +68084,7 @@ var getters = {
 var mutations = {
   getAlbums: function getAlbums(state, payload) {
     state.albums = payload;
+    localStorage.setItem('albums', JSON.stringify(payload));
   },
   selectAllAlbums: function selectAllAlbums(state, payload) {
     return state.selectAllAlbums = payload;

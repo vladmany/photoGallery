@@ -69,13 +69,8 @@ let actions = {
     showToasted({}, payload) {
         let text = payload.text;
         let action = payload.action || {};
-        Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-            action : {
-                text : 'Закрыть',
-                onClick : (e, toastObject) => {
-                    toastObject.goAway(0);
-                }
-            },
+        Vue.toasted.show(text, {
+            action : action,
             position: 'bottom-left',
             duration: 5000,
             keepOnHover: true
@@ -89,3 +84,4 @@ export default {
     mutations,
     actions
 }
+

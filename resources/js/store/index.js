@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 import AddPhoto from './modules/AddPhoto'
 import ListPhoto from './modules/ListPhoto'
 import ListAlbum from "./modules/ListAlbum";
@@ -150,19 +151,9 @@ export default new Vuex.Store({
                             dispatch('showToasted', {
                                 text: 'Все объекты уже существуют в выбранном альбоме, да',
                             })
-                            // Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-                            //     // action : {
-                            //     //     text : 'Закрыть',
-                            //     //     onClick : (e, toastObject) => {
-                            //     //         toastObject.goAway(0);
-                            //     //     }
-                            //     // },
-                            //     position: 'bottom-left',
-                            //     duration: 5000,
-                            //     keepOnHover: true
-                            // });
                         } else {
-                            Vue.toasted.show(response.data.length + ' объектов добавлены в альбом', {
+                            let payload = {
+                                text: response.data.length + ' объектов добавлены в альбом',
                                 action : {
                                     text : 'Посмотреть',
                                     onClick : (e, toastObject) => {
@@ -170,10 +161,8 @@ export default new Vuex.Store({
                                         toastObject.goAway(0);
                                     }
                                 },
-                                position: 'bottom-left',
-                                duration: 5000,
-                                keepOnHover: true
-                            });
+                            };
+                            dispatch('showToasted', payload);
                         }
                     // }
                 })
@@ -230,8 +219,7 @@ export default new Vuex.Store({
 
             })
         }
-
-    }
+    },
 })
 
 // как пример для вставки в toasted

@@ -28,25 +28,43 @@ export default new VueRouter({
             path: '/album/:id',
             component: OneAlbum,
             name: 'OneAlbum',
-            props: true
+            props: (route) => {
+                const id = Number.parseInt(route.params.id, 10)
+                if (Number.isNaN(id)) {
+                    return 0
+                }
+                return { id }
+            }
         },
         {
             path: '/album/:id/add',
             component: AddPhotoToAlbum,
             name: 'AddPhotoToAlbum',
-            props: true
+            props: (route) => {
+                const id = Number.parseInt(route.params.id, 10)
+                if (Number.isNaN(id)) {
+                    return 0
+                }
+                return { id }
+            }
         },
         {
             path: '/photos',
             component: IndexPhoto,
             name: 'IndexPhoto',
-            alias: '/',
+            alias: ['/', '/home'],
         },
         {
             path: '/photo/:id',
             component: IndexViewPhoto,
             name: 'IndexViewPhoto',
-            props: true
+            props: (route) => {
+                const id = Number.parseInt(route.params.id, 10)
+                if (Number.isNaN(id)) {
+                    return 0
+                }
+                return { id }
+            }
         },
         {
             path: '/manipul',
