@@ -44,7 +44,6 @@
             delAlbums() {
                 if (this.$store.getters.selectedAlbums.length > 0) {
                     for(let i = 0; i<this.$store.getters.selectedAlbums.length; i++) {
-                    console.log(this.$store.getters.selectedAlbums[i]);
                     this.$store.dispatch('deleteAlbum', this.$store.getters.selectedAlbums[i])
                     }
                     this.$store.commit('clearAlbums');

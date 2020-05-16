@@ -4765,7 +4765,6 @@ __webpack_require__.r(__webpack_exports__);
     delAlbums: function delAlbums() {
       if (this.$store.getters.selectedAlbums.length > 0) {
         for (var i = 0; i < this.$store.getters.selectedAlbums.length; i++) {
-          console.log(this.$store.getters.selectedAlbums[i]);
           this.$store.dispatch('deleteAlbum', this.$store.getters.selectedAlbums[i]);
         }
 
