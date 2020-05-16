@@ -215,7 +215,11 @@ export default new Vuex.Store({
                 responseType: 'blob',
                 onUploadProgress: (itemUpload) => {
                     let Progress = Math.round((itemUpload.loaded / itemUpload.total) * 100);
-                    console.log(Progress)
+                    console.log('UPLOAD=' + Progress)
+                },
+                onDownloadProgress: (itemDownload) => {
+                    let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
+                    console.log('DOWNLOAD=' + Progress)
                 }
             })
             .then(response => {

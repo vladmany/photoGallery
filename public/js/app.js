@@ -67837,7 +67837,11 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         responseType: 'blob',
         onUploadProgress: function onUploadProgress(itemUpload) {
           var Progress = Math.round(itemUpload.loaded / itemUpload.total * 100);
-          console.log(Progress);
+          console.log('UPLOAD=' + Progress);
+        },
+        onDownloadProgress: function onDownloadProgress(itemDownload) {
+          var Progress = Math.round(itemDownload.loaded / itemDownload.total * 100);
+          console.log('DOWNLOAD=' + Progress);
         }
       }).then(function (response) {
         var url = window.URL.createObjectURL(new Blob([response.data]));
