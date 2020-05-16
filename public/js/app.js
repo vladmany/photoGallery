@@ -67972,8 +67972,10 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     errorAlbum: [],
     //------------------------------------------
     // Альбомы
-    AllAlbums: [] //--------
-
+    AllAlbums: [],
+    //--------
+    // Скачивание фото
+    downloadProgress: 0
   },
   getters: {},
   mutations: {
@@ -68043,9 +68045,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     changeActiveIdAlbum: function changeActiveIdAlbum(state, val) {
       state.IdAlbum = val;
-    } //----------------------------
+    },
+    //----------------------------
     // Скачивание фото
-    //----------------
+    setDownloadProgress: function setDownloadProgress(state, data) {
+      state.downloadProgress = data;
+    } //----------------
 
     /*getAlbums() {
         axios.get('api/albums')
@@ -68145,19 +68150,18 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       });
     },
     downloadPhotos: function downloadPhotos(_ref4, photos) {
+      var _this4 = this;
+
       var commit = _ref4.commit,
           getters = _ref4.getters;
       axios.post('/api/photos/download', {
         photos: photos
       }, {
         responseType: 'blob',
-        onUploadProgress: function onUploadProgress(itemUpload) {
-          var Progress = Math.round(itemUpload.loaded / itemUpload.total * 100);
-          console.log('UPLOAD=' + Progress);
-        },
         onDownloadProgress: function onDownloadProgress(itemDownload) {
           var Progress = Math.round(itemDownload.loaded / itemDownload.total * 100);
-          console.log('DOWNLOAD=' + Progress);
+
+          _this4.$store.commit('setDownloadProgress', Progress);
         }
       }).then(function (response) {
         var url = window.URL.createObjectURL(new Blob([response.data]));
@@ -68167,6 +68171,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         link.setAttribute('download', randName + '.' + response.data.type.split('/').pop());
         document.body.appendChild(link);
         link.click();
+        console.log('ТЗЕН');
       })["catch"](function (error) {});
     }
   }

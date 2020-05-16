@@ -43,8 +43,11 @@ export default new Vuex.Store({
         errorAlbum: [],
         //------------------------------------------
         // Альбомы
-        AllAlbums: []
+        AllAlbums: [],
         //--------
+
+        // Скачивание фото
+        downloadProgress: 0,
     },
     getters: {
 
@@ -119,11 +122,13 @@ export default new Vuex.Store({
         },
         changeActiveIdAlbum(state, val) {
             state.IdAlbum = val
-        }
+        },
         //----------------------------
 
         // Скачивание фото
-
+        setDownloadProgress(state, data) {
+            state.downloadProgress = data
+        }
         //----------------
 
         /*getAlbums() {
@@ -213,13 +218,9 @@ export default new Vuex.Store({
             },
             {
                 responseType: 'blob',
-                onUploadProgress: (itemUpload) => {
-                    let Progress = Math.round((itemUpload.loaded / itemUpload.total) * 100);
-                    console.log('UPLOAD=' + Progress)
-                },
                 onDownloadProgress: (itemDownload) => {
                     let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
-                    console.log('DOWNLOAD=' + Progress)
+                    this.$store.commit('setDownloadProgress', Progress)
                 }
             })
             .then(response => {
@@ -230,6 +231,7 @@ export default new Vuex.Store({
                 link.setAttribute('download',randName + '.' + response.data.type.split('/').pop());
                 document.body.appendChild(link);
                 link.click();
+                console.log('ТЗЕН')
             })
             .catch(error => {
 
