@@ -4115,7 +4115,8 @@ __webpack_require__.r(__webpack_exports__);
     },
     CloseModalChangeNameAlbum: function CloseModalChangeNameAlbum() {
       this.$store.state.isChangeNameAlbum = false;
-    }
+    },
+    ChangeCover: function ChangeCover() {}
   },
   props: {
     albumId: {
@@ -46192,7 +46193,7 @@ var render = function() {
       _vm._v(" "),
       _c(
         "div",
-        { staticClass: "action change_date", on: { click: _vm.ChangeDate } },
+        { staticClass: "action change_date", on: { click: _vm.ChangeCover } },
         [
           _c("object", {
             attrs: {
@@ -68979,11 +68980,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         _this3.dispatch('ListAlbum/getAlbums');
       });
     },
-    downloadPhotos: function downloadPhotos(_ref4, photos) {
+    changeCover: function changeCover(_ref4, photoAlbumId, AlbumId) {
       var _this4 = this;
 
       var commit = _ref4.commit,
           getters = _ref4.getters;
+      axios.post('/api/albums/change-cover', {
+        idPhotoAlbum: photoAlbumId,
+        idAlbum: AlbumId
+      }).then(function (response) {
+        _this4.dispatch('ListAlbum/getAlbums');
+      });
+    },
+    downloadPhotos: function downloadPhotos(_ref5, photos) {
+      var _this5 = this;
+
+      var commit = _ref5.commit,
+          getters = _ref5.getters;
       axios.post('/api/photos/download', {
         photos: photos
       }, {
@@ -68991,7 +69004,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         onDownloadProgress: function onDownloadProgress(itemDownload) {
           var Progress = Math.round(itemDownload.loaded / itemDownload.total * 100);
 
-          _this4.$store.commit('setDownloadProgress', Progress);
+          _this5.$store.commit('setDownloadProgress', Progress);
         }
       }).then(function (response) {
         var url = window.URL.createObjectURL(new Blob([response.data]));

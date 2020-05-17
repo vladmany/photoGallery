@@ -33,3 +33,4 @@ Route::get('/collages', 'Api\PhotoController@collageIndex')->name('collages');
 Route::get('/animatoins', 'Api\PhotoController@animationIndex')->name('animations');
 Route::post('/album-destr', 'Api\AlbumController@myDestroy')->name('album-destr');
 Route::post('/albums/update', 'Api\AlbumController@myUpdate')->name('albums.my-update');
+Route::post('/albums/change-cover', 'Api\AlbumController@changeCover')->name('albums.change-cover');

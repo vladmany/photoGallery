@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\AlbumRequest;
 use App\Models\Dashboard\Album;
+use App\Models\Dashboard\AlbumPhoto;
+use App\Models\Dashboard\Photo;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -122,8 +124,22 @@ class AlbumController extends Controller
         $albumId = $data['id'];
 
         Album::destroy($albumId);
+    }
+    public function changeCover(Request $request)
+    {
+        $data = $request->only(['idPhotoAlbum', 'idAlbum']);
 
+        $photoIdAlbum = $data['idPhotoAlbum'];
+        $photoAlbum = AlbumPhoto::where('id', $photoIdAlbum)->get()->first();
 
+        $albumId = $data['idAlbum'];
+        $album = Album::where('id', $albumId)->get()->first();
 
+        $photoId = $photoAlbum->photo_id;
+        $photo = Photo::where('id', $photoId)->get()->first();
+
+        $album->cover = $photo->url;
+
+        $album->save();
     }
 }
