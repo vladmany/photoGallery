@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Slider :images="slides" :current-index="start"></Slider>
+        <Slider :images="images" :current-index="start"></Slider>
 <!--        <carousel :data="slides" :autoplay="false"></carousel>-->
     </div>
 </template>
@@ -26,12 +26,11 @@
                 return this.$store.getters['ListPhoto/getPhotoIndex'](this.images, this.id);
             },
             slides() {
-                let ret = [];
-                for(let image of this.images) {
-                    ret.push(image.url)
-                }
-
-                return ret;
+                // let ret = [];
+                // for(let image of this.images) {
+                //     ret.push(image.url)
+                // }
+                // return ret;
             }
         },
     }

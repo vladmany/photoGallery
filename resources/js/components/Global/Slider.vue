@@ -49,9 +49,19 @@
         computed: {
             currentImg() {
                 return this.images[Math.abs(this.currentIndex) % this.images.length];
+            },
+            currentImgUrl() {
+                return this.currentImg.url;
+            },
+            currentPhotoId() {
+                return this.currentImg.id;
             }
         },
-
+        watch: {
+            currentPhotoId() {
+                this.$store.dispatch()
+            }
+        }
     };
 </script>
 
