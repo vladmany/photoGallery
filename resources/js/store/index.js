@@ -204,6 +204,16 @@ export default new Vuex.Store({
                     }
                 );
         },
+        changeCover({ commit, getters }, photoAlbumId,AlbumId) {
+            axios.post('/api/albums/change-cover', {
+                idPhotoAlbum:photoAlbumId,
+                idAlbum:AlbumId
+            })
+                .then(response => {
+                        this.dispatch('ListAlbum/getAlbums');
+                    }
+                );
+        },
         downloadPhotos({ commit, getters }, photos) {
             axios.post('/api/photos/download', {
                 photos: photos
