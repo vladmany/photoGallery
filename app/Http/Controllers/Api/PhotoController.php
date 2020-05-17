@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\PhotoRequest;
 use App\Models\Dashboard\Photo;
+use App\Services\PhotoService;
 use App\User;
 use Carbon\Carbon;
 use Composer\Util\Zip;
@@ -18,6 +19,13 @@ use ZipArchive;
 
 class PhotoController extends Controller
 {
+    public $photoService;
+
+    public function __construct(PhotoService $photoService)
+    {
+        $this->photoService = $photoService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -38,53 +46,7 @@ class PhotoController extends Controller
      */
     public function store(PhotoRequest $request)
     {
-        if($this->getFilesSize(storage_path('app/public/images')) >= 1000000000)
-        {
-            return response()->json(array(
-                'code'      =>  401,
-                'message'   =>  'На сервере превышен максимальный объем хранения фото(1 ГБ). Обратитесь к владельцу сайта.'
-            ), 401);
-        }
-
-        $userId = Auth::check() ? Auth::id() : 1;
-
-        if($request->hasFile('photo')) {
-//            dd('ЕСТЬ ФАЙЛЫ');
-            $file = $request->file('photo');
-            $kindId = $request->all()['kind'] ?? 1;
-            $date = Carbon::now()->format('Y_m_d');
-            $data = [];
-            $data['user_id'] = $userId;
-            $data['size'] = $file->getSize();
-            $data['name'] = $file->getClientOriginalName();
-            $data['path'] = $file->store("/images/{$date}", 'public');
-            $data['extension'] = $file->getClientOriginalExtension();
-            $data['url'] = Storage::url($data['path']);
-            $imageSize = getimagesize($file);
-            $data['width'] = $imageSize[0];
-            $data['height'] = $imageSize[2];
-            $data['kind_id'] = $kindId;
-//                dd(Photo::all());
-            Photo::create($data);
-        }
-
-    }
-
-    private function getFilesSize($path)
-    {
-        $fileSize = 0;
-        $dir = scandir($path);
-
-        foreach($dir as $file)
-        {
-            if (($file!='.') && ($file!='..'))
-                if(is_dir($path . '/' . $file))
-                    $fileSize += $this->getFilesSize($path.'/'.$file);
-                else
-                    $fileSize += filesize($path . '/' . $file);
-        }
-
-        return $fileSize;
+        $this->photoService->store($request);
     }
 
     /**
