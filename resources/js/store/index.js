@@ -6,6 +6,7 @@ import ListPhoto from './modules/ListPhoto'
 import ListAlbum from "./modules/ListAlbum";
 import Globals from "./modules/Globals";
 import routes from "../routes";
+import Correct from "./modules/Correct";
 
 Vue.use(Vuex)
 
@@ -15,6 +16,7 @@ export default new Vuex.Store({
         ListPhoto,
         ListAlbum,
         Globals,
+        Correct
     },
     state: {
         // Загрузка фото

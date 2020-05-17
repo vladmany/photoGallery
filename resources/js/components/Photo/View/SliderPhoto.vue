@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Slider :images="images" :current-index="start"></Slider>
+        <Slider :images="images" :current-index="start" :is-correct="isCorrect"></Slider>
 <!--        <carousel :data="slides" :autoplay="false"></carousel>-->
     </div>
 </template>
@@ -16,6 +16,10 @@
             id: {
                 required: true,
                 type: Number,
+            },
+            isCorrect: {
+                type: Boolean,
+                default: false,
             }
         },
         computed: {

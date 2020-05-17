@@ -9,6 +9,7 @@ import OnePhoto from "./components/Photo/View/OnePhoto";
 import AlbumIndex from "./components/Album/AlbumIndex";
 import OneAlbum from "./components/Album/List/OneAlbum";
 import AddPhotoToAlbum from "./components/Album/List/AddPhotoToAlbum";
+import CorrectIndex from "./components/Photo/Correct/CorrectIndex";
 
 
 export default new VueRouter({
@@ -58,6 +59,18 @@ export default new VueRouter({
             path: '/photo/:id',
             component: IndexViewPhoto,
             name: 'IndexViewPhoto',
+            props: (route) => {
+                const id = Number.parseInt(route.params.id, 10)
+                if (Number.isNaN(id)) {
+                    return 0
+                }
+                return { id }
+            }
+        },
+        {
+            path: '/photos/correct/:id',
+            component: CorrectIndex,
+            name: 'CorrectIndex',
             props: (route) => {
                 const id = Number.parseInt(route.params.id, 10)
                 if (Number.isNaN(id)) {

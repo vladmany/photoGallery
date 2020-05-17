@@ -22,7 +22,7 @@
         <div class="action turn_image" @click="turnImage">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
         </div>
-        <div class="action image_correction" @click="imageCorrection">
+        <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
         </div>
         <div class="action delete_image" @click="deleteImages">
@@ -59,15 +59,22 @@
 
             },
             imageCorrection() {
-
+                if (this.$store.getters.selectedPhotos.length === 1) {
+                    this.$store.dispatch('setCorrectPhotoId')
+                    let id = this.$store.getters.correctPhotoId;
+                    this.$router.push({ name: 'CorrectIndex', params: { id: id }});
+                }
             },
             deleteImages() {
 
-            }
+            },
         },
         computed: {
-            isSelectedPhotos: function() {
-                return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : ''
+            isSelectedPhotos() {
+                return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : '';
+            },
+            isSelectedPhotos1() {
+                return (this.$store.getters.selectedPhotos.length === 1) ? 'available' : '';
             },
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos'

@@ -2,13 +2,11 @@ let state = {
     photos: [],
     groups: {},
     selectAllPhotos: false,
-    currentPhotoId: -1,
 }
 let getters = {
     photos: state => state.photos,
     groups: state => state.groups,
     selectAllPhotos: state => state.selectAllPhotos,
-    currentPhotoId: state => state.currentPhotoId,
     photo: state => id =>
         state.photos.find(photo => photo.id === id),
     groupByPhoto: state => id => {
@@ -54,8 +52,6 @@ let mutations = {
     },
     selectAllPhotos:(state, payload) =>
         state.selectAllPhotos = payload,
-    changeCurrentPhotoId:(state, payload) =>
-        state.currentPhotoId = payload,
 }
 let actions = {
     addPhoto: payload => {
@@ -117,15 +113,6 @@ let actions = {
     },
     selectAllPhotos:({ commit }, isselect) =>
         commit('selectAllPhotos', isselect),
-    setCurrentPhotoId({ commit, getters }) {
-        if(getters.selectAllPhotos.length === 1) {
-            let id = getters.selectAllPhotos.length[0];
-            commit('changeCurrentPhotoId', id);
-        }
-    },
-    changeCurrentPhotoId({ commit }, id) {
-        commit('changeCurrentPhotoId', id);
-    },
 }
 
 export default {

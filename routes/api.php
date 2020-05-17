@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('all-albums', 'Api\AlbumController');
+Route::apiResource('/corrects', 'Api\CorrectController');
 
 Route::apiResource('/albums-photos', 'Api\AlbumPhotoController');
 //        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
