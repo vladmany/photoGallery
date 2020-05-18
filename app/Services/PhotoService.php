@@ -38,7 +38,7 @@ class PhotoService
             $data['url'] = Storage::url($data['path']);
             $imageSize = getimagesize($file);
             $data['width'] = $imageSize[0];
-            $data['height'] = $imageSize[2];
+            $data['height'] = $imageSize[1];
             $data['kind_id'] = $kindId;
 
             return Photo::create($data);
