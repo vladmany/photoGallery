@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <div class="action add_to_album" :class=" 'available'" @click="addToAlbum">
+        <div class="action add_to_album" :class="(this.correctPhotoId !== -1) ? 'available': ''" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
         <div class="action download" :class="isSelectedPhotos" @click="download">
@@ -30,10 +30,9 @@
         name: "Actions",
         methods: {
             addToAlbum() {
-                console.log(this.correctPhotoId)
-                // if (this.$store.getters.selectedPhotos.length > 0) {
-                //     this.$store.commit('showAddPhotoToAlbum')
-                // }
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.commit('showAddPhotoToAlbum')
+                }
             },
             download() {
                 if (this.$store.getters.selectedPhotos.length > 0) {

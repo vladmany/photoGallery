@@ -6624,9 +6624,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   name: "Actions",
   methods: {
     addToAlbum: function addToAlbum() {
-      console.log(this.correctPhotoId); // if (this.$store.getters.selectedPhotos.length > 0) {
-      //     this.$store.commit('showAddPhotoToAlbum')
-      // }
+      if (this.$store.getters.selectedPhotos.length > 0) {
+        this.$store.commit('showAddPhotoToAlbum');
+      }
     },
     download: function download() {
       if (this.$store.getters.selectedPhotos.length > 0) {
@@ -49130,7 +49130,7 @@ var render = function() {
       "div",
       {
         staticClass: "action add_to_album",
-        class: "available",
+        class: this.correctPhotoId !== -1 ? "available" : "",
         on: { click: _vm.addToAlbum }
       },
       [
@@ -70349,8 +70349,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
