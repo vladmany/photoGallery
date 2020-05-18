@@ -8,6 +8,7 @@
             <upload-photos-modal/>
             <add-photo-to-album-modal-window/>
             <change-name-album/>
+            <download-progress/>
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
@@ -181,9 +182,11 @@
     import UploadPhotosModal from "./components/Photo/Upload/Modals/UploadPhotos";
     import SelectionFilesErrorModal from "./components/Photo/Upload/Modals/SelectionFilesError";
     import {loadProgressBar} from "axios-progress-bar";
+    import DownloadProgress from "./components/Photo/Download/Modals/DownloadProgress";
 
     export default {
         components: {
+            DownloadProgress,
             SelectionFilesErrorModal,
             UploadPhotosModal,
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},

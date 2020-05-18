@@ -3496,6 +3496,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_Photo_Upload_Modals_SelectionFilesError__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Photo/Upload/Modals/SelectionFilesError */ "./resources/js/components/Photo/Upload/Modals/SelectionFilesError.vue");
 /* harmony import */ var axios_progress_bar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios-progress-bar */ "./node_modules/axios-progress-bar/dist/index.js");
 /* harmony import */ var axios_progress_bar__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios_progress_bar__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _components_Photo_Download_Modals_DownloadProgress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Photo/Download/Modals/DownloadProgress */ "./resources/js/components/Photo/Download/Modals/DownloadProgress.vue");
+//
 //
 //
 //
@@ -3678,8 +3680,10 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    DownloadProgress: _components_Photo_Download_Modals_DownloadProgress__WEBPACK_IMPORTED_MODULE_8__["default"],
     SelectionFilesErrorModal: _components_Photo_Upload_Modals_SelectionFilesError__WEBPACK_IMPORTED_MODULE_6__["default"],
     UploadPhotosModal: _components_Photo_Upload_Modals_UploadPhotos__WEBPACK_IMPORTED_MODULE_5__["default"],
     ModalWindow: _components_Global_ModalWindow__WEBPACK_IMPORTED_MODULE_4__["default"],
@@ -4953,6 +4957,49 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     currentImg: function currentImg() {
       return this.images[Math.abs(this.currentIndex) % this.images.length];
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../Global/ModalWindow */ "./resources/js/components/Global/ModalWindow.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "DownloadProgress",
+  components: {
+    ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    close: function close() {
+      this.$store.commit('closeDownloadProgress');
+    }
+  },
+  computed: {
+    isDownloadProgress: function isDownloadProgress() {
+      return this.$store.state.isDownloadProgress;
     }
   }
 });
@@ -44864,6 +44911,8 @@ var render = function() {
         _vm._v(" "),
         _c("change-name-album"),
         _vm._v(" "),
+        _c("download-progress"),
+        _vm._v(" "),
         _c(
           "nav",
           {
@@ -46706,6 +46755,55 @@ var render = function() {
     ],
     1
   )
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true&":
+/*!*****************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("modal-window", {
+    attrs: { title: "Подготовка к скачиванию", "close-action": _vm.close },
+    scopedSlots: _vm._u([
+      {
+        key: "content",
+        fn: function() {
+          return [
+            _c("div", { staticClass: "progress" }, [
+              _c("div", {
+                staticClass:
+                  "progress-bar progress-bar-striped progress-bar-animated bg-info",
+                style: { width: this.$store.state.downloadProgress + "%" },
+                attrs: {
+                  role: "progressbar",
+                  "aria-valuenow": "75",
+                  "aria-valuemin": "0",
+                  "aria-valuemax": "100"
+                }
+              })
+            ])
+          ]
+        },
+        proxy: true
+      }
+    ])
+  })
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -66267,6 +66365,75 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Photo/Download/Modals/DownloadProgress.vue":
+/*!****************************************************************************!*\
+  !*** ./resources/js/components/Photo/Download/Modals/DownloadProgress.vue ***!
+  \****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DownloadProgress_vue_vue_type_template_id_24eb8e5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true& */ "./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true&");
+/* harmony import */ var _DownloadProgress_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DownloadProgress.vue?vue&type=script&lang=js& */ "./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DownloadProgress_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DownloadProgress_vue_vue_type_template_id_24eb8e5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DownloadProgress_vue_vue_type_template_id_24eb8e5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "24eb8e5f",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Photo/Download/Modals/DownloadProgress.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadProgress_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./DownloadProgress.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadProgress_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true&":
+/*!***********************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true& ***!
+  \***********************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadProgress_vue_vue_type_template_id_24eb8e5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/Download/Modals/DownloadProgress.vue?vue&type=template&id=24eb8e5f&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadProgress_vue_vue_type_template_id_24eb8e5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DownloadProgress_vue_vue_type_template_id_24eb8e5f_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Photo/List/Actions/ActionsIndex.vue":
 /*!*********************************************************************!*\
   !*** ./resources/js/components/Photo/List/Actions/ActionsIndex.vue ***!
@@ -67575,22 +67742,52 @@ __webpack_require__.r(__webpack_exports__);
     path: '/album/:id',
     component: _components_Album_List_OneAlbum__WEBPACK_IMPORTED_MODULE_5__["default"],
     name: 'OneAlbum',
-    props: true
+    props: function props(route) {
+      var id = Number.parseInt(route.params.id, 10);
+
+      if (Number.isNaN(id)) {
+        return 0;
+      }
+
+      return {
+        id: id
+      };
+    }
   }, {
     path: '/album/:id/add',
     component: _components_Album_List_AddPhotoToAlbum__WEBPACK_IMPORTED_MODULE_6__["default"],
     name: 'AddPhotoToAlbum',
-    props: true
+    props: function props(route) {
+      var id = Number.parseInt(route.params.id, 10);
+
+      if (Number.isNaN(id)) {
+        return 0;
+      }
+
+      return {
+        id: id
+      };
+    }
   }, {
     path: '/photos',
     component: _components_Photo_List_PhotoIndex__WEBPACK_IMPORTED_MODULE_1__["default"],
     name: 'IndexPhoto',
-    alias: '/'
+    alias: ['/', '/home']
   }, {
     path: '/photo/:id',
     component: _components_Photo_View_ViewIndex__WEBPACK_IMPORTED_MODULE_2__["default"],
     name: 'IndexViewPhoto',
-    props: true
+    props: function props(route) {
+      var id = Number.parseInt(route.params.id, 10);
+
+      if (Number.isNaN(id)) {
+        return 0;
+      }
+
+      return {
+        id: id
+      };
+    }
   }, {
     path: '/manipul'
   }],
@@ -67659,7 +67856,9 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     AllAlbums: [],
     //--------
     // Скачивание фото
-    downloadProgress: 0
+    isDownloadProgress: false,
+    downloadProgress: 0 //----------------
+
   },
   getters: {},
   mutations: {
@@ -67732,6 +67931,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     //----------------------------
     // Скачивание фото
+    showDownloadProgress: function showDownloadProgress(state) {
+      state.isDownloadProgress = true;
+    },
+    hideDownloadProgress: function hideDownloadProgress(state) {
+      state.isDownloadProgress = false;
+    },
     setDownloadProgress: function setDownloadProgress(state, data) {
       state.downloadProgress = data;
     } //----------------
@@ -67838,6 +68043,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
       var commit = _ref4.commit,
           getters = _ref4.getters;
+      this.commit('showDownloadProgress');
       axios.post('/api/photos/download', {
         photos: photos
       }, {
@@ -67845,7 +68051,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         onDownloadProgress: function onDownloadProgress(itemDownload) {
           var Progress = Math.round(itemDownload.loaded / itemDownload.total * 100);
 
-          _this4.$store.commit('setDownloadProgress', Progress);
+          _this4.commit('setDownloadProgress', Progress);
         }
       }).then(function (response) {
         var url = window.URL.createObjectURL(new Blob([response.data]));
@@ -67855,7 +68061,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         link.setAttribute('download', randName + '.' + response.data.type.split('/').pop());
         document.body.appendChild(link);
         link.click();
-        console.log('ТЗЕН');
+        console.log(_this4.state.downloadProgress);
       })["catch"](function (error) {});
     }
   }

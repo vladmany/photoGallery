@@ -47,7 +47,9 @@ export default new Vuex.Store({
         //--------
 
         // Скачивание фото
+        isDownloadProgress: false,
         downloadProgress: 0,
+        //----------------
     },
     getters: {
 
@@ -126,6 +128,12 @@ export default new Vuex.Store({
         //----------------------------
 
         // Скачивание фото
+        showDownloadProgress(state) {
+            state.isDownloadProgress = true
+        },
+        hideDownloadProgress(state) {
+            state.isDownloadProgress = false
+        },
         setDownloadProgress(state, data) {
             state.downloadProgress = data
         }
@@ -213,6 +221,7 @@ export default new Vuex.Store({
                 );
         },
         downloadPhotos({ commit, getters }, photos) {
+            this.commit('showDownloadProgress');
             axios.post('/api/photos/download', {
                 photos: photos
             },
@@ -220,7 +229,7 @@ export default new Vuex.Store({
                 responseType: 'blob',
                 onDownloadProgress: (itemDownload) => {
                     let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
-                    this.$store.commit('setDownloadProgress', Progress)
+                    this.commit('setDownloadProgress', Progress)
                 }
             })
             .then(response => {
@@ -231,7 +240,7 @@ export default new Vuex.Store({
                 link.setAttribute('download',randName + '.' + response.data.type.split('/').pop());
                 document.body.appendChild(link);
                 link.click();
-                console.log('ТЗЕН')
+                console.log(this.state.downloadProgress)
             })
             .catch(error => {
 

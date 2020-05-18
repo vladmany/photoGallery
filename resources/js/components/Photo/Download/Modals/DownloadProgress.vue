@@ -1,6 +1,7 @@
 <template>
     <modal-window
         title="Подготовка к скачиванию"
+        :close-action="close"
     >
         <template v-slot:content>
             <div class="progress">
@@ -14,7 +15,17 @@
     import ModalWindow from "../../../Global/ModalWindow";
     export default {
         name: "DownloadProgress",
-        components: {ModalWindow}
+        components: {ModalWindow},
+        methods: {
+            close() {
+                this.$store.commit('closeDownloadProgress')
+            }
+        },
+        computed: {
+            isDownloadProgress() {
+                return this.$store.state.isDownloadProgress
+            }
+        }
     }
 </script>
 
