@@ -34,23 +34,25 @@ class CorrectService
             ->with('photo')
             ->get()
             ->first();
-        $brightness = $corrects->brightness;
-        $contrast = $corrects->contrast;
+        $brightness = $corrects->brightness-100;
+        $contrast = $corrects->contrast-100;
         $grayscale = $corrects->grayscale;
-        $saturate = $corrects->saturate;
+        $saturate = $corrects->saturate-100;
 
         $photo = $corrects->photo;
         $url = public_path($photo->url);
         $image = Image::make($url);
 
-        $image->brightness($brightness)
-            ->contrast($contrast)
+        $image
+//            ->brightness($brightness)
+//            ->contrast($contrast) # ok
 //            ->greyscale($grayscale)
             ->colorize(
-                $saturate-100,
-                $saturate-100,
-                $saturate-100
-            );
+                $saturate,
+                $saturate,
+                $saturate
+            )
+        ;
 
         $image->save();
     }

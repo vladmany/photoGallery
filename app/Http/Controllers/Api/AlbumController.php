@@ -127,16 +127,13 @@ class AlbumController extends Controller
     }
     public function changeCover(Request $request)
     {
-        $data = $request->only(['idPhotoAlbum', 'idAlbum']);
+        $data = $request->only(['idPhoto', 'idAlbum']);
 
-        $photoIdAlbum = $data['idPhotoAlbum'];
-        $photoAlbum = AlbumPhoto::where('id', $photoIdAlbum)->get()->first();
+        $photoId = $data['idPhoto'];
+        $photo = Photo::where('id', $photoId)->get()->first();
 
         $albumId = $data['idAlbum'];
         $album = Album::where('id', $albumId)->get()->first();
-
-        $photoId = $photoAlbum->photo_id;
-        $photo = Photo::where('id', $photoId)->get()->first();
 
         $album->cover = $photo->url;
 

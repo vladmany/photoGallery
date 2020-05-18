@@ -1,22 +1,20 @@
 <template>
     <div class="action-panel">
-        <div class="action change_album" @click="changeAlbumName">
-            <!--<object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>-->
-            <CButton text="Добавить альбом" :action="changeAlbumName" class="btn-create-album">
-                <img src="/storage/albums/actions/ic_change_album.png">
-            </CButton>
+        <div class="action change_album" :class="isSelectedEveryTime" @click="changeAlbumName">
+            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>
         </div>
-        <div class="action to_provide_access" @click="toProvideAccess">
+        <div class="action to_provide_access" v-if="isSelectedPhotos" :class="isSelectedPhotos" @click="toProvideAccess">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
 
         </div>
-        <div class="action turn_download" @click="turnDownload">
+        <div class="action turn_download" v-if="isSelectedPhotos" :class="isSelectedPhotos" @click="turnDownload">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
-        <div class="action change_date" @click="ChangeCover">
+
+        <div class="action change_date" v-if="isSelectedSinglePhoto" :class="isSelectedSinglePhoto" @click="ChangeCover">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_change_cover.svg"></object>
         </div>
-        <div class="action delete_image" @click="deleteImages">
+        <div class="action delete_image" v-if="isSelectedPhotos" :class="isSelectedPhotos" @click="deleteImages">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
         </div>
         <change-name-album></change-name-album>
@@ -25,6 +23,7 @@
 
 <script>
     import ChangeNameAlbum from "../Modals/ChangeNameAllbum";
+    import {mapGetters} from "vuex";
     export default {
         name: "ActionOneAlbum",
         components: {ChangeNameAlbum},
@@ -37,8 +36,19 @@
 
             },
             ChangeCover(){
-                this.$store.dispatch('changeCover', 5)
+                let id = this.$store.getters.selectedPhotos;
+                console.log(id);
+                this.$store.dispatch('changeCover', [id[0], this.$store.state.IdAlbum])
             },
+            toProvideAccess(){
+
+            },
+            turnDownload(){
+
+            },
+            deleteImages(){
+
+            }
         },
         props: {
             albumId: {
@@ -46,10 +56,29 @@
                 type: Number,
             }
         },
+        selectedPhotos() {
+            if (this.selectedPhotos.length === 0) {
+                this.isSelected = false
+            }
+        },
         computed: {
             album() {
                 return this.$store.getters['ListAlbum/album'](this.albumId);
-            }
+            },
+            isSelectedPhotos: function() {
+                return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : ''
+            },
+            isSelectedEveryTime: function() {
+                return  'available'
+            },
+            isSelectedSinglePhoto: function() {
+                return (this.$store.getters.selectedPhotos.length === 1) ? 'available' : ''
+            },
+            ...mapGetters({
+                selectedPhotos: 'selectedPhotos',
+
+            })
+
         }
 
     }
@@ -85,5 +114,24 @@
 
     .action-panel div:not(:first-child) {
         margin-left: 15px;
+    }
+    .action-ever {
+        margin-left: 15px;
+        user-select: text;
+    }
+
+    .action {
+        margin-left: 15px;
+        user-select: none;
+    }
+    .action.available object {
+        filter: brightness(75%);
+        pointer-events: none;
+    }
+    .action.available:hover object {
+        filter: brightness(50%);
+    }
+    .action.available:hover {
+        cursor: pointer;
     }
 </style>
