@@ -69368,6 +69368,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           getters = _ref3.getters;
       axios.post('/api/album-destr', {
         id: albumId
+        /*dell*/
+
       }).then(function (response) {
         _this3.commit('hideDelAlbum');
 
