@@ -4,12 +4,10 @@
             <h1 class="pl-3">Альбомы</h1>
         </template>
         <template v-slot:button>
-
                 <CreateAlbum></CreateAlbum>
-
         </template>
         <template v-slot:actions>
-            <div class="panel">
+            <div class="panel" v-if="albums.length > 0">
                 <action-all-albums></action-all-albums>
                 <search-albums></search-albums>
             </div>
@@ -31,6 +29,7 @@
     import CreateAlbum from "./Create/CreateAlbum";
     import ActionAllAlbums from "./List/ActionAllAlbums";
     import SearchAlbums from "./List/SearchAlbums";
+    import {mapGetters} from "vuex";
 
     export default {
         name: "BlockAlbumList",
@@ -49,6 +48,11 @@
                 this.isInfoPopupVisible = false;
 
             },
+        },
+        computed: {
+            ...mapGetters({
+                albums: 'ListAlbum/albums',
+            }),
         },
     }
 </script>

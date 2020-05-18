@@ -3737,6 +3737,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Create_CreateAlbum__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Create/CreateAlbum */ "./resources/js/components/Album/Create/CreateAlbum.vue");
 /* harmony import */ var _List_ActionAllAlbums__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./List/ActionAllAlbums */ "./resources/js/components/Album/List/ActionAllAlbums.vue");
 /* harmony import */ var _List_SearchAlbums__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./List/SearchAlbums */ "./resources/js/components/Album/List/SearchAlbums.vue");
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -3761,8 +3768,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
+
 
 
 
@@ -3792,7 +3798,10 @@ __webpack_require__.r(__webpack_exports__);
     CloseModal: function CloseModal() {
       this.isInfoPopupVisible = false;
     }
-  }
+  },
+  computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_6__["mapGetters"])({
+    albums: 'ListAlbum/albums'
+  }))
 });
 
 /***/ }),
@@ -4076,7 +4085,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.getters.selectedAlbums.length > 0 ? 'available' : '';
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    selectedAlbums: 'selectedAlbums'
+    selectedAlbums: 'selectedAlbums',
+    albums: 'ListAlbum/albums'
   }))
 });
 
@@ -4092,8 +4102,13 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _Modals_ChangeNameAllbum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../Modals/ChangeNameAllbum */ "./resources/js/components/Album/Modals/ChangeNameAllbum.vue");
-//
-//
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 //
 //
 //
@@ -4118,6 +4133,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ActionOneAlbum",
   components: {
@@ -4131,8 +4147,13 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.state.isChangeNameAlbum = false;
     },
     ChangeCover: function ChangeCover() {
-      this.$store.dispatch('changeCover', 5);
-    }
+      var id = this.$store.getters.selectedPhotos;
+      console.log(id);
+      this.$store.dispatch('changeCover', [id[0], this.$store.state.IdAlbum]);
+    },
+    toProvideAccess: function toProvideAccess() {},
+    turnDownload: function turnDownload() {},
+    deleteImages: function deleteImages() {}
   },
   props: {
     albumId: {
@@ -4140,11 +4161,27 @@ __webpack_require__.r(__webpack_exports__);
       type: Number
     }
   },
-  computed: {
+  selectedPhotos: function selectedPhotos() {
+    if (this.selectedPhotos.length === 0) {
+      this.isSelected = false;
+    }
+  },
+  computed: _objectSpread({
     album: function album() {
       return this.$store.getters['ListAlbum/album'](this.albumId);
+    },
+    isSelectedPhotos: function isSelectedPhotos() {
+      return this.$store.getters.selectedPhotos.length > 0 ? 'available' : '';
+    },
+    isSelectedEveryTime: function isSelectedEveryTime() {
+      return 'available';
+    },
+    isSelectedSinglePhoto: function isSelectedSinglePhoto() {
+      return this.$store.getters.selectedPhotos.length === 1 ? 'available' : '';
     }
-  }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
+    selectedPhotos: 'selectedPhotos'
+  }))
 });
 
 /***/ }),
@@ -4787,6 +4824,20 @@ __webpack_require__.r(__webpack_exports__);
       if (this.$store.getters.selectedAlbums.length > 0) {
         for (var i = 0; i < this.$store.getters.selectedAlbums.length; i++) {
           this.$store.dispatch('deleteAlbum', this.$store.getters.selectedAlbums[i]);
+        }
+
+        if (this.$store.getters.selectedAlbums.length === 1) {
+          var payload = {
+            text: ' Альбом был удален'
+          };
+          this.$store.dispatch('showToasted', payload);
+        }
+
+        if (this.$store.getters.selectedAlbums.length > 1) {
+          var _payload = {
+            text: ' Удалено альбомов ' + this.$store.getters.selectedAlbums.length
+          };
+          this.$store.dispatch('showToasted', _payload);
         }
 
         this.$store.commit('clearAlbums');
@@ -11374,7 +11425,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.action-panel[data-v-e69153d6] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    min-height: 93px;\n    height: 100%;\n    max-width: 203px;\n    width: 100%;\n}\n.action-panel.available object[data-v-e69153d6] {\n    -webkit-filter: brightness(75%);\n            filter: brightness(75%);\n    pointer-events: none;\n}\n.action-panel.available:hover object[data-v-e69153d6] {\n    -webkit-filter: brightness(50%);\n            filter: brightness(50%);\n}\n.action-panel.available[data-v-e69153d6]:hover {\n    cursor: pointer;\n}\n.change_album[data-v-e69153d6] {\n    margin-left: 28px;\n}\n.action-panel div[data-v-e69153d6]:not(:first-child) {\n    margin-left: 15px;\n}\n", ""]);
+exports.push([module.i, "\n.action-panel[data-v-e69153d6] {\n    display: flex;\n    flex-direction: row;\n    align-items: center;\n    min-height: 93px;\n    height: 100%;\n    max-width: 203px;\n    width: 100%;\n}\n.action-panel.available object[data-v-e69153d6] {\n    -webkit-filter: brightness(75%);\n            filter: brightness(75%);\n    pointer-events: none;\n}\n.action-panel.available:hover object[data-v-e69153d6] {\n    -webkit-filter: brightness(50%);\n            filter: brightness(50%);\n}\n.action-panel.available[data-v-e69153d6]:hover {\n    cursor: pointer;\n}\n.change_album[data-v-e69153d6] {\n    margin-left: 28px;\n}\n.action-panel div[data-v-e69153d6]:not(:first-child) {\n    margin-left: 15px;\n}\n.action-ever[data-v-e69153d6] {\n    margin-left: 15px;\n    -webkit-user-select: text;\n       -moz-user-select: text;\n        -ms-user-select: text;\n            user-select: text;\n}\n.action[data-v-e69153d6] {\n    margin-left: 15px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.action.available object[data-v-e69153d6] {\n    -webkit-filter: brightness(75%);\n            filter: brightness(75%);\n    pointer-events: none;\n}\n.action.available:hover object[data-v-e69153d6] {\n    -webkit-filter: brightness(50%);\n            filter: brightness(50%);\n}\n.action.available[data-v-e69153d6]:hover {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -45883,12 +45934,14 @@ var render = function() {
         key: "actions",
         fn: function() {
           return [
-            _c(
-              "div",
-              { staticClass: "panel" },
-              [_c("action-all-albums"), _vm._v(" "), _c("search-albums")],
-              1
-            )
+            _vm.albums.length > 0
+              ? _c(
+                  "div",
+                  { staticClass: "panel" },
+                  [_c("action-all-albums"), _vm._v(" "), _c("search-albums")],
+                  1
+                )
+              : _vm._e()
           ]
         },
         proxy: true
@@ -46204,56 +46257,62 @@ var render = function() {
         _c("label", { attrs: { for: "all-selector" } })
       ]),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "action to_provide_access",
-          class: _vm.isSelectedAlbums,
-          on: { click: _vm.provideAccess }
-        },
-        [
-          _c("object", {
-            attrs: {
-              type: "image/svg+xml",
-              data: "/storage/albums/actions/ic_provide_access.svg"
-            }
-          })
-        ]
-      ),
+      _vm.isSelectedAlbums
+        ? _c(
+            "div",
+            {
+              staticClass: "action to_provide_access",
+              class: _vm.isSelectedAlbums,
+              on: { click: _vm.provideAccess }
+            },
+            [
+              _c("object", {
+                attrs: {
+                  type: "image/svg+xml",
+                  data: "/storage/albums/actions/ic_provide_access.svg"
+                }
+              })
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "action turn_download",
-          class: _vm.isSelectedAlbums,
-          on: { click: _vm.downloadAlbum }
-        },
-        [
-          _c("object", {
-            attrs: {
-              type: "image/svg+xml",
-              data: "/storage/albums/actions/ic_download.svg"
-            }
-          })
-        ]
-      ),
+      _vm.isSelectedAlbums
+        ? _c(
+            "div",
+            {
+              staticClass: "action turn_download",
+              class: _vm.isSelectedAlbums,
+              on: { click: _vm.downloadAlbum }
+            },
+            [
+              _c("object", {
+                attrs: {
+                  type: "image/svg+xml",
+                  data: "/storage/albums/actions/ic_download.svg"
+                }
+              })
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "action delete_image",
-          class: _vm.isSelectedAlbums,
-          on: { click: _vm.deleteAlbum }
-        },
-        [
-          _c("object", {
-            attrs: {
-              type: "image/svg+xml",
-              data: "/storage/albums/actions/ic_delete.svg"
-            }
-          })
-        ]
-      ),
+      _vm.isSelectedAlbums
+        ? _c(
+            "div",
+            {
+              staticClass: "action delete_image",
+              class: _vm.isSelectedAlbums,
+              on: { click: _vm.deleteAlbum }
+            },
+            [
+              _c("object", {
+                attrs: {
+                  type: "image/svg+xml",
+                  data: "/storage/albums/actions/ic_delete.svg"
+                }
+              })
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("del-albums")
     ],
@@ -46290,82 +46349,94 @@ var render = function() {
         "div",
         {
           staticClass: "action change_album",
+          class: _vm.isSelectedEveryTime,
           on: { click: _vm.changeAlbumName }
         },
         [
-          _c(
-            "CButton",
+          _c("object", {
+            attrs: {
+              type: "image/svg+xml",
+              data: "/storage/albums/actions/ic_change_album.svg"
+            }
+          })
+        ]
+      ),
+      _vm._v(" "),
+      _vm.isSelectedPhotos
+        ? _c(
+            "div",
             {
-              staticClass: "btn-create-album",
-              attrs: { text: "Добавить альбом", action: _vm.changeAlbumName }
+              staticClass: "action to_provide_access",
+              class: _vm.isSelectedPhotos,
+              on: { click: _vm.toProvideAccess }
             },
             [
-              _c("img", {
-                attrs: { src: "/storage/albums/actions/ic_change_album.png" }
+              _c("object", {
+                attrs: {
+                  type: "image/svg+xml",
+                  data: "/storage/albums/actions/ic_provide_access.svg"
+                }
               })
             ]
           )
-        ],
-        1
-      ),
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "action to_provide_access",
-          on: { click: _vm.toProvideAccess }
-        },
-        [
-          _c("object", {
-            attrs: {
-              type: "image/svg+xml",
-              data: "/storage/albums/actions/ic_provide_access.svg"
-            }
-          })
-        ]
-      ),
+      _vm.isSelectedPhotos
+        ? _c(
+            "div",
+            {
+              staticClass: "action turn_download",
+              class: _vm.isSelectedPhotos,
+              on: { click: _vm.turnDownload }
+            },
+            [
+              _c("object", {
+                attrs: {
+                  type: "image/svg+xml",
+                  data: "/storage/albums/actions/ic_download.svg"
+                }
+              })
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        {
-          staticClass: "action turn_download",
-          on: { click: _vm.turnDownload }
-        },
-        [
-          _c("object", {
-            attrs: {
-              type: "image/svg+xml",
-              data: "/storage/albums/actions/ic_download.svg"
-            }
-          })
-        ]
-      ),
+      _vm.isSelectedSinglePhoto
+        ? _c(
+            "div",
+            {
+              staticClass: "action change_date",
+              class: _vm.isSelectedSinglePhoto,
+              on: { click: _vm.ChangeCover }
+            },
+            [
+              _c("object", {
+                attrs: {
+                  type: "image/svg+xml",
+                  data: "/storage/albums/actions/ic_change_cover.svg"
+                }
+              })
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "action change_date", on: { click: _vm.ChangeCover } },
-        [
-          _c("object", {
-            attrs: {
-              type: "image/svg+xml",
-              data: "/storage/albums/actions/ic_change_cover.svg"
-            }
-          })
-        ]
-      ),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
-        [
-          _c("object", {
-            attrs: {
-              type: "image/svg+xml",
-              data: "/storage/albums/actions/ic_delete.svg"
-            }
-          })
-        ]
-      ),
+      _vm.isSelectedPhotos
+        ? _c(
+            "div",
+            {
+              staticClass: "action delete_image",
+              class: _vm.isSelectedPhotos,
+              on: { click: _vm.deleteImages }
+            },
+            [
+              _c("object", {
+                attrs: {
+                  type: "image/svg+xml",
+                  data: "/storage/albums/actions/ic_delete.svg"
+                }
+              })
+            ]
+          )
+        : _vm._e(),
       _vm._v(" "),
       _c("change-name-album")
     ],
@@ -69066,6 +69137,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _modules_Globals__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./modules/Globals */ "./resources/js/store/modules/Globals.js");
 /* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../routes */ "./resources/js/routes.js");
 /* harmony import */ var _modules_Correct__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./modules/Correct */ "./resources/js/store/modules/Correct.js");
+function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
+
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+
+function _unsupportedIterableToArray(o, minLen) { if (!o) return; if (typeof o === "string") return _arrayLikeToArray(o, minLen); var n = Object.prototype.toString.call(o).slice(8, -1); if (n === "Object" && o.constructor) n = o.constructor.name; if (n === "Map" || n === "Set") return Array.from(o); if (n === "Arguments" || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(n)) return _arrayLikeToArray(o, minLen); }
+
+function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len = arr.length; for (var i = 0, arr2 = new Array(len); i < len; i++) { arr2[i] = arr[i]; } return arr2; }
+
+function _iterableToArrayLimit(arr, i) { if (typeof Symbol === "undefined" || !(Symbol.iterator in Object(arr))) return; var _arr = []; var _n = true; var _d = false; var _e = undefined; try { for (var _i = arr[Symbol.iterator](), _s; !(_n = (_s = _i.next()).done); _n = true) { _arr.push(_s.value); if (i && _arr.length === i) break; } } catch (err) { _d = true; _e = err; } finally { try { if (!_n && _i["return"] != null) _i["return"](); } finally { if (_d) throw _e; } } return _arr; }
+
+function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
+
 
 
 
@@ -69285,35 +69368,42 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
           getters = _ref3.getters;
       axios.post('/api/album-destr', {
         id: albumId
+        /*dell*/
+
       }).then(function (response) {
-        var payload = {
-          text: ' Альбом был удален'
-        };
-
-        _this3.dispatch('showToasted', payload);
-
         _this3.commit('hideDelAlbum');
 
         _this3.dispatch('ListAlbum/getAlbums');
       });
     },
-    changeCover: function changeCover(_ref4, photoAlbumId) {
+    changeCover: function changeCover(_ref4, _ref5) {
       var _this4 = this;
 
       var commit = _ref4.commit,
           getters = _ref4.getters;
+
+      var _ref6 = _slicedToArray(_ref5, 2),
+          photoId = _ref6[0],
+          albumId = _ref6[1];
+
       axios.post('/api/albums/change-cover', {
-        idPhotoAlbum: photoAlbumId,
-        idAlbum: this.state.IdAlbum
+        idPhoto: photoId,
+        idAlbum: albumId
       }).then(function (response) {
+        var payload = {
+          text: ' Обложка альбома была изменена'
+        };
+
+        _this4.dispatch('showToasted', payload);
+
         _this4.dispatch('ListAlbum/getAlbums');
       });
     },
-    downloadPhotos: function downloadPhotos(_ref5, photos) {
+    downloadPhotos: function downloadPhotos(_ref7, photos) {
       var _this5 = this;
 
-      var commit = _ref5.commit,
-          getters = _ref5.getters;
+      var commit = _ref7.commit,
+          getters = _ref7.getters;
       this.commit('showDownloadProgress');
       axios.post('/api/photos/download', {
         photos: photos
@@ -69994,8 +70084,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
