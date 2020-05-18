@@ -5336,6 +5336,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "DownloadProgressModal",
@@ -11630,7 +11631,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.progress[data-v-24eb8e5f] {\n    margin-top: 33px\n}\n", ""]);
+exports.push([module.i, "\n.download_percents[data-v-24eb8e5f] {\n    margin-top: 33px;\n    text-align: center;\n    font-style: normal;\n    font-weight: 500;\n    line-height: 30px;\n    color: #808080;\n}\n", ""]);
 
 // exports
 
@@ -47559,10 +47560,14 @@ var render = function() {
               key: "content",
               fn: function() {
                 return [
+                  _c("span", { staticClass: "download_percents" }, [
+                    _vm._v(_vm._s(_vm.downloadProgress) + "%")
+                  ]),
+                  _vm._v(" "),
                   _c("div", { staticClass: "progress" }, [
                     _c("div", {
                       staticClass:
-                        "progress-bar progress-bar-striped progress-bar-animated bg-warning",
+                        "progress-bar progress-bar-striped progress-bar-animated",
                       style: { width: _vm.downloadProgress + "%" },
                       attrs: {
                         role: "progressbar",
@@ -47579,7 +47584,7 @@ var render = function() {
           ],
           null,
           false,
-          144522197
+          2754016707
         )
       })
     : _vm._e()

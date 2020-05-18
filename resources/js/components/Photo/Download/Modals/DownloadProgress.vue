@@ -5,8 +5,9 @@
         :close-action="close"
     >
         <template v-slot:content>
+            <span class="download_percents">{{downloadProgress}}%</span>
             <div class="progress">
-                <div class="progress-bar progress-bar-striped progress-bar-animated bg-warning" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" :style="{width: downloadProgress + '%'}"></div>
+                <div class="progress-bar progress-bar-striped progress-bar-animated" role="progressbar" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100" :style="{width: downloadProgress + '%'}"></div>
             </div>
         </template>
     </modal-window>
@@ -36,7 +37,12 @@
 </script>
 
 <style scoped>
-    .progress {
-        margin-top: 33px
+    .download_percents {
+        margin-top: 33px;
+        text-align: center;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 30px;
+        color: #808080;
     }
 </style>
