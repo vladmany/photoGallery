@@ -37,7 +37,7 @@
 
             },
             ChangeCover(){
-
+                this.$store.dispatch('changeCover', 5)
             },
         },
         props: {

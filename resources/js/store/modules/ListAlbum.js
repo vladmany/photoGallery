@@ -3,12 +3,24 @@ let state = {
     album:{},
     groups: {},
     selectAllAlbums: false,
+    searchString: "",
 }
 let getters = {
     albums: state => {
         if(!state.albums) {
             return JSON.parse(localStorage.getItem('albums'))
         }
+        let searchString = state.searchString;
+
+        searchString = searchString.trim().toLowerCase();
+
+        state.albums = state.albums.filter(function(item){
+            if(item.name.toLowerCase().indexOf(searchString) !== -1){
+                return item;
+            }
+        })
+
+
 
         return state.albums
     },
@@ -30,8 +42,14 @@ let mutations = {
         state.albums = payload;
         localStorage.setItem('albums', JSON.stringify(payload))
     },
+
+    searchString:(state, payload) =>
+        state.searchString = payload,
+
     selectAllAlbums:(state, payload) =>
-        state.selectAllAlbums = payload
+        state.selectAllAlbums = payload,
+    selectSearchString:(state, payload) =>
+        state.searchString = payload
 }
 let actions = {
     getAlbums({ commit }) {
