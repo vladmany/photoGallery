@@ -4,10 +4,18 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Models\Dashboard\Correct;
+use App\Services\CorrectService;
 use Illuminate\Http\Request;
 
 class CorrectController extends Controller
 {
+    protected $correctService;
+
+    public function __construct(CorrectService $correctService)
+    {
+        $this->correctService = $correctService;
+    }
+
     /**
      * Display a listing of the resource.
      *
@@ -22,19 +30,10 @@ class CorrectController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        $data = $request->all();
-        $id = $data['data']['photo_id'];
-        $item = Correct::where('photo_id', $id)->get()->first();
-        if($item) {
-            $item->update($data['data']);
-        } else {
-            Correct::create($data['data']);
-        }
+        $this->correctService->store($request);
     }
 
     /**
