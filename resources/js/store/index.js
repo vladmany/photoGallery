@@ -245,6 +245,7 @@ export default new Vuex.Store({
                 document.body.appendChild(link);
                 link.click();
                 this.commit('hideDownloadProgress');
+                this.commit('setDownloadProgress', 0)
             })
             .catch(error => {
 

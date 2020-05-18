@@ -69270,6 +69270,8 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         link.click();
 
         _this5.commit('hideDownloadProgress');
+
+        _this5.commit('setDownloadProgress', 0);
       })["catch"](function (error) {});
     }
   }
