@@ -69277,6 +69277,14 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         _this5.commit('hideDownloadProgress');
 
         _this5.commit('setDownloadProgress', 0);
+
+        _this5.dispatch('clearPhotos');
+
+        var payload = {
+          text: 'Скачивание фото началось'
+        };
+
+        _this5.dispatch('showToasted', payload);
       })["catch"](function (error) {});
     }
   }

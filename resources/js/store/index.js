@@ -45,6 +45,7 @@ export default new Vuex.Store({
         IdAlbum: 16,
         errorAlbum: [],
         //------------------------------------------
+
         // Альбомы
         AllAlbums: [],
         //--------
@@ -245,7 +246,12 @@ export default new Vuex.Store({
                 document.body.appendChild(link);
                 link.click();
                 this.commit('hideDownloadProgress');
-                this.commit('setDownloadProgress', 0)
+                this.commit('setDownloadProgress', 0);
+                this.dispatch('clearPhotos');
+                let payload = {
+                    text: 'Скачивание фото началось',
+                };
+                this.dispatch('showToasted', payload);
             })
             .catch(error => {
 
