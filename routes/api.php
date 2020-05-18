@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('all-albums', 'Api\AlbumController');
+Route::apiResource('/corrects', 'Api\CorrectController');
 
 Route::apiResource('/albums-photos', 'Api\AlbumPhotoController');
 //        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
@@ -30,6 +31,6 @@ Route::post('/albums/create', 'Api\AlbumController@store')->name('albums.create'
 Route::post('/albums/index', 'Api\AlbumController@index')->name('albums.index');
 Route::get('/collages', 'Api\PhotoController@collageIndex')->name('collages');
 Route::get('/animatoins', 'Api\PhotoController@animationIndex')->name('animations');
-Route::get('/album-destr', 'Api\AlbumController@myDestroy')->name('album-destr');
-
+Route::post('/album-destr', 'Api\AlbumController@myDestroy')->name('album-destr');
 Route::post('/albums/update', 'Api\AlbumController@myUpdate')->name('albums.my-update');
+Route::post('/albums/change-cover', 'Api\AlbumController@changeCover')->name('albums.change-cover');

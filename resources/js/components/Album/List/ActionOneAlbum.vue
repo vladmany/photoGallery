@@ -13,7 +13,7 @@
         <div class="action turn_download" @click="turnDownload">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
-        <div class="action change_date" @click="ChangeDate">
+        <div class="action change_date" @click="ChangeCover">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_change_cover.svg"></object>
         </div>
         <div class="action delete_image" @click="deleteImages">
@@ -34,6 +34,9 @@
             },
             CloseModalChangeNameAlbum(){
                 this.$store.state.isChangeNameAlbum = false;
+
+            },
+            ChangeCover(){
 
             },
         },

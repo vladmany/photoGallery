@@ -51,7 +51,7 @@ let mutations = {
         state.groups = payload
     },
     selectAllPhotos:(state, payload) =>
-        state.selectAllPhotos = payload
+        state.selectAllPhotos = payload,
 }
 let actions = {
     addPhoto: payload => {

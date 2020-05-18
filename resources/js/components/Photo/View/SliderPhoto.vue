@@ -1,6 +1,6 @@
 <template>
     <div>
-        <Slider :images="slides" :current-index="start"></Slider>
+        <Slider :images="images" :current-index="start" :is-correct="isCorrect"></Slider>
 <!--        <carousel :data="slides" :autoplay="false"></carousel>-->
     </div>
 </template>
@@ -15,7 +15,11 @@
         props: {
             id: {
                 required: true,
-                type: Object,
+                type: Number,
+            },
+            isCorrect: {
+                type: Boolean,
+                default: false,
             }
         },
         computed: {
@@ -26,17 +30,11 @@
                 return this.$store.getters['ListPhoto/getPhotoIndex'](this.images, this.id);
             },
             slides() {
-                let ret = [];
-                for(let image of this.images) {
-                    ret.push(
-                        image.url
-                        // `<div>
-                        //     <img class="img-fluid" src="${ image.url }">
-                        // </div>`
-                    )
-                }
-
-                return ret;
+                // let ret = [];
+                // for(let image of this.images) {
+                //     ret.push(image.url)
+                // }
+                // return ret;
             }
         },
     }

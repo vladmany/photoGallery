@@ -6,9 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class Album extends Model
 {
-    protected $fillable = ['name'];
+    protected $fillable = ['name', 'url'];
     protected $attributes = [
-        'url'=> 'none-url',
         'cover' => '/storage/albums/placeholderAlbum.png'
     ];
 

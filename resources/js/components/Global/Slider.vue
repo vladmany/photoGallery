@@ -1,10 +1,10 @@
 <template>
     <div class="slider">
         <transition-group name="fade" tag="div" class="one-slide">
-            <!--            <div v-for="i in [currentIndex]" :key="i">-->
             <img v-for="i in [currentIndex]" :key="i"
-                 class="img-fluid one-photo" :src="currentImg" />
-            <!--            </div>-->
+                 class="img-fluid one-photo" :src="currentImg"
+                 :style="myStyle"
+            />
         </transition-group>
         <div class="arrows">
             <span class="prev" @click="prev">&#10094;</span>
@@ -23,11 +23,16 @@
             currentIndex: {
                 type: Number,
                 default: 0
+            },
+            isCorrect: {
+                type: Boolean,
+                default: false
             }
         },
         data() {
             return {
                 timer: null,
+                myStyle: ''
             };
         },
 
@@ -45,12 +50,47 @@
             },
             prev: function() {
                 this.currentIndex -= 1;
-            }
+            },
         },
 
         computed: {
-            currentImg: function() {
-                return this.images[Math.abs(this.currentIndex) % this.images.length];
+            slideImages() {
+                let ret = []
+                for(let im of this.images) {
+                    ret.push(im.url)
+                }
+
+                return ret;
+            },
+            currentImg() {
+                return this.slideImages[Math.abs(this.currentIndex) % this.slideImages.length];
+            },
+            cssStyle() {
+                if(this.isCorrect) {
+                    let id = this.$store.getters.correctPhotoId;
+                    this.$store.dispatch('setSccAttrsById', id)
+                    this.$store.dispatch('makeCssFilter')
+                    let filter = this.$store.getters.cssFilter;
+                    // console.log(filter);
+
+                    return filter;
+                }
+
+                return ''
+            }
+        },
+        watch: {
+            currentIndex() {
+                let ind = Math.abs(this.currentIndex) % this.slideImages.length;
+                this.$store.dispatch('changeCorrectPhotoId', ind);
+            },
+            cssStyle(newVal, oldVal) {
+                this.myStyle = newVal;
+            }
+        },
+        created() {
+            if(this.isCorrect) {
+                this.myStyle = this.cssStyle;
             }
         }
     };

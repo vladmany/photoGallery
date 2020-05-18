@@ -1,12 +1,16 @@
+import Vue from "vue";
+
 let state = {
     selected: {
         photos: [], // добавлять id
         albums: []  // добавлять id
     },
+    correctPhotoId: -1,
 }
 let getters = {
     selectedPhotos: (state) => state.selected.photos,
     selectedAlbums: (state) => state.selected.albums,
+    correctPhotoId: (state) => state.correctPhotoId,
     isSelectedAlbum: (state, getters) => id => {
         return getters.selectedAlbums.includes(id);
     },
@@ -43,6 +47,9 @@ let mutations = {
     clearSelectedPhotos:(state) => {
         state.selected.photos = [];
     },
+    setCorrectPhotoId: (state, payload) => {
+        state.correctPhotoId = payload
+    },
     // clearSelectedAlbums:(state) => {
     //     state.selected.albums = [];
     // }
@@ -64,6 +71,26 @@ let actions = {
     delAlbum({ commit }, val) {
         commit('delAlbum', val)
     },
+    showToasted({}, payload) {
+        let text = payload.text;
+        let action = payload.action || {};
+        Vue.toasted.show(text, {
+            action : action,
+            position: 'bottom-left',
+            duration: 5000,
+            keepOnHover: true
+        });
+    },
+    setCorrectPhotoId({ commit, getters }, ) {
+        if(getters.selectedPhotos.length === 1) {
+            let id = getters.selectedPhotos[0];
+            commit('setCorrectPhotoId', id)
+        }
+
+    },
+    changeCorrectPhotoId({ commit, getters }, id) {
+        commit('setCorrectPhotoId', id)
+    },
 }
 
 export default {
@@ -72,3 +99,4 @@ export default {
     mutations,
     actions
 }
+

@@ -1,10 +1,12 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+
 import AddPhoto from './modules/AddPhoto'
 import ListPhoto from './modules/ListPhoto'
 import ListAlbum from "./modules/ListAlbum";
 import Globals from "./modules/Globals";
 import routes from "../routes";
+import Correct from "./modules/Correct";
 
 Vue.use(Vuex)
 
@@ -14,6 +16,7 @@ export default new Vuex.Store({
         ListPhoto,
         ListAlbum,
         Globals,
+        Correct
     },
     state: {
         // Загрузка фото
@@ -145,7 +148,7 @@ export default new Vuex.Store({
         }*/
     },
     actions: {
-        savePhotosToAlbum({ commit, getters }, albumId) {
+        savePhotosToAlbum({ commit, getters, dispatch }, albumId) {
             let photos = getters.selectedPhotos;
             if(photos && albumId) {
                 axios.post('/api/albums-photos', {
@@ -160,30 +163,21 @@ export default new Vuex.Store({
                         this.dispatch('clearPhotos');
                         this.commit('hideAddPhotoToAlbum')
                         if (response.data.length <= 0) {
-                            Vue.toasted.show('Все объекты уже существуют в выбранном альбоме', {
-                                action : {
-                                    text : 'Закрыть',
-                                    onClick : (e, toastObject) => {
-                                        toastObject.goAway(0);
-                                    }
-                                },
-                                position: 'bottom-left',
-                                duration: 5000,
-                                keepOnHover: true
-                            });
+                            dispatch('showToasted', {
+                                text: 'Все объекты уже существуют в выбранном альбоме, да',
+                            })
                         } else {
-                            Vue.toasted.show(response.data.length + ' объектов добавлены в альбом', {
-                                action : {
+                            let payload = {
+                                text: response.data.length + ' объектов добавлены в альбом',
+                                action: (this.state.isAddPhotoToAlbum) ? {
                                     text : 'Посмотреть',
                                     onClick : (e, toastObject) => {
                                         routes.push({ name: 'OneAlbum', params: { id: +albumId } })
                                         toastObject.goAway(0);
                                     }
-                                },
-                                position: 'bottom-left',
-                                duration: 5000,
-                                keepOnHover: true
-                            });
+                                } : {},
+                            };
+                            dispatch('showToasted', payload);
                         }
                     // }
                 })
@@ -211,11 +205,21 @@ export default new Vuex.Store({
                 });
         },
         deleteAlbum({ commit, getters }, albumId) {
-            axios.get('/api/album-destr', {
+            axios.post('/api/album-destr', {
                 id:albumId
             })
                 .then(response => {
                         this.commit('hideDelAlbum');
+                        this.dispatch('ListAlbum/getAlbums');
+                    }
+                );
+        },
+        changeCover({ commit, getters }, photoAlbumId,AlbumId) {
+            axios.post('/api/albums/change-cover', {
+                idPhotoAlbum:photoAlbumId,
+                idAlbum:AlbumId
+            })
+                .then(response => {
                         this.dispatch('ListAlbum/getAlbums');
                     }
                 );
@@ -246,6 +250,13 @@ export default new Vuex.Store({
 
             })
         }
-
-    }
+    },
 })
+
+// как пример для вставки в toasted
+// action : {
+//     text : 'Закрыть',
+//         onClick : (e, toastObject) => {
+//         toastObject.goAway(0);
+//     }
+// },
