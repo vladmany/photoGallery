@@ -59,6 +59,7 @@
                     ret[key] = corrects[key]
                 }
                 this.$store.dispatch('saveCorrectedImage', ret)
+                this.$store.dispatch('getCorrects')
                 // this.$store.dispatch('setDefaultCssAttrs');
             }
         },
@@ -107,7 +108,7 @@
             let id = this.$store.getters.correctPhotoId;
             if(id === -1) {
                 this.$store.state.correctPhotoId = this.currentIndex
-                console.log(this.$store.state.correctPhotoId);
+                // console.log(this.$store.state.correctPhotoId);
             }
             if(this.isCorrect) {
                 this.$store.dispatch('setSccAttrsById', id)

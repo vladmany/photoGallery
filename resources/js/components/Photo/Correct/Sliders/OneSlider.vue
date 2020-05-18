@@ -34,7 +34,6 @@
         },
         watch: {
             val(newVal, oldVal) {
-                console.log(newVal, oldVal)
                 this.value = newVal
             },
             value() {

@@ -5073,7 +5073,8 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
         ret[key] = corrects[key];
       }
 
-      this.$store.dispatch('saveCorrectedImage', ret); // this.$store.dispatch('setDefaultCssAttrs');
+      this.$store.dispatch('saveCorrectedImage', ret);
+      this.$store.dispatch('getCorrects'); // this.$store.dispatch('setDefaultCssAttrs');
     }
   },
   computed: {
@@ -5130,8 +5131,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     var id = this.$store.getters.correctPhotoId;
 
     if (id === -1) {
-      this.$store.state.correctPhotoId = this.currentIndex;
-      console.log(this.$store.state.correctPhotoId);
+      this.$store.state.correctPhotoId = this.currentIndex; // console.log(this.$store.state.correctPhotoId);
     }
 
     if (this.isCorrect) {
@@ -5243,7 +5243,8 @@ __webpack_require__.r(__webpack_exports__);
         ret[key] = corrects[key];
       }
 
-      this.$store.dispatch('saveCorrectedImage', ret); // this.$store.dispatch('setDefaultCssAttrs');
+      this.$store.dispatch('saveCorrectedImage', ret);
+      this.$store.dispatch('getCorrects'); // this.$store.dispatch('setDefaultCssAttrs');
     }
   },
   created: function created() {
@@ -5336,7 +5337,6 @@ __webpack_require__.r(__webpack_exports__);
   },
   watch: {
     val: function val(newVal, oldVal) {
-      console.log(newVal, oldVal);
       this.value = newVal;
     },
     value: function value() {
