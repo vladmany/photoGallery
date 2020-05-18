@@ -1,5 +1,6 @@
 <template>
     <div class="wrapper">
+<!--        <input type="text" v-model="$store.dispatch('s')" placeholder="Введите название статьи" />-->
         <div v-if="albums.length > 0">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
@@ -29,7 +30,6 @@
     import Paginator from "../../Global/Paginator";
     import {mapGetters} from "vuex";
     import OneAlbumSmall from "./OneAlbumSmall";
-
     export default {
         components: {noAlbums, Paginator, OneAlbumSmall},
         name: "AllAlbums",
@@ -62,14 +62,12 @@
                 pageOfItems: 0
             }
         },
-
         methods: {
             onChangePage(page) {
                 let perPage = this.paginateCount;
                 let from = (page * perPage) - perPage;
                 let to = (page * perPage);
                 this.pageOfItems = this.albums.slice(from, to);
-
                 // this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
             },
             setPages() {
@@ -96,7 +94,6 @@
         flex-direction: column;
         padding-top: 35px;
     }
-
     .album {
         border-bottom-width: 1px;
         border-bottom-style: solid;
@@ -107,9 +104,7 @@
         background-color: #ffffff;
         justify-content: center;
     }
-
     .album-paginate {
         flex: 0 0 auto;
     }
-
 </style>

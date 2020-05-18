@@ -16,8 +16,10 @@ let getters = {
     },
 }
 let mutations = {
-    addPhoto:(state, val) =>
-        state.selected.photos.push(val),
+    addPhoto:(state, val) => {
+        state.selected.photos.push(val)
+        state.correctPhotoId = val
+    },
     delPhoto:(state, val) => {
         for(let i=0; i<state.selected.photos.length; i++) {
             if (state.selected.photos[i] === val) {
