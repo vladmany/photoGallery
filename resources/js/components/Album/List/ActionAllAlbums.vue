@@ -4,13 +4,13 @@
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
             <label for="all-selector"></label>
         </div>
-        <div class="action to_provide_access" :class="isSelectedAlbums" @click="provideAccess">
+        <div class="action to_provide_access" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="provideAccess">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
         </div>
-        <div class="action turn_download" :class="isSelectedAlbums" @click="downloadAlbum">
+        <div class="action turn_download" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="downloadAlbum">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
-        <div class="action delete_image" :class="isSelectedAlbums" @click="deleteAlbum">
+        <div class="action delete_image" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="deleteAlbum">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
         </div>
         <del-albums></del-albums>
@@ -62,7 +62,8 @@
                 return (this.$store.getters.selectedAlbums.length > 0) ? 'available' : ''
             },
             ...mapGetters({
-                selectedAlbums: 'selectedAlbums'
+                selectedAlbums: 'selectedAlbums',
+                albums: 'ListAlbum/albums',
             })
         },
     }

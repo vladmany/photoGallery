@@ -215,22 +215,22 @@ export default new Vuex.Store({
                 id:albumId
             })
                 .then(response => {
-                    let payload = {
-                        text: ' Альбом был удален',
-                    };
-                    this.dispatch('showToasted', payload);
                         this.commit('hideDelAlbum');
                         this.dispatch('ListAlbum/getAlbums');
                     }
                 );
         },
-        changeCover({ commit, getters }, photoAlbumId) {
+        changeCover({ commit, getters }, [photoId, albumId]) {
             axios.post('/api/albums/change-cover', {
-                idPhotoAlbum:photoAlbumId,
-                idAlbum:this.state.IdAlbum
+                idPhoto:photoId,
+                idAlbum:albumId
             })
                 .then(response => {
-                        this.dispatch('ListAlbum/getAlbums');
+                    let payload = {
+                        text: ' Обложка альбома была изменена',
+                    };
+                    this.dispatch('showToasted', payload);
+                    this.dispatch('ListAlbum/getAlbums');
                     }
                 );
         },

@@ -46,6 +46,19 @@
                     for(let i = 0; i<this.$store.getters.selectedAlbums.length; i++) {
                     this.$store.dispatch('deleteAlbum', this.$store.getters.selectedAlbums[i])
                     }
+                    if(this.$store.getters.selectedAlbums.length === 1){
+                        let payload = {
+                            text: ' Альбом был удален',
+                        };
+                        this.$store.dispatch('showToasted', payload);
+                    }
+                    if(this.$store.getters.selectedAlbums.length > 1){
+                        let payload = {
+                            text: ' Удалено альбомов ' + this.$store.getters.selectedAlbums.length,
+                        };
+                        this.$store.dispatch('showToasted', payload);
+                    }
+
                     this.$store.commit('clearAlbums');
                 }
 
