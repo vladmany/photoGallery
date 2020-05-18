@@ -13,6 +13,10 @@
         <div class="action turn_download" @click="turnDownload">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
+
+        <CButton text="Добавить альбом" @click="ChangeCover" class="btn-create-album">
+            cover
+        </CButton>
         <div class="action change_date" @click="ChangeCover">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_change_cover.svg"></object>
         </div>
@@ -37,7 +41,9 @@
 
             },
             ChangeCover(){
-                this.$store.dispatch('changeCover', 5)
+                let id = this.$store.getters.selectedPhotos;
+                console.log(id);
+                this.$store.dispatch('changeCover', id[0])
             },
         },
         props: {

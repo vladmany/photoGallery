@@ -4117,6 +4117,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ActionOneAlbum",
@@ -4131,7 +4135,9 @@ __webpack_require__.r(__webpack_exports__);
       this.$store.state.isChangeNameAlbum = false;
     },
     ChangeCover: function ChangeCover() {
-      this.$store.dispatch('changeCover', 5);
+      var id = this.$store.getters.selectedPhotos;
+      console.log(id);
+      this.$store.dispatch('changeCover', id[0]);
     }
   },
   props: {
@@ -46342,6 +46348,16 @@ var render = function() {
       ),
       _vm._v(" "),
       _c(
+        "CButton",
+        {
+          staticClass: "btn-create-album",
+          attrs: { text: "Добавить альбом" },
+          on: { click: _vm.ChangeCover }
+        },
+        [_vm._v("\n        cover\n    ")]
+      ),
+      _vm._v(" "),
+      _c(
         "div",
         { staticClass: "action change_date", on: { click: _vm.ChangeCover } },
         [
@@ -69994,8 +70010,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
