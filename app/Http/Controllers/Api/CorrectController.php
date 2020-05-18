@@ -28,7 +28,13 @@ class CorrectController extends Controller
     public function store(Request $request)
     {
         $data = $request->all();
-        Correct::updateOrCreate($data['data']);
+        $id = $data['data']['photo_id'];
+        $item = Correct::where('photo_id', $id)->get()->first();
+        if($item) {
+            $item->update($data['data']);
+        } else {
+            Correct::create($data['data']);
+        }
     }
 
     /**

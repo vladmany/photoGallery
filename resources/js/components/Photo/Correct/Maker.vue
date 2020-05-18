@@ -47,7 +47,7 @@
                     ret[key] = corrects[key]
                 }
                 this.$store.dispatch('saveCorrectedImage', ret)
-                this.$store.dispatch('setDefaultCssAttrs');
+                // this.$store.dispatch('setDefaultCssAttrs');
             }
         },
         created() {

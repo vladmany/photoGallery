@@ -41,6 +41,18 @@ let mutations = {
     setCssAttr: (state, payload) => {
         state.cssAttrs[payload.name] = payload.value
     },
+    setSccAttrsById: (state, id) => {
+        id += 1
+        // console.log(state.photoCorrects, id)
+        let obj = state.photoCorrects.find(photo => photo.photo_id === id)
+        // console.log(obj)
+        if(obj) {
+            for(let key of Object.keys(state.cssAttrsDef)) {
+                state.cssAttrs[key] = obj[key]
+            }
+            console.log(state.cssAttrs)
+        }
+    }
 }
 let actions = {
     getCorrects:({commit}) => {
@@ -50,6 +62,7 @@ let actions = {
             })
     },
     saveCorrectedImage:({commit}, payload) => {
+        payload['photo_id'] = payload['photo_id']+1
         axios.post('/api/corrects', { data: payload })
             .then(res => {
                 console.log('save correct success')
@@ -80,12 +93,7 @@ let actions = {
         }
     },
     setSccAttrsById: ({ commit, state }, id) => {
-        // let obj = state.photoCorrects.find(photo => photo.id === id)
-        // if(obj) {
-        //     for(let key of Object.keys(state.cssAttrsDef)) {
-        //         state.cssAttrs[key] = obj[key]
-        //     }
-        // }
+        commit('setSccAttrsById', id)
     }
 }
 

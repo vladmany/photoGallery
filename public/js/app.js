@@ -5062,6 +5062,18 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     prev: function prev() {
       this.currentIndex -= 1;
+    },
+    save: function save() {
+      var ret = {};
+      ret['photo_id'] = this.$store.getters['correctPhotoId'];
+      var corrects = this.$store.getters['cssAttrs'];
+
+      for (var _i = 0, _Object$keys = Object.keys(corrects); _i < _Object$keys.length; _i++) {
+        var key = _Object$keys[_i];
+        ret[key] = corrects[key];
+      }
+
+      this.$store.dispatch('saveCorrectedImage', ret); // this.$store.dispatch('setDefaultCssAttrs');
     }
   },
   computed: {
@@ -5089,8 +5101,6 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     },
     cssStyle: function cssStyle() {
       if (this.isCorrect) {
-        var id = this.$store.getters.correctPhotoId;
-        this.$store.dispatch('setSccAttrsById', id);
         this.$store.dispatch('makeCssFilter');
         var filter = this.$store.getters.cssFilter; // console.log(filter);
 
@@ -5104,13 +5114,28 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
     currentIndex: function currentIndex() {
       var ind = Math.abs(this.currentIndex) % this.slideImages.length;
       this.$store.dispatch('changeCorrectPhotoId', ind);
+
+      if (this.isCorrect) {
+        this.save(); // this.$store.dispatch('setDefaultCssAttrs');
+      }
+
+      var id = this.$store.getters.correctPhotoId;
+      this.$store.dispatch('setSccAttrsById', id);
     },
     cssStyle: function cssStyle(newVal, oldVal) {
       this.myStyle = newVal;
     }
   },
   created: function created() {
+    var id = this.$store.getters.correctPhotoId;
+
+    if (id === -1) {
+      this.$store.state.correctPhotoId = this.currentIndex;
+      console.log(this.$store.state.correctPhotoId);
+    }
+
     if (this.isCorrect) {
+      this.$store.dispatch('setSccAttrsById', id);
       this.myStyle = this.cssStyle;
     }
   }
@@ -5218,8 +5243,7 @@ __webpack_require__.r(__webpack_exports__);
         ret[key] = corrects[key];
       }
 
-      this.$store.dispatch('saveCorrectedImage', ret);
-      this.$store.dispatch('setDefaultCssAttrs');
+      this.$store.dispatch('saveCorrectedImage', ret); // this.$store.dispatch('setDefaultCssAttrs');
     }
   },
   created: function created() {
@@ -5305,15 +5329,25 @@ __webpack_require__.r(__webpack_exports__);
   computed: {
     val: function val() {
       return this.$store.getters['getCssAttr'](this.name);
+    },
+    correctPhotoId: function correctPhotoId() {
+      return this.$store.getters['correctPhotoId'];
     }
   },
   watch: {
+    val: function val(newVal, oldVal) {
+      console.log(newVal, oldVal);
+      this.value = newVal;
+    },
     value: function value() {
       this.$store.dispatch('setCssAttr', {
         name: this.name,
         value: this.value
       });
       this.$store.dispatch('makeCssFilter');
+    },
+    correctPhotoId: function correctPhotoId() {
+      this.value = this.val;
     }
   },
   created: function created() {
@@ -69428,6 +69462,22 @@ var mutations = {
   },
   setCssAttr: function setCssAttr(state, payload) {
     state.cssAttrs[payload.name] = payload.value;
+  },
+  setSccAttrsById: function setSccAttrsById(state, id) {
+    id += 1; // console.log(state.photoCorrects, id)
+
+    var obj = state.photoCorrects.find(function (photo) {
+      return photo.photo_id === id;
+    }); // console.log(obj)
+
+    if (obj) {
+      for (var _i = 0, _Object$keys = Object.keys(state.cssAttrsDef); _i < _Object$keys.length; _i++) {
+        var key = _Object$keys[_i];
+        state.cssAttrs[key] = obj[key];
+      }
+
+      console.log(state.cssAttrs);
+    }
   }
 };
 var actions = {
@@ -69439,6 +69489,7 @@ var actions = {
   },
   saveCorrectedImage: function saveCorrectedImage(_ref2, payload) {
     var commit = _ref2.commit;
+    payload['photo_id'] = payload['photo_id'] + 1;
     axios.post('/api/corrects', {
       data: payload
     }).then(function (res) {
@@ -69453,8 +69504,8 @@ var actions = {
     var attrs = state.cssAttrs;
     var ret = 'filter: ';
 
-    for (var _i = 0, _Object$keys = Object.keys(attrs); _i < _Object$keys.length; _i++) {
-      var key = _Object$keys[_i];
+    for (var _i2 = 0, _Object$keys2 = Object.keys(attrs); _i2 < _Object$keys2.length; _i2++) {
+      var key = _Object$keys2[_i2];
       ret += "".concat(key, "(").concat(attrs[key], "%) ");
     }
 
@@ -69469,23 +69520,18 @@ var actions = {
     var commit = _ref5.commit,
         state = _ref5.state;
 
-    for (var _i2 = 0, _Object$keys2 = Object.keys(state.cssAttrsDef); _i2 < _Object$keys2.length; _i2++) {
-      var key = _Object$keys2[_i2];
+    for (var _i3 = 0, _Object$keys3 = Object.keys(state.cssAttrsDef); _i3 < _Object$keys3.length; _i3++) {
+      var key = _Object$keys3[_i3];
       commit('setCssAttr', {
         name: key,
         value: state.cssAttrsDef[key]
       });
     }
   },
-  setSccAttrsById: function setSccAttrsById(_ref6, id) {// let obj = state.photoCorrects.find(photo => photo.id === id)
-    // if(obj) {
-    //     for(let key of Object.keys(state.cssAttrsDef)) {
-    //         state.cssAttrs[key] = obj[key]
-    //     }
-    // }
-
+  setSccAttrsById: function setSccAttrsById(_ref6, id) {
     var commit = _ref6.commit,
         state = _ref6.state;
+    commit('setSccAttrsById', id);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -69538,7 +69584,8 @@ var getters = {
 };
 var mutations = {
   addPhoto: function addPhoto(state, val) {
-    return state.selected.photos.push(val);
+    state.selected.photos.push(val);
+    state.correctPhotoId = val;
   },
   delPhoto: function delPhoto(state, val) {
     for (var i = 0; i < state.selected.photos.length; i++) {
@@ -69945,8 +69992,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

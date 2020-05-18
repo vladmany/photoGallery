@@ -51,6 +51,16 @@
             prev: function() {
                 this.currentIndex -= 1;
             },
+            save() {
+                let ret = {};
+                ret['photo_id'] = this.$store.getters['correctPhotoId'];
+                let corrects = this.$store.getters['cssAttrs'];
+                for(let key of Object.keys(corrects)) {
+                    ret[key] = corrects[key]
+                }
+                this.$store.dispatch('saveCorrectedImage', ret)
+                // this.$store.dispatch('setDefaultCssAttrs');
+            }
         },
 
         computed: {
@@ -67,8 +77,7 @@
             },
             cssStyle() {
                 if(this.isCorrect) {
-                    let id = this.$store.getters.correctPhotoId;
-                    this.$store.dispatch('setSccAttrsById', id)
+
                     this.$store.dispatch('makeCssFilter')
                     let filter = this.$store.getters.cssFilter;
                     // console.log(filter);
@@ -83,13 +92,25 @@
             currentIndex() {
                 let ind = Math.abs(this.currentIndex) % this.slideImages.length;
                 this.$store.dispatch('changeCorrectPhotoId', ind);
+                if(this.isCorrect) {
+                    this.save()
+                    // this.$store.dispatch('setDefaultCssAttrs');
+                }
+                let id = this.$store.getters.correctPhotoId;
+                this.$store.dispatch('setSccAttrsById', id)
             },
             cssStyle(newVal, oldVal) {
                 this.myStyle = newVal;
             }
         },
         created() {
+            let id = this.$store.getters.correctPhotoId;
+            if(id === -1) {
+                this.$store.state.correctPhotoId = this.currentIndex
+                console.log(this.$store.state.correctPhotoId);
+            }
             if(this.isCorrect) {
+                this.$store.dispatch('setSccAttrsById', id)
                 this.myStyle = this.cssStyle;
             }
         }

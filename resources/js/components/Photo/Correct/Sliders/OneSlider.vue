@@ -27,15 +27,25 @@
         computed: {
             val() {
                 return this.$store.getters['getCssAttr'](this.name)
+            },
+            correctPhotoId() {
+                return this.$store.getters['correctPhotoId']
             }
         },
         watch: {
+            val(newVal, oldVal) {
+                console.log(newVal, oldVal)
+                this.value = newVal
+            },
             value() {
                 this.$store.dispatch('setCssAttr', {
                     name: this.name,
                     value: this.value
                 })
                 this.$store.dispatch('makeCssFilter');
+            },
+            correctPhotoId() {
+                this.value = this.val;
             }
         },
         created() {
