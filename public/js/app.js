@@ -3850,6 +3850,7 @@ __webpack_require__.r(__webpack_exports__);
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ModalCreateAlbum__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ModalCreateAlbum */ "./resources/js/components/Album/Create/ModalCreateAlbum.vue");
+/* harmony import */ var _routes__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../routes */ "./resources/js/routes.js");
 //
 //
 //
@@ -3885,6 +3886,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ModalCreateAlbum",
@@ -3909,6 +3911,12 @@ __webpack_require__.r(__webpack_exports__);
       var newAlbum = app.album;
       axios.post('api/albums/create', newAlbum).then(function (response) {
         _this.closeModal();
+
+        var payload = {
+          text: _this.album.name + ' Альбом создан'
+        };
+
+        _this.$store.dispatch('showToasted', payload);
 
         _this.$store.dispatch('ListAlbum/getAlbums');
       })["catch"](function (error) {
@@ -4120,7 +4128,9 @@ __webpack_require__.r(__webpack_exports__);
     CloseModalChangeNameAlbum: function CloseModalChangeNameAlbum() {
       this.$store.state.isChangeNameAlbum = false;
     },
-    ChangeCover: function ChangeCover() {}
+    ChangeCover: function ChangeCover() {
+      this.$store.dispatch('changeCover', 5);
+    }
   },
   props: {
     albumId: {
@@ -4258,6 +4268,7 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
+//
 //
 //
 //
@@ -11365,7 +11376,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 
 // module
-exports.push([module.i, "\n.wrapper[data-v-8384e982] {\n    display: flex;\n    background-color: #ffffff;\n    width: 100%;\n    flex-direction: column;\n    padding-top: 35px;\n}\n.album[data-v-8384e982] {\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-color: #DADADA;\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    background-color: #ffffff;\n    justify-content: center;\n}\n.album-paginate[data-v-8384e982] {\n    flex: 0 0 auto;\n}\n\n", ""]);
+exports.push([module.i, "\n.wrapper[data-v-8384e982] {\n    display: flex;\n    background-color: #ffffff;\n    width: 100%;\n    flex-direction: column;\n    padding-top: 35px;\n}\n.album[data-v-8384e982] {\n    border-bottom-width: 1px;\n    border-bottom-style: solid;\n    border-color: #DADADA;\n    display: flex;\n    flex-direction: row;\n    flex-wrap: wrap;\n    background-color: #ffffff;\n    justify-content: center;\n}\n.album-paginate[data-v-8384e982] {\n    flex: 0 0 auto;\n}\n", ""]);
 
 // exports
 
@@ -69214,6 +69225,12 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
         id: this.state.IdAlbum,
         name: albumName
       }).then(function (response) {
+        var payload = {
+          text: ' Имя альбома было изменено на ' + albumName
+        };
+
+        _this2.dispatch('showToasted', payload);
+
         _this2.commit('hideChangeNameAlbum');
 
         _this2.dispatch('ListAlbum/getAlbums');
@@ -69233,19 +69250,25 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       axios.post('/api/album-destr', {
         id: albumId
       }).then(function (response) {
+        var payload = {
+          text: ' Альбом был удален'
+        };
+
+        _this3.dispatch('showToasted', payload);
+
         _this3.commit('hideDelAlbum');
 
         _this3.dispatch('ListAlbum/getAlbums');
       });
     },
-    changeCover: function changeCover(_ref4, photoAlbumId, AlbumId) {
+    changeCover: function changeCover(_ref4, photoAlbumId) {
       var _this4 = this;
 
       var commit = _ref4.commit,
           getters = _ref4.getters;
       axios.post('/api/albums/change-cover', {
         idPhotoAlbum: photoAlbumId,
-        idAlbum: AlbumId
+        idAlbum: this.state.IdAlbum
       }).then(function (response) {
         _this4.dispatch('ListAlbum/getAlbums');
       });
@@ -69626,7 +69649,8 @@ var state = {
   albums: [],
   album: {},
   groups: {},
-  selectAllAlbums: false
+  selectAllAlbums: false,
+  searchString: ""
 };
 var getters = {
   albums: function albums(state) {
@@ -69634,6 +69658,13 @@ var getters = {
       return JSON.parse(localStorage.getItem('albums'));
     }
 
+    var searchString = state.searchString;
+    searchString = searchString.trim().toLowerCase();
+    state.albums = state.albums.filter(function (item) {
+      if (item.name.toLowerCase().indexOf(searchString) !== -1) {
+        return item;
+      }
+    });
     return state.albums;
   },
   groups: function groups(state) {
@@ -69666,8 +69697,14 @@ var mutations = {
     state.albums = payload;
     localStorage.setItem('albums', JSON.stringify(payload));
   },
+  searchString: function searchString(state, payload) {
+    return state.searchString = payload;
+  },
   selectAllAlbums: function selectAllAlbums(state, payload) {
     return state.selectAllAlbums = payload;
+  },
+  selectSearchString: function selectSearchString(state, payload) {
+    return state.searchString = payload;
   }
 };
 var actions = {
@@ -69908,8 +69945,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
