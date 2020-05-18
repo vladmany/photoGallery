@@ -150,7 +150,7 @@ export default new Vuex.Store({
     },
     actions: {
         savePhotosToAlbum({ commit, getters, dispatch }, albumId) {
-            let photos = getters.selectedPhotos;
+            let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId)) ? getters.correctPhotoId : getters.selectedPhotos;
             if(photos && albumId) {
                 axios.post('/api/albums-photos', {
                     photos: photos,

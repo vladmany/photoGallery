@@ -108,6 +108,12 @@
         margin-left: 15px;
         user-select: none;
     }
+    .action:not(.select_all) {
+        display: none;
+    }
+    .action.available {
+        display: block;
+    }
     .action.available object {
         filter: brightness(75%);
         pointer-events: none;

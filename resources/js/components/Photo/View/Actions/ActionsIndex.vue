@@ -30,7 +30,8 @@
         name: "Actions",
         methods: {
             addToAlbum() {
-                if (this.$store.getters.selectedPhotos.length > 0) {
+                console.log(this.correctPhotoId)
+                if (this.correctPhotoId !== -1) {
                     this.$store.commit('showAddPhotoToAlbum')
                 }
             },
