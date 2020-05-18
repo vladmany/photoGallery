@@ -106,7 +106,7 @@
         },
         created() {
             let id = this.$store.getters.correctPhotoId;
-            if(id === -1) {
+            if(id === 0) {
                 this.$store.state.correctPhotoId = this.currentIndex
                 // console.log(this.$store.state.correctPhotoId);
             }

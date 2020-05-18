@@ -205,6 +205,7 @@
             getAllData() {
                 this.$store.dispatch('ListPhoto/getPhotos');
                 this.$store.dispatch('ListAlbum/getAlbums');
+                this.$store.dispatch('getCorrects');
             }
         },
         watch: {
@@ -214,6 +215,7 @@
         },
         created() {
             loadProgressBar()
+            this.$store.dispatch('getCorrects');
         },
     }
 </script>
