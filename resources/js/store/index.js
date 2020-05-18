@@ -244,7 +244,7 @@ export default new Vuex.Store({
                 link.setAttribute('download',randName + '.' + response.data.type.split('/').pop());
                 document.body.appendChild(link);
                 link.click();
-                console.log(this.state.downloadProgress)
+                this.commit('hideDownloadProgress');
             })
             .catch(error => {
 
