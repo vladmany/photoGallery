@@ -5,7 +5,7 @@ let state = {
         photos: [], // добавлять id
         albums: []  // добавлять id
     },
-    correctPhotoId: -1,
+    correctPhotoId: 0,
 }
 let getters = {
     selectedPhotos: (state) => state.selected.photos,

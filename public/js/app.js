@@ -3706,6 +3706,7 @@ __webpack_require__.r(__webpack_exports__);
     getAllData: function getAllData() {
       this.$store.dispatch('ListPhoto/getPhotos');
       this.$store.dispatch('ListAlbum/getAlbums');
+      this.$store.dispatch('getCorrects');
     }
   },
   watch: {
@@ -3715,6 +3716,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     Object(axios_progress_bar__WEBPACK_IMPORTED_MODULE_7__["loadProgressBar"])();
+    this.$store.dispatch('getCorrects');
   }
 });
 
@@ -5130,7 +5132,7 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
   created: function created() {
     var id = this.$store.getters.correctPhotoId;
 
-    if (id === -1) {
+    if (id === 0) {
       this.$store.state.correctPhotoId = this.currentIndex; // console.log(this.$store.state.correctPhotoId);
     }
 
@@ -69564,7 +69566,7 @@ var state = {
     albums: [] // добавлять id
 
   },
-  correctPhotoId: -1
+  correctPhotoId: 0
 };
 var getters = {
   selectedPhotos: function selectedPhotos(state) {

@@ -62,7 +62,7 @@ let actions = {
             })
     },
     saveCorrectedImage:({commit}, payload) => {
-        payload['photo_id'] = payload['photo_id']+1
+        payload['photo_id'] = payload['photo_id'] + 1
         axios.post('/api/corrects', { data: payload })
             .then(res => {
                 console.log('save correct success')
