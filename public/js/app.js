@@ -69491,7 +69491,7 @@ var actions = {
   },
   saveCorrectedImage: function saveCorrectedImage(_ref2, payload) {
     var commit = _ref2.commit;
-    payload['photo_id'] = payload['photo_id'] + 1;
+    payload['photo_id'] = payload['photo_id'];
     axios.post('/api/corrects', {
       data: payload
     }).then(function (res) {
