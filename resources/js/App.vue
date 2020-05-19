@@ -9,6 +9,7 @@
             <add-photo-to-album-modal-window/>
             <change-name-album/>
             <download-progress/>
+            <delete-images-modal/>
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
@@ -183,9 +184,11 @@
     import SelectionFilesErrorModal from "./components/Photo/Upload/Modals/SelectionFilesError";
     import {loadProgressBar} from "axios-progress-bar";
     import DownloadProgress from "./components/Photo/Download/Modals/DownloadProgress";
+    import DeleteImagesModal from "./components/Photo/List/Actions/DeleteImages/Modals/DeleteImages";
 
     export default {
         components: {
+            DeleteImagesModal,
             DownloadProgress,
             SelectionFilesErrorModal,
             UploadPhotosModal,

@@ -54,6 +54,10 @@ export default new Vuex.Store({
         isDownloadProgress: false,
         downloadProgress: 0,
         //----------------
+
+        // Удоление фото на странице фото
+        isDeleteImages: false,
+        //-------------------------------
     },
     getters: {
 
@@ -140,8 +144,17 @@ export default new Vuex.Store({
         },
         setDownloadProgress(state, data) {
             state.downloadProgress = data
-        }
+        },
         //----------------
+
+        // Удоление фото на странице фото
+        showDeleteImages(state) {
+            state.isDeleteImages = true
+        },
+        hideDeleteImages(state) {
+            state.isDeleteImages = false
+        },
+        //-------------------------------
 
         /*getAlbums() {
             axios.get('api/albums')
@@ -265,6 +278,21 @@ export default new Vuex.Store({
             })
             .catch(error => {
 
+            })
+        },
+        deletePhotos({ commit, getters, dispatch }, photos) {
+            // /photos/delete
+            axios.post('/api/photos/delete', {
+                photos: photos
+            })
+            .then(response => {
+                console.log("Успешное удаление")
+                this.commit('hideDeleteImages')
+                this.dispatch('ListPhoto/getPhotos');
+                this.commit('clearPhotos');
+            })
+            .catch(error => {
+                console.log('Удаление не удалось')
             })
         }
     },

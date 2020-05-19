@@ -4,7 +4,10 @@
             <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'photo-' + photo.id" v-model="isSelected">
             <label :for="'photo-' + photo.id"></label>
             <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id } }">
-                <img :src="photo.url" :alt="photo.name" class="img-fluid  one-photo">
+                <img :src="photo.url" :alt="photo.name"
+                     class="img-fluid  one-photo"
+                     @click="getId"
+                >
             </router-link>
         </div>
     </div>
@@ -47,6 +50,11 @@
                 selectedPhotos: 'selectedPhotos'
             })
         },
+        methods: {
+            getId() {
+                this.$store.dispatch('changeCorrectPhotoId', this.photo.id)
+            }
+        }
     }
 </script>
 

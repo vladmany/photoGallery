@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <div class="action select_all">
+        <div class="action select_all" :class="(photos.length > 0) ? 'available' : ''">
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
             <label for="all-selector"></label>
         </div>
@@ -25,7 +25,7 @@
         <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
         </div>
-        <div class="action delete_image" @click="deleteImages">
+        <div class="action delete_image" :class="isSelectedPhotos" @click="deleteImages">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
         </div>
     </div>
@@ -66,7 +66,9 @@
                 }
             },
             deleteImages() {
-
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.commit('showDeleteImages')
+                }
             },
         },
         computed: {
@@ -77,7 +79,8 @@
                 return (this.$store.getters.selectedPhotos.length === 1) ? 'available' : '';
             },
             ...mapGetters({
-                selectedPhotos: 'selectedPhotos'
+                selectedPhotos: 'selectedPhotos',
+                photos: 'ListPhoto/photos'
             })
         },
         data() {
@@ -107,8 +110,6 @@
     .action {
         margin-left: 15px;
         user-select: none;
-    }
-    .action:not(.select_all) {
         display: none;
     }
     .action.available {
