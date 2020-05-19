@@ -118,12 +118,14 @@
         },
         created() {
             let id = this.$store.getters.correctPhotoId;
+            console.log(id);
             if(id === 0) {
-                this.$store.state.correctPhotoId = this.currentIndex
+                this.$store.state.correctPhotoId = id = this.realPhotoInd
                 // console.log(this.$store.state.correctPhotoId);
             }
             if(this.isCorrect) {
                 this.$store.dispatch('setSccAttrsById', id)
+                console.log(this.$store.getters.cssAttrs)
                 this.myStyle = this.cssStyle;
             }
         }
