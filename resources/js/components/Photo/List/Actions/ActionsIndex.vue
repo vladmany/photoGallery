@@ -13,7 +13,7 @@
         <div class="action download" :class="isSelectedPhotos" @click="download">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_download.svg"></object>
         </div>
-        <div class="action change_date" @click="changeDate">
+        <div class="action change_date" :class="isSelectedPhotos" @click="changeDate">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>
         </div>
         <div class="action to_favorite" @click="toFavorite">
@@ -50,7 +50,9 @@
                 }
             },
             changeDate() {
-
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.commit('showChangeDate')
+                }
             },
             toFavorite() {
 

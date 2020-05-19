@@ -1,7 +1,7 @@
 <template>
     <div>
         <div class="outside-the-window">
-            <div class="window animated fadeInDown">
+            <div class="window animated fadeInDown" :style="'max-width: ' + minWidth + 'px'">
                 <button class="close-window-btn" @click="closeAction">
                     <object type="image/svg+xml" data="/storage/ic_clear.svg"></object>
                 </button>
@@ -14,7 +14,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -29,6 +28,10 @@
             closeAction: {
                 type: Function,
                 required: true
+            },
+            minWidth: {
+                type: Number,
+                default: 540
             }
         }
     }
@@ -48,7 +51,6 @@
     .window {
         /*width: 150vw;*/
         opacity: 1!important;
-        max-width: 540px;
         /*height: 278px;*/
         background: #FFFFFF;
         box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.07);

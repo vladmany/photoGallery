@@ -313,6 +313,26 @@ export default new Vuex.Store({
             .catch(error => {
                 console.log('Удаление не удалось')
             })
+        },
+        changeDatePhotos({ commit, getters, dispatch }, date) {
+            let photos = getters.selectedPhotos;
+            axios.post('/api/photos/change-date', {
+                photos: photos,
+                date: date
+            })
+            .then(response => {
+                console.log("Успешное изменение даты")
+                this.commit('hideChangeDate')
+                this.dispatch('ListPhoto/getPhotos');
+                this.commit('clearPhotos');
+                let payload = {
+                    text: `Изменена дата ${photos.length} фото`,
+                };
+                dispatch('showToasted', payload);
+            })
+            .catch(error => {
+                console.log('Изменение даты не удалось')
+            })
         }
     },
 })

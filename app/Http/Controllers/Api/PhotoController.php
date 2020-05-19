@@ -173,4 +173,23 @@ class PhotoController extends Controller
             }
         }
     }
+    public function changeDate(Request $request)
+    {
+        $data = $request->only(['photos', 'date']);
+        $photos = $data['photos'];
+        $date = $data['date'];
+        if ((count($photos) > 0) && $date)
+        {
+            foreach ($photos as $photoId)
+            {
+                $photoBd = Photo::all()->where('id', $photoId)->first();
+
+                if ($photoBd)
+                {
+                    $photoBd->created_at = $date;
+                    $photoBd->save();
+                }
+            }
+        }
+    }
 }
