@@ -58,6 +58,10 @@ export default new Vuex.Store({
         // Удоление фото на странице фото
         isDeleteImages: false,
         //-------------------------------
+
+        // Изменение даты фото
+        isChangeDate: true,
+        //--------------------
     },
     getters: {
 
@@ -155,6 +159,16 @@ export default new Vuex.Store({
             state.isDeleteImages = false
         },
         //-------------------------------
+
+        // Изменение даты фото
+        showChangeDate(state) {
+            state.isChangeDate = true
+        },
+        hideChangeDate(state) {
+            state.isChangeDate = false
+        },
+
+        //--------------------
 
         /*getAlbums() {
             axios.get('api/albums')
