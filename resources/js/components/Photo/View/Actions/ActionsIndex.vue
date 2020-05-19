@@ -1,13 +1,6 @@
 <template>
     <div class="actions">
-        <div class="action select_all" :class="(photos.length > 0) ? 'available' : ''">
-            <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
-            <label for="all-selector"></label>
-        </div>
-        <div class="action create">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_create.svg"></object>
-        </div>
-        <div class="action add_to_album" :class="isSelectedPhotos" @click="addToAlbum">
+        <div class="action add_to_album" :class="(this.correctPhotoId !== -1) ? 'available': ''" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
         <div class="action download" :class="isSelectedPhotos" @click="download">
@@ -19,13 +12,10 @@
         <div class="action to_favorite" @click="toFavorite">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>
         </div>
-        <div class="action turn_image" @click="turnImage">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
-        </div>
         <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
         </div>
-        <div class="action delete_image" :class="isSelectedPhotos" @click="deleteImages">
+        <div class="action delete_image" @click="deleteImages">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
         </div>
     </div>
@@ -40,7 +30,8 @@
         name: "Actions",
         methods: {
             addToAlbum() {
-                if (this.$store.getters.selectedPhotos.length > 0) {
+                console.log(this.correctPhotoId)
+                if (this.correctPhotoId !== -1) {
                     this.$store.commit('showAddPhotoToAlbum')
                 }
             },
@@ -66,9 +57,7 @@
                 }
             },
             deleteImages() {
-                if (this.$store.getters.selectedPhotos.length > 0) {
-                    this.$store.commit('showDeleteImages')
-                }
+
             },
         },
         computed: {
@@ -80,7 +69,8 @@
             },
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
-                photos: 'ListPhoto/photos'
+                correctPhotoId: 'correctPhotoId'
+
             })
         },
         data() {
@@ -88,15 +78,8 @@
                 isSelected: false
             }
         },
-        watch: {
-            isSelected() {
-                this.$store.dispatch('ListPhoto/selectAllPhotos', this.isSelected);
-            },
-            selectedPhotos() {
-                if (this.selectedPhotos.length === 0) {
-                    this.isSelected = false
-                }
-            }
+        created() {
+            console.log(this.correctPhotoId)
         }
     }
 </script>
@@ -110,10 +93,6 @@
     .action {
         margin-left: 15px;
         user-select: none;
-        display: none;
-    }
-    .action.available {
-        display: block;
     }
     .action.available object {
         filter: brightness(75%);

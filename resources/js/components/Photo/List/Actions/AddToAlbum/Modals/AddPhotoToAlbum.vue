@@ -45,7 +45,9 @@
         methods: {
             addToAlbum() {
                 this.errors = []
-                if (this.selectedPhotos.length > 0) {
+                let photos = ((this.$store.getters.selectedPhotos.length === 0) && (this.$store.getters.correctPhotoId !== -1)) ? this.$store.getters.correctPhotoId : this.$store.getters.selectedPhotos;
+                console.log(this.$store.state.correctPhotoId)
+                if (photos.length > 0) {
                     let albumId = $('.select__head span').attr('album-id');
                     if (albumId >= 0) {
                         let res = this.$store.dispatch('savePhotosToAlbum', albumId)

@@ -13,6 +13,12 @@ import JwPagination from 'jw-vue-pagination';
 import Toasted from 'vue-toasted';
 import { loadProgressBar } from 'axios-progress-bar'
 import 'axios-progress-bar/dist/nprogress.css'
+import VCalendar from 'v-calendar';
+
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, {
+    componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+});
 
 loadProgressBar()
 

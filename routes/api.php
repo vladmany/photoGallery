@@ -27,6 +27,7 @@ Route::apiResource('/albums-photos', 'Api\AlbumPhotoController');
 Route::post('/photos/upload', 'Api\PhotoController@store')->name('photos.upload');
 Route::post('/photos/add-to-album', 'Api\PhotoController@addToAlbum')->name('photos.addToAlbum');
 Route::post('/photos/download','Api\PhotoController@download')->name('photos.download');
+Route::post('/photos/delete','Api\PhotoController@deletePhotos')->name('photos.delete');
 Route::post('/albums/create', 'Api\AlbumController@store')->name('albums.create');
 Route::post('/albums/index', 'Api\AlbumController@index')->name('albums.index');
 Route::get('/collages', 'Api\PhotoController@collageIndex')->name('collages');

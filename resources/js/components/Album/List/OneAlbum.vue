@@ -62,6 +62,8 @@
         },
         created() {
             this.$store.dispatch('ListAlbum/getAlbums');
+            this.$store.dispatch('clearPhotos')
+            this.$store.dispatch('clearAlbums')
             this.$store.state.IdAlbum = this.id;
         },
         methods: {

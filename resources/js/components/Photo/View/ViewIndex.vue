@@ -3,6 +3,9 @@
         <template v-slot:title>
             <h1>Просмотр фото</h1>
         </template>
+        <template v-slot:actions>
+            <actions/>
+        </template>
         <template v-slot:content>
             <div class="back-button">
                 <router-link :to="{ name: 'IndexPhoto' }" >
@@ -19,10 +22,11 @@
 <script>
     import OnePhoto from "./OnePhoto";
     import SliderPhoto from "./SliderPhoto";
+    import Actions from "../View/Actions/ActionsIndex";
 
     export default {
         name: "ViewIndex",
-        components: {SliderPhoto, OnePhoto },
+        components: {Actions, SliderPhoto, OnePhoto },
         props: {
             id: {
                 required: true,

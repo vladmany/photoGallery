@@ -154,4 +154,23 @@ class PhotoController extends Controller
         }
 
     }
+    public function deletePhotos(Request $request)
+    {
+        $data = $request->only(['photos']);
+
+        $photos = $data['photos'];
+
+        if (count($photos) > 0)
+        {
+            foreach ($photos as $photoId)
+            {
+                $photoBd = Photo::all()->where('id', $photoId)->first();
+
+                if ($photoBd)
+                {
+                    $photoBd->delete();
+                }
+            }
+        }
+    }
 }

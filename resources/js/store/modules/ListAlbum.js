@@ -10,15 +10,15 @@ let getters = {
         if(!state.albums) {
             return JSON.parse(localStorage.getItem('albums'))
         }
-        let searchString = state.searchString;
+        /* let searchString = state.searchString;
 
-        searchString = searchString.trim().toLowerCase();
+         searchString = searchString.trim().toLowerCase();
 
-        state.albums = state.albums.filter(function(item){
-            if(item.name.toLowerCase().indexOf(searchString) !== -1){
-                return item;
-            }
-        })
+         state.albums = state.albums.filter(function(item){
+             if(item.name.toLowerCase().indexOf(searchString) !== -1){
+                 return item;
+             }
+         })*/
 
 
 
@@ -35,7 +35,8 @@ let getters = {
             return album.photos;
         }
         return false;
-    }
+    },
+    getSearchStr: state => state.searchString,
 }
 let mutations = {
     getAlbums:(state, payload) => {
@@ -43,13 +44,12 @@ let mutations = {
         localStorage.setItem('albums', JSON.stringify(payload))
     },
 
-    searchString:(state, payload) =>
-        state.searchString = payload,
+    setSearchStr: (state, payload) => {
+        state.searchString = payload
+    },
 
     selectAllAlbums:(state, payload) =>
         state.selectAllAlbums = payload,
-    selectSearchString:(state, payload) =>
-        state.searchString = payload
 }
 let actions = {
     getAlbums({ commit }) {
@@ -60,6 +60,9 @@ let actions = {
     },
     selectAllAlbums:({ commit }, isselect) =>
         commit('selectAllAlbums', isselect),
+    setSearchStr:({ commit }, payload) => {
+        commit('setSearchStr', payload);
+    },
 }
 
 export default {

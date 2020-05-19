@@ -67,6 +67,9 @@ let actions = {
     clearPhotos({ commit }) {
       commit('clearPhotos')
     },
+    clearAlbums({ commit }) {
+        commit('clearAlbums')
+    },
     addAlbum({ commit }, val) {
         commit('addAlbum', val)
     },
