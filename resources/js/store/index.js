@@ -62,6 +62,7 @@ export default new Vuex.Store({
         // Изменение даты фото
         isChangeDate: false,
         //--------------------
+
     },
     getters: {
 
