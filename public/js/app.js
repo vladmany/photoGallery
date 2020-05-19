@@ -4537,6 +4537,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$store.dispatch('ListAlbum/getAlbums');
+    this.$store.dispatch('clearPhotos');
+    this.$store.dispatch('clearAlbums');
     this.$store.state.IdAlbum = this.id;
   },
   methods: {
@@ -70092,16 +70094,20 @@ var actions = {
     var commit = _ref3.commit;
     commit('clearPhotos');
   },
-  addAlbum: function addAlbum(_ref4, val) {
+  clearAlbums: function clearAlbums(_ref4) {
     var commit = _ref4.commit;
+    commit('clearAlbums');
+  },
+  addAlbum: function addAlbum(_ref5, val) {
+    var commit = _ref5.commit;
     commit('addAlbum', val);
   },
-  delAlbum: function delAlbum(_ref5, val) {
-    var commit = _ref5.commit;
+  delAlbum: function delAlbum(_ref6, val) {
+    var commit = _ref6.commit;
     commit('delAlbum', val);
   },
-  showToasted: function showToasted(_ref6, payload) {
-    _objectDestructuringEmpty(_ref6);
+  showToasted: function showToasted(_ref7, payload) {
+    _objectDestructuringEmpty(_ref7);
 
     var text = payload.text;
     var action = payload.action || {};
@@ -70112,18 +70118,18 @@ var actions = {
       keepOnHover: true
     });
   },
-  setCorrectPhotoId: function setCorrectPhotoId(_ref7) {
-    var commit = _ref7.commit,
-        getters = _ref7.getters;
+  setCorrectPhotoId: function setCorrectPhotoId(_ref8) {
+    var commit = _ref8.commit,
+        getters = _ref8.getters;
 
     if (getters.selectedPhotos.length === 1) {
       var id = getters.selectedPhotos[0];
       commit('setCorrectPhotoId', id);
     }
   },
-  changeCorrectPhotoId: function changeCorrectPhotoId(_ref8, id) {
-    var commit = _ref8.commit,
-        getters = _ref8.getters;
+  changeCorrectPhotoId: function changeCorrectPhotoId(_ref9, id) {
+    var commit = _ref9.commit,
+        getters = _ref9.getters;
     commit('setCorrectPhotoId', id);
   }
 };
@@ -70157,14 +70163,15 @@ var getters = {
     if (!state.albums) {
       return JSON.parse(localStorage.getItem('albums'));
     }
+    /* let searchString = state.searchString;
+      searchString = searchString.trim().toLowerCase();
+      state.albums = state.albums.filter(function(item){
+         if(item.name.toLowerCase().indexOf(searchString) !== -1){
+             return item;
+         }
+     })*/
 
-    var searchString = state.searchString;
-    searchString = searchString.trim().toLowerCase();
-    state.albums = state.albums.filter(function (item) {
-      if (item.name.toLowerCase().indexOf(searchString) !== -1) {
-        return item;
-      }
-    });
+
     return state.albums;
   },
   groups: function groups(state) {
@@ -70190,6 +70197,9 @@ var getters = {
 
       return false;
     };
+  },
+  getSearchStr: function getSearchStr(state) {
+    return state.searchString;
   }
 };
 var mutations = {
@@ -70197,14 +70207,11 @@ var mutations = {
     state.albums = payload;
     localStorage.setItem('albums', JSON.stringify(payload));
   },
-  searchString: function searchString(state, payload) {
-    return state.searchString = payload;
+  setSearchStr: function setSearchStr(state, payload) {
+    state.searchString = payload;
   },
   selectAllAlbums: function selectAllAlbums(state, payload) {
     return state.selectAllAlbums = payload;
-  },
-  selectSearchString: function selectSearchString(state, payload) {
-    return state.searchString = payload;
   }
 };
 var actions = {
@@ -70217,6 +70224,10 @@ var actions = {
   selectAllAlbums: function selectAllAlbums(_ref2, isselect) {
     var commit = _ref2.commit;
     return commit('selectAllAlbums', isselect);
+  },
+  setSearchStr: function setSearchStr(_ref3, payload) {
+    var commit = _ref3.commit;
+    commit('setSearchStr', payload);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -70445,8 +70456,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! C:\Users\vladm\Downloads\OSPanel\domains\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! D:\OpenServer\OSPanel\domains\photo\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })
