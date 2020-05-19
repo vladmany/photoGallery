@@ -5162,17 +5162,30 @@ function _arrayLikeToArray(arr, len) { if (len == null || len > arr.length) len 
       }
 
       return '';
+    },
+    realIndex: function realIndex() {
+      if (this.currentIndex > this.images.length - 1) {
+        // console.log('c', this.currentIndex)
+        return this.currentIndex % this.images.length;
+      }
+
+      return this.currentIndex;
+    },
+    realPhotoInd: function realPhotoInd() {
+      return this.images[this.realIndex].id;
     }
   },
   watch: {
     currentIndex: function currentIndex() {
-      var ind = Math.abs(this.currentIndex) % this.slideImages.length;
-      this.$store.dispatch('changeCorrectPhotoId', ind);
+      // let ind = Math.abs(this.currentIndex) % this.slideImages.length;
+      this.$store.dispatch('changeCorrectPhotoId', this.realPhotoInd);
 
       if (this.isCorrect) {
         this.save(); // this.$store.dispatch('setDefaultCssAttrs');
-      }
+      } // console.log('r', this.realIndex)
 
+
+      console.log(this.$store.getters.correctPhotoId);
       var id = this.$store.getters.correctPhotoId;
       this.$store.dispatch('setSccAttrsById', id);
     },
@@ -5937,6 +5950,9 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 //
 //
 //
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -5971,7 +5987,12 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
   },
   computed: _objectSpread({}, Object(vuex__WEBPACK_IMPORTED_MODULE_1__["mapGetters"])({
     selectedPhotos: 'selectedPhotos'
-  }))
+  })),
+  methods: {
+    getId: function getId() {
+      this.$store.dispatch('changeCorrectPhotoId', this.photo.id);
+    }
+  }
 });
 
 /***/ }),
@@ -48227,7 +48248,8 @@ var render = function() {
           [
             _c("img", {
               staticClass: "img-fluid  one-photo",
-              attrs: { src: _vm.photo.url, alt: _vm.photo.name }
+              attrs: { src: _vm.photo.url, alt: _vm.photo.name },
+              on: { click: _vm.getId }
             })
           ]
         )
@@ -70084,8 +70106,8 @@ var actions = {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\js\app.js */"./resources/js/app.js");
-module.exports = __webpack_require__(/*! E:\Downloads\openserver\open_server_5_3_7_full\OpenServer\domains\fSprint\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\js\app.js */"./resources/js/app.js");
+module.exports = __webpack_require__(/*! C:\OSPanel\domains\final\photoGallery\resources\sass\app.scss */"./resources/sass/app.scss");
 
 
 /***/ })

@@ -43,15 +43,16 @@ class CorrectService
         $url = public_path($photo->url);
         $image = Image::make($url);
 
+
         $image
-//            ->brightness($brightness)
-//            ->contrast($contrast) # ok
+            ->brightness($brightness)
+            ->contrast($contrast) # ok
 //            ->greyscale($grayscale)
-            ->colorize(
-                $saturate,
-                $saturate,
-                $saturate
-            )
+//            ->colorize(
+//                $saturate,
+//                $saturate,
+//                $saturate
+//            )
         ;
 
         $image->save();
