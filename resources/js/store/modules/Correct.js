@@ -4,7 +4,7 @@ let state = {
     photoCorrects: [],
     cssFilter: '',
     cssAttrsDef: {
-        brightness: 50, // яркость
+        brightness: 100, // яркость
         contrast: 100, // контрастность
         grayscale: 0, // осветление
         saturate: 100, // насыщенность

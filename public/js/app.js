@@ -3497,6 +3497,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios_progress_bar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios-progress-bar */ "./node_modules/axios-progress-bar/dist/index.js");
 /* harmony import */ var axios_progress_bar__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios_progress_bar__WEBPACK_IMPORTED_MODULE_7__);
 /* harmony import */ var _components_Photo_Download_Modals_DownloadProgress__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Photo/Download/Modals/DownloadProgress */ "./resources/js/components/Photo/Download/Modals/DownloadProgress.vue");
+/* harmony import */ var _components_Photo_List_Actions_DeleteImages_Modals_DeleteImages__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ./components/Photo/List/Actions/DeleteImages/Modals/DeleteImages */ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue");
+/* harmony import */ var _components_Photo_List_Actions_hangeDate_Modals_changeDate__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ./components/Photo/List/Actions/СhangeDate/Modals/changeDate */ "./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue");
+//
+//
 //
 //
 //
@@ -3681,8 +3685,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
 /* harmony default export */ __webpack_exports__["default"] = ({
   components: {
+    ChangeDateModal: _components_Photo_List_Actions_hangeDate_Modals_changeDate__WEBPACK_IMPORTED_MODULE_10__["default"],
+    DeleteImagesModal: _components_Photo_List_Actions_DeleteImages_Modals_DeleteImages__WEBPACK_IMPORTED_MODULE_9__["default"],
     DownloadProgress: _components_Photo_Download_Modals_DownloadProgress__WEBPACK_IMPORTED_MODULE_8__["default"],
     SelectionFilesErrorModal: _components_Photo_Upload_Modals_SelectionFilesError__WEBPACK_IMPORTED_MODULE_6__["default"],
     UploadPhotosModal: _components_Photo_Upload_Modals_UploadPhotos__WEBPACK_IMPORTED_MODULE_5__["default"],
@@ -4537,6 +4545,8 @@ __webpack_require__.r(__webpack_exports__);
   },
   created: function created() {
     this.$store.dispatch('ListAlbum/getAlbums');
+    this.$store.dispatch('clearPhotos');
+    this.$store.dispatch('clearAlbums');
     this.$store.state.IdAlbum = this.id;
   },
   methods: {
@@ -5550,7 +5560,11 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
         });
       }
     },
-    deleteImages: function deleteImages() {}
+    deleteImages: function deleteImages() {
+      if (this.$store.getters.selectedPhotos.length > 0) {
+        this.$store.commit('showDeleteImages');
+      }
+    }
   },
   computed: _objectSpread({
     isSelectedPhotos: function isSelectedPhotos() {
@@ -5560,7 +5574,8 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
       return this.$store.getters.selectedPhotos.length === 1 ? 'available' : '';
     }
   }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
-    selectedPhotos: 'selectedPhotos'
+    selectedPhotos: 'selectedPhotos',
+    photos: 'ListPhoto/photos'
   })),
   data: function data() {
     return {
@@ -5641,8 +5656,10 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     addToAlbum: function addToAlbum() {
       this.errors = [];
+      var photos = this.$store.getters.selectedPhotos.length === 0 && this.$store.getters.correctPhotoId !== -1 ? this.$store.getters.correctPhotoId : this.$store.getters.selectedPhotos;
+      console.log(this.$store.state.correctPhotoId);
 
-      if (this.selectedPhotos.length > 0) {
+      if (photos.length > 0) {
         var albumId = $('.select__head span').attr('album-id');
 
         if (albumId >= 0) {
@@ -5704,6 +5721,135 @@ __webpack_require__.r(__webpack_exports__);
         $('.select__head').html('<span>Выберите</span>'); // console.log('Закрывается модалка')
       }
     }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../Global/ModalWindow */ "./resources/js/components/Global/ModalWindow.vue");
+/* harmony import */ var _Global_CButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../Global/CButton */ "./resources/js/components/Global/CButton.vue");
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "DeleteImagesModal",
+  components: {
+    CButton: _Global_CButton__WEBPACK_IMPORTED_MODULE_1__["default"],
+    ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"]
+  },
+  methods: {
+    deleteImages: function deleteImages() {
+      this.$store.dispatch('deletePhotos', this.selectedPhotos);
+    },
+    close: function close() {
+      this.$store.commit('hideDeleteImages');
+    }
+  },
+  computed: {
+    selectedPhotos: function selectedPhotos() {
+      return this.$store.getters.selectedPhotos;
+    }
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../../../../Global/ModalWindow */ "./resources/js/components/Global/ModalWindow.vue");
+/* harmony import */ var _Global_CButton__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../../Global/CButton */ "./resources/js/components/Global/CButton.vue");
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'v-calendar/lib/components/calendar.umd'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'v-calendar/lib/components/date-picker.umd'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+
+
+
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "changeDateModal",
+  components: {
+    ModalWindow: _Global_ModalWindow__WEBPACK_IMPORTED_MODULE_0__["default"],
+    CButton: _Global_CButton__WEBPACK_IMPORTED_MODULE_1__["default"],
+    Calendar: !(function webpackMissingModule() { var e = new Error("Cannot find module 'v-calendar/lib/components/calendar.umd'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()),
+    DatePicker: !(function webpackMissingModule() { var e = new Error("Cannot find module 'v-calendar/lib/components/date-picker.umd'"); e.code = 'MODULE_NOT_FOUND'; throw e; }())
+  },
+  methods: {
+    changeDate: function changeDate() {},
+    close: function close() {}
+  },
+  data: function data() {
+    return {
+      selDate: new Date(),
+      attrs: [{
+        key: 'today',
+        highlight: false,
+        dates: new Date()
+      }]
+    };
   }
 });
 
@@ -6653,6 +6799,102 @@ var height;
 
 /***/ }),
 
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var vuex__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuex */ "./node_modules/vuex/dist/vuex.esm.js");
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+// import ListPhoto from "../../../store/modules/ListPhoto";
+
+/* harmony default export */ __webpack_exports__["default"] = ({
+  name: "Actions",
+  methods: {
+    addToAlbum: function addToAlbum() {
+      console.log(this.correctPhotoId);
+
+      if (this.correctPhotoId !== -1) {
+        this.$store.commit('showAddPhotoToAlbum');
+      }
+    },
+    download: function download() {
+      if (this.$store.getters.selectedPhotos.length > 0) {
+        this.$store.dispatch('downloadPhotos', this.$store.getters.selectedPhotos);
+      }
+    },
+    changeDate: function changeDate() {},
+    toFavorite: function toFavorite() {},
+    turnImage: function turnImage() {},
+    imageCorrection: function imageCorrection() {
+      if (this.$store.getters.selectedPhotos.length === 1) {
+        this.$store.dispatch('setCorrectPhotoId');
+        var id = this.$store.getters.correctPhotoId;
+        this.$router.push({
+          name: 'CorrectIndex',
+          params: {
+            id: id
+          }
+        });
+      }
+    },
+    deleteImages: function deleteImages() {}
+  },
+  computed: _objectSpread({
+    isSelectedPhotos: function isSelectedPhotos() {
+      return this.$store.getters.selectedPhotos.length > 0 ? 'available' : '';
+    },
+    isSelectedPhotos1: function isSelectedPhotos1() {
+      return this.$store.getters.selectedPhotos.length === 1 ? 'available' : '';
+    }
+  }, Object(vuex__WEBPACK_IMPORTED_MODULE_0__["mapGetters"])({
+    selectedPhotos: 'selectedPhotos',
+    correctPhotoId: 'correctPhotoId'
+  })),
+  data: function data() {
+    return {
+      isSelected: false
+    };
+  },
+  created: function created() {
+    console.log(this.correctPhotoId);
+  }
+});
+
+/***/ }),
+
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/OnePhoto.vue?vue&type=script&lang=js&":
 /*!******************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/View/OnePhoto.vue?vue&type=script&lang=js& ***!
@@ -6749,6 +6991,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _OnePhoto__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./OnePhoto */ "./resources/js/components/Photo/View/OnePhoto.vue");
 /* harmony import */ var _SliderPhoto__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./SliderPhoto */ "./resources/js/components/Photo/View/SliderPhoto.vue");
+/* harmony import */ var _View_Actions_ActionsIndex__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../View/Actions/ActionsIndex */ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue");
 //
 //
 //
@@ -6767,11 +7010,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
   name: "ViewIndex",
   components: {
+    Actions: _View_Actions_ActionsIndex__WEBPACK_IMPORTED_MODULE_2__["default"],
     SliderPhoto: _SliderPhoto__WEBPACK_IMPORTED_MODULE_1__["default"],
     OnePhoto: _OnePhoto__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
@@ -11769,7 +12017,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../node_module
 
 
 // module
-exports.push([module.i, "\n.actions[data-v-1961cde0] {\n    display: flex;\n    align-items: center;\n    min-height: 90px;\n}\n.action[data-v-1961cde0] {\n    margin-left: 15px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.action.available object[data-v-1961cde0] {\n    -webkit-filter: brightness(75%);\n            filter: brightness(75%);\n    pointer-events: none;\n}\n.action.available:hover object[data-v-1961cde0] {\n    -webkit-filter: brightness(50%);\n            filter: brightness(50%);\n}\n.action.available[data-v-1961cde0]:hover {\n    cursor: pointer;\n}\n", ""]);
+exports.push([module.i, "\n.actions[data-v-1961cde0] {\n    display: flex;\n    align-items: center;\n    min-height: 90px;\n}\n.action[data-v-1961cde0] {\n    margin-left: 15px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n    display: none;\n}\n.action.available[data-v-1961cde0] {\n    display: block;\n}\n.action.available object[data-v-1961cde0] {\n    -webkit-filter: brightness(75%);\n            filter: brightness(75%);\n    pointer-events: none;\n}\n.action.available:hover object[data-v-1961cde0] {\n    -webkit-filter: brightness(50%);\n            filter: brightness(50%);\n}\n.action.available[data-v-1961cde0]:hover {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -11789,6 +12037,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../../../../node_
 
 // module
 exports.push([module.i, "\n.content[data-v-45c27a0a] {\n    display: flex;\n    flex-direction: column;\n    max-width: 380px;\n    width: 100%;\n    margin-top: 33px;\n    margin-bottom: 33px;\n}\n.content label[data-v-45c27a0a] {\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #808080;\n}\n.select[data-v-45c27a0a] {\n    position: relative;\n    display: block;\n    min-width: 220px;\n    width: 100%;\n    max-width: 400px;\n    margin-bottom: 20px;\n}\n.select span[data-v-45c27a0a] {\n    pointer-events: none;\n    color: #808080;\n}\n.select__head[data-v-45c27a0a] {\n    border: 2px solid #F5F5F5;\n    box-sizing: border-box;\n    border-radius: 4px;\n    height: 50px;\n    cursor: pointer;\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #808080;\n    padding: 10px 15px;\n}\n.select__head[data-v-45c27a0a]::after {\n    width: 10px;\n    height: 6px;\n    background: #FFF url(\"data:image/svg+xml,%3Csvg width='10' height='6' viewBox='0 0 10 6' fill='none' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath fill-rule='evenodd' clip-rule='evenodd' d='M4.50495 5.78413L0.205241 1.25827C-0.0684138 0.970375 -0.0684138 0.503596 0.205241 0.215836C0.478652 -0.0719461 0.922098 -0.071946 1.19549 0.215837L5.00007 4.22052L8.80452 0.215953C9.07805 -0.0718292 9.52145 -0.0718292 9.79486 0.215953C10.0684 0.503736 10.0684 0.970492 9.79486 1.25839L5.49508 5.78425C5.35831 5.92814 5.17925 6 5.00009 6C4.82085 6 4.64165 5.928 4.50495 5.78413Z' fill='%23D8D8D8'/%3E%3C/svg%3E%0A\") no-repeat center / cover;\n    position: absolute;\n    right: 20px;\n    bottom: 50%;\n    transform: translateY(50%);\n    content: '';\n    display: block;\n    transition: .2s ease-in;\n}\n.select__head.open[data-v-45c27a0a]::after {\n    transform: translateY(50%) rotate(180deg);\n}\n.select__list[data-v-45c27a0a] {\n    display: none;\n    position: absolute;\n    top: 100%;\n    left: 0;\n    right: 0;\n    background: #fff;\n    border: 2px solid #F5F5F5;\n    border-top: none;\n    margin-top: 5px;\n    max-height: 205px;\n    overflow-x: hidden;\n    overflow-y: auto;\n    z-index: 100;\n    margin: 0;\n    padding: 0;\n    font-size: 14px;\n    color: #424348;\n    scrollbar-color: dark;\n    scrollbar-width: thin;\n    -ms-scroll-chaining: none;\n        overscroll-behavior: contain;\n}\n.select__list[data-v-45c27a0a]::-webkit-scrollbar {\n    width: 7px;\n    background-color: #F8F9FA;\n    padding: 5px;\n}\n.select__list[data-v-45c27a0a]::-webkit-scrollbar-thumb {\n    border-radius: 10px;\n    background-color: #D9D9D9;\n}\n.select__list .select__item[data-v-45c27a0a] {\n    position: relative;\n    border-top: 1px solid rgba(224, 229, 231, 0.5);\n    padding: 10px 15px;\n    cursor: pointer;\n    list-style-type: none;\n}\n.select__list .select__item[data-v-45c27a0a]:hover {\n    background-color: rgba(224, 229, 231, 0.5);\n}\n.invalid-feedback[data-v-45c27a0a] {\n    position: absolute;\n}\n.is-invalid[data-v-45c27a0a] {\n    border-color: #dc3545!important;\n}\n.select__head span[data-v-45c27a0a] {\n    pointer-events: none;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css&":
+/*!*********************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css& ***!
+  \*********************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\nspan[data-v-de6b91ea] {\n    font-family: 'Roboto', sans-serif;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 14px;\n    line-height: 30px;\n    color: #808080;\n    margin-top: 10px;\n    margin-bottom: 33px;\n}\n", ""]);
 
 // exports
 
@@ -11960,6 +12227,25 @@ exports = module.exports = __webpack_require__(/*! ../../../../../node_modules/c
 
 // module
 exports.push([module.i, "\n.upload-btn[data-v-21056515] {\n    font-family: sans-serif!important;\n    font-style: normal;\n    width: 120px;\n    height: 50px;\n    border: none;\n    background-color: #1875F0;\n    font-weight: 900;\n    font-size: 12px;\n    line-height: 50px;\n    color: #fff;\n    border-radius: 4px;\n    /*margin-right: 10px;*/\n    text-transform: uppercase;\n}\n.upload-methods[data-v-21056515] {\n    z-index: 999;\n    display: none;\n    position: absolute;\n    max-width: 255px;\n    width: 100%;\n    max-height: 120px;\n    height: 100%;\n    margin-top: 7px;\n    background: #FFFFFF;\n    box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);\n}\n.upload-methods .from-computer[data-v-21056515], .upload-methods .from-disk[data-v-21056515] {\n    padding-left: 27px;\n    margin: 0;\n    max-width: 255px;\n    width: 100%;\n    background: #fff;\n    border: none;\n    text-align: left;\n    font-family: sans-serif!important;\n    font-style: normal;\n    font-weight: 500;\n    font-size: 13px;\n    line-height: 60px;\n    color: #999999;\n}\n.from-computer-form[data-v-21056515] {\n    max-height: 62px;\n}\n.upload-methods .from-computer object[data-v-21056515] {\n    vertical-align: middle;\n    pointer-events: none;\n    min-width: 30px;\n    min-height: 30px;\n    padding: 0;\n    margin: 0;\n}\nbutton.from-disk[data-v-21056515] {\n    border-top: 2px solid #F5F5F5!important;\n}\n.inputfile[data-v-21056515] {\n    width: 0.1px;\n    height: 0.1px;\n    opacity: 0;\n    overflow: hidden;\n    position: absolute;\n    z-index: -1;\n}\n.inputfile + label[data-v-21056515] {\n    max-width: 80%;\n    font-size: 1.25rem;\n    /* 20px */\n    font-weight: 700;\n    text-overflow: ellipsis;\n    white-space: nowrap;\n    cursor: pointer;\n    display: inline-block;\n    overflow: hidden;\n    padding: 0.625rem 1.25rem;\n    /* 10px 20px */\n}\n.inputfile:focus + label[data-v-21056515],\n.inputfile.has-focus + label[data-v-21056515] {\n    outline: 1px dotted #000;\n    outline: -webkit-focus-ring-color auto 5px;\n}\n.inputfile + label *[data-v-21056515] {\n    /* pointer-events: none; */\n    /* in case of FastClick lib use */\n}\n.inputfile + label svg[data-v-21056515] {\n    width: 1em;\n    height: 1em;\n    vertical-align: middle;\n    fill: currentColor;\n    margin-top: -0.25em;\n    /* 4px */\n    margin-right: 0.25em;\n    /* 4px */\n}\n/* style 1 */\n.inputfile-1 + label[data-v-21056515] {\n    color: #fff6fe;\n    background-color: #3e51d3;\n}\n", ""]);
+
+// exports
+
+
+/***/ }),
+
+/***/ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+exports = module.exports = __webpack_require__(/*! ../../../../../../node_modules/css-loader/lib/css-base.js */ "./node_modules/css-loader/lib/css-base.js")(false);
+// imports
+
+
+// module
+exports.push([module.i, "\n.actions[data-v-ccc46c8e] {\n    display: flex;\n    align-items: center;\n    min-height: 90px;\n}\n.action[data-v-ccc46c8e] {\n    margin-left: 15px;\n    -webkit-user-select: none;\n       -moz-user-select: none;\n        -ms-user-select: none;\n            user-select: none;\n}\n.action.available object[data-v-ccc46c8e] {\n    -webkit-filter: brightness(75%);\n            filter: brightness(75%);\n    pointer-events: none;\n}\n.action.available:hover object[data-v-ccc46c8e] {\n    -webkit-filter: brightness(50%);\n            filter: brightness(50%);\n}\n.action.available[data-v-ccc46c8e]:hover {\n    cursor: pointer;\n}\n", ""]);
 
 // exports
 
@@ -44585,6 +44871,36 @@ if(false) {}
 
 /***/ }),
 
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css&":
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css& ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../../../node_modules/css-loader??ref--6-1!../../../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
 /***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/AllPhoto.vue?vue&type=style&index=0&lang=css&":
 /*!*****************************************************************************************************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/List/AllPhoto.vue?vue&type=style&index=0&lang=css& ***!
@@ -44848,6 +45164,36 @@ options.transform = transform
 options.insertInto = undefined;
 
 var update = __webpack_require__(/*! ../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
+
+if(content.locals) module.exports = content.locals;
+
+if(false) {}
+
+/***/ }),
+
+/***/ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css&":
+/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/style-loader!./node_modules/css-loader??ref--6-1!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src??ref--6-2!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css& ***!
+  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+
+var content = __webpack_require__(/*! !../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css& */ "./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css&");
+
+if(typeof content === 'string') content = [[module.i, content, '']];
+
+var transform;
+var insertInto;
+
+
+
+var options = {"hmr":true}
+
+options.transform = transform
+options.insertInto = undefined;
+
+var update = __webpack_require__(/*! ../../../../../../node_modules/style-loader/lib/addStyles.js */ "./node_modules/style-loader/lib/addStyles.js")(content, options);
 
 if(content.locals) module.exports = content.locals;
 
@@ -45528,6 +45874,10 @@ var render = function() {
         _c("change-name-album"),
         _vm._v(" "),
         _c("download-progress"),
+        _vm._v(" "),
+        _c("delete-images-modal"),
+        _vm._v(" "),
+        _c("change-date-modal"),
         _vm._v(" "),
         _c(
           "nav",
@@ -47751,48 +48101,55 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "actions" }, [
-    _c("div", { staticClass: "action select_all" }, [
-      _c("input", {
-        directives: [
-          {
-            name: "model",
-            rawName: "v-model",
-            value: _vm.isSelected,
-            expression: "isSelected"
-          }
-        ],
-        staticClass: "custom-checkbox",
-        attrs: { type: "checkbox", id: "all-selector" },
-        domProps: {
-          checked: Array.isArray(_vm.isSelected)
-            ? _vm._i(_vm.isSelected, null) > -1
-            : _vm.isSelected
-        },
-        on: {
-          change: function($event) {
-            var $$a = _vm.isSelected,
-              $$el = $event.target,
-              $$c = $$el.checked ? true : false
-            if (Array.isArray($$a)) {
-              var $$v = null,
-                $$i = _vm._i($$a, $$v)
-              if ($$el.checked) {
-                $$i < 0 && (_vm.isSelected = $$a.concat([$$v]))
+    _c(
+      "div",
+      {
+        staticClass: "action select_all",
+        class: _vm.photos.length > 0 ? "available" : ""
+      },
+      [
+        _c("input", {
+          directives: [
+            {
+              name: "model",
+              rawName: "v-model",
+              value: _vm.isSelected,
+              expression: "isSelected"
+            }
+          ],
+          staticClass: "custom-checkbox",
+          attrs: { type: "checkbox", id: "all-selector" },
+          domProps: {
+            checked: Array.isArray(_vm.isSelected)
+              ? _vm._i(_vm.isSelected, null) > -1
+              : _vm.isSelected
+          },
+          on: {
+            change: function($event) {
+              var $$a = _vm.isSelected,
+                $$el = $event.target,
+                $$c = $$el.checked ? true : false
+              if (Array.isArray($$a)) {
+                var $$v = null,
+                  $$i = _vm._i($$a, $$v)
+                if ($$el.checked) {
+                  $$i < 0 && (_vm.isSelected = $$a.concat([$$v]))
+                } else {
+                  $$i > -1 &&
+                    (_vm.isSelected = $$a
+                      .slice(0, $$i)
+                      .concat($$a.slice($$i + 1)))
+                }
               } else {
-                $$i > -1 &&
-                  (_vm.isSelected = $$a
-                    .slice(0, $$i)
-                    .concat($$a.slice($$i + 1)))
+                _vm.isSelected = $$c
               }
-            } else {
-              _vm.isSelected = $$c
             }
           }
-        }
-      }),
-      _vm._v(" "),
-      _c("label", { attrs: { for: "all-selector" } })
-    ]),
+        }),
+        _vm._v(" "),
+        _c("label", { attrs: { for: "all-selector" } })
+      ]
+    ),
     _vm._v(" "),
     _vm._m(0),
     _vm._v(" "),
@@ -47888,7 +48245,11 @@ var render = function() {
     _vm._v(" "),
     _c(
       "div",
-      { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
+      {
+        staticClass: "action delete_image",
+        class: _vm.isSelectedPhotos,
+        on: { click: _vm.deleteImages }
+      },
       [
         _c("object", {
           attrs: {
@@ -48019,6 +48380,149 @@ var render = function() {
       }
     ])
   })
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true&":
+/*!******************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true& ***!
+  \******************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return this.$store.state.isDeleteImages
+    ? _c("modal-window", {
+        attrs: { title: "Подтвердите действие", "close-action": _vm.close },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "content",
+              fn: function() {
+                return [
+                  _c("span", [
+                    _vm._v(
+                      "Вы уверены что хотите удалить " +
+                        _vm._s(_vm.selectedPhotos.length) +
+                        " фото?"
+                    )
+                  ])
+                ]
+              },
+              proxy: true
+            },
+            {
+              key: "buttons",
+              fn: function() {
+                return [
+                  _c("c-button", {
+                    attrs: { text: "Подтвердить", action: _vm.deleteImages }
+                  }),
+                  _vm._v(" "),
+                  _c("c-button", {
+                    attrs: {
+                      text: "Отмена",
+                      type: "secondary",
+                      action: _vm.close
+                    }
+                  })
+                ]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          false,
+          2514467506
+        )
+      })
+    : _vm._e()
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=template&id=508fb343&scoped=true&":
+/*!**************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=template&id=508fb343&scoped=true& ***!
+  \**************************************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return this.$store.state.isChangeDate
+    ? _c("modal-window", {
+        attrs: { title: "Изменить дату", "close-action": _vm.close },
+        scopedSlots: _vm._u(
+          [
+            {
+              key: "content",
+              fn: function() {
+                return [
+                  _c("span", [_vm._v(_vm._s(_vm.selDate))]),
+                  _vm._v(" "),
+                  _c("date-picker", {
+                    attrs: { "is-inline": "", attributes: _vm.attrs },
+                    model: {
+                      value: _vm.selDate,
+                      callback: function($$v) {
+                        _vm.selDate = $$v
+                      },
+                      expression: "selDate"
+                    }
+                  })
+                ]
+              },
+              proxy: true
+            },
+            {
+              key: "buttons",
+              fn: function() {
+                return [
+                  _c("c-button", {
+                    attrs: { text: "Изменить", action: _vm.changeDate }
+                  }),
+                  _vm._v(" "),
+                  _c("c-button", {
+                    attrs: {
+                      text: "Отмена",
+                      type: "secondary",
+                      action: _vm.close
+                    }
+                  })
+                ]
+              },
+              proxy: true
+            }
+          ],
+          null,
+          false,
+          2890035835
+        )
+      })
+    : _vm._e()
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -49056,6 +49560,120 @@ render._withStripped = true
 
 /***/ }),
 
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true&":
+/*!**********************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true& ***!
+  \**********************************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", { staticClass: "actions" }, [
+    _c(
+      "div",
+      {
+        staticClass: "action add_to_album",
+        class: this.correctPhotoId !== -1 ? "available" : "",
+        on: { click: _vm.addToAlbum }
+      },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_add_to_album.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "action download",
+        class: _vm.isSelectedPhotos,
+        on: { click: _vm.download }
+      },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_download.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action change_date", on: { click: _vm.changeDate } },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_change_date.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action to_favorite", on: { click: _vm.toFavorite } },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_add_to_favorite.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      {
+        staticClass: "action image_correction",
+        class: _vm.isSelectedPhotos1,
+        on: { click: _vm.imageCorrection }
+      },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_photo_correction.svg"
+          }
+        })
+      ]
+    ),
+    _vm._v(" "),
+    _c(
+      "div",
+      { staticClass: "action delete_image", on: { click: _vm.deleteImages } },
+      [
+        _c("object", {
+          attrs: {
+            type: "image/svg+xml",
+            data: "/storage/photos/actions/ic_delete.svg"
+          }
+        })
+      ]
+    )
+  ])
+}
+var staticRenderFns = []
+render._withStripped = true
+
+
+
+/***/ }),
+
 /***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/OnePhoto.vue?vue&type=template&id=0958e044&scoped=true&":
 /*!**********************************************************************************************************************************************************************************************************************************!*\
   !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Photo/View/OnePhoto.vue?vue&type=template&id=0958e044&scoped=true& ***!
@@ -49139,6 +49757,13 @@ var render = function() {
         key: "title",
         fn: function() {
           return [_c("h1", [_vm._v("Просмотр фото")])]
+        },
+        proxy: true
+      },
+      {
+        key: "actions",
+        fn: function() {
+          return [_c("actions")]
         },
         proxy: true
       },
@@ -65508,6 +66133,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var axios_progress_bar__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(axios_progress_bar__WEBPACK_IMPORTED_MODULE_11__);
 /* harmony import */ var axios_progress_bar_dist_nprogress_css__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! axios-progress-bar/dist/nprogress.css */ "./node_modules/axios-progress-bar/dist/nprogress.css");
 /* harmony import */ var axios_progress_bar_dist_nprogress_css__WEBPACK_IMPORTED_MODULE_12___default = /*#__PURE__*/__webpack_require__.n(axios_progress_bar_dist_nprogress_css__WEBPACK_IMPORTED_MODULE_12__);
+!(function webpackMissingModule() { var e = new Error("Cannot find module 'v-calendar'"); e.code = 'MODULE_NOT_FOUND'; throw e; }());
 __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
@@ -65523,6 +66149,12 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
 
 
+ // Use v-calendar & v-date-picker components
+
+vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(!(function webpackMissingModule() { var e = new Error("Cannot find module 'v-calendar'"); e.code = 'MODULE_NOT_FOUND'; throw e; }()), {
+  componentPrefix: 'vc' // Use <vc-calendar /> instead of <v-calendar />
+
+});
 Object(axios_progress_bar__WEBPACK_IMPORTED_MODULE_11__["loadProgressBar"])();
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vue_toasted__WEBPACK_IMPORTED_MODULE_10___default.a);
 vue__WEBPACK_IMPORTED_MODULE_0___default.a.component('Section', _components_Global_Section__WEBPACK_IMPORTED_MODULE_6__["default"]);
@@ -67936,6 +68568,162 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue ***!
+  \*****************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DeleteImages_vue_vue_type_template_id_de6b91ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true& */ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true&");
+/* harmony import */ var _DeleteImages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DeleteImages.vue?vue&type=script&lang=js& */ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _DeleteImages_vue_vue_type_style_index_0_id_de6b91ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css& */ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _DeleteImages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DeleteImages_vue_vue_type_template_id_de6b91ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DeleteImages_vue_vue_type_template_id_de6b91ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "de6b91ea",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=script&lang=js&":
+/*!******************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=script&lang=js& ***!
+  \******************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteImages.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css&":
+/*!**************************************************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css& ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_style_index_0_id_de6b91ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/style-loader!../../../../../../../../node_modules/css-loader??ref--6-1!../../../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=style&index=0&id=de6b91ea&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_style_index_0_id_de6b91ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_style_index_0_id_de6b91ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_style_index_0_id_de6b91ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_style_index_0_id_de6b91ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_style_index_0_id_de6b91ea_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true&":
+/*!************************************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true& ***!
+  \************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_template_id_de6b91ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/DeleteImages/Modals/DeleteImages.vue?vue&type=template&id=de6b91ea&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_template_id_de6b91ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DeleteImages_vue_vue_type_template_id_de6b91ea_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue ***!
+  \*************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _changeDate_vue_vue_type_template_id_508fb343_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./changeDate.vue?vue&type=template&id=508fb343&scoped=true& */ "./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=template&id=508fb343&scoped=true&");
+/* harmony import */ var _changeDate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./changeDate.vue?vue&type=script&lang=js& */ "./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _changeDate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _changeDate_vue_vue_type_template_id_508fb343_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _changeDate_vue_vue_type_template_id_508fb343_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "508fb343",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_changeDate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./changeDate.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_changeDate_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=template&id=508fb343&scoped=true&":
+/*!********************************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=template&id=508fb343&scoped=true& ***!
+  \********************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_changeDate_vue_vue_type_template_id_508fb343_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../../../node_modules/vue-loader/lib??vue-loader-options!./changeDate.vue?vue&type=template&id=508fb343&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/List/Actions/СhangeDate/Modals/changeDate.vue?vue&type=template&id=508fb343&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_changeDate_vue_vue_type_template_id_508fb343_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_changeDate_vue_vue_type_template_id_508fb343_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Photo/List/AllPhoto.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Photo/List/AllPhoto.vue ***!
@@ -68788,6 +69576,93 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue":
+/*!*********************************************************************!*\
+  !*** ./resources/js/components/Photo/View/Actions/ActionsIndex.vue ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _ActionsIndex_vue_vue_type_template_id_ccc46c8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true& */ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true&");
+/* harmony import */ var _ActionsIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ActionsIndex.vue?vue&type=script&lang=js& */ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _ActionsIndex_vue_vue_type_style_index_0_id_ccc46c8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css& */ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_3__["default"])(
+  _ActionsIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ActionsIndex_vue_vue_type_template_id_ccc46c8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ActionsIndex_vue_vue_type_template_id_ccc46c8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  "ccc46c8e",
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Photo/View/Actions/ActionsIndex.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************!*\
+  !*** ./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ActionsIndex.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css&":
+/*!******************************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css& ***!
+  \******************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_style_index_0_id_ccc46c8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/style-loader!../../../../../../node_modules/css-loader??ref--6-1!../../../../../../node_modules/vue-loader/lib/loaders/stylePostLoader.js!../../../../../../node_modules/postcss-loader/src??ref--6-2!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css& */ "./node_modules/style-loader/index.js!./node_modules/css-loader/index.js?!./node_modules/vue-loader/lib/loaders/stylePostLoader.js!./node_modules/postcss-loader/src/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=style&index=0&id=ccc46c8e&scoped=true&lang=css&");
+/* harmony import */ var _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_style_index_0_id_ccc46c8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_style_index_0_id_ccc46c8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__);
+/* harmony reexport (unknown) */ for(var __WEBPACK_IMPORT_KEY__ in _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_style_index_0_id_ccc46c8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__) if(__WEBPACK_IMPORT_KEY__ !== 'default') (function(key) { __webpack_require__.d(__webpack_exports__, key, function() { return _node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_style_index_0_id_ccc46c8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0__[key]; }) }(__WEBPACK_IMPORT_KEY__));
+ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_style_loader_index_js_node_modules_css_loader_index_js_ref_6_1_node_modules_vue_loader_lib_loaders_stylePostLoader_js_node_modules_postcss_loader_src_index_js_ref_6_2_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_style_index_0_id_ccc46c8e_scoped_true_lang_css___WEBPACK_IMPORTED_MODULE_0___default.a); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true&":
+/*!****************************************************************************************************************!*\
+  !*** ./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true& ***!
+  \****************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_template_id_ccc46c8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../../node_modules/vue-loader/lib??vue-loader-options!./ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Photo/View/Actions/ActionsIndex.vue?vue&type=template&id=ccc46c8e&scoped=true&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_template_id_ccc46c8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ActionsIndex_vue_vue_type_template_id_ccc46c8e_scoped_true___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
 /***/ "./resources/js/components/Photo/View/OnePhoto.vue":
 /*!*********************************************************!*\
   !*** ./resources/js/components/Photo/View/OnePhoto.vue ***!
@@ -69217,7 +70092,13 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     //--------
     // Скачивание фото
     isDownloadProgress: false,
-    downloadProgress: 0 //----------------
+    downloadProgress: 0,
+    //----------------
+    // Удоление фото на странице фото
+    isDeleteImages: false,
+    //-------------------------------
+    // Изменение даты фото
+    isChangeDate: false //--------------------
 
   },
   getters: {},
@@ -69299,7 +70180,23 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
     },
     setDownloadProgress: function setDownloadProgress(state, data) {
       state.downloadProgress = data;
-    } //----------------
+    },
+    //----------------
+    // Удоление фото на странице фото
+    showDeleteImages: function showDeleteImages(state) {
+      state.isDeleteImages = true;
+    },
+    hideDeleteImages: function hideDeleteImages(state) {
+      state.isDeleteImages = false;
+    },
+    //-------------------------------
+    // Изменение даты фото
+    showChangeDate: function showChangeDate(state) {
+      state.isChangeDate = true;
+    },
+    hideChangeDate: function hideChangeDate(state) {
+      state.isChangeDate = false;
+    } //--------------------
 
     /*getAlbums() {
         axios.get('api/albums')
@@ -69314,7 +70211,7 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
       var commit = _ref.commit,
           getters = _ref.getters,
           dispatch = _ref.dispatch;
-      var photos = getters.selectedPhotos;
+      var photos = getters.selectedPhotos.length === 0 && getters.correctPhotoId ? getters.correctPhotoId : getters.selectedPhotos;
 
       if (photos && albumId) {
         axios.post('/api/albums-photos', {
@@ -69457,6 +70354,32 @@ vue__WEBPACK_IMPORTED_MODULE_0___default.a.use(vuex__WEBPACK_IMPORTED_MODULE_1__
 
         _this5.dispatch('showToasted', payload);
       })["catch"](function (error) {});
+    },
+    deletePhotos: function deletePhotos(_ref8, photos) {
+      var _this6 = this;
+
+      var commit = _ref8.commit,
+          getters = _ref8.getters,
+          dispatch = _ref8.dispatch;
+      // /photos/delete
+      axios.post('/api/photos/delete', {
+        photos: photos
+      }).then(function (response) {
+        console.log("Успешное удаление");
+
+        _this6.commit('hideDeleteImages');
+
+        _this6.dispatch('ListPhoto/getPhotos');
+
+        _this6.commit('clearPhotos');
+
+        var payload = {
+          text: "\u0423\u0434\u0430\u043B\u0435\u043D\u043E ".concat(photos.length, " \u0444\u043E\u0442\u043E")
+        };
+        dispatch('showToasted', payload);
+      })["catch"](function (error) {
+        console.log('Удаление не удалось');
+      });
     }
   }
 })); // как пример для вставки в toasted
@@ -69524,7 +70447,7 @@ var state = {
   photoCorrects: [],
   cssFilter: '',
   cssAttrsDef: {
-    brightness: 50,
+    brightness: 100,
     // яркость
     contrast: 100,
     // контрастность
@@ -69753,16 +70676,20 @@ var actions = {
     var commit = _ref3.commit;
     commit('clearPhotos');
   },
-  addAlbum: function addAlbum(_ref4, val) {
+  clearAlbums: function clearAlbums(_ref4) {
     var commit = _ref4.commit;
+    commit('clearAlbums');
+  },
+  addAlbum: function addAlbum(_ref5, val) {
+    var commit = _ref5.commit;
     commit('addAlbum', val);
   },
-  delAlbum: function delAlbum(_ref5, val) {
-    var commit = _ref5.commit;
+  delAlbum: function delAlbum(_ref6, val) {
+    var commit = _ref6.commit;
     commit('delAlbum', val);
   },
-  showToasted: function showToasted(_ref6, payload) {
-    _objectDestructuringEmpty(_ref6);
+  showToasted: function showToasted(_ref7, payload) {
+    _objectDestructuringEmpty(_ref7);
 
     var text = payload.text;
     var action = payload.action || {};
@@ -69773,18 +70700,18 @@ var actions = {
       keepOnHover: true
     });
   },
-  setCorrectPhotoId: function setCorrectPhotoId(_ref7) {
-    var commit = _ref7.commit,
-        getters = _ref7.getters;
+  setCorrectPhotoId: function setCorrectPhotoId(_ref8) {
+    var commit = _ref8.commit,
+        getters = _ref8.getters;
 
     if (getters.selectedPhotos.length === 1) {
       var id = getters.selectedPhotos[0];
       commit('setCorrectPhotoId', id);
     }
   },
-  changeCorrectPhotoId: function changeCorrectPhotoId(_ref8, id) {
-    var commit = _ref8.commit,
-        getters = _ref8.getters;
+  changeCorrectPhotoId: function changeCorrectPhotoId(_ref9, id) {
+    var commit = _ref9.commit,
+        getters = _ref9.getters;
     commit('setCorrectPhotoId', id);
   }
 };
@@ -69818,14 +70745,15 @@ var getters = {
     if (!state.albums) {
       return JSON.parse(localStorage.getItem('albums'));
     }
+    /* let searchString = state.searchString;
+       searchString = searchString.trim().toLowerCase();
+       state.albums = state.albums.filter(function(item){
+         if(item.name.toLowerCase().indexOf(searchString) !== -1){
+             return item;
+         }
+     })*/
 
-    var searchString = state.searchString;
-    searchString = searchString.trim().toLowerCase();
-    state.albums = state.albums.filter(function (item) {
-      if (item.name.toLowerCase().indexOf(searchString) !== -1) {
-        return item;
-      }
-    });
+
     return state.albums;
   },
   groups: function groups(state) {
@@ -69851,6 +70779,9 @@ var getters = {
 
       return false;
     };
+  },
+  getSearchStr: function getSearchStr(state) {
+    return state.searchString;
   }
 };
 var mutations = {
@@ -69858,14 +70789,11 @@ var mutations = {
     state.albums = payload;
     localStorage.setItem('albums', JSON.stringify(payload));
   },
-  searchString: function searchString(state, payload) {
-    return state.searchString = payload;
+  setSearchStr: function setSearchStr(state, payload) {
+    state.searchString = payload;
   },
   selectAllAlbums: function selectAllAlbums(state, payload) {
     return state.selectAllAlbums = payload;
-  },
-  selectSearchString: function selectSearchString(state, payload) {
-    return state.searchString = payload;
   }
 };
 var actions = {
@@ -69878,6 +70806,10 @@ var actions = {
   selectAllAlbums: function selectAllAlbums(_ref2, isselect) {
     var commit = _ref2.commit;
     return commit('selectAllAlbums', isselect);
+  },
+  setSearchStr: function setSearchStr(_ref3, payload) {
+    var commit = _ref3.commit;
+    commit('setSearchStr', payload);
   }
 };
 /* harmony default export */ __webpack_exports__["default"] = ({
