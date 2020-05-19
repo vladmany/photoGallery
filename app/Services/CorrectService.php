@@ -36,25 +36,25 @@ class CorrectService
             ->first();
         $brightness = $corrects->brightness-100;
         $contrast = $corrects->contrast-100;
-        $grayscale = $corrects->grayscale;
-        $saturate = $corrects->saturate-100;
+//        $grayscale = $corrects->grayscale;
+//        $saturate = $corrects->saturate-100;
 
         $photo = $corrects->photo;
         $url = public_path($photo->url);
         $image = Image::make($url);
 
+        $brightness = $this->delimiter($brightness, 2);
+        $contrast = $this->delimiter($contrast, 2);
 
         $image
             ->brightness($brightness)
             ->contrast($contrast) # ok
-//            ->greyscale($grayscale)
-//            ->colorize(
-//                $saturate,
-//                $saturate,
-//                $saturate
-//            )
         ;
-
         $image->save();
+    }
+
+    private function delimiter(int $val, float $delim): int
+    {
+        return (int)-$val/$delim;
     }
 }

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <p>{{ title }}({{ value }})</p>
+        <p>{{ title }}({{ value - 100 }})</p>
         <input type="range" min="0" max="200" v-model="value"
                class="w-100">
     </div>
