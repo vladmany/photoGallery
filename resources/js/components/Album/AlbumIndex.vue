@@ -7,9 +7,9 @@
                 <CreateAlbum></CreateAlbum>
         </template>
         <template v-slot:actions>
-            <div class="panel" v-if="albums.length > 0">
-                <action-all-albums></action-all-albums>
-                <search-albums></search-albums>
+            <div class="panel">
+                <action-all-albums v-if="albums.length > 0"></action-all-albums>
+                <search-albums ></search-albums>
             </div>
         </template>
         <template v-slot:content>
