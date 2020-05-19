@@ -50,13 +50,19 @@
         watch: {
             isSelected() {
                 this.$store.dispatch('ListAlbum/selectAllAlbums', this.isSelected);
-            }
+            },
+            selectedAlbums() {
+                if (this.selectedAlbums.length === 0) {
+                    this.isSelected = false
+                }
+            },
+            /*selectedAllAlbums() {
+                if (this.selectedAlbums.length === 2) {
+                    this.isSelected = true
+                }
+            },*/
         },
-        selectedAlbums() {
-            if (this.selectedAlbums.length === 0) {
-                this.isSelected = false
-            }
-        },
+
         computed: {
             isSelectedAlbums: function() {
                 return (this.$store.getters.selectedAlbums.length > 0) ? 'available' : ''
