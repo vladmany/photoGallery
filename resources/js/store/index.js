@@ -290,6 +290,10 @@ export default new Vuex.Store({
                 this.commit('hideDeleteImages')
                 this.dispatch('ListPhoto/getPhotos');
                 this.commit('clearPhotos');
+                let payload = {
+                    text: `Удалено ${photos.length} фото`,
+                };
+                dispatch('showToasted', payload);
             })
             .catch(error => {
                 console.log('Удаление не удалось')
