@@ -61,7 +61,7 @@
                 this.$store.dispatch('saveCorrectedImage', ret)
                 this.$store.dispatch('getCorrects')
                 // this.$store.dispatch('setDefaultCssAttrs');
-            }
+            },
         },
 
         computed: {
@@ -87,16 +87,28 @@
                 }
 
                 return ''
+            },
+            realIndex() {
+                if(this.currentIndex > this.images.length-1) {
+                    // console.log('c', this.currentIndex)
+                    return this.currentIndex % this.images.length
+                }
+                return this.currentIndex
+            },
+            realPhotoInd() {
+                return this.images[this.realIndex].id
             }
         },
         watch: {
             currentIndex() {
-                let ind = Math.abs(this.currentIndex) % this.slideImages.length;
-                this.$store.dispatch('changeCorrectPhotoId', ind);
+                // let ind = Math.abs(this.currentIndex) % this.slideImages.length;
+                this.$store.dispatch('changeCorrectPhotoId', this.realPhotoInd);
                 if(this.isCorrect) {
                     this.save()
                     // this.$store.dispatch('setDefaultCssAttrs');
                 }
+                // console.log('r', this.realIndex)
+                console.log(this.$store.getters.correctPhotoId)
                 let id = this.$store.getters.correctPhotoId;
                 this.$store.dispatch('setSccAttrsById', id)
             },
@@ -106,12 +118,14 @@
         },
         created() {
             let id = this.$store.getters.correctPhotoId;
+            console.log(id);
             if(id === 0) {
-                this.$store.state.correctPhotoId = this.currentIndex
+                this.$store.state.correctPhotoId = id = this.realPhotoInd
                 // console.log(this.$store.state.correctPhotoId);
             }
             if(this.isCorrect) {
                 this.$store.dispatch('setSccAttrsById', id)
+                console.log(this.$store.getters.cssAttrs)
                 this.myStyle = this.cssStyle;
             }
         }

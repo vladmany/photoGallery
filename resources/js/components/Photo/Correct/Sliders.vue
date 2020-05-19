@@ -17,8 +17,8 @@
                 sliderNames: {
                     brightness: 'Яркость',
                     contrast: 'Контрастность',
-                    grayscale: 'Осветление',
-                    saturate: 'Насыщенность',
+                    // grayscale: 'Осветление',
+                    // saturate: 'Насыщенность',
                 }
             }
         }

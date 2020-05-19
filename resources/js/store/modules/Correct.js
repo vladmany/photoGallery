@@ -4,7 +4,7 @@ let state = {
     photoCorrects: [],
     cssFilter: '',
     cssAttrsDef: {
-        brightness: 50, // яркость
+        brightness: 100, // яркость
         contrast: 100, // контрастность
         grayscale: 0, // осветление
         saturate: 100, // насыщенность
@@ -12,7 +12,7 @@ let state = {
         // opacity: 100, // резкость
     },
     cssAttrs: {
-        brightness: 50, // яркость
+        brightness: 100, // яркость
         contrast: 100, // контрастность
         grayscale: 0, // осветление
         saturate: 100, // насыщенность
@@ -42,15 +42,11 @@ let mutations = {
         state.cssAttrs[payload.name] = payload.value
     },
     setSccAttrsById: (state, id) => {
-        id += 1
-        // console.log(state.photoCorrects, id)
         let obj = state.photoCorrects.find(photo => photo.photo_id === id)
-        // console.log(obj)
         if(obj) {
             for(let key of Object.keys(state.cssAttrsDef)) {
                 state.cssAttrs[key] = obj[key]
             }
-            console.log(state.cssAttrs)
         }
     }
 }
@@ -62,7 +58,9 @@ let actions = {
             })
     },
     saveCorrectedImage:({commit}, payload) => {
-        payload['photo_id'] = payload['photo_id']
+        payload['brightness'] = parseInt(payload['brightness'])-100;
+        payload['contrast'] = parseInt(payload['contrast'])-100;
+        // payload['photo_id'] = payload['photo_id']
         axios.post('/api/corrects', { data: payload })
             .then(res => {
                 console.log('save correct success')
@@ -93,7 +91,19 @@ let actions = {
         }
     },
     setSccAttrsById: ({ commit, state }, id) => {
-        commit('setSccAttrsById', id)
+        let obj = state.photoCorrects.find(photo => photo.photo_id === id)
+        if(obj) {
+            for(let key of Object.keys(state.cssAttrsDef)) {
+                state.cssAttrs[key] = obj[key]
+            }
+        } else {
+            for(let key of Object.keys(state.cssAttrsDef)) {
+                commit('setCssAttr', {
+                    name: key,
+                    value: state.cssAttrsDef[key]
+                })
+            }
+        }
     }
 }
 

@@ -16,10 +16,10 @@ class CreateCorrectsTable extends Migration
         Schema::create('corrects', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('photo_id')->comment('ид фото');
-            $table->unsignedInteger('brightness')->comment('яркость')->default(0);
-            $table->unsignedInteger('contrast')->comment('контраст')->default(0);
-            $table->unsignedInteger('grayscale')->comment('осветление')->default(0);
-            $table->unsignedInteger('saturate')->comment('насыщенность')->default(0);
+            $table->Integer('brightness')->comment('яркость')->default(0);
+            $table->Integer('contrast')->comment('контраст')->default(0);
+            $table->Integer('grayscale')->comment('осветление')->default(0);
+            $table->Integer('saturate')->comment('насыщенность')->default(0);
             $table->timestamps();
         });
 

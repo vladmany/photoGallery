@@ -10,19 +10,23 @@ let getters = {
         if(!state.albums) {
             return JSON.parse(localStorage.getItem('albums'))
         }
-        /* let searchString = state.searchString;
+        let searchString = state.searchString;
 
          searchString = searchString.trim().toLowerCase();
-
-         state.albums = state.albums.filter(function(item){
+       /* if(!searchString){
+            return state.albums
+        }*/
+        let arr=state.albums;
+        arr = state.albums.filter(function(item){
              if(item.name.toLowerCase().indexOf(searchString) !== -1){
                  return item;
              }
-         })*/
+         })
+
+        console.log('Конец геттера albums '+arr);
 
 
-
-        return state.albums
+        return arr
     },
     groups: state => state.groups,
     selectAllAlbums: state => state.selectAllAlbums,
