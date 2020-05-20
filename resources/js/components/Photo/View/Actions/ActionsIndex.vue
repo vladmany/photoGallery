@@ -59,6 +59,10 @@
                     this.$store.dispatch('setCorrectPhotoId')
                     let id = this.$store.getters.correctPhotoId;
                     this.$router.push({ name: 'CorrectIndex', params: { id: id }});
+                } else if(this.$store.getters.selectedPhotos.length === 0
+                                || this.$router.name === 'IndexViewPhoto') {
+                    let id = this.$store.getters.correctPhotoId;
+                    this.$router.push({ name: 'CorrectIndex', params: { id: id }});
                 }
             },
             deleteImages() {
@@ -73,7 +77,8 @@
                 return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : '';
             },
             isSelectedPhotos1() {
-                return (this.$store.getters.selectedPhotos.length === 1) ? 'available' : '';
+                return (this.$store.getters.selectedPhotos.length === 1
+                    || this.$route.name === 'IndexViewPhoto') ? 'available' : '';
             },
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
@@ -87,7 +92,8 @@
             }
         },
         created() {
-            console.log(this.correctPhotoId)
+            // console.log(this.correctPhotoId)
+            // console.log(this.$route.name);
         }
     }
 </script>
