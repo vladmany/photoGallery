@@ -178,7 +178,7 @@ export default new Vuex.Store({
     },
     actions: {
         savePhotosToAlbum({ commit, getters, dispatch }, albumId) {
-            let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId)) ? getters.correctPhotoId : getters.selectedPhotos;
+            let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId !== 0)) ? [getters.correctPhotoId] : getters.selectedPhotos;
             if(photos && albumId) {
                 axios.post('/api/albums-photos', {
                     photos: photos,
@@ -193,7 +193,7 @@ export default new Vuex.Store({
                         this.commit('hideAddPhotoToAlbum')
                         if (response.data.length <= 0) {
                             dispatch('showToasted', {
-                                text: 'Все объекты уже существуют в выбранном альбоме, да',
+                                text: 'Все объекты уже существуют в выбранном альбоме',
                             })
                         } else {
                             let payload = {
@@ -295,8 +295,8 @@ export default new Vuex.Store({
 
             })
         },
-        deletePhotos({ commit, getters, dispatch }, photos) {
-            // /photos/delete
+        deletePhotos({ commit, getters, dispatch }) {
+            let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId !== 0)) ? [getters.correctPhotoId] : getters.selectedPhotos;
             axios.post('/api/photos/delete', {
                 photos: photos
             })
@@ -315,7 +315,7 @@ export default new Vuex.Store({
             })
         },
         changeDatePhotos({ commit, getters, dispatch }, date) {
-            let photos = getters.selectedPhotos;
+            let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId !== 0)) ? [getters.correctPhotoId] : getters.selectedPhotos;
             axios.post('/api/photos/change-date', {
                 photos: photos,
                 date: date

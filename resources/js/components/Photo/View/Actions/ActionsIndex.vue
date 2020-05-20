@@ -1,12 +1,12 @@
 <template>
     <div class="actions">
-        <div class="action add_to_album" :class="(this.correctPhotoId !== -1) ? 'available': ''" @click="addToAlbum">
+        <div class="action add_to_album" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
-        <div class="action download" :class="isSelectedPhotos" @click="download">
+        <div class="action download" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="download">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_download.svg"></object>
         </div>
-        <div class="action change_date" @click="changeDate">
+        <div class="action change_date" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="changeDate">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>
         </div>
         <div class="action to_favorite" @click="toFavorite">
@@ -15,7 +15,7 @@
         <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
         </div>
-        <div class="action delete_image" @click="deleteImages">
+        <div class="action delete_image" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="deleteImages">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
         </div>
     </div>
@@ -31,17 +31,22 @@
         methods: {
             addToAlbum() {
                 console.log(this.correctPhotoId)
-                if (this.correctPhotoId !== -1) {
+                if (this.correctPhotoId !== 0) {
+                    this.$store.commit('clearPhotos')
                     this.$store.commit('showAddPhotoToAlbum')
                 }
             },
             download() {
-                if (this.$store.getters.selectedPhotos.length > 0) {
-                    this.$store.dispatch('downloadPhotos', this.$store.getters.selectedPhotos)
+                if (this.correctPhotoId !== 0) {
+                    this.$store.commit('clearPhotos')
+                    this.$store.dispatch('downloadPhotos', [this.correctPhotoId])
                 }
             },
             changeDate() {
-
+                if (this.correctPhotoId !== 0) {
+                    this.$store.commit('clearPhotos')
+                    this.$store.commit('showChangeDate')
+                }
             },
             toFavorite() {
 
@@ -57,7 +62,10 @@
                 }
             },
             deleteImages() {
-
+                if (this.correctPhotoId !== 0) {
+                    this.$store.commit('clearPhotos')
+                    this.$store.commit('showDeleteImages')
+                }
             },
         },
         computed: {

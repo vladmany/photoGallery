@@ -13,6 +13,8 @@
     </div>
 </template>
 <script>
+    import routes from "../../routes";
+
     export default {
         name: "Slider",
         props: {
@@ -96,7 +98,11 @@
                 return this.currentIndex
             },
             realPhotoInd() {
-                return this.images[this.realIndex].id
+                try {
+                    return this.images[this.realIndex].id
+                } catch (e) {
+                    routes.push({ name: 'IndexPhoto'})
+                }
             }
         },
         watch: {

@@ -4,7 +4,7 @@
         title="Подтвердите действие"
         :close-action="close">
         <template v-slot:content>
-            <span>Вы уверены что хотите удалить {{selectedPhotos.length}} фото?</span>
+            <span>Вы уверены что хотите удалить {{((selectedPhotos.length === 0) && (correctPhotoId !== 0)) ? 1 : selectedPhotos.length}} фото?</span>
         </template>
         <template v-slot:buttons>
             <c-button
@@ -28,7 +28,7 @@
         components: {CButton, ModalWindow},
         methods: {
             deleteImages() {
-                this.$store.dispatch('deletePhotos', this.selectedPhotos)
+                this.$store.dispatch('deletePhotos')
             },
             close() {
                 this.$store.commit('hideDeleteImages')
@@ -37,6 +37,9 @@
         computed: {
             selectedPhotos: function() {
                 return this.$store.getters.selectedPhotos
+            },
+            correctPhotoId : function () {
+                return this.$store.getters.correctPhotoId
             }
         }
     }
