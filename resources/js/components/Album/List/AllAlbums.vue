@@ -1,7 +1,6 @@
 <template>
     <div class="wrapper">
-<!--        <input type="text" v-model="$store.dispatch('s')" placeholder="Введите название статьи" />-->
-        <div v-if="albums.length > 0">
+        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
                            class="pt-3 pb-3 album" />

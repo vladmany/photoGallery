@@ -4,6 +4,7 @@ let state = {
     groups: {},
     selectAllAlbums: false,
     searchString: "",
+    countAlbums: 0
 }
 let getters = {
     albums: state => {
@@ -17,6 +18,7 @@ let getters = {
             return state.albums
         }*/
         let arr=state.albums;
+        state.countAlbums = state.albums.length;
         arr = state.albums.filter(function(item){
              if(item.name.toLowerCase().indexOf(searchString) !== -1){
                  return item;
@@ -28,6 +30,7 @@ let getters = {
 
         return arr
     },
+    countAlbums: state => state.countAlbums,
     groups: state => state.groups,
     selectAllAlbums: state => state.selectAllAlbums,
     album: (state, getters) => id =>
@@ -54,6 +57,14 @@ let mutations = {
 
     selectAllAlbums:(state, payload) =>
         state.selectAllAlbums = payload,
+
+    countAlbumsP(state) {
+        state.countAlbums = state.countAlbums + 1
+    },
+    countAlbumsM(state) {
+        state.countAlbums = state.countAlbums - 1
+    },
+
 }
 let actions = {
     getAlbums({ commit }) {
