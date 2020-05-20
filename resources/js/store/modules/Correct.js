@@ -125,7 +125,7 @@ let actions = {
         commit('rotatePhoto', angle);
     },
     setAngle: ({ commit }, angle) => {
-        commit('setPhotoAngle', angle);
+        commit('setAngle', angle);
     },
     turnImage: ({ commit, getters }, id) => {
         let ret = {}
