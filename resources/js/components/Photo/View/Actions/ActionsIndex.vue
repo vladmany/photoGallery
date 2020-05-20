@@ -12,6 +12,9 @@
         <div class="action to_favorite" @click="toFavorite">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>
         </div>
+        <div class="action image_correction" :class="isSelectedPhotos1" @click="turnImage">
+            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
+        </div>
         <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
         </div>
@@ -52,7 +55,15 @@
 
             },
             turnImage() {
-
+                let id = this.$store.getters.correctPhotoId;
+                this.$store.dispatch('turnImage', id);
+                let deltaAngle = this.$store.getters.rotAngleIncr;
+                this.$store.dispatch('rotatePhoto', deltaAngle);
+                this.$store.dispatch('showToasted', {
+                    text: 'Поворот фото сохранен'
+                })
+                // console.log(this.$store.getters.rotAngle)
+                this.$store.dispatch('ListPhoto/getPhotos')
             },
             imageCorrection() {
                 if (this.$store.getters.selectedPhotos.length === 1) {

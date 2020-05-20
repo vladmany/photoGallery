@@ -3,14 +3,14 @@
         <div class="col-12">
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-6">
-<!--                    <div class="back-button">-->
-<!--                        <router-link :to="{ name: 'IndexPhoto' }">-->
-<!--                            <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>-->
-<!--                        </router-link>-->
-<!--                    </div>-->
-                    <router-link :to="{ name: 'IndexPhoto' }">
-                        Назад
-                    </router-link>
+                    <div class="back-button">
+                        <router-link :to="{ name: 'IndexPhoto' }" @click="updatePhoto">
+                            <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
+                        </router-link>
+                    </div>
+<!--                    <router-link :to="{ name: 'IndexPhoto' }">-->
+<!--                        Назад-->
+<!--                    </router-link>-->
                 </div>
                 <div class="col-12 col-lg-6 text-right">
                     <span @click="save" class="save">Сохранить</span>
@@ -47,8 +47,14 @@
                     ret[key] = corrects[key]
                 }
                 this.$store.dispatch('saveCorrectedImage', ret)
+                this.$store.dispatch('showToasted', {
+                    text: 'Фото после коррекции сохранено',
+                })
                 this.$store.dispatch('getCorrects')
-                // this.$store.dispatch('setDefaultCssAttrs');
+                // this.$store.dispatch('ListPhoto/getPhotos')
+            },
+            updatePhoto() {
+                this.$store.dispatch('ListPhoto/getPhotos')
             }
         },
         created() {
@@ -63,6 +69,10 @@
         cursor: pointer;
         font-weight: bold;
         color: #999999;
+    }
+    object {
+        pointer-events: none;
+        filter: brightness(75%);
     }
     .back-button {
         display: flex;
