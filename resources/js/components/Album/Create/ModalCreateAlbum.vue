@@ -62,7 +62,7 @@
                             text: this.album.name + ' Альбом создан',
                         };
                         this.$store.dispatch('showToasted', payload);
-
+                        this.$store.commit('ListAlbum/countAlbumsP');
 
                         this.$store.dispatch('ListAlbum/getAlbums');}
                     )

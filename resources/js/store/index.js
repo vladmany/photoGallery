@@ -241,10 +241,10 @@ export default new Vuex.Store({
         deleteAlbum({ commit, getters }, albumId) {
             axios.post('/api/album-destr', {
                 id:albumId
-                /*dell*/
             })
                 .then(response => {
                         this.commit('hideDelAlbum');
+                        this.commit('ListAlbum/countAlbumsM')
                         this.dispatch('ListAlbum/getAlbums');
                     }
                 );

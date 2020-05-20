@@ -8,15 +8,19 @@
         </template>
         <template v-slot:actions>
             <div class="panel">
-                <action-all-albums v-if="albums.length > 0"></action-all-albums>
-                <search-albums ></search-albums>
+                <action-all-albums v-if="showPanels"></action-all-albums>
+                <search-albums v-if="showPanels" ></search-albums>
             </div>
         </template>
         <template v-slot:content>
             <div class="albums-wrap">
+                <div v-if="showNoSearch">
+                    <p class="empty-search">Объект не найден</p>
+                </div>
                 <div class="main-panel">
                     <AllAlbums :paginate-count="5"></AllAlbums>
                 </div>
+
             </div>
         </template>
     </Section>
@@ -37,7 +41,10 @@
         data: function () {
             return {
                 album: {},
-                isInfoPopupVisible: false
+                isInfoPopupVisible: false,
+                isPanelVisible: false,
+                NoAvalAlbums: false
+
             }
         },
         methods: {
@@ -50,6 +57,19 @@
             },
         },
         computed: {
+            showPanels: function() {
+                if(this.$store.getters['ListAlbum/countAlbums'] > 0)
+                {console.log("count "+this.$store.getters['ListAlbum/countAlbums']);
+                    return true}
+                else return false
+
+            },
+            showNoSearch: function () {
+                if(this.albums.length === 0 && this.$store.getters['ListAlbum/countAlbums'] !==0){
+                    return true
+                } else
+                    return false
+            },
             ...mapGetters({
                 albums: 'ListAlbum/albums',
             }),
@@ -113,5 +133,12 @@
         justify-content: center;
         align-items: center;
         border-right: 2px solid #F5F5F5;
+    }
+    .empty-search{
+        font-size: 20px;
+        text-align: center;
+        color: #666666;
+        font-weight: bold;
+        padding-top: 25px;
     }
 </style>
