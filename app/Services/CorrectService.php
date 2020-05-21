@@ -53,7 +53,7 @@ class CorrectService
 //        dd($brightness, $contrast);
 //        dd($corrects, $diff);
         $photo = $corrects->photo;
-        $url = public_path($photo->url);
+        $url = storage_path($photo->url);
         $image = Image::make($url);
 
         $brightness = $this->delimiter($brightness, 2);
