@@ -69,4 +69,9 @@ class CorrectController extends Controller
     {
         //
     }
+
+    public function saveRotate(Request $request)
+    {
+        $this->correctService->saveOrient($request);
+    }
 }

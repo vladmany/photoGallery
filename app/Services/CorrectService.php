@@ -20,9 +20,11 @@ class CorrectService
         $id = (int)$data['data']['photo_id'];
         $item = Correct::where('photo_id', $id)->get()->first();
         $diff = [];
+//        dd($item->brightness, $data['data']['brightness']);
         if($item) {
-            $diff['brightness'] = $item->brightness - $data['data']['brightness'];
-            $diff['contrast'] = $item->contrast - $data['data']['contrast'];
+            $diff['brightness'] = ($item->brightness-100) - $data['data']['brightness'];
+            $diff['contrast'] = ($item->contrast-100) - $data['data']['contrast'];
+//            dd($item->brightness, $diff);
             $item->brightness = $data['data']['brightness']+100;
             $item->contrast = $data['data']['contrast']+100;
 //            dd($item, $data['data']);
@@ -31,9 +33,9 @@ class CorrectService
         } else {
             $diff['brightness'] = $data['data']['brightness'];
             $diff['contrast'] = $data['data']['contrast'];
-            $data['data']['brightness'] += 100;
-            $data['data']['contrast'] += 100;
-            Correct::create($data['data']);
+            $data['data']['brightness'] = (int)$data['data']['brightness'] + 100;
+            $data['data']['contrast'] = (int)$data['data']['contrast'] + 100;
+            $item = Correct::create($data['data']);
         }
         $this->saveFile($diff, $id);
     }
@@ -49,13 +51,15 @@ class CorrectService
         $contrast = $diff['contrast'];
 
 //        dd($brightness, $contrast);
-
+//        dd($corrects, $diff);
         $photo = $corrects->photo;
         $url = public_path($photo->url);
         $image = Image::make($url);
 
         $brightness = $this->delimiter($brightness, 2);
         $contrast = $this->delimiter($contrast, 2);
+
+//        dd($brightness, $contrast);
 
         $image
             ->brightness($brightness)
@@ -67,5 +71,39 @@ class CorrectService
     private function delimiter(int $val, float $delim): int
     {
         return (int)$val/$delim;
+    }
+
+    public function saveOrient(Request $request)
+    {
+        $data = $request->all();
+        $data = $data['data'];
+        $photoId = $data['photo_id'];
+        $angle = $data['angle'];
+//        $kind = $data['mirror'];
+
+        $photo = Photo::where('id', $photoId)->get()->first();
+        $url = public_path($photo->url);
+
+//        if($kind) {
+//            $this->mirror($url, $kind);
+//        }
+
+        if($angle) {
+            $this->rotate($url, -$angle);
+        }
+    }
+
+    private function rotate(string $url, $angle)
+    {
+        $image = Image::make($url);
+        $image->rotate($angle);
+        $image->save();
+    }
+
+    private function mirror(string $url, $kind)
+    {
+        $image = Image::make($url);
+        $image->flip($kind);
+        $image->save();
     }
 }
