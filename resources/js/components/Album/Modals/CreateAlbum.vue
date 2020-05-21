@@ -42,14 +42,10 @@
         },
         methods: {
             CreateAlbum() {
-
                 this.$store.dispatch('createAlbum', this.album);
-                if(this.$store.state.isCreateAlbum == false){
-                    this.album = [];
-                    console.log('rabotaj');
-                }
             },
             CloseModalCreateAlbum(){
+                this.album = [];
                 this.$store.commit('hideCreateAlbum');
             }
         },
