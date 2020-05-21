@@ -8,18 +8,6 @@
                             :groupId="index"/>
             </div>
             <div class="photo-paginate">
-<!--                <paginate-->
-<!--                    :page-count="pages"-->
-<!--                    :page-range="3"-->
-<!--                    :margin-pages="2"-->
-<!--                    :click-handler="onChangePage"-->
-<!--                    :prev-text="'&#129120;'"-->
-<!--                    :next-text="'&#129122;'"-->
-<!--                    :prev-class="'one-page prev'"-->
-<!--                    :next-class="'one-page next'"-->
-<!--                    :container-class="'paginate'"-->
-<!--                    :page-class="'one-page'">-->
-<!--                </paginate>-->
                 <Paginator :pages="pages" :func="onChangePage"></Paginator>
             </div>
         </div>
@@ -72,7 +60,8 @@
             ...mapGetters({
                 photos: 'ListPhoto/photos',
                 groups: 'ListPhoto/groups',
-                selectedPhotos: 'selectedPhotos'
+                selectedPhotos: 'selectedPhotos',
+                isSelectAll: 'ListPhoto/selectAllPhotos'
             })
         },
         watch: {
@@ -88,6 +77,14 @@
                 let to = (page * perPage);
                 let pageOfItems = this.photos.slice(from, to);
 
+                if(this.isSelectAll) {
+                    for(let key of Object.keys(this.groups)) {
+                        // for(let item of this.groups[key]) {
+                            this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
+                        // }
+                    }
+                }
+
                 this.$store.dispatch('ListPhoto/makeGroups', {
                     items: pageOfItems,
                     reverse: this.reverseGroup,
@@ -102,11 +99,13 @@
                 }
                 this.pages = pages.length;
             },
+
         },
-        created() {
+        async created() {
             this.setPages();
             this.onChangePage(1);
-
+            this.$store.dispatch('ListPhoto/clearPhotos')
+            await this.$store.dispatch('ListPhoto/getPhotos')
         },
     }
 </script>

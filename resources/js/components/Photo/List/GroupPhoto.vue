@@ -43,7 +43,8 @@
         computed: {
             ...mapGetters({
                 selectAll: 'ListPhoto/selectAllPhotos',
-                selectedPhotos: 'selectedPhotos'
+                selectedPhotos: 'selectedPhotos',
+                // groupsSelected: 'ListPhoto/groupsSelected'
             })
         },
         watch: {
@@ -54,7 +55,14 @@
                 if (this.selectedPhotos.length === 0) {
                     this.isSelected = false
                 }
-            }
+            },
+            // groupsSelected() {
+            //     for(let key of Object.keys(this.groupsSelected)) {
+            //         if(key === this.title && this.groupsSelected[key]) {
+            //             this.isSelected = true
+            //         }
+            //     }
+            // }
         }
     }
 </script>

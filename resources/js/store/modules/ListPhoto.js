@@ -1,11 +1,13 @@
 let state = {
     photos: [],
     groups: {},
+    groupsSelected: {},
     selectAllPhotos: false,
 }
 let getters = {
     photos: state => state.photos,
     groups: state => state.groups,
+    groupsSelected: state => state.groupsSelected,
     selectAllPhotos: state => state.selectAllPhotos,
     photo: state => id =>
         state.photos.find(photo => photo.id === id),
@@ -41,12 +43,12 @@ let getters = {
         }
 
         return ind;
-    }
+    },
 }
 let mutations = {
-    getPhotos:(state, payload) => {
-        state.photos = payload
+    getPhotos: (state, payload) => {
         console.log('загрузить фото')
+        state.photos = payload
     },
     makeGroups:(state, payload) => {
         state.groups = payload
@@ -57,6 +59,12 @@ let mutations = {
         state.photos = []
         // console.log(state.photos)
         console.log('очистить фото')
+    },
+    addGroupsSelected:(state, payload) => {
+        state.groupsSelected[payload.key] = true
+    },
+    clearGroupsSelected: (state) => {
+        state.groupsSelected = {}
     }
 }
 let actions = {
@@ -121,6 +129,15 @@ let actions = {
     },
     selectAllPhotos:({ commit }, isselect) =>
         commit('selectAllPhotos', isselect),
+    clearPhotos: ({ commit }) => {
+        commit('clearPhotos')
+    },
+    addGroupsSelected:({ commit }, payload) => {
+        commit('addGroupsSelected', payload)
+    },
+    clearGroupsSelected:({ commit }) => {
+        commit('clearGroupsSelected');
+    }
 }
 
 export default {

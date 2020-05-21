@@ -53,7 +53,10 @@ class CorrectService
 //        dd($brightness, $contrast);
 //        dd($corrects, $diff);
         $photo = $corrects->photo;
-        $url = public_path($photo->url);
+        $url = storage_path("app/public/".$photo->path);
+
+
+
         $image = Image::make($url);
 
         $brightness = $this->delimiter($brightness, 2);
@@ -66,9 +69,6 @@ class CorrectService
             ->contrast($contrast)
         ;
         $image->save($url);
-
-        dd($url);
-        $photo->path = $url;
     }
 
     private function delimiter(int $val, float $delim): int
@@ -85,7 +85,19 @@ class CorrectService
 //        $kind = $data['mirror'];
 
         $photo = Photo::where('id', $photoId)->get()->first();
-        $url = public_path($photo->url);
+        $original_url = $photo->path;
+        $url = storage_path("app/public/".$photo->path);
+
+
+//        $new_url = explode('.', $original_url);
+//        $arr = [$new_url[0].'_new', $new_url[1]];
+//        $new_url = implode('.', $arr);
+//
+//        $url = storage_path("app/public/".$new_url);
+//        dd($new_url);
+
+//        $photo->path = $new_url;
+//        $photo->save();
 
 //        if($kind) {
 //            $this->mirror($url, $kind);
@@ -100,19 +112,11 @@ class CorrectService
     {
         $image = Image::make($url);
         $image->rotate($angle);
-
-
-//        $arr = explode('.', $url);
-//        $arr = [
-//            'name' => $arr[0].'_new',
-//            'ext' => $arr[1],
-//        ];
-//        $url = implode('.', $arr);
-//        dd($url);
-
         $image->save($url);
-        $photo->path = $url;
-        $photo->save();
+
+//        $photo->update([
+//            'path' => $original_url
+//        ]);
     }
 
     private function mirror(string $url, $kind)

@@ -32,14 +32,14 @@
         //     }),
         // },
         methods: {
-            loadData() {
-                this.$store.dispatch('ListPhoto/getPhotos');
-            }
+            // loadData() {
+            //     this.$store.dispatch('ListPhoto/getPhotos');
+            // }
         },
         created() {
             // setTimeout(this.load, 1000);
-            this.loadData()
-            console.log('страница с фото')
+            // this.loadData()
+            console.log('главная страница с фото')
             this.$store.dispatch('clearPhotos');
         },
     }

@@ -63,7 +63,7 @@
                     text: 'Поворот фото сохранен'
                 })
                 // console.log(this.$store.getters.rotAngle)
-                this.$store.dispatch('ListPhoto/getPhotos')
+                // this.$store.dispatch('ListPhoto/getPhotos')
             },
             imageCorrection() {
                 if (this.$store.getters.selectedPhotos.length === 1) {
