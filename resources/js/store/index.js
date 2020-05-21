@@ -63,6 +63,10 @@ export default new Vuex.Store({
         isChangeDate: false,
         //--------------------
 
+        // Удаление фото из альбома
+        isDeleteImagesFromAlbum: false,
+        //-------------------------
+
     },
     getters: {
 
@@ -168,8 +172,16 @@ export default new Vuex.Store({
         hideChangeDate(state) {
             state.isChangeDate = false
         },
-
         //--------------------
+
+        // Удаление фото из альбома
+        showDeleteImagesFromAlbum(state) {
+            state.isDeleteImagesFromAlbum = true
+        },
+        hideDeleteImagesFromAlbum(state) {
+            state.isDeleteImagesFromAlbum = false
+        },
+        //-------------------------
 
         /*getAlbums() {
             axios.get('api/albums')
@@ -287,7 +299,39 @@ export default new Vuex.Store({
                 this.commit('setDownloadProgress', 0);
                 this.dispatch('clearPhotos');
                 let payload = {
-                    text: 'Скачивание фото началось',
+                    text: 'Скачивание началось',
+                };
+                this.dispatch('showToasted', payload);
+            })
+            .catch(error => {
+
+            })
+        },
+        downloadAlbums({ commit, getters }, albums) {
+            this.commit('showDownloadProgress');
+            axios.post('/api/album-photos/download-albums', {
+                albums: albums
+            },
+            {
+                responseType: 'blob',
+                onDownloadProgress: (itemDownload) => {
+                    let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
+                    this.commit('setDownloadProgress', Progress)
+                }
+            })
+            .then(response => {
+                const url = window.URL.createObjectURL(new Blob([response.data]));
+                const link = document.createElement('a');
+                link.href = url;
+                let randName = Math.random().toString(36).substring(2, 15);
+                link.setAttribute('download',randName + '.' + response.data.type.split('/').pop());
+                document.body.appendChild(link);
+                link.click();
+                this.commit('hideDownloadProgress');
+                this.commit('setDownloadProgress', 0);
+                this.dispatch('clearPhotos');
+                let payload = {
+                    text: 'Скачивание началось',
                 };
                 this.dispatch('showToasted', payload);
             })
@@ -304,6 +348,10 @@ export default new Vuex.Store({
                 console.log("Успешное удаление")
                 this.commit('hideDeleteImages')
                 this.dispatch('ListPhoto/getPhotos');
+                if(this.state.isDeleteImagesFromAlbum) {
+                    this.commit('hideDeleteImagesFromAlbum')
+                    this.dispatch('ListAlbum/getAlbums');
+                }
                 this.commit('clearPhotos');
                 let payload = {
                     text: `Удалено ${photos.length} фото`,
@@ -312,6 +360,28 @@ export default new Vuex.Store({
             })
             .catch(error => {
                 console.log('Удаление не удалось')
+            })
+        },
+        deletePhotosFromAlbum({ commit, getters, dispatch }, albumId) {
+            let photos = getters.selectedPhotos;
+            console.log(albumId)
+            axios.post('/api/album-photos/delete', {
+                photos: photos,
+                albumId: albumId
+            })
+            .then(response => {
+                console.log("Успешное удаление фото из альбома")
+                this.commit('hideDeleteImagesFromAlbum')
+                this.dispatch('ListPhoto/getPhotos');
+                this.dispatch('ListAlbum/getAlbums');
+                this.commit('clearPhotos');
+                let payload = {
+                    text: `Удалено ${photos.length} фото из альбома`,
+                };
+                dispatch('showToasted', payload);
+            })
+            .catch(error => {
+                console.log('Удаление из альбома не удалось')
             })
         },
         changeDatePhotos({ commit, getters, dispatch }, date) {

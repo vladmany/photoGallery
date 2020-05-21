@@ -39,7 +39,7 @@
 
 <script>
     import AllPhotoAlbum from "./AllPhotoAlbum";
-    import ActionOneAlbum from "./ActionOneAlbum";
+    import ActionOneAlbum from "./ActionsOneAlbum/ActionsIndex";
     import CButton from "../../Global/CButton";
     import routes from '../../../routes';
 

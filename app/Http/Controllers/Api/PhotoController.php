@@ -169,6 +169,7 @@ class PhotoController extends Controller
                 if ($photoBd)
                 {
                     $photoBd->delete();
+                    Storage::disk('public')->delete($photoBd->path);
                 }
             }
         }

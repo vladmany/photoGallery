@@ -8,6 +8,7 @@ use App\Models\Dashboard\Album;
 use App\Models\Dashboard\AlbumPhoto;
 use App\Models\Dashboard\Photo;
 use Illuminate\Http\Request;
+use ZipArchive;
 
 class AlbumPhotoController extends Controller
 {
@@ -96,5 +97,64 @@ class AlbumPhotoController extends Controller
     public function destroy(AlbumPhoto $albumPhoto)
     {
         //
+    }
+
+    public function deletePhotos(Request $request)
+    {
+        $data = $request->only(['photos', 'albumId']);
+
+        $photos = $data['photos'];
+        $albumId = $data['albumId'];
+
+        if ((count($photos) > 0) and $albumId)
+        {
+            foreach ($photos as $photoId)
+            {
+                $AlbumPhotoBd = AlbumPhoto::all()->where('photo_id', $photoId)->where('album_id', $albumId)->first();
+
+                if ($AlbumPhotoBd)
+                {
+                    $AlbumPhotoBd->delete();
+                }
+            }
+        }
+    }
+
+    public function downloadAlbums(Request $request)
+    {
+        $data = $request->only(['albums']);
+
+        $albums = $data['albums'];
+
+
+        if (count($albums) > 0)
+        {
+            $zip = new ZipArchive;
+
+            $fileName = 'myNewFile.zip';
+
+            if ($zip->open(public_path($fileName), ZipArchive::CREATE) === TRUE)
+            {
+                foreach ($albums as $albumId)
+                {
+                    $albumPhotoBd = AlbumPhoto::all()->where('album_id', $albumId);
+                    $albumName = Album::all()->where('id', $albumId)->first()->name;
+                    foreach ($albumPhotoBd as $albumPhoto)
+                    {
+                        $photo = Photo::all()->where('id', $albumPhoto->photo_id)->first();
+                        if ($photo)
+                        {
+                            $photoPath = storage_path("app/public/{$photo->path}");
+                            $zip->addEmptyDir($albumName);
+                            $relativeNameInZipFile = $albumName .'/'. basename($photoPath); #
+                            $zip->addFile($photoPath, $relativeNameInZipFile);
+                        }
+                    }
+                }
+
+                $zip->close();
+            }
+            return response()->download(public_path($fileName))->deleteFileAfterSend(true);
+        }
     }
 }

@@ -31,7 +31,7 @@
     import Index from "./Index";
     import ModalCreateAlbum from "./Create/ModalCreateAlbum";
     import CreateAlbum from "./Create/CreateAlbum";
-    import ActionAllAlbums from "./List/ActionAllAlbums";
+    import ActionAllAlbums from "./List/ActionsAllAlbum/ActionsIndex";
     import SearchAlbums from "./List/SearchAlbums";
     import {mapGetters} from "vuex";
 
