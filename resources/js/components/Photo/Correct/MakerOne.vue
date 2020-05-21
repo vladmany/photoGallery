@@ -18,7 +18,7 @@
             <Sliders></Sliders>
         </div>
         <div class="col-12">
-            <SliderPhoto :id="currentImageId" :is-correct="true"></SliderPhoto>
+            <OnePhoto :id="currentImageId"></OnePhoto>
         </div>
     </div>
 </template>
@@ -26,10 +26,11 @@
 <script>
     import Sliders from "./Sliders";
     import SliderPhoto from "../View/SliderPhoto";
+    import OnePhoto from "../View/OnePhoto";
 
     export default {
-        name: "Maker",
-        components: { Sliders, SliderPhoto },
+        name: "MakerOne",
+        components: {OnePhoto, Sliders, SliderPhoto },
         computed: {
             currentImageId() {
                 return this.$store.getters['correctPhotoId'];
@@ -51,11 +52,10 @@
                 // this.$store.dispatch('ListPhoto/getPhotos')
             },
             updatePhoto() {
-                // this.$store.dispatch('ListPhoto/getPhotos')
+                this.$store.dispatch('ListPhoto/getPhotos')
             }
         },
         created() {
-            this.$store.dispatch('ListPhoto/getPhotos')
             this.$store.dispatch('getCorrects');
         }
     }

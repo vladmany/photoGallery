@@ -36,3 +36,4 @@ Route::get('/animatoins', 'Api\PhotoController@animationIndex')->name('animation
 Route::post('/album-destr', 'Api\AlbumController@myDestroy')->name('album-destr');
 Route::post('/albums/update', 'Api\AlbumController@myUpdate')->name('albums.my-update');
 Route::post('/albums/change-cover', 'Api\AlbumController@changeCover')->name('albums.change-cover');
+Route::post('/photo/turn', 'Api\CorrectController@saveRotate')->name('photo.turn');

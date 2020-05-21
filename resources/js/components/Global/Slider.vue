@@ -13,8 +13,6 @@
     </div>
 </template>
 <script>
-    import routes from "../../routes";
-
     export default {
         name: "Slider",
         props: {
@@ -34,7 +32,8 @@
         data() {
             return {
                 timer: null,
-                myStyle: ''
+                myStyle: '',
+
             };
         },
 
@@ -62,7 +61,32 @@
                 }
                 this.$store.dispatch('saveCorrectedImage', ret)
                 this.$store.dispatch('getCorrects')
-                // this.$store.dispatch('setDefaultCssAttrs');
+                // this.$store.dispatch('ListPhoto/getPhotos')
+            },
+            makeAction(curInd) {
+                console.log('cur', this.currentIndex)
+                this.$store.dispatch('changeCorrectPhotoId', this.realPhotoInd(curInd));
+
+                if(this.isCorrect) {
+                    this.save()
+                }
+                // let id = this.$store.getters.correctPhotoId;
+                this.$store.dispatch('setSccAttrsById', this.realPhotoInd(curInd))
+            },
+            realPhotoInd(curInd) {
+                let realIndex = curInd
+                if(curInd < 0) {
+                    realIndex = Math.abs(this.images.length-Math.abs(curInd)) % this.images.length
+                }
+                if(curInd > (this.images.length-1)) {
+                    realIndex = curInd % this.images.length
+                }
+
+                console.log(this.images[realIndex], this.images)
+
+                let id = this.images[realIndex].id
+                // console.log(id)
+                return id
             },
         },
 
@@ -90,48 +114,42 @@
 
                 return ''
             },
-            realIndex() {
-                if(this.currentIndex > this.images.length-1) {
-                    // console.log('c', this.currentIndex)
-                    return this.currentIndex % this.images.length
-                }
-                return this.currentIndex
-            },
-            realPhotoInd() {
-                try {
-                    return this.images[this.realIndex].id
-                } catch (e) {
-                    routes.push({ name: 'IndexPhoto'})
-                }
+
+            rotAngle() {
+                return this.$store.getters.rotAngle;
             }
         },
         watch: {
-            currentIndex() {
-                // let ind = Math.abs(this.currentIndex) % this.slideImages.length;
-                this.$store.dispatch('changeCorrectPhotoId', this.realPhotoInd);
-                if(this.isCorrect) {
-                    this.save()
-                    // this.$store.dispatch('setDefaultCssAttrs');
-                }
-                // console.log('r', this.realIndex)
-                console.log(this.$store.getters.correctPhotoId)
-                let id = this.$store.getters.correctPhotoId;
-                this.$store.dispatch('setSccAttrsById', id)
+            currentIndex(newVal, oldVal) {
+                // this.$store.dispatch('ListPhoto/getPhotos')
+                // console.log(newVal, oldVal)
+                this.makeAction(newVal)
+                let angle = this.$store.getters.rotWithId(this.realPhotoInd(newVal)) || 0;
+                this.$store.dispatch('setAngle', angle);
             },
             cssStyle(newVal, oldVal) {
                 this.myStyle = newVal;
+            },
+            rotAngle(newVal, oldVal) {
+                // console.log(newVal)
+                let id = this.realPhotoInd
+                this.$store.dispatch('changeRotStyle', id)
+                let angle = this.$store.getters.rotWithId(id)
+                let cssStyle = `transform: rotate(${angle}deg)`
+                // console.log(cssStyle)
+                this.myStyle = cssStyle
             }
         },
         created() {
             let id = this.$store.getters.correctPhotoId;
-            console.log(id);
+            // console.log(id);
             if(id === 0) {
-                this.$store.state.correctPhotoId = id = this.realPhotoInd
+                this.$store.state.correctPhotoId = id = this.realPhotoInd(this.currentIndex)
                 // console.log(this.$store.state.correctPhotoId);
             }
             if(this.isCorrect) {
                 this.$store.dispatch('setSccAttrsById', id)
-                console.log(this.$store.getters.cssAttrs)
+                // console.log(this.$store.getters.cssAttrs)
                 this.myStyle = this.cssStyle;
             }
         }

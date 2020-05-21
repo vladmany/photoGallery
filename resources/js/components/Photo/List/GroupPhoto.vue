@@ -6,7 +6,7 @@
         </div>
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
-                      :photo="photo"
+                      :id="photo.id"
                       :is-selected="isSelected"
             ></OnePhoto>
         </div>

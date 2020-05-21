@@ -46,12 +46,18 @@ let getters = {
 let mutations = {
     getPhotos:(state, payload) => {
         state.photos = payload
+        console.log('загрузить фото')
     },
     makeGroups:(state, payload) => {
         state.groups = payload
     },
     selectAllPhotos:(state, payload) =>
         state.selectAllPhotos = payload,
+    clearPhotos: (state) => {
+        state.photos = []
+        // console.log(state.photos)
+        console.log('очистить фото')
+    }
 }
 let actions = {
     addPhoto: payload => {
@@ -62,9 +68,11 @@ let actions = {
         })
     },
     getPhotos({ commit }) {
+        // commit('clearPhotos');
         axios.get('/api/all-photos')
             .then(res => {
                 commit('getPhotos', res.data);
+                console.log('все фото')
             })
     },
     makeGroups({ state, commit }, payload) {

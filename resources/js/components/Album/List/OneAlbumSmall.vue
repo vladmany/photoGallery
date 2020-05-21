@@ -1,7 +1,8 @@
 <template>
     <div>
         <div class="align-self-center justify-content-center text-center ml-4 mr-4">
-            <input type="checkbox" class="checkbox-album text-center"
+<!--            <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">-->
+            <input type="checkbox" class="checkbox-album text-center" :id="'album-' + album.id"
                    v-model="isSelected"
             >
         </div>
@@ -84,7 +85,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     .second-info {
         display: flex;
         flex-direction: row;
@@ -99,10 +100,10 @@
         width: 180px;
     }
 
-    .checkbox-album {
-        height: 20px;
-        width: 20px;
-    }
+    /*.checkbox-album {*/
+    /*    height: 20px;*/
+    /*    width: 20px;*/
+    /*}*/
 
     .name-album {
         font-size: 16px;

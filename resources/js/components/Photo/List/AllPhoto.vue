@@ -50,10 +50,10 @@
             UploadPhotosComponent, Paginator
         },
         props: {
-            photos: {
-                required: true,
-                type: Object
-            },
+            // photos: {
+            //     required: true,
+            //     type: Object
+            // },
             paginateCount: {
                 type: Number,
                 default: 20
@@ -70,6 +70,7 @@
         },
         computed: {
             ...mapGetters({
+                photos: 'ListPhoto/photos',
                 groups: 'ListPhoto/groups',
                 selectedPhotos: 'selectedPhotos'
             })
@@ -91,7 +92,7 @@
                     items: pageOfItems,
                     reverse: this.reverseGroup,
                 });
-
+                this.$store.dispatch('clearPhotos')
             },
             setPages () {
                 let pages =[]
@@ -105,7 +106,8 @@
         created() {
             this.setPages();
             this.onChangePage(1);
-        }
+
+        },
     }
 </script>
 
