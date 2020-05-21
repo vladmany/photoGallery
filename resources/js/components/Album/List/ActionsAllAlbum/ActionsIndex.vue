@@ -7,7 +7,7 @@
         <div class="action to_provide_access" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="provideAccess">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
         </div>
-        <div class="action turn_download" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="downloadAlbum">
+        <div class="action turn_download" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="downloadAlbums">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
         <div class="action delete_image" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="deleteAlbum">
@@ -19,9 +19,9 @@
 
 <script>
     import {mapGetters} from "vuex";
-    import DelAlbums from "../Modals/DelAlbums";
-    import ModalWindow from "../../Global/ModalWindow";
-    import CButton from "../../Global/CButton";
+    import DelAlbums from "../../Modals/DelAlbums";
+    import ModalWindow from "../../../Global/ModalWindow";
+    import CButton from "../../../Global/CButton";
 
     export default {
         name: "ActionAllAlbums",
@@ -37,8 +37,9 @@
                 if (this.$store.getters.selectedAlbums.length > 0) {
                 }
             },
-            downloadAlbum() {
+            downloadAlbums() {
                 if (this.$store.getters.selectedAlbums.length > 0) {
+                    this.$store.dispatch('downloadAlbums', this.$store.getters.selectedAlbums)
                 }
             },
             deleteAlbum() {

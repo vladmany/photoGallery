@@ -8,6 +8,9 @@
                             <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
                         </router-link>
                     </div>
+<!--                    <router-link :to="{ name: 'IndexPhoto' }">-->
+<!--                        Назад-->
+<!--                    </router-link>-->
                 </div>
                 <div class="col-12 col-lg-6 text-right">
                     <span @click="save" class="save">Сохранить</span>
@@ -51,11 +54,10 @@
                 // this.$store.dispatch('ListPhoto/getPhotos')
             },
             updatePhoto() {
-                // this.$store.dispatch('ListPhoto/getPhotos')
+                this.$store.dispatch('ListPhoto/getPhotos')
             }
         },
         created() {
-            this.$store.dispatch('ListPhoto/getPhotos')
             this.$store.dispatch('getCorrects');
         }
     }

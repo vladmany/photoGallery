@@ -11,6 +11,7 @@
             <download-progress/>
             <delete-images-modal/>
             <change-date-modal/>
+            <delete-images-from-album-modal/>
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
@@ -187,9 +188,12 @@
     import DownloadProgress from "./components/Photo/Download/Modals/DownloadProgress";
     import DeleteImagesModal from "./components/Photo/List/Actions/DeleteImages/Modals/DeleteImages";
     import ChangeDateModal from "./components/Photo/List/Actions/СhangeDate/Modals/changeDate";
+    import DeleteImagesFromAlbumModal
+        from "./components/Album/List/ActionsOneAlbum/DeleteImagesFromAlbum/Modals/DeleteImagesFromAlbum";
 
     export default {
         components: {
+            DeleteImagesFromAlbumModal,
             ChangeDateModal,
             DeleteImagesModal,
             DownloadProgress,

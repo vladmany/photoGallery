@@ -23,6 +23,8 @@ Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/corrects', 'Api\CorrectController');
 
 Route::apiResource('/albums-photos', 'Api\AlbumPhotoController');
+Route::post('/album-photos/delete','Api\AlbumPhotoController@deletePhotos');
+Route::post('/album-photos/download-albums','Api\AlbumPhotoController@downloadAlbums');
 //        Route::get('/photos', 'PhotoController@photoIndex')->name('photos');
 Route::post('/photos/upload', 'Api\PhotoController@store')->name('photos.upload');
 Route::post('/photos/add-to-album', 'Api\PhotoController@addToAlbum')->name('photos.addToAlbum');

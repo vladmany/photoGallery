@@ -45,14 +45,14 @@
                 let photos = $(e.target);
                 console.log(photos.prop('files').length)
                 console.log(this.$store.state.maxFilesToUpload)
-                if ((photos.prop('files').length > 0) && (photos.prop('files').length < this.$store.state.maxFilesToUpload))
+                if ((photos.prop('files').length > 0) && (photos.prop('files').length <= this.$store.state.maxFilesToUpload))
                 {
                     let files = Array.from(this.$refs.photo.files);
                     this.$root.$emit('uploadPhotos',files)
                     this.$store.commit('showUploadPhotos')
                 }
                 if (photos.prop('files').length > this.$store.state.maxFilesToUpload) {
-                        console.log(this.$store.commit('showSelectError'))
+                        this.$store.commit('showSelectError')
                 }
             },
             // validate(file) {
