@@ -82,7 +82,7 @@ class CorrectService
 //        $kind = $data['mirror'];
 
         $photo = Photo::where('id', $photoId)->get()->first();
-        $url = public_path($photo->url);
+        $url = storage_path($photo->url);
 
 //        if($kind) {
 //            $this->mirror($url, $kind);
