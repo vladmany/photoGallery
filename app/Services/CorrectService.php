@@ -54,6 +54,7 @@ class CorrectService
 //        dd($corrects, $diff);
         $photo = $corrects->photo;
         $url = storage_path("app/public/{$photo->path}");
+//        dd($url);
         $image = Image::make($url);
 
         $brightness = $this->delimiter($brightness, 2);
@@ -65,7 +66,7 @@ class CorrectService
             ->brightness($brightness)
             ->contrast($contrast)
         ;
-        $image->save();
+        $image->save($url);
     }
 
     private function delimiter(int $val, float $delim): int
@@ -97,7 +98,7 @@ class CorrectService
     {
         $image = Image::make($url);
         $image->rotate($angle);
-        $image->save();
+        $image->save($url);
     }
 
     private function mirror(string $url, $kind)
