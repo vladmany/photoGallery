@@ -83,6 +83,7 @@ let actions = {
             })
             .catch(err => {
                 console.log('save correct invalid')
+                console.log(err)
         })
     },
     makeCssFilter:({ commit, state }) => {
