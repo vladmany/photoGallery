@@ -53,7 +53,7 @@ class CorrectService
 //        dd($brightness, $contrast);
 //        dd($corrects, $diff);
         $photo = $corrects->photo;
-        $url = storage_path($photo->url);
+        $url = storage_path("app/public/{$photo->path}");
         $image = Image::make($url);
 
         $brightness = $this->delimiter($brightness, 2);
@@ -82,7 +82,7 @@ class CorrectService
 //        $kind = $data['mirror'];
 
         $photo = Photo::where('id', $photoId)->get()->first();
-        $url = storage_path($photo->url);
+        $url = storage_path("app/public/{$photo->path}");
 
 //        if($kind) {
 //            $this->mirror($url, $kind);
