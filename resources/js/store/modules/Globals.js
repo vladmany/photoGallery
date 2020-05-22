@@ -1,6 +1,7 @@
 import Vue from "vue";
 
 let state = {
+    isPhotoOpen: false,
     selected: {
         photos: [], // добавлять id
         albums: []  // добавлять id

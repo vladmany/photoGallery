@@ -60,7 +60,7 @@
             this.loadData()
             console.log('главная страница с фото')
             this.$store.dispatch('clearPhotos');
-        },
+        }
     }
 </script>
 
