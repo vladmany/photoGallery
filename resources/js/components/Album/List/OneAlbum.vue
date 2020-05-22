@@ -1,5 +1,14 @@
 <template>
     <Section>
+        <template v-slot:breadcrumbs>
+            <breadcrumbs
+                :crumbs="{
+                    'Фотографии': 'none',
+                    'Альбомы': {name: 'AlbumIndex'},
+                    'Просмотр альбома': 'none',
+                }"
+            />
+        </template>
         <template v-slot:title>
             <span>Просмотр альбома</span>
         </template>
@@ -42,10 +51,11 @@
     import ActionOneAlbum from "./ActionsOneAlbum/ActionsIndex";
     import CButton from "../../Global/CButton";
     import routes from '../../../routes';
+    import Breadcrumbs from "../../Global/Breadcrumbs";
 
     export default {
         name: "OneAlbum",
-        components: {CButton, ActionOneAlbum, AllPhotoAlbum},
+        components: {CButton, ActionOneAlbum, AllPhotoAlbum, Breadcrumbs},
         props: {
             id: {
                 required: true,

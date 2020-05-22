@@ -5,7 +5,9 @@
                 <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
                             :elements="elements"
                             :title="title"
-                            :groupId="index"/>
+                            :groupId="index"
+                            :album-id="albumId"
+                />
             </div>
             <div class="photo-paginate">
 <!--                <paginate-->
@@ -61,6 +63,9 @@
             reverseGroup: {
                 type: Boolean,
                 default: false
+            },
+            albumId: {
+                type: Number
             }
         },
         data() {

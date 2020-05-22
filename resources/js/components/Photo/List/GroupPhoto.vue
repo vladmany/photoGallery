@@ -8,6 +8,7 @@
             <OnePhoto v-for="photo in elements" :key="photo.id"
                       :photo="photo"
                       :is-selected="isSelected"
+                      :album-id="albumId"
             ></OnePhoto>
         </div>
     </div>
@@ -32,6 +33,9 @@
             },
             groupId: {
                 required: true,
+                type: Number
+            },
+            albumId: {
                 type: Number
             }
         },

@@ -31,6 +31,11 @@
 
     export default {
         name: "Actions",
+        props: {
+            previousRoute: {
+                type: Object
+            }
+        },
         methods: {
             addToAlbum() {
                 console.log(this.correctPhotoId)
@@ -69,11 +74,11 @@
                 if (this.$store.getters.selectedPhotos.length === 1) {
                     this.$store.dispatch('setCorrectPhotoId')
                     let id = this.$store.getters.correctPhotoId;
-                    this.$router.push({ name: 'CorrectIndex', params: { id: id }});
+                    this.$router.push({ name: 'CorrectIndex', params: { id: id, previousRoute: this.previousRoute }});
                 } else if(this.$store.getters.selectedPhotos.length === 0
                                 || this.$router.name === 'IndexViewPhoto') {
                     let id = this.$store.getters.correctPhotoId;
-                    this.$router.push({ name: 'CorrectIndex', params: { id: id }});
+                    this.$router.push({ name: 'CorrectIndex', params: { id: id, previousRoute: this.previousRoute }});
                 }
             },
             deleteImages() {

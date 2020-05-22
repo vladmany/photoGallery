@@ -4,7 +4,7 @@
             <div class="row justify-content-between">
                 <div class="col-12 col-lg-6">
                     <div class="back-button">
-                        <router-link :to="{ name: 'IndexPhoto' }" @click="updatePhoto">
+                        <router-link :to="previousRoute" @click="updatePhoto">
                             <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
                         </router-link>
                     </div>
@@ -33,6 +33,7 @@
     export default {
         name: "Maker",
         components: { Sliders, SliderPhoto },
+        props: ['previousRoute'],
         computed: {
             currentImageId() {
                 return this.$store.getters['correctPhotoId'];

@@ -3,6 +3,7 @@
         <AllPhoto v-if="photos.length > 0"
                   :photos="photos"
                   :paginate-count="20"
+                  :album-id="albumId"
         ></AllPhoto>
         <div v-else class="noPhotos content">
             <div class="text-center">

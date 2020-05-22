@@ -1,14 +1,35 @@
 <template>
     <Section>
+        <template v-slot:breadcrumbs>
+            <breadcrumbs
+                v-if="previousRoute.name === 'IndexPhoto'"
+                :crumbs="{
+                    'Фотографии': 'none',
+                    'Фото': {name: 'IndexPhoto'},
+                    'Просмотр фото': 'none'
+                }"
+            />
+            <breadcrumbs
+                v-else
+                :crumbs="{
+                    'Фотографии': 'none',
+                    'Альбомы': {name: 'AlbumIndex'},
+                    'Просмотр альбома': previousRoute,
+                    'Просмотр фото': 'none'
+                }"
+            />
+        </template>
         <template v-slot:title>
             <h1>Просмотр фото</h1>
         </template>
         <template v-slot:actions>
-            <actions/>
+            <actions
+                :previousRoute="previousRoute"
+            />
         </template>
         <template v-slot:content>
             <div class="back-button">
-                <router-link :to="{ name: 'IndexPhoto' }" >
+                <router-link :to="previousRoute" >
                     <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
                 </router-link>
             </div>
@@ -23,14 +44,19 @@
     import OnePhoto from "./OnePhoto";
     import SliderPhoto from "./SliderPhoto";
     import Actions from "../View/Actions/ActionsIndex";
+    import Breadcrumbs from "../../Global/Breadcrumbs";
 
     export default {
         name: "ViewIndex",
-        components: {Actions, SliderPhoto, OnePhoto },
+        components: {Breadcrumbs, Actions, SliderPhoto, OnePhoto },
         props: {
             id: {
                 required: true,
                 type: Number
+            },
+            previousRoute: {
+                required: true,
+                type: Object
             }
         },
         methods: {

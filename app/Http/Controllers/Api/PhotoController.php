@@ -152,7 +152,6 @@ class PhotoController extends Controller
                 return response()->download($photoPath);
             }
         }
-
     }
     public function deletePhotos(Request $request)
     {

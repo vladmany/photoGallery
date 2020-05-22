@@ -11,7 +11,7 @@
             id: {
                 required: true,
                 type: Number
-            }
+            },
         },
         computed: {
             photo() {

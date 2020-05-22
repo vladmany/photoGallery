@@ -1,5 +1,13 @@
 <template>
     <Section>
+        <template v-slot:breadcrumbs>
+            <breadcrumbs
+                :crumbs="{
+                    'Фотографии': 'none',
+                    'Альбомы': 'none',
+                }"
+            />
+        </template>
         <template v-slot:title>
             <h1 class="pl-3">Альбомы</h1>
         </template>
@@ -34,10 +42,11 @@
     import ActionAllAlbums from "./List/ActionsAllAlbum/ActionsIndex";
     import SearchAlbums from "./List/SearchAlbums";
     import {mapGetters} from "vuex";
+    import Breadcrumbs   from "../Global/Breadcrumbs";
 
     export default {
         name: "BlockAlbumList",
-        components: {SearchAlbums, ActionAllAlbums, CreateAlbum, AllAlbums, Index, ModalCreateAlbum},
+        components: {SearchAlbums, ActionAllAlbums, CreateAlbum, AllAlbums, Index, ModalCreateAlbum, Breadcrumbs},
         data: function () {
             return {
                 album: {},

@@ -1,5 +1,13 @@
 <template>
     <Section>
+        <template v-slot:breadcrumbs>
+            <breadcrumbs
+                :crumbs="{
+                    'Фотографии': 'none',
+                    'Фото': 'none',
+                }"
+            />
+        </template>
         <template v-slot:title>
             <span>Фото</span>
         </template>
@@ -7,7 +15,8 @@
             <upload-photos-component/>
         </template>
         <template v-slot:actions>
-            <actions/>
+            <actions
+            />
         </template>
         <template v-slot:content>
             <AllPhoto
@@ -23,10 +32,16 @@
     import UploadPhotosComponent from "../Upload/UploadPhotosComponent";
     import { mapGetters } from 'vuex'
     import Actions from "./Actions/ActionsIndex";
+    import Breadcrumbs from "../../Global/Breadcrumbs";
 
     export default {
         name: "PhotoIndex",
-        components: {Actions, UploadPhotosComponent, AllPhoto,},
+        components: {Breadcrumbs, Actions, UploadPhotosComponent, AllPhoto,},
+        props: {
+            albumId: {
+                type: Number
+            }
+        },
         computed: {
             ...mapGetters({
                 photos: 'ListPhoto/photos',

@@ -61,10 +61,11 @@ export default new VueRouter({
             name: 'IndexViewPhoto',
             props: (route) => {
                 const id = Number.parseInt(route.params.id, 10)
+                const previousRoute = route.params.previousRoute
                 if (Number.isNaN(id)) {
                     return 0
                 }
-                return { id }
+                return { id, previousRoute }
             }
         },
         {
@@ -73,10 +74,11 @@ export default new VueRouter({
             name: 'CorrectIndex',
             props: (route) => {
                 const id = Number.parseInt(route.params.id, 10)
+                const previousRoute = route.params.previousRoute
                 if (Number.isNaN(id)) {
                     return 0
                 }
-                return { id }
+                return { id, previousRoute }
             }
         },
         {
