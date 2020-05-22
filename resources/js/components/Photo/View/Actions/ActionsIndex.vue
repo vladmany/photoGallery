@@ -34,6 +34,9 @@
         props: {
             previousRoute: {
                 type: Object
+            },
+            albumId: {
+                type: Number
             }
         },
         methods: {
@@ -74,11 +77,55 @@
                 if (this.$store.getters.selectedPhotos.length === 1) {
                     this.$store.dispatch('setCorrectPhotoId')
                     let id = this.$store.getters.correctPhotoId;
-                    this.$router.push({ name: 'CorrectIndexOne', params: { id: id }});
+                    this.$router.push({
+                        name: 'CorrectIndexOne',
+                        params:
+                            {
+                                id: id,
+                                previousRoute: {
+                                    name: 'IndexViewPhoto',
+                                    params: {
+                                        id: this.correctPhotoId,
+                                        previousRoute: (this.albumId) ? {
+                                            name: 'OneAlbum',
+                                            params: {
+                                                id: this.albumId
+                                            }
+                                            } :
+                                            {
+                                                name:'IndexPhoto'
+                                            }
+                                    }
+                                },
+                                albumId: this.albumId
+                            }
+                    });
                 } else if(this.$store.getters.selectedPhotos.length === 0
                                 || this.$router.name === 'IndexViewPhoto') {
                     let id = this.$store.getters.correctPhotoId;
-                    this.$router.push({ name: 'CorrectIndexOne', params: { id: id }});
+                    this.$router.push({
+                        name: 'CorrectIndexOne',
+                        params:
+                            {
+                                id: id,
+                                previousRoute: {
+                                    name: 'IndexViewPhoto',
+                                    params: {
+                                        id: this.correctPhotoId,
+                                        previousRoute: (this.albumId) ? {
+                                                name: 'OneAlbum',
+                                                params: {
+                                                    id: this.albumId
+                                                }
+                                            } :
+                                            {
+                                                name:'IndexPhoto'
+                                            }
+                                    }
+                                },
+                                albumId: this.albumId
+                            }
+                    });
                 }
             },
             deleteImages() {

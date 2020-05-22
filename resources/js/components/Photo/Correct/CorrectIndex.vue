@@ -19,6 +19,7 @@
                 }"
             />
         </template>
+
         <template v-slot:title>
             <span>Коррекция фото</span>
         </template>

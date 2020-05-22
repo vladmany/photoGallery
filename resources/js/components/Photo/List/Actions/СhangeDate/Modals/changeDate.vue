@@ -65,9 +65,19 @@
                 ],
             }
         },
+        computed: {
+            isChangeDate() {
+                return this.$store.state.isChangeDate
+            }
+        },
         watch: {
             selDate() {
                 $('.calendar-wrapper').removeClass('is-invalid')
+            },
+            isChangeDate() {
+                if (this.$store.state.isChangeDate === false) {
+                    this.selDate = new Date();
+                }
             }
         }
     }

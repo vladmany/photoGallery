@@ -25,6 +25,7 @@
         <template v-slot:actions>
             <actions
                 :previousRoute="previousRoute"
+                :album-id="albumId"
             />
         </template>
         <template v-slot:content>
@@ -57,6 +58,9 @@
             previousRoute: {
                 required: true,
                 type: Object
+            },
+            albumId: {
+                type: Number
             }
         },
         methods: {
