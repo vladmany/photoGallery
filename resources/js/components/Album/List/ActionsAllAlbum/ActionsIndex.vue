@@ -4,9 +4,6 @@
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
             <label for="all-selector"></label>
         </div>
-        <div class="action to_provide_access" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="provideAccess">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
-        </div>
         <div class="action turn_download" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="downloadAlbums">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
@@ -33,10 +30,6 @@
             }
         },
         methods: {
-            provideAccess() {
-                if (this.$store.getters.selectedAlbums.length > 0) {
-                }
-            },
             downloadAlbums() {
                 if (this.$store.getters.selectedAlbums.length > 0) {
                     this.$store.dispatch('downloadAlbums', this.$store.getters.selectedAlbums)

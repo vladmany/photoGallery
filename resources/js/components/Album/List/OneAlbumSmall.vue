@@ -1,38 +1,34 @@
 <template>
-    <div>
-        <div class="align-self-center justify-content-center text-center ml-4 mr-4">
-<!--            <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">-->
-            <input type="checkbox" class="checkbox-album text-center" :id="'album-' + album.id"
-                   v-model="isSelected"
-            >
-        </div>
-        <div class="align-items-center">
-            <router-link
-                :to="{ name: 'OneAlbum', params: { id: album.id } }">
-                <img :src="album.cover" class="img-fluid img-cover">
-            </router-link>
-        </div>
-        <div class="right-info">
-            <div class="name-album pt-2 pl-lg-5">
+    <div class="wrap-list container">
+        <div class="row">
+            <div class="text-center col-12">
+                <router-link
+                    :to="{ name: 'OneAlbum', params: { id: album.id } }">
+                    <img :src="album.cover" class="img-fluid img-cover">
+                </router-link>
+            </div>
+            <div class="name-album col-12 text-center mt-2">
                 <router-link
                     :to="{ name: 'OneAlbum', params: { id: album.id } }">
                     <p class="name-album">{{ album.name}}</p>
                 </router-link>
             </div>
-            <div class="second-info pl-lg-5">
-                <div class="text-center">
-                    <p class="text-center"><img src="/storage/albums/ico_calendar.png">
-                        {{ formatDate(album.created_at) }}
-                    </p>
+            <div class="justify-content-around col-12 d-flex">
+                <div class="pl-2 pt-1">
+                    <!--<input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">-->
+                    <input type="checkbox" class="checkbox-album form-check-input text-center" :id="'album-' + album.id"
+                           v-model="isSelected"
+                    >
                 </div>
-                <div class="text-center pr-lg-5">
-                    <p class="text-center"><img src="/storage/albums/ico-user.png">Пользователи с
-                        доступом<img src="/storage/albums/ico-select.png">
+                <div class="pr-2">
+                    <p class="text-center pt-2"><img src="/storage/albums/ico_calendar.png">
+                        {{ formatDate(album.created_at) }}
                     </p>
                 </div>
             </div>
         </div>
     </div>
+
 </template>
 
 <script>
@@ -56,11 +52,11 @@
                 this.isSelected = this.selectAll;
             },
             isSelected() {
-               if (this.isSelected) {
-                   this.$store.dispatch('addAlbum', this.album.id);
-               } else {
-                   this.$store.dispatch('delAlbum', this.album.id);
-               }
+                if (this.isSelected) {
+                    this.$store.dispatch('addAlbum', this.album.id);
+                } else {
+                    this.$store.dispatch('delAlbum', this.album.id);
+                }
             }
         },
         data() {
@@ -86,63 +82,37 @@
 </script>
 
 <style>
-    .second-info {
+    .wrap-list {
         display: flex;
-        flex-direction: row;
+        flex-direction: column;
         justify-content: space-between;
-        flex-wrap: wrap;
+        width: 100%;
+        color: #666666 !important;
 
+    }
+    .checkbox-album{
+        width: 21px;
+        height: 21px;
+        border: 1px solid #dddddd;
+        background-color: #ffffff;
     }
 
     .img-cover {
         /*width: 180px;*/
         /*height: 100px;*/
-        width: 180px;
+        width: 220px;
     }
-
-    /*.checkbox-album {*/
-    /*    height: 20px;*/
-    /*    width: 20px;*/
-    /*}*/
 
     .name-album {
         font-size: 16px;
         word-wrap: break-word;
-    }
-    @media (max-width: 1332px) {
-        .name-album{
-            text-align: center;
-        }
-    }
-    @media (min-width: 1333px) {
-        .name-album{
-            text-align: left;
-        }
-    }
-    .right-info{
-        max-width: 800px;
-        width: 100%;
-
-    }
-    .paginate {
-        display: flex;
-        margin-bottom: 0;
-        user-select: none;
-        outline: none;
-        margin-top: 53px;
+        font-weight: bold;
     }
 
-    .one-page {
-        width: 60px;
-        height: 60px;
-        color: #666;
-        border-left: 2px solid #DADADA;
-
-    }
 
     a {
-        color: black;
-        text-decoration: #666666;
+        color: #666666;
+        text-decoration: none !important;
     }
 
     .one-page a {
@@ -158,16 +128,4 @@
 
     }
 
-    .prev {
-        /*border-bottom-left-radius: 3px;*/
-        /*border-top-left-radius: 3px;*/
-        color: #D8D8D8;
-        border-left: none;
-    }
-
-    .next {
-        border-bottom-right-radius: 3px;
-        border-top-right-radius: 3px;
-        color: #D8D8D8;
-    }
 </style>

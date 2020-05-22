@@ -26,7 +26,7 @@
                     <p class="empty-search">Объект не найден</p>
                 </div>
                 <div class="main-panel">
-                    <AllAlbums :paginate-count="5"></AllAlbums>
+                    <AllAlbums :paginate-count="12"></AllAlbums>
                 </div>
 
             </div>
