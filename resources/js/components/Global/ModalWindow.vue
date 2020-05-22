@@ -98,6 +98,7 @@
         border: none;
         float: right;
         cursor: pointer;
+        border-radius: 6px;
     }
 
     .close-window-btn object {

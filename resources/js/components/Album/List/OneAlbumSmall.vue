@@ -2,9 +2,11 @@
     <div>
         <div class="align-self-center justify-content-center text-center ml-4 mr-4">
 <!--            <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">-->
-            <input type="checkbox" class="checkbox-album text-center" :id="'album-' + album.id"
-                   v-model="isSelected"
-            >
+<!--            <input type="checkbox" class="checkbox-album text-center" :id="'album-' + album.id"-->
+<!--                   v-model="isSelected"-->
+<!--            >-->
+            <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">
+            <label :for="'album-' + album.id"></label>
         </div>
         <div class="align-items-center">
             <router-link
