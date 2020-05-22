@@ -19,6 +19,22 @@ class CreateAlbumPhotoTable extends Migration
             $table->unsignedBigInteger('photo_id')->comment('Фото')->nullable();
             $table->timestamps();
         });
+
+        Schema::table('album_photo', function(Blueprint $table){
+            $table->foreign('album_id')
+                ->references('id')
+                ->on('albums')
+                ->onDelete('cascade');
+
+        });
+
+        Schema::table('album_photo', function(Blueprint $table){
+            $table->foreign('photo_id')
+                ->references('id')
+                ->on('photos')
+                ->onDelete('cascade');
+
+        });
     }
 
     /**

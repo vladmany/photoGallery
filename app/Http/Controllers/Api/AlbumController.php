@@ -139,4 +139,39 @@ class AlbumController extends Controller
 
         $album->save();
     }
+    /*public function changeCoverForcibly(Request $request)
+    {
+        $data = $request->only(['idAlbum', 'idPhoto']);
+
+        $albumId = $data['idAlbum'];
+        $album = Album::where('id', $albumId)->get()->first();
+
+        $countAlbumPhotos=AlbumPhoto::where('album_id',$album->id)->count();
+        if($countAlbumPhotos == 0){
+            $album->cover = '/storage/albums/placeholderAlbum.png';
+        }
+        else {
+            $photoId = $data['idPhoto'];
+            $photo = Photo::where('id', $photoId->id)->get()->first();
+
+            if($album->cover == $photo->url){
+
+            }
+
+            $photoAlbumId = AlbumPhoto::where('album_id', $album->id)->get()->first();
+
+            $photo = Photo::where('id', $photoAlbumId->photo_id)->get()->first();
+
+            $album->cover = $photo->url;
+        }
+
+
+
+
+        if($album->cover == )
+
+
+
+        $album->save();
+    }*/
 }

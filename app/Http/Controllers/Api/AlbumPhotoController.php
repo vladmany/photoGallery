@@ -101,11 +101,11 @@ class AlbumPhotoController extends Controller
 
     public function deletePhotos(Request $request)
     {
+
         $data = $request->only(['photos', 'albumId']);
 
         $photos = $data['photos'];
         $albumId = $data['albumId'];
-
         if ((count($photos) > 0) and $albumId)
         {
             foreach ($photos as $photoId)
@@ -115,6 +115,11 @@ class AlbumPhotoController extends Controller
                 {
                     $AlbumPhotoBd->delete();
                 }
+            }
+            $countAlbumPhotos=AlbumPhoto::where('album_id',$albumId)->count();
+            if($countAlbumPhotos == 0){
+                $album = Album::where('id', $albumId)->get()->first();
+                $album->cover = '/storage/albums/placeholderAlbum.png';
             }
         }
     }
