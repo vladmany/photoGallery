@@ -1,5 +1,15 @@
 <template>
     <Section>
+        <template v-slot:breadcrumbs>
+            <breadcrumbs
+                :crumbs="{
+                    'Фотографии': 'none',
+                    'Альбомы': {name: 'AlbumIndex'},
+                    'Просмотр альбома': { name: 'OneAlbum', params: { id: id } },
+                    'Добавление фото в альбом': 'none',
+                }"
+            />
+        </template>
         <template v-slot:title>
             <span>Фото</span>
         </template>
@@ -42,10 +52,11 @@
     import UploadPhotosComponent from "../../Photo/Upload/UploadPhotosComponent";
     import AllPhoto from "../../Photo/List/AllPhoto";
     import { mapGetters } from 'vuex'
+    import Breadcrumbs from "../../Global/Breadcrumbs";
 
     export default {
         name: "AddPhotoToAlbum",
-        components: {UploadPhotosComponent, AllPhoto,},
+        components: {UploadPhotosComponent, AllPhoto, Breadcrumbs},
         props: {
             id: {
                 required: true,
