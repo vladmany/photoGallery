@@ -43,13 +43,13 @@
                             <span>Календарь</span>
                         </router-link>
                     </li>
-                    <li @click="switchPhotoOpen" :class="isPhotoOpen ? 'group-tab-open' : ''" style="cursor: pointer; user-select: none">
+                    <li @click="photosOpen = !photosOpen" :class="photosOpen ? 'group-tab-open' : ''" style="cursor: pointer; user-select: none">
                         <a>
                             <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_camera_alt.svg"></object>
                             <span>Фотографии</span>
                         </a>
                     </li>
-                    <div class="group-tabs" :style="'display: ' + (isPhotoOpen ? 'block' : 'none')">
+                    <div class="group-tabs" :style="'display: ' + (photosOpen ? 'block' : 'none')">
                         <li>
                             <router-link to="/photos" >
                                 <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
@@ -206,7 +206,7 @@
                 avatar : 'test_avatar.png',
                 userMenuOpen : false,
                 sidebarOpen : true,
-                photosOpen : false
+                photosOpen : true
             }
         },
         methods: {
