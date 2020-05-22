@@ -1,7 +1,7 @@
 <template>
     <modal-window
         v-if="this.$store.state.isDeleteImages"
-        title="Подтвердите действие"
+        title="Удалить фото?"
         :close-action="close">
         <template v-slot:content>
             <span>Вы уверены что хотите удалить {{((selectedPhotos.length === 0) && (correctPhotoId !== 0)) ? 1 : selectedPhotos.length}} фото?</span>

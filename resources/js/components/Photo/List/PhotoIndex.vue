@@ -40,21 +40,24 @@
         props: {
             albumId: {
                 type: Number
+            },
+            photos: {
+                type: Object
             }
         },
-        // computed: {
-        //     ...mapGetters({
-        //         photos: 'ListPhoto/photos',
-        //     }),
-        // },
+        computed: {
+            ...mapGetters({
+                photos: 'ListPhoto/photos',
+            }),
+        },
         methods: {
-            // loadData() {
-            //     this.$store.dispatch('ListPhoto/getPhotos');
-            // }
+            loadData() {
+                this.$store.dispatch('ListPhoto/getPhotos');
+            }
         },
         created() {
             // setTimeout(this.load, 1000);
-            // this.loadData()
+            this.loadData()
             console.log('главная страница с фото')
             this.$store.dispatch('clearPhotos');
         },
