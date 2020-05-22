@@ -262,7 +262,7 @@
         left: 0;
         height: 100vh;
         max-height: 100%;
-        z-index: 999;
+        z-index: 0;
         background: #fff;
         color: #fff;
         transition: all 0.3s;

@@ -9,9 +9,9 @@
         <div class="action change_date" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="changeDate">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>
         </div>
-        <div class="action to_favorite" @click="toFavorite">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>
-        </div>
+<!--        <div class="action to_favorite" @click="toFavorite">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>-->
+<!--        </div>-->
         <div class="action image_correction" :class="isSelectedPhotos1" @click="turnImage">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
         </div>

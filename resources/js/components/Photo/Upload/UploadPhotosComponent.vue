@@ -1,26 +1,9 @@
 <template>
     <div>
-        <button class="upload-btn" @click="switchShowMethods">Загрузить</button>
-        <div class="upload-methods flex-column">
-            <form action="/photoGallery/public/index.php/api/photos/upload" method="post" class="from-computer-form">
-                <input type="file" name="photo" id="photo" ref="photo" class="inputfile inputfile-1" @change="sendFiles" @click="clearFiles" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
-                <label for="photo" class="from-computer" @click="switchShowMethods">
-                    <object type="image/svg+xml" data="/storage/photos/ic_computer.svg"></object>
-                    <span>С компьютера</span>
-                </label>
-            </form>
-            <button class="from-disk" @click="switchShowMethods">
-                <svg width="30" height="30" viewBox="0 0 30 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <mask id="mask1" mask-type="alpha" maskUnits="userSpaceOnUse" x="3" y="7" width="24" height="16">
-                        <path fill-rule="evenodd" clip-rule="evenodd" d="M22.35 13.04C21.67 9.59 18.64 7 15 7C12.11 7 9.6 8.64 8.35 11.04C5.34 11.36 3 13.91 3 17C3 20.31 5.69 23 9 23H22C24.76 23 27 20.76 27 18C27 15.36 24.95 13.22 22.35 13.04ZM20 16L15 21L10 16H13V12H17V16H20Z" fill="white"/>
-                    </mask>
-                    <g mask="url(#mask1)">
-                        <rect x="2" y="2" width="26" height="26" fill="#D8D8D8"/>
-                    </g>
-                </svg>
-                <span>С диска</span>
-            </button>
-        </div>
+
+            <button class="upload-btn" @click="switchShowMethods"><label for="photo" class="from-computer">Загрузить</label></button>
+
+        <input type="file" name="photo" id="photo" ref="photo" class="inputfile inputfile-1" @change="sendFiles" @click="clearFiles" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
     </div>
 </template>
 
@@ -125,6 +108,13 @@
         /*margin-right: 10px;*/
         text-transform: uppercase;
     }
+
+    .upload-btn label {
+        width: 100%;
+        height: 100%;
+        cursor: pointer
+    }
+
     .upload-methods {
         z-index: 999;
         display: none;
