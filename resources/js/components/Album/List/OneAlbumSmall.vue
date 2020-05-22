@@ -144,7 +144,9 @@
 
     a {
         color: black;
-        text-decoration: #666666;
+        text-decoration: none !important;
+        color: #666666!important;
+        font-weight: 600;
     }
 
     .one-page a {
