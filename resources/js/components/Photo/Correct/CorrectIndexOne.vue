@@ -10,7 +10,7 @@
                 }"
             />
             <breadcrumbs
-                v-else-if="previousRoute.name === 'IndexViewPhoto'"
+                v-else-if="(previousRoute.name === 'IndexViewPhoto') && albumId"
                 :crumbs="{
                     'Фотографии': 'none',
                     'Альбомы': {name: 'AlbumIndex'},
@@ -23,8 +23,8 @@
                 v-else
                 :crumbs="{
                     'Фотографии': 'none',
-                    'Альбомы': {name: 'AlbumIndex'},
-                    'Просмотр альбома': previousRoute,
+                    'Фото': {name: 'IndexPhoto'},
+                    'Просмотр фото': previousRoute,
                     'Коррекция фото': 'none'
                 }"
             />
