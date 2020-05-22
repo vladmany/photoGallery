@@ -48,11 +48,9 @@
 
             next: function() {
                 this.currentIndex += 1;
-                this.makeAction()
             },
             prev: function() {
                 this.currentIndex -= 1;
-                this.makeAction()
             },
             save() {
                 let ret = {};
@@ -65,14 +63,30 @@
                 this.$store.dispatch('getCorrects')
                 // this.$store.dispatch('ListPhoto/getPhotos')
             },
-            makeAction() {
-                console.log(this.currentIndex)
-                this.$store.dispatch('changeCorrectPhotoId', this.realPhotoInd);
+            makeAction(curInd) {
+                console.log('cur', this.currentIndex)
+                this.$store.dispatch('changeCorrectPhotoId', this.realPhotoInd(curInd));
+
                 if(this.isCorrect) {
                     this.save()
                 }
                 // let id = this.$store.getters.correctPhotoId;
-                this.$store.dispatch('setSccAttrsById', this.realPhotoInd)
+                this.$store.dispatch('setSccAttrsById', this.realPhotoInd(curInd))
+            },
+            realPhotoInd(curInd) {
+                let realIndex = curInd
+                if(curInd < 0) {
+                    realIndex = Math.abs(this.images.length-Math.abs(curInd)) % this.images.length
+                }
+                if(curInd > (this.images.length-1)) {
+                    realIndex = curInd % this.images.length
+                }
+
+                console.log(this.images[realIndex], this.images)
+
+                let id = this.images[realIndex].id
+                // console.log(id)
+                return id
             },
         },
 
@@ -100,28 +114,17 @@
 
                 return ''
             },
-            realIndex() {
-                if(this.currentIndex < 0) {
-                    return Math.abs(this.images.length-Math.abs(this.currentIndex)) % this.images.length
-                }
-                if(this.currentIndex > (this.images.length-1)) {
-                    return this.currentIndex % this.images.length
-                }
-                return this.currentIndex
-            },
-            realPhotoInd() {
-                let id = this.images[this.realIndex].id
-                // console.log(id)
-                return id
-            },
+
             rotAngle() {
                 return this.$store.getters.rotAngle;
             }
         },
         watch: {
-            currentIndex() {
+            currentIndex(newVal, oldVal) {
                 // this.$store.dispatch('ListPhoto/getPhotos')
-                let angle = this.$store.getters.rotWithId(this.realPhotoInd) || 0;
+                // console.log(newVal, oldVal)
+                this.makeAction(newVal)
+                let angle = this.$store.getters.rotWithId(this.realPhotoInd(newVal)) || 0;
                 this.$store.dispatch('setAngle', angle);
             },
             cssStyle(newVal, oldVal) {
@@ -141,12 +144,12 @@
             let id = this.$store.getters.correctPhotoId;
             // console.log(id);
             if(id === 0) {
-                this.$store.state.correctPhotoId = id = this.realPhotoInd
+                this.$store.state.correctPhotoId = id = this.realPhotoInd(this.currentIndex)
                 // console.log(this.$store.state.correctPhotoId);
             }
             if(this.isCorrect) {
                 this.$store.dispatch('setSccAttrsById', id)
-                console.log(this.$store.getters.cssAttrs)
+                // console.log(this.$store.getters.cssAttrs)
                 this.myStyle = this.cssStyle;
             }
         }

@@ -68,17 +68,17 @@
                     text: 'Поворот фото сохранен'
                 })
                 // console.log(this.$store.getters.rotAngle)
-                this.$store.dispatch('ListPhoto/getPhotos')
+                // this.$store.dispatch('ListPhoto/getPhotos')
             },
             imageCorrection() {
                 if (this.$store.getters.selectedPhotos.length === 1) {
                     this.$store.dispatch('setCorrectPhotoId')
                     let id = this.$store.getters.correctPhotoId;
-                    this.$router.push({ name: 'CorrectIndex', params: { id: id, previousRoute: this.previousRoute }});
+                    this.$router.push({ name: 'CorrectIndexOne', params: { id: id }});
                 } else if(this.$store.getters.selectedPhotos.length === 0
                                 || this.$router.name === 'IndexViewPhoto') {
                     let id = this.$store.getters.correctPhotoId;
-                    this.$router.push({ name: 'CorrectIndex', params: { id: id, previousRoute: this.previousRoute }});
+                    this.$router.push({ name: 'CorrectIndexOne', params: { id: id }});
                 }
             },
             deleteImages() {

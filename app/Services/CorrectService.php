@@ -17,25 +17,25 @@ class CorrectService
     public function store(Request $request)
     {
         $data = $request->all();
-        $id = (int)$data['data']['photo_id'];
+        $data = $data['data'];
+        $id = (int)$data['photo_id'];
         $item = Correct::where('photo_id', $id)->get()->first();
+
         $diff = [];
 //        dd($item->brightness, $data['data']['brightness']);
         if($item) {
-            $diff['brightness'] = ($item->brightness-100) - $data['data']['brightness'];
-            $diff['contrast'] = ($item->contrast-100) - $data['data']['contrast'];
+            $diff['brightness'] = $item->brightness - $data['brightness'];
+            $diff['contrast'] = $item->contrast  - $data['contrast'];
 //            dd($item->brightness, $diff);
-            $item->brightness = $data['data']['brightness']+100;
-            $item->contrast = $data['data']['contrast']+100;
-//            dd($item, $data['data']);
+            $item->brightness = $data['brightness'];
+            $item->contrast = $data['contrast'];
             $item->save();
-//            $item->update($data['data']);
         } else {
-            $diff['brightness'] = $data['data']['brightness'];
-            $diff['contrast'] = $data['data']['contrast'];
-            $data['data']['brightness'] = (int)$data['data']['brightness'] + 100;
-            $data['data']['contrast'] = (int)$data['data']['contrast'] + 100;
-            $item = Correct::create($data['data']);
+            $diff['brightness'] = $data['brightness'];
+            $diff['contrast'] = $data['contrast'];
+//            $data['brightness'] = (int)$data['brightness'];
+//            $data['contrast'] = (int)$data['contrast'];
+            $item = Correct::create($data);
         }
         $this->saveFile($diff, $id);
     }
@@ -47,13 +47,16 @@ class CorrectService
             ->get()
             ->first();
 
-        $brightness = $diff['brightness'];
-        $contrast = $diff['contrast'];
+        $brightness = $diff['brightness'] - 100;
+        $contrast = $diff['contrast'] - 100;
 
 //        dd($brightness, $contrast);
 //        dd($corrects, $diff);
         $photo = $corrects->photo;
-        $url = public_path($photo->url);
+        $url = storage_path("app/public/".$photo->path);
+
+
+
         $image = Image::make($url);
 
         $brightness = $this->delimiter($brightness, 2);
@@ -65,7 +68,7 @@ class CorrectService
             ->brightness($brightness)
             ->contrast($contrast)
         ;
-        $image->save();
+        $image->save($url);
     }
 
     private function delimiter(int $val, float $delim): int
@@ -82,22 +85,38 @@ class CorrectService
 //        $kind = $data['mirror'];
 
         $photo = Photo::where('id', $photoId)->get()->first();
-        $url = public_path($photo->url);
+        $original_url = $photo->path;
+        $url = storage_path("app/public/".$photo->path);
+
+
+//        $new_url = explode('.', $original_url);
+//        $arr = [$new_url[0].'_new', $new_url[1]];
+//        $new_url = implode('.', $arr);
+//
+//        $url = storage_path("app/public/".$new_url);
+//        dd($new_url);
+
+//        $photo->path = $new_url;
+//        $photo->save();
 
 //        if($kind) {
 //            $this->mirror($url, $kind);
 //        }
 
         if($angle) {
-            $this->rotate($url, -$angle);
+            $this->rotate($photo, $url, -$angle);
         }
     }
 
-    private function rotate(string $url, $angle)
+    private function rotate(Photo $photo, string $url, $angle)
     {
         $image = Image::make($url);
         $image->rotate($angle);
-        $image->save();
+        $image->save($url);
+
+//        $photo->update([
+//            'path' => $original_url
+//        ]);
     }
 
     private function mirror(string $url, $kind)

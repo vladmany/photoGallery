@@ -1,11 +1,13 @@
 let state = {
     photos: [],
     groups: {},
+    groupsSelected: {},
     selectAllPhotos: false,
 }
 let getters = {
     photos: state => state.photos,
     groups: state => state.groups,
+    groupsSelected: state => state.groupsSelected,
     selectAllPhotos: state => state.selectAllPhotos,
     photo: state => id =>
         state.photos.find(photo => photo.id === id),
@@ -41,10 +43,11 @@ let getters = {
         }
 
         return ind;
-    }
+    },
 }
 let mutations = {
-    getPhotos:(state, payload) => {
+    getPhotos: (state, payload) => {
+        console.log('загрузить фото')
         state.photos = payload
     },
     makeGroups:(state, payload) => {
@@ -52,6 +55,17 @@ let mutations = {
     },
     selectAllPhotos:(state, payload) =>
         state.selectAllPhotos = payload,
+    clearPhotos: (state) => {
+        state.photos = []
+        // console.log(state.photos)
+        console.log('очистить фото')
+    },
+    addGroupsSelected:(state, payload) => {
+        state.groupsSelected[payload.key] = true
+    },
+    clearGroupsSelected: (state) => {
+        state.groupsSelected = {}
+    }
 }
 let actions = {
     addPhoto: payload => {
@@ -62,9 +76,11 @@ let actions = {
         })
     },
     getPhotos({ commit }) {
+        // commit('clearPhotos');
         axios.get('/api/all-photos')
             .then(res => {
                 commit('getPhotos', res.data);
+                console.log('все фото')
             })
     },
     makeGroups({ state, commit }, payload) {
@@ -113,6 +129,15 @@ let actions = {
     },
     selectAllPhotos:({ commit }, isselect) =>
         commit('selectAllPhotos', isselect),
+    clearPhotos: ({ commit }) => {
+        commit('clearPhotos')
+    },
+    addGroupsSelected:({ commit }, payload) => {
+        commit('addGroupsSelected', payload)
+    },
+    clearGroupsSelected:({ commit }) => {
+        commit('clearGroupsSelected');
+    }
 }
 
 export default {

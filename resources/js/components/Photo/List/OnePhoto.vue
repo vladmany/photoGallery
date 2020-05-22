@@ -21,9 +21,9 @@
         name: "OnePhoto",
         components: {Checkbox},
         props: {
-            photo: {
+            id: {
                 required: true,
-                type: Object,
+                type: Number,
             },
             isSelected: {
                 required: true,
@@ -51,13 +51,34 @@
         computed: {
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos'
-            })
+            }),
+            photo: {
+                get() {
+                    return this.$store.getters['ListPhoto/photo'](this.id)
+                },
+                set(val) {
+                    this.$store.commit('updateChecked', val)
+                }
+                // let ret = this.getPhoto()
+                // console.log(ret)
+                // return ret
+            }
         },
         methods: {
             getId() {
                 this.$store.dispatch('changeCorrectPhotoId', this.photo.id)
+            },
+            getPhoto() {
+                return this.$store.getters['ListPhoto/photo'](this.id)
             }
-        }
+        },
+        // beforeCreate() {
+            // this.$store.dispatch('ListPhoto/getPhotos');
+        // }
+        created() {
+            console.log('одно фото')
+            // this.$store.dispatch('ListPhoto/getPhotos');
+        },
     }
 </script>
 

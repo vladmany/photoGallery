@@ -30,7 +30,6 @@ Vue.component('jw-pagination', JwPagination);
 Vue.component('paginate', Paginate)
 Vue.component(VueCarousel.name, VueCarousel);
 
-
 Vue.use(VueRouter)
 
 Vue.config.devtools = false

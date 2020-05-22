@@ -74,8 +74,8 @@ let actions = {
             })
     },
     saveCorrectedImage:({commit}, payload) => {
-        payload['brightness'] = parseInt(payload['brightness'])-100;
-        payload['contrast'] = parseInt(payload['contrast'])-100;
+        // payload['brightness'] = parseInt(payload['brightness']);
+        // payload['contrast'] = parseInt(payload['contrast']);
         // payload['photo_id'] = payload['photo_id']
         axios.post('/api/corrects', { data: payload })
             .then(res => {
@@ -83,6 +83,7 @@ let actions = {
             })
             .catch(err => {
                 console.log('save correct invalid')
+                console.log(err.response)
         })
     },
     makeCssFilter:({ commit, state }) => {

@@ -40,6 +40,7 @@ export default new Vuex.Store({
         //------------------------------------------
 
         // Изменение имени альбома(на стрнице детального просмотра альбома)
+        isCreateAlbum: false,
         isChangeNameAlbum: false,
         isDelAlbum: false,
         IdAlbum: 16,
@@ -99,6 +100,12 @@ export default new Vuex.Store({
         },
         hideSelectError(state) {
             state.isSelectFilesError = false
+        },
+        showCreateAlbum(state) {
+            state.isCreateAlbum = true
+        },
+        hideCreateAlbum(state) {
+            state.isCreateAlbum = false
         },
         //--------------
 
@@ -274,6 +281,25 @@ export default new Vuex.Store({
                     this.dispatch('ListAlbum/getAlbums');
                     }
                 );
+        },
+        createAlbum({ commit, getters }, newAlbum) {
+            axios.post('api/albums/create', newAlbum)
+                .then(response => {
+                     let payload = {
+                        text:'Альбом ' + newAlbum.name + ' успешно создан',
+                    };
+                    this.dispatch('showToasted', payload);
+                    this.commit('ListAlbum/countAlbumsP');
+                    this.commit('hideCreateAlbum');
+                    this.dispatch('ListAlbum/getAlbums');
+}
+                )
+                .catch(error =>{
+                    if(error.response.status == 422){
+                        this.state.errorAlbum = error.response.data.errors.name;
+                        return false;
+                    }
+                });
         },
         downloadPhotos({ commit, getters }, photos) {
             this.commit('showDownloadProgress');
