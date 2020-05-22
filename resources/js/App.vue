@@ -206,7 +206,7 @@
                 avatar : 'test_avatar.png',
                 userMenuOpen : false,
                 sidebarOpen : true,
-                photosOpen : false
+                photosOpen : true
             }
         },
         methods: {
@@ -216,6 +216,9 @@
                 this.$store.dispatch('ListPhoto/getPhotos');
                 this.$store.dispatch('ListAlbum/getAlbums');
                 this.$store.dispatch('getCorrects');
+            },
+            switchPhotoOpen() {
+                this.$store.commit('switchPhotoOpen')
             }
         },
         watch: {
@@ -237,7 +240,15 @@
             currentRoute() {
                 console.log(this.$router.currentRoute)
                 return this.$router.currentRoute
+            },
+            isPhotoOpen() {
+                return this.$store.state.isPhotoOpen
             }
+        },
+        mounted() {
+            this.$root.$on('showPhotosSidebar', () => {
+                this.photosOpen = true
+            })
         }
     }
 </script>
@@ -251,7 +262,7 @@
         left: 0;
         height: 100vh;
         max-height: 100%;
-        z-index: 999;
+        z-index: 0;
         background: #fff;
         color: #fff;
         transition: all 0.3s;

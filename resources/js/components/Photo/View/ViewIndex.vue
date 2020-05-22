@@ -67,6 +67,9 @@
             back() {
                 // this.$router.go(-1);
             }
+        },
+        created() {
+            this.$root.$emit('showPhotosSidebar')
         }
     }
 

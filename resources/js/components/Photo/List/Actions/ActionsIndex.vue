@@ -4,9 +4,9 @@
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
             <label for="all-selector"></label>
         </div>
-        <div class="action create">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_create.svg"></object>
-        </div>
+<!--        <div class="action create">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_create.svg"></object>-->
+<!--        </div>-->
         <div class="action add_to_album" :class="isSelectedPhotos" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
@@ -16,17 +16,17 @@
         <div class="action change_date" :class="isSelectedPhotos" @click="changeDate">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>
         </div>
-        <div class="action to_favorite" @click="toFavorite">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>
-        </div>
-        <div class="action turn_image" @click="turnImage">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
+<!--        <div class="action to_favorite" @click="toFavorite">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action turn_image" @click="turnImage">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>-->
+<!--        </div>-->
+        <div class="action delete_image" :class="isSelectedPhotos" @click="deleteImages">
+            <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
         </div>
         <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
-        </div>
-        <div class="action delete_image" :class="isSelectedPhotos" @click="deleteImages">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
         </div>
     </div>
 </template>
@@ -112,10 +112,10 @@
     .action {
         margin-left: 15px;
         user-select: none;
-        display: none;
+        opacity: 0;
     }
     .action.available {
-        display: block;
+        opacity: 1;
     }
     .action.available object {
         filter: brightness(75%);
