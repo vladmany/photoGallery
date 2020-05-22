@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\PhotoRequest;
+use App\Models\Dashboard\AlbumPhoto;
 use App\Models\Dashboard\Photo;
 use App\Services\PhotoService;
 use App\User;
@@ -167,6 +168,11 @@ class PhotoController extends Controller
 
                 if ($photoBd)
                 {
+                    $albumPhotos = AlbumPhoto::all()->where('photo_id', $photoBd->id);
+                    foreach ($albumPhotos as $albumPhoto)
+                    {
+                        $albumPhoto->first()->delete();
+                    }
                     $photoBd->delete();
                     Storage::disk('public')->delete($photoBd->path);
                 }

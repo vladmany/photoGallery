@@ -219,14 +219,26 @@
             }
         },
         watch: {
-            photosOpen () {
-                console.log('Изменилось')
+            currentRoute() {
+                console.log(this.currentRoute.name)
+                if (['AlbumIndex','OneAlbum','AddPhotoToAlbum','IndexPhoto','IndexViewPhoto', 'CorrectIndex', 'CorrectIndexOne'].includes(this.currentRoute.name))
+                    this.photosOpen = true
+                else
+                    this.photosOpen = false
             }
         },
         created() {
             loadProgressBar()
             this.$store.dispatch('getCorrects');
+            // if  ($('.router-link-active').length > 0)
+            //     this.photosOpen = true
         },
+        computed: {
+            currentRoute() {
+                console.log(this.$router.currentRoute)
+                return this.$router.currentRoute
+            }
+        }
     }
 </script>
 
