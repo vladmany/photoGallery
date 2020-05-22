@@ -3,7 +3,7 @@
         <div class="photo_element">
             <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'photo-' + photo.id" v-model="isSelected">
             <label :for="'photo-' + photo.id"></label>
-            <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id, previousRoute: (albumId) ? { name: 'OneAlbum', params: { id: albumId } } : { name: 'IndexPhoto' } } }">
+            <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id, previousRoute: (albumId) ? { name: 'OneAlbum', params: { id: albumId } } : { name: 'IndexPhoto' }, albumId: albumId } }">
                 <img :src="photo.url" :alt="photo.name"
                      class="img-fluid  one-photo"
                      @click="getId"

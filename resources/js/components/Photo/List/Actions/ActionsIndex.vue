@@ -64,7 +64,7 @@
                 if (this.$store.getters.selectedPhotos.length === 1) {
                     this.$store.dispatch('setCorrectPhotoId')
                     let id = this.$store.getters.correctPhotoId;
-                    this.$router.push({ name: 'CorrectIndexOne', params: { id: id }});
+                    this.$router.push({ name: 'CorrectIndexOne', params: { id: id, previousRoute: {name: 'IndexPhoto'} }});
                 }
             },
             deleteImages() {

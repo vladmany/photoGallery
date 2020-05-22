@@ -63,10 +63,11 @@ export default new VueRouter({
             props: (route) => {
                 const id = Number.parseInt(route.params.id, 10)
                 const previousRoute = route.params.previousRoute
+                const albumId = route.params.albumId
                 if (Number.isNaN(id)) {
                     return 0
                 }
-                return { id, previousRoute }
+                return { id, previousRoute, albumId }
             }
         },
         {
@@ -88,10 +89,12 @@ export default new VueRouter({
             name: 'CorrectIndexOne',
             props: (route) => {
                 const id = Number.parseInt(route.params.id, 10)
+                const previousRoute = route.params.previousRoute
+                const albumId = route.params.albumId
                 if (Number.isNaN(id)) {
                     return 0
                 }
-                return { id }
+                return { id, previousRoute, albumId }
             }
         },
         {
