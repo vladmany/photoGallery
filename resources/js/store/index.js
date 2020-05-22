@@ -197,6 +197,7 @@ export default new Vuex.Store({
     },
     actions: {
         savePhotosToAlbum({ commit, getters, dispatch }, albumId) {
+            console.log(getters.selectedPhotos)
             let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId !== 0)) ? [getters.correctPhotoId] : getters.selectedPhotos;
             if(photos && albumId) {
                 axios.post('/api/albums-photos', {
@@ -390,6 +391,7 @@ export default new Vuex.Store({
         },
         deletePhotosFromAlbum({ commit, getters, dispatch }, albumId) {
             let photos = getters.selectedPhotos;
+            console.log(photos)
             console.log(albumId)
             axios.post('/api/album-photos/delete', {
                 photos: photos,

@@ -40,10 +40,10 @@
             UploadPhotosComponent, Paginator
         },
         props: {
-            // photos: {
-            //     required: true,
-            //     type: Object
-            // },
+            photos: {
+                required: true,
+                type: Object
+            },
             paginateCount: {
                 type: Number,
                 default: 20
@@ -63,7 +63,7 @@
         },
         computed: {
             ...mapGetters({
-                photos: 'ListPhoto/photos',
+                // photos: 'ListPhoto/photos',
                 groups: 'ListPhoto/groups',
                 selectedPhotos: 'selectedPhotos',
                 isSelectAll: 'ListPhoto/selectAllPhotos'

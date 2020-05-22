@@ -111,7 +111,6 @@ class AlbumPhotoController extends Controller
             foreach ($photos as $photoId)
             {
                 $AlbumPhotoBd = AlbumPhoto::all()->where('photo_id', $photoId)->where('album_id', $albumId)->first();
-
                 if ($AlbumPhotoBd)
                 {
                     $AlbumPhotoBd->delete();

@@ -27,7 +27,7 @@ export default new VueRouter({
             name: "AlbumIndex",
         },
         {
-            path: '/album/:id',
+            path: '/albums/:id',
             component: OneAlbum,
             name: 'OneAlbum',
             props: (route) => {
@@ -39,7 +39,7 @@ export default new VueRouter({
             }
         },
         {
-            path: '/album/:id/add',
+            path: '/albums/:id/add',
             component: AddPhotoToAlbum,
             name: 'AddPhotoToAlbum',
             props: (route) => {
@@ -57,7 +57,7 @@ export default new VueRouter({
             alias: ['/', '/home'],
         },
         {
-            path: '/photo/:id',
+            path: '/photos/:id',
             component: IndexViewPhoto,
             name: 'IndexViewPhoto',
             props: (route) => {
