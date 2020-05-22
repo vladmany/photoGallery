@@ -1,5 +1,6 @@
 <template>
     <div class="createAlbum">
+<!--         DD -->
         <create></create>
         <CButton text="Добавить альбом" :action="modalCreate" class="btn-create-album"></CButton>
     </div>
