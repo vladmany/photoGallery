@@ -33,6 +33,14 @@
                 type: Number,
                 default: 540
             }
+        },
+        created() {
+            document.addEventListener('mouseup', (e) => {
+                let container = $(".window");
+                if (container.has(e.target).length === 0){
+                    this.closeAction()
+                }
+            });
         }
     }
 </script>
@@ -47,6 +55,7 @@
         width: 100%;
         height: 100%;
         overflow: auto;
+        background: rgba(64,64,64, .4);
     }
     .window {
         /*width: 150vw;*/
