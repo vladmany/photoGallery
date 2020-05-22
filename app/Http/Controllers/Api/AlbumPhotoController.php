@@ -117,10 +117,12 @@ class AlbumPhotoController extends Controller
                 }
             }
             $countAlbumPhotos=AlbumPhoto::where('album_id',$albumId)->count();
-            if($countAlbumPhotos == 0){
+            if($countAlbumPhotos === 0){
                 $album = Album::where('id', $albumId)->get()->first();
-                $album->cover = '/storage/albums/placeholderAlbum.png';
+                $album->cover = "/storage/albums/placeholderAlbum.png";
+                $album->save();
             }
+
         }
     }
 
