@@ -3,7 +3,7 @@
         <button class="upload-btn" @click="switchShowMethods">Загрузить</button>
         <div class="upload-methods flex-column">
             <form action="/photoGallery/public/index.php/api/photos/upload" method="post" class="from-computer-form">
-                <input type="file" name="photo" id="photo" ref="photo" class="inputfile inputfile-1" @change="sendFiles" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
+                <input type="file" name="photo" id="photo" ref="photo" class="inputfile inputfile-1" @change="sendFiles" @click="clearFiles" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
                 <label for="photo" class="from-computer" @click="switchShowMethods">
                     <object type="image/svg+xml" data="/storage/photos/ic_computer.svg"></object>
                     <span>С компьютера</span>
@@ -35,6 +35,10 @@
             }
         },
         methods: {
+            clearFiles(e) {
+                let photos = $(e.target);
+                photos.val('');
+            },
             switchShowMethods() {
                 let methods = $('.upload-methods')
                 methods.css('display', methods.css('display') === 'none' ? 'flex' : 'none')
