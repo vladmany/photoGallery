@@ -5,7 +5,7 @@
             <label :for="'photo-' + photo.id"></label>
             <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id, previousRoute: (albumId) ? { name: 'OneAlbum', params: { id: albumId } } : { name: 'IndexPhoto' }, albumId: albumId } }">
                 <img :src="photoUrl" :alt="photo.name"
-                     class="img-fluid  one-photo"
+                     class="img-fluid one-photo"
                      @click="getId"
                 >
             </router-link>
@@ -98,9 +98,12 @@
         transition: all 0.2s ease;
     }
 
+    .photo_element:hover img {
+        -webkit-filter: brightness(0.6) saturate(1.3);
+    }
+
     .photo_element:hover {
         box-shadow: 0 0 3px rgba(0,0,0,0.5);
-        -webkit-filter: brightness(0.6) saturate(1.3);
     }
 
     .photo_element input[type=checkbox] {
