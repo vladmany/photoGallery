@@ -128,11 +128,14 @@ let actions = {
     setAngle: ({ commit }, angle) => {
         commit('setAngle', angle);
     },
+    clearAngle: ({commit}) => {
+        commit('setAngle', 0);
+    },
     turnImage: ({ commit, getters }, id) => {
         let ret = {}
         ret['photo_id'] = id
         ret['angle'] = getters.rotAngleIncr
-        console.log(ret)
+        // console.log(ret)
         axios.post('/api/photo/turn', { data: ret })
             .then(res => {
                 console.log('save turn success')
