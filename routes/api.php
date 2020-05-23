@@ -22,6 +22,7 @@ Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/corrects', 'Api\CorrectController');
 
+Route::post('/dead-session', 'Auth\LoginController@deadSession');
 Route::apiResource('/albums-photos', 'Api\AlbumPhotoController');
 Route::post('/album-photos/delete','Api\AlbumPhotoController@deletePhotos');
 Route::post('/album-photos/download-albums','Api\AlbumPhotoController@downloadAlbums');

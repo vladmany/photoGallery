@@ -120,6 +120,9 @@
         color: #999999;
         padding-left: 13px;
     }
+    .group-date:hover {
+        opacity: 0.8;
+    }
     .group-content {
         display: flex;
         flex-direction: row;

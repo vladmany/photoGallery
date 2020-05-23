@@ -51,13 +51,16 @@ export default new VueRouter({
                     return 0
                 }
                 return { id }
-            }
+            },
         },
         {
             path: '/photos',
             component: IndexPhoto,
             name: 'IndexPhoto',
             alias: ['/'],
+            meta: {
+                title: 'Photos'
+            }
         },
         {
             path: '/photos/:id',

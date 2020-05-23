@@ -83,6 +83,8 @@ class LoginController extends Controller
                 $user = User::firstOrCreate([
                         'email' => $response['email'],
                         'name' => $response['name'],
+                        'surname' => $response['surname'],
+                        'avatar_url' => $response['avatar_url'],
                         'password' => Hash::make('qwer1234'),
                         'remember_token' => $access->access_token
                     ]
@@ -111,5 +113,12 @@ class LoginController extends Controller
         Auth::logout();
 
         return redirect()->route('auth');
+    }
+
+    public function deadSession(Request $request)
+    {
+        session_destroy();
+
+        return response('session destroy succsess');
     }
 }
