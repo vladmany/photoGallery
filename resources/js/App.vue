@@ -266,7 +266,7 @@
             this.$root.$on('showPhotosSidebar', () => {
                 this.photosOpen = true
             })
-        }
+        },
     }
 </script>
 

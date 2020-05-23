@@ -73,6 +73,19 @@ export default new Vuex.Store({
 
     },
     mutations: {
+        // возврат состояния state
+
+        // beforeCreate() {
+        //     this.$store.commit('initialiseStore');
+        // },
+        initialiseStore(state) {
+            // if(localStorage.getItem('store')) {
+            //     this.replaceState(
+            //         Object.assign(state, JSON.parse(localStorage.getItem('store')))
+            //     );
+            // }
+        },
+
         // Загрузка фото
         showUploadError(state) {
             state.isUploadError = true
