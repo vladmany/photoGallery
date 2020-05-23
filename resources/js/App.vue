@@ -79,7 +79,13 @@
                 </ul>
             </nav>
             <div class="main_content">
-                <nav class="navbar navbar-light">
+                <nav class="navbar navbar-light" :class="sidebarOpen ? 'phone_navbar' : ''">
+                    <div id="sidebar-phone_toggle" @click="sidebarToggle" :class="sidebarOpen ? 'open' : ''">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </div>
                     <div class="user_block">
                         <div class="user_menu-wrapper">
                             <div></div>
@@ -205,6 +211,16 @@
                 this.$store.dispatch('ListAlbum/getAlbums');
                 this.$store.dispatch('getCorrects');
             },
+            sidebarToggle() {
+                if (!this.sidebarOpen) {
+                    this.sidebarOpen = true
+                    $('#sidebar-phone_toggle').addClass('open')
+                }
+                else {
+                    this.sidebarOpen = false
+                    $('#sidebar-phone_toggle').removeClass('open')
+                }
+            }
         },
         watch: {
             currentRoute() {
@@ -220,10 +236,9 @@
                     $('.main-group-tab').removeClass('group-tab-open')
                 }
                 else {
-
                     $('.main-group-tab').addClass('group-tab-open')
                 }
-            }
+            },
         },
         created() {
             loadProgressBar()
@@ -612,8 +627,7 @@
         position: absolute;
         height: 7px;
         width: 100%;
-        background: #1875F0;;
-        border-radius: 9px;
+        background: #D8D8D8;
         opacity: 1;
         left: 0;
         transform: rotate(0deg);
@@ -661,7 +675,15 @@
             max-width: 60px;
         }
     }
+    .navbar {
+        border-bottom: 2px solid #F5F5F5;
+    }
     @media(max-width: 550px)  {
+        .phone_navbar {
+            position: fixed;
+            z-index: 999;
+            width: 100%;
+        }
         .navbar-brand {
             display: none;
         }
