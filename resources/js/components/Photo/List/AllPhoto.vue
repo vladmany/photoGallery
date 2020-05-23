@@ -106,11 +106,12 @@
             },
 
         },
-        async created() {
+        created() {
             this.setPages();
             this.onChangePage(1);
             this.$store.dispatch('ListPhoto/clearPhotos')
-            await this.$store.dispatch('ListPhoto/getPhotos')
+            this.$store.dispatch('clearAngle')
+            // await this.$store.dispatch('ListPhoto/getPhotos')
         },
     }
 </script>

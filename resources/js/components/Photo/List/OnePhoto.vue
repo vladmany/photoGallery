@@ -4,7 +4,7 @@
             <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'photo-' + photo.id" v-model="isSelected">
             <label :for="'photo-' + photo.id"></label>
             <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id, previousRoute: (albumId) ? { name: 'OneAlbum', params: { id: albumId } } : { name: 'IndexPhoto' }, albumId: albumId } }">
-                <img :src="photo.url" :alt="photo.name"
+                <img :src="photoUrl" :alt="photo.name"
                      class="img-fluid  one-photo"
                      @click="getId"
                 >
@@ -57,11 +57,17 @@
                     return this.$store.getters['ListPhoto/photo'](this.id)
                 },
                 set(val) {
-                    this.$store.commit('updateChecked', val)
+                    // this.$store.commit('updateChecked', val)
                 }
                 // let ret = this.getPhoto()
                 // console.log(ret)
                 // return ret
+            },
+            photoUrl() {
+                let ret = this.photo.url + '?' + new Date().getTime();
+                // console.log(ret);
+
+                return ret
             }
         },
         methods: {
