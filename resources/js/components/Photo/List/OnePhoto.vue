@@ -85,7 +85,7 @@
 
 <style scoped>
     .one-photo {
-        height: 200px;
+        max-height: 160px;
     }
 
     .photo_element {
