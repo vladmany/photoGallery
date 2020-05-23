@@ -20,7 +20,10 @@ export default new VueRouter({
         //     component: component,
         //     name: name
         // }
-
+        {
+            path: '/home',
+            beforeEnter() {location.href = 'https://team1-group-project.azurewebsites.net/'}
+        },
         {
             path: "/albums",
             component: AlbumIndex,
@@ -54,7 +57,7 @@ export default new VueRouter({
             path: '/photos',
             component: IndexPhoto,
             name: 'IndexPhoto',
-            alias: ['/', '/home'],
+            alias: ['/'],
         },
         {
             path: '/photos/:id',

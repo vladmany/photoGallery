@@ -48,7 +48,7 @@
 <style scoped>
     .outside-the-window {
         opacity: 1;
-        z-index: 1;
+        z-index: 1000;
         position: fixed;
         top: 0;
         left: 0;
