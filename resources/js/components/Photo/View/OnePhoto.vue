@@ -1,6 +1,6 @@
 <template>
     <div class="photo-wrap">
-        <img :src="photo.url" :alt="photo.name" class="img-fluid one-photo pt-5" :style="myStyle">
+        <img :src="photoUrl" :alt="photo.name" class="img-fluid one-photo pt-5" :style="myStyle">
     </div>
 </template>
 
@@ -21,6 +21,12 @@
         computed: {
             photo() {
                 return this.$store.getters['ListPhoto/photo'](this.id);
+            },
+            photoUrl() {
+                let ret = this.photo.url + '?' + new Date().getTime();
+                // console.log(this.photo.url, ret)
+
+                return ret
             },
             cssStyle() {
                 this.$store.dispatch('makeCssFilter')
