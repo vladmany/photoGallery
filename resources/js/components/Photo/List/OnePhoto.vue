@@ -85,17 +85,17 @@
 
 <style scoped>
     .one-photo {
-        max-height: 100px;
+        max-height: 200px;
     }
 
     .photo_element {
         margin: 7px;
         -webkit-filter: brightness(1) saturate(1);
-        -webkit-transition: all 0.6s ease;
-        -moz-transition: all 0.6s ease;
-        -o-transition: all 0.6s ease;
-        -ms-transition: all 0.6s ease;
-        transition: all 0.6s ease;
+        -webkit-transition: all 0.2s ease;
+        -moz-transition: all 0.2s ease;
+        -o-transition: all 0.2s ease;
+        -ms-transition: all 0.2s ease;
+        transition: all 0.2s ease;
     }
 
     .photo_element:hover {
