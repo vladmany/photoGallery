@@ -43,13 +43,13 @@
                             <span>Календарь</span>
                         </router-link>
                     </li>
-                    <li @click="photosOpen = !photosOpen" :class="photosOpen ? 'group-tab-open' : ''" style="cursor: pointer; user-select: none">
+                    <li @click="photosOpen = !photosOpen" class="main-group-tab group-tab-open">
                         <a>
                             <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_camera_alt.svg"></object>
                             <span>Фотографии</span>
                         </a>
                     </li>
-                    <div class="group-tabs" :style="'display: ' + (photosOpen ? 'block' : 'none')">
+                    <div class="group-tabs">
                         <li>
                             <router-link to="/photos" >
                                 <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
@@ -60,12 +60,6 @@
                             <router-link to="/albums" >
                                 <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_albums.svg"></object>
                                 <span>Альбомы</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/studio" >
-                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
-                                <span>Креативная студия</span>
                             </router-link>
                         </li>
                     </div>
@@ -117,9 +111,6 @@
             <footer class="container">
                 <ul class="row">
                     <li class="col-lg-4 col-md-6 col-sm-12 pl-sm-3">
-
-
-
                         <ul>
                             <li>
                                 <img src="/storage/navbar_logo.png" alt="navbar_logo">
@@ -129,42 +120,39 @@
                         </ul>
                     </li>
                     <li class="col-lg-4 col-md-6 col-sm-12 pl-sm-3">
-
-
                         <h4 class="text">Инструменты</h4>
                         <ul>
-                            <li>Диск</li>
-                            <li>Календарь</li>
-                            <li>Контакты</li>
-                            <li>Почта</li>
-                            <li>Фото</li>
+                            <li><a href="/disk" class>Диск</a></li>
+                            <li><a href="http://laravelproject.s-host.net/" class>Календарь</a></li>
+                            <li><a href="https://contacts.s-host.net/" class>Контакты</a></li>
+                            <li><a href="http://cu66460.tmweb.ru/" class>Почта</a></li>
+                            <li><a href="/" class>Фото</a></li>
                         </ul>
                     </li>
-                    <!--                    <li class="col-lg-4 offset-md-6 offset-sm-0 offset-lg-0 col-md-6 col-sm-12 pl-sm-3">-->
-                    <!--                        <h4 class="text">Контакты</h4>-->
-                    <!--                        <ul>-->
-                    <!--                            <li>+38095 900 38 00 </li>-->
-                    <!--                            <li>mail@aiti20.com</li>-->
-                    <!--                        </ul>-->
-
-                    <!--                        <ul class="social_block">-->
-                    <!--                            <li>-->
-                    <!--                                <a href="google.com">-->
-                    <!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_facebook.svg"></object>-->
-                    <!--                                </a>-->
-                    <!--                            </li>-->
-                    <!--                            <li>-->
-                    <!--                                <a href="google.com">-->
-                    <!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_twitter.svg"></object>-->
-                    <!--                                </a>-->
-                    <!--                            </li>-->
-                    <!--                            <li>-->
-                    <!--                                <a href="google.com">-->
-                    <!--                                    <object type="image/svg+xml" data="/storage/social_ic/ic_instagram.svg"></object>-->
-                    <!--                                </a>-->
-                    <!--                            </li>-->
-                    <!--                        </ul>-->
-                    <!--                    </li>-->
+                    <li class="col-lg-4 offset-md-6 offset-sm-0 offset-lg-0 col-md-6 col-sm-12 pl-sm-3">
+                        <h4 class="text">Контакты</h4>
+                        <ul>
+                            <li>+38095 900 38 00 </li>
+                            <li>mail@aiti20.com</li>
+                        </ul>
+                        <ul class="social_block">
+                            <li>
+                                <a href="google.com">
+                                    <object type="image/svg+xml" data="/storage/social_ic/ic_facebook.svg"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="google.com">
+                                    <object type="image/svg+xml" data="/storage/social_ic/ic_twitter.svg"/>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="google.com">
+                                    <object type="image/svg+xml" data="/storage/social_ic/ic_instagram.svg"/>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
                 </ul>
             </footer>
         </div>
@@ -217,9 +205,6 @@
                 this.$store.dispatch('ListAlbum/getAlbums');
                 this.$store.dispatch('getCorrects');
             },
-            switchPhotoOpen() {
-                this.$store.commit('switchPhotoOpen')
-            }
         },
         watch: {
             currentRoute() {
@@ -228,13 +213,30 @@
                     this.photosOpen = true
                 else
                     this.photosOpen = false
+            },
+            photosOpen() {
+                $('.group-tabs').slideToggle(200)
+                if (!this.photosOpen) {
+                    $('.main-group-tab').removeClass('group-tab-open')
+                }
+                else {
+
+                    $('.main-group-tab').addClass('group-tab-open')
+                }
             }
         },
         created() {
             loadProgressBar()
             this.$store.dispatch('getCorrects');
-            // if  ($('.router-link-active').length > 0)
-            //     this.photosOpen = true
+            let mql = window.matchMedia('(max-width: 1380px)');
+
+            mql.addListener((e) => {
+                if (e.matches) {
+                    this.sidebarOpen = false
+                } else {
+                    this.sidebarOpen = true
+                }
+            });
         },
         computed: {
             currentRoute() {
@@ -260,9 +262,11 @@
     #sidebar {
         top: 0;
         left: 0;
-        height: 100vh;
         max-height: 100%;
-        z-index: 0;
+        min-height: -webkit-fit-content;
+        min-height: -moz-fit-content;
+        min-height: fit-content;
+        z-index: 999;
         background: #fff;
         color: #fff;
         transition: all 0.3s;
@@ -270,11 +274,12 @@
         border-radius: 6px;
         max-width: 160px;
         width: 100%;
+        flex-grow: 5;
     }
     .sidebar-open {
         max-width: 255px!important;
     }
-    #side_menu a {
+    #side_menu a, .second_level-toggle {
         display: flex;
         align-items: center;
         flex-direction: row;
@@ -288,11 +293,15 @@
         color: #999999;
         height: 100%;
     }
-    #side_menu a span {
+    #side_menu a span,
+    .second_level-toggle a span{
         width: 150px;
         text-align: center;
+        z-index: -3;
     }
-    .sidebar-open a span {
+    .sidebar-open a span,
+    .sidebar-open .second_level-toggle a span
+    {
         text-align: left!important;
         margin-left: 22px;
     }
@@ -303,6 +312,7 @@
         color: #666666;
     }
     #side_menu .router-link-active object {
+        -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
     }
     #side_menu object{
@@ -318,34 +328,11 @@
         transition: margin-bottom .3s;
     }
     .sidebar-open li{
+        min-height: 0px!important;
         margin-bottom: 0px!important;
     }
     #side_menu .router-link-active {
         border-left: 3px solid #1875F0;
-    }
-    #side_menu .group-tab-open {
-        cursor: pointer;
-    }
-    .group-tab-open {
-        user-select: none;
-    }
-    .group-tab-open a span{
-        color: #666666;
-        font-weight: 500;
-        font-size: 13px;
-        /*line-height: 60px;*/
-    }
-    li.group-tab-open {
-        border-bottom: none;
-    }
-    .group-tab-open a object {
-        filter: brightness(15%);
-    }
-    .group-tabs li {
-        border: none
-    }
-    .sidebar-open .group-tabs li:last-child {
-        border-bottom: 2px solid #F5F5F5;
     }
     .wrapper {
         display: flex;
@@ -354,6 +341,7 @@
     }
     .main_content {
         flex-grow: 1;
+        max-width: 100%;
     }
     #sidebar .navbar-brand {
         padding: 19px 0;
@@ -364,7 +352,6 @@
     }
     #sidebar .navbar-brand img {
         max-width: 160px;
-        margin-left:20px;
     }
     #sidebar .toggle_sidebar {
         cursor: pointer;
@@ -394,11 +381,30 @@
         text-align: right;
         color: #999999;
         position: relative;
+        display: flex;
+        align-items: center;
     }
     .user_block img{
         margin-left: 20px;
+        max-height: 50px;
+        max-width: 50px;
+        border-radius: 50%;
     }
-
+    .user_block .initials{
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        margin-left: 20px;
+        max-height: 50px;
+        max-width: 50px;
+        min-width: 50px;
+        min-height: 50px;
+        font-size: 32px;
+        color: #999;
+        border-radius: 50%;
+        border: 1px solid #666;
+    }
     .user_menu-wrapper {
         max-height: 0px;
         overflow: hidden;
@@ -409,31 +415,11 @@
         bottom: -8px;
         z-index: 9;
     }
-
-    .user_menu-wrapper > div:first-child {
-        display: block;
-        position: relative;
-        width: 0;
-        height: 0;
-        margin-left: auto;
-        right: 30px;
-        border-left: 5px solid transparent;
-        border-right: 5px solid transparent;
-        border-bottom: 9px solid #fff;
-    }
-
     .user_menu {
-        position: absolute;
         background: #fff;
         border-radius: 6px;
         list-style: none;
-        /*left: -97%;*/
-        bottom: -33px;
         padding: 0;
-        transform: translateY(100%);
-        max-height: 0px;
-        overflow: hidden;
-        transition: max-height .7s ease-in-out;
     }
     .user_menu li {
         border-bottom: 2px solid #F5F5F5;
@@ -444,6 +430,13 @@
         width: 100%;
         padding: 0 50px;
     }
+    .user_menu li:last-child {
+        border-bottom: none;
+    }
+    .user_block a:hover {
+        color: #1875F0;
+        text-decoration: none;
+    }
     .user_menu a {
         font-style: normal;
         font-weight: 500;
@@ -451,13 +444,15 @@
         text-align: center;
         color: #808080;
     }
-    .user_menu-opened:after {
+    .user_menu .router-link-active {
+        color: #1875F0;
+    }
+    .user_menu-wrapper > div {
         display: block;
-        content: '';
-        position: absolute;
+        position: relative;
         width: 0;
         height: 0;
-        top: -9px;
+        margin-left: auto;
         right: 30px;
         border-left: 5px solid transparent;
         border-right: 5px solid transparent;
@@ -535,13 +530,198 @@
     footer li{
         margin-bottom: 20px;
     }
+    footer a{
+        text-decoration: none;
+        color: inherit;
+    }
+    footer a:hover{
+        text-decoration: none;
+        color: #1875F0;
+    }
     .social_block li:hover object{
+        -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
+    }
+    #side_menu li:not(.second_level-wrapper):not(.main-group-tab):hover a:not(.router-link-active) object {
+        -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
+        filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
+        opacity: .6;
+    }
+    #side_menu li.main-group-tab:not(.group-tab-open):hover a object {
+        filter: brightness(70%);
     }
     .footer_wrapper {
         width: 100%;
         background: #fff;
         padding-top: 48px;
+    }
+    .second_level-wrapper {
+        max-height: 68px;
+        margin-bottom: 0!important;
+        overflow: hidden;
+        transition: all .3s!important;
+        height: -webkit-fit-content!important;
+        height: -moz-fit-content!important;
+        height: fit-content!important;
+    }
+    .second_level-wrapper a {
+        cursor: pointer;
+        max-height: 60px;
+        margin-bottom: 14px;
+    }
+    .second_level-open {
+        max-height: 250px;
+    }
+    .second_level-toggled object{
+        -webkit-filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
+        filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
+    }
+    #side_menu .second_level-wrapper:hover > a:first-of-type:not(.second_level-toggled) object {
+        -webkit-filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
+        filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
+        opacity: .6;
+    }
+    #side_menu .second_level-wrapper a:not(:first-of-type):not(.router-link-active):hover object {
+        -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
+        filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
+        opacity: .6;
+    }
+    .sidebar-open .second_level-wrapper {
+        max-height: 60px;
+    }
+    .sidebar-open .second_level-wrapper a {
+        margin-bottom: 0px;
+        min-height: 60px;
+    }
+    .sidebar-open .second_level-open {
+        max-height: 180px;
+    }
+
+    /* sidebar animated toggler for phones */
+    #sidebar-phone_toggle {
+        display: none;
+        width: 60px;
+        height: 45px;
+        position: relative;
+        transform: rotate(0deg);
+        transition: .5s ease-in-out;
+        cursor: pointer;
+    }
+    #sidebar-phone_toggle span{
+        display: block;
+        position: absolute;
+        height: 7px;
+        width: 100%;
+        background: #1875F0;;
+        border-radius: 9px;
+        opacity: 1;
+        left: 0;
+        transform: rotate(0deg);
+        transition: .25s ease-in-out;
+    }
+    #sidebar-phone_toggle span:nth-child(1) {
+        top: 0px;
+    }
+    #sidebar-phone_toggle span:nth-child(2),#sidebar-phone_toggle span:nth-child(3) {
+        top: 18px;
+    }
+    #sidebar-phone_toggle span:nth-child(4) {
+        top: 36px;
+    }
+    #sidebar-phone_toggle.open span:nth-child(1) {
+        top: 18px;
+        width: 0%;
+        left: 50%;
+    }
+    #sidebar-phone_toggle.open span:nth-child(2) {
+        transform: rotate(45deg);
+    }
+    #sidebar-phone_toggle.open span:nth-child(3) {
+        transform: rotate(-45deg);
+    }
+    #sidebar-phone_toggle.open span:nth-child(4) {
+        top: 18px;
+        width: 0%;
+        left: 50%;
+    }
+    @media(max-width: 1000px)  {
+        #sidebar:not(.sidebar-open) span {
+            display: none;
+        }
+        .navbar-brand img {
+            width: 100%;
+            height: auto;
+        }
+        .navbar-brand  {
+            height: 91px;
+            display: flex;
+            align-items: center;
+        }
+        #sidebar {
+            max-width: 60px;
+        }
+    }
+    @media(max-width: 550px)  {
+        .navbar-brand {
+            display: none;
+        }
+        #sidebar {
+            position: fixed;
+            max-width: 0;
+            overflow-x: hidden;
+            top: 91px;
+            border-radius: 0;
+            width: 100%;
+            height: 100vh;
+            max-height: -webkit-max-content;
+            max-height: -moz-max-content;
+            max-height: max-content;
+        }
+        #sidebar-phone_toggle {
+            display: block;
+            width: 50px;
+        }
+        .sidebar-open {
+            max-width: 100%!important;
+        }
+        .toggle_sidebar {
+            display: none!important;
+        }
+    }
+
+    .group-tab-open {
+        user-select: none;
+    }
+    .group-tab-open a span{
+        color: #666666;
+        font-weight: 500;
+        font-size: 13px;
+        /*line-height: 60px;*/
+    }
+    li.group-tab-open {
+        border-bottom: none;
+    }
+    .group-tab-open a object {
+        filter: brightness(15%);
+    }
+
+    .group-tab-open:hover a object {
+        filter: brightness(40%);
+    }
+
+    .group-tabs {
+        display: block;
+    }
+
+    .group-tabs li {
+        border: none
+    }
+    .sidebar-open .group-tabs li:last-child {
+        border-bottom: 2px solid #F5F5F5;
+    }
+    .main-group-tab {
+        cursor: pointer;
+        user-select: none;
     }
 </style>
 

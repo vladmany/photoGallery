@@ -23,10 +23,10 @@
         <template v-slot:content>
             <div class="albums-wrap">
                 <div v-if="showNoSearch">
-                    <p class="empty-search">Объект не найден</p>
+                    <p class="empty-search">Альбом не найден</p>
                 </div>
                 <div class="main-panel">
-                    <AllAlbums :paginate-count="5"></AllAlbums>
+                    <AllAlbums :paginate-count="6"></AllAlbums>
                 </div>
 
             </div>

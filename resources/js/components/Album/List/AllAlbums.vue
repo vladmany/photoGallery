@@ -1,10 +1,10 @@
 <template>
-    <div class="wrapper">
-        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0">
+    <div class="wrapper container">
+        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row ">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
-                           class="pt-3 pb-3 album" />
-            <div class="album-paginate">
+                           class="pt-3 pb-3 album col-12 col-md-6 col-lg-4 one-album"/>
+            <div class="album-paginate col-12">
                 <!--            <paginate-->
                 <!--                :page-count="pages"-->
                 <!--                :page-range="3"-->
@@ -87,11 +87,9 @@
 
 <style scoped>
     .wrapper {
-        display: flex;
         background-color: #ffffff;
-        width: 100%;
-        flex-direction: column;
         padding-top: 35px;
+        justify-content: start;
     }
     .album {
         border-bottom-width: 1px;
@@ -105,5 +103,10 @@
     }
     .album-paginate {
         flex: 0 0 auto;
+    }
+    .one-album:hover {
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
     }
 </style>
