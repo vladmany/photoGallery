@@ -90,12 +90,17 @@
 
     .photo_element {
         margin: 7px;
+        -webkit-filter: brightness(1) saturate(1);
+        -webkit-transition: all 0.6s ease;
+        -moz-transition: all 0.6s ease;
+        -o-transition: all 0.6s ease;
+        -ms-transition: all 0.6s ease;
+        transition: all 0.6s ease;
     }
 
     .photo_element:hover {
         box-shadow: 0 0 3px rgba(0,0,0,0.5);
-        transition: 0.2s filter ease;
-        filter: brightness(1.2) saturate(1.5);
+        -webkit-filter: brightness(0.6) saturate(1.3);
     }
 
     .photo_element input[type=checkbox] {
