@@ -25,7 +25,7 @@
                 required: true,
                 type: Number,
             },
-            isSelected: {
+            isSelectedDef: {
                 required: true,
                 type: Boolean,
             },
@@ -33,35 +33,34 @@
                 type: Number
             }
         },
+        data() {
+            return {
+                isSelected: false
+            }
+        },
         watch: {
             isSelected() {
                 if(this.isSelected) {
                     this.$store.dispatch('addPhoto', this.photo.id);
+                    this.$store.dispatch('ListPhoto/selectPhoto', this.photo.id)
                 } else {
                     this.$store.dispatch('delPhoto', this.photo.id);
+                    this.$store.dispatch('ListPhoto/unselectPhoto', this.photo.id)
+
+                    // let allPhotos = this.$store.getters["ListPhoto/photos"];
+                    // let allSelectedPhotos = this.$store.getters.selectedPhotos;
+                    // let res = allPhotos.length === allSelectedPhotos.length;
+                    // this.$store.dispatch('ListPhoto/selectAllPhotos', res);
                 }
-                // console.log(this.$store.getters.selectedPhotos);
             },
-            selectedPhotos() {
-                if (this.selectedPhotos.length === 0) {
-                    this.isSelected = false
-                }
-            }
         },
         computed: {
             ...mapGetters({
-                selectedPhotos: 'selectedPhotos'
+                selectedPhotos: 'selectedPhotos',
+                groupsSelected: 'ListPhoto/groupsSelected'
             }),
-            photo: {
-                get() {
-                    return this.$store.getters['ListPhoto/photo'](this.id)
-                },
-                set(val) {
-                    // this.$store.commit('updateChecked', val)
-                }
-                // let ret = this.getPhoto()
-                // console.log(ret)
-                // return ret
+            photo() {
+                return this.$store.getters['ListPhoto/photo'](this.id)
             },
             photoUrl() {
                 let ret = this.photo.url + '?' + new Date().getTime();
@@ -78,12 +77,8 @@
                 return this.$store.getters['ListPhoto/photo'](this.id)
             }
         },
-        // beforeCreate() {
-            // this.$store.dispatch('ListPhoto/getPhotos');
-        // }
         created() {
-            console.log('одно фото')
-            // this.$store.dispatch('ListPhoto/getPhotos');
+            this.isSelected = this.isSelectedDef;
         },
     }
 </script>
@@ -95,6 +90,12 @@
 
     .photo_element {
         margin: 7px;
+    }
+
+    .photo_element:hover {
+        box-shadow: 0 0 3px rgba(0,0,0,0.5);
+        transition: 0.2s filter ease;
+        filter: brightness(1.2) saturate(1.5);
     }
 
     .photo_element input[type=checkbox] {

@@ -152,7 +152,11 @@
                 // console.log(this.$store.getters.cssAttrs)
                 this.myStyle = this.cssStyle;
             }
-        }
+        },
+        beforeMount() {
+            this.$store.commit('initialiseStore');
+            console.log(this.$store.state)
+        },
     };
 </script>
 

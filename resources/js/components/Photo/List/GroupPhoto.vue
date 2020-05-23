@@ -7,7 +7,7 @@
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
                       :id="photo.id"
-                      :is-selected="isSelected"
+                      :is-selected-def="isSelected"
                       :album-id="albumId"
             ></OnePhoto>
         </div>
@@ -49,25 +49,46 @@
                 selectAll: 'ListPhoto/selectAllPhotos',
                 selectedPhotos: 'selectedPhotos',
                 // groupsSelected: 'ListPhoto/groupsSelected'
-            })
+            }),
         },
         watch: {
             selectAll() {
                 this.isSelected = this.selectAll;
             },
-            selectedPhotos() {
-                if (this.selectedPhotos.length === 0) {
-                    this.isSelected = false
+            selectedPhotos(newVal) {
+                let allPhotoSelected = this.checkAllElementsSelected()
+                if(this.isSelected !== allPhotoSelected) {
+                    this.isSelected = allPhotoSelected;
                 }
             },
-            // groupsSelected() {
-            //     for(let key of Object.keys(this.groupsSelected)) {
-            //         if(key === this.title && this.groupsSelected[key]) {
-            //             this.isSelected = true
-            //         }
-            //     }
-            // }
-        }
+            isSelected() {
+                if(this.isSelected) {
+                    this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
+                    this.selectAllElements()
+                } else {
+                    this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
+                }
+
+                // let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id)
+                // let isSelGroup = this.$store.getters['ListPhoto/groupsSelected'][group]
+            }
+        },
+        methods: {
+            checkAllElementsSelected() {
+                for(let el of this.elements) {
+                    if(!el['is_selected']) {
+                        return false
+                    }
+                }
+                return true
+            },
+            selectAllElements() {
+                for(let el of this.elements) {
+                    el['is_selected'] = true
+                }
+                console.log(this.elements)
+            }
+        },
     }
 </script>
 

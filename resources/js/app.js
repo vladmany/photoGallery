@@ -20,6 +20,12 @@ Vue.use(VCalendar, {
     componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
 });
 
+// сохранение состояния state
+// store.subscribe((mutation, state) => {
+//         // Store the state object as a JSON string
+//         localStorage.setItem('store', JSON.stringify(state));
+//     });
+
 loadProgressBar()
 
 Vue.use(Toasted)

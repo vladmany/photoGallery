@@ -25,6 +25,7 @@ class CreatePhotosTable extends Migration
             $table->integer('size')->comment('размер файла');
             $table->string('extension', 5)->comment('формат файла');
             $table->string('path')->comment('ссылка на файл');
+            $table->boolean('is_selected')->default(false)->comment('выбор фото');
             $table->timestamps();
         });
 
