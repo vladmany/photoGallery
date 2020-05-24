@@ -2,12 +2,14 @@
     <div class="" v-if="photos.length > 0">
         <div class="photo-wrapper">
             <div class="photo-content">
-                <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
-                            :elements="elements"
-                            :title="title"
-                            :groupId="index"
-                            :album-id="albumId"
-                />
+                <div class="row">
+                    <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
+                                :elements="elements"
+                                :title="title"
+                                :groupId="index"
+                                :album-id="albumId"
+                    />
+                </div>
             </div>
             <div class="photo-paginate">
                 <Paginator :pages="pages" :func="onChangePage"></Paginator>
@@ -58,7 +60,8 @@
         },
         data() {
             return {
-                pages: 0
+                pages: 0,
+                there: false
             }
         },
         computed: {
@@ -73,7 +76,15 @@
             photos() {
                 this.setPages();
                 this.onChangePage(1);
-            }
+            },
+            groups() {
+                let photos = this.$store.getters.photoChangedDate;
+                if(photos.length !== 0) {
+                    this.onChangePage(1);
+                    this.$store.state.photoChangedDate = [];
+                }
+                // console.log(this.$store.state.photoChangedDate)
+            },
         },
         methods: {
             onChangePage(page = 1) {
@@ -84,9 +95,7 @@
 
                 if(this.isSelectAll) {
                     for(let key of Object.keys(this.groups)) {
-                        // for(let item of this.groups[key]) {
-                            this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
-                        // }
+                        this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
                     }
                 }
 

@@ -7,6 +7,7 @@ import ListAlbum from "./modules/ListAlbum";
 import Globals from "./modules/Globals";
 import routes from "../routes";
 import Correct from "./modules/Correct";
+import authorization from "./modules/authorization";
 
 Vue.use(Vuex)
 
@@ -16,7 +17,8 @@ export default new Vuex.Store({
         ListPhoto,
         ListAlbum,
         Globals,
-        Correct
+        Correct,
+        authorization
     },
     state: {
         // Загрузка фото
@@ -67,12 +69,16 @@ export default new Vuex.Store({
         // Удаление фото из альбома
         isDeleteImagesFromAlbum: false,
         //-------------------------
-
+        photoChangedDate: [],
     },
     getters: {
-
+        photoChangedDate: state => state.photoChangedDate,
     },
     mutations: {
+        setPhotoChangedDate: (state, payload) => {
+            state.photoChangedDate = payload
+        },
+
         // возврат состояния state
 
         // beforeCreate() {
@@ -427,6 +433,7 @@ export default new Vuex.Store({
         },
         changeDatePhotos({ commit, getters, dispatch }, date) {
             let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId !== 0)) ? [getters.correctPhotoId] : getters.selectedPhotos;
+            commit('setPhotoChangedDate', photos)
             axios.post('/api/photos/change-date', {
                 photos: photos,
                 date: date

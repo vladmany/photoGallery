@@ -3,10 +3,6 @@
         <div class="action change_album" :class="isSelectedEveryTime" @click="changeAlbumName">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>
         </div>
-        <div class="action to_provide_access" :class="isSelectedPhotos" @click="toProvideAccess">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
-
-        </div>
         <div class="action turn_download" :class="isSelectedPhotos" @click="turnDownload">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
@@ -38,9 +34,6 @@
                 let id = this.$store.getters.selectedPhotos;
                 console.log(id);
                 this.$store.dispatch('changeCover', [id[0], this.$store.state.IdAlbum])
-            },
-            toProvideAccess(){
-
             },
             turnDownload(){
                 if (this.$store.getters.selectedPhotos.length > 0) {

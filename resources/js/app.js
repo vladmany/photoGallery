@@ -28,6 +28,11 @@ Vue.use(VCalendar, {
 
 loadProgressBar()
 
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title
+    next()
+})
+
 Vue.use(Toasted)
 
 Vue.component('Section', Section);
@@ -41,7 +46,6 @@ Vue.use(VueRouter)
 Vue.config.devtools = false
 Vue.config.debug = false
 Vue.config.silent = true
-
 
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;

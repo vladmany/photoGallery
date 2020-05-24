@@ -92,8 +92,13 @@
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 100%;
+        max-width: 350px;
         color: #666666 !important;
+
+        border: 1px;
+        border: solid;
+        border-color: #DFDFDF;
+        border-radius: 3px;
 
     }
     .cover_element .custom-checkbox+label{

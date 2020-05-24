@@ -75,6 +75,8 @@ class LoginController extends Controller
 
             $response = json_decode($result, true);//данные о user пришедшие от Богдана
 
+//            dd($response);
+
             $myuser = User::query()->where('email', $response['email'])->first();
 
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
@@ -83,17 +85,28 @@ class LoginController extends Controller
                 $user = User::firstOrCreate([
                         'email' => $response['email'],
                         'name' => $response['name'],
+                        'surname' => $response['surname'],
+                        'avatar_url' => $response['avatar_url'] ?? null,
                         'password' => Hash::make('qwer1234'),
                         'remember_token' => $access->access_token
                     ]
                 );
+//                dd($response, $user);
                 Auth::login($user);
                 return response()->redirectTo(RouteServiceProvider::HOME);
             }
 
+
+
 //авторизовать пользователя
-            $myuser->update(['remember_token' => $access->access_token]);
+            $myuser->update([
+                'remember_token' => $access->access_token,
+                'name' => $response['name'],
+                'surname' => $response['surname'],
+            ]);
             Auth::login($myuser);
+
+//            dd($response ,$myuser);
 
 //перекинуть в личны кабинет
             return response()->redirectTo(RouteServiceProvider::HOME);
@@ -112,4 +125,5 @@ class LoginController extends Controller
 
         return redirect()->route('auth');
     }
+
 }

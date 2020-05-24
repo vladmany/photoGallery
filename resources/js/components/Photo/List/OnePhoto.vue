@@ -5,7 +5,7 @@
             <label :for="'photo-' + photo.id"></label>
             <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id, previousRoute: (albumId) ? { name: 'OneAlbum', params: { id: albumId } } : { name: 'IndexPhoto' }, albumId: albumId } }">
                 <img :src="photoUrl" :alt="photo.name"
-                     class="img-fluid  one-photo"
+                     class="img-fluid one-photo"
                      @click="getId"
                 >
             </router-link>
@@ -25,39 +25,51 @@
                 required: true,
                 type: Number,
             },
-            isSelectedDef: {
+            isSelected: {
                 required: true,
                 type: Boolean,
             },
             albumId: {
                 type: Number
-            }
+            },
         },
         data() {
             return {
-                isSelected: false
+                // isSelected: false
             }
         },
         watch: {
-            isSelected() {
-                if(this.isSelected) {
-                    this.$store.dispatch('addPhoto', this.photo.id);
-                    this.$store.dispatch('ListPhoto/selectPhoto', this.photo.id)
-                } else {
-                    this.$store.dispatch('delPhoto', this.photo.id);
-                    this.$store.dispatch('ListPhoto/unselectPhoto', this.photo.id)
-
+            isSelected(newVal) {
+                // if(this.downUp === 1) {
+                    if(newVal) {
+                        this.$store.dispatch('addPhoto', this.photo.id);
+                        this.$store.dispatch('ListPhoto/selectPhoto', this.photo.id)
+                    } else {
+                        this.$store.dispatch('delPhoto', this.photo.id);
+                        this.$store.dispatch('ListPhoto/unselectPhoto', this.photo.id)
+                    // }
+                // } else {
                     // let allPhotos = this.$store.getters["ListPhoto/photos"];
                     // let allSelectedPhotos = this.$store.getters.selectedPhotos;
                     // let res = allPhotos.length === allSelectedPhotos.length;
                     // this.$store.dispatch('ListPhoto/selectAllPhotos', res);
                 }
             },
+
+            // clickCount() {
+            //     if(this.downUp === 0) {
+            //         let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id);
+            //         let isSelectedGroup = this.$store.getters['ListPhoto/groupsSelected'][group];
+            //         this.isSelected = !this.isSelectedGroup;
+            //     }
+            // },
         },
         computed: {
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
-                groupsSelected: 'ListPhoto/groupsSelected'
+                groupsSelected: 'ListPhoto/groupsSelected',
+                downUp: 'ListPhoto/downUp',
+                // clickCount: 'ListPhoto/clickCount',
             }),
             photo() {
                 return this.$store.getters['ListPhoto/photo'](this.id)
@@ -67,7 +79,7 @@
                 // console.log(ret);
 
                 return ret
-            }
+            },
         },
         methods: {
             getId() {
@@ -78,24 +90,34 @@
             }
         },
         created() {
-            this.isSelected = this.isSelectedDef;
+            // this.isSelected = this.isSelectedDef;
         },
     }
 </script>
 
 <style scoped>
     .one-photo {
-        max-height: 100px;
+        max-height: 160px;
     }
 
     .photo_element {
         margin: 7px;
     }
+    .photo_element  {
+        -webkit-filter: brightness(1) saturate(1);
+        -webkit-transition: filter 0.2s ease;
+        -moz-transition: filter 0.2s ease;
+        -o-transition: filter 0.2s ease;
+        -ms-transition: filter 0.2s ease;
+        transition: filter 0.2s ease;
+    }
+
+    .photo_element:hover {
+        -webkit-filter: brightness(0.6) saturate(1.3);
+    }
 
     .photo_element:hover {
         box-shadow: 0 0 3px rgba(0,0,0,0.5);
-        transition: 0.2s filter ease;
-        filter: brightness(1.2) saturate(1.5);
     }
 
     .photo_element input[type=checkbox] {
@@ -104,5 +126,6 @@
         transform:scale(1.5);
         margin-top: 6px;
         margin-left: 6px!important;
+        -webkit-filter: brightness(1) saturate(1);
     }
 </style>

@@ -40,6 +40,9 @@ export default new VueRouter({
             path: "/albums",
             component: AlbumIndex,
             name: "AlbumIndex",
+            meta: {
+                title: 'IT 2.0 Tools Альбомы'
+            }
         },
         {
             path: '/albums/:id',
@@ -51,7 +54,11 @@ export default new VueRouter({
                     return 0
                 }
                 return { id }
+            },
+            meta:{
+                title: 'IT 2.0 Tools Просмотр альбома'
             }
+
         },
         {
             path: '/albums/:id/add',
@@ -63,6 +70,9 @@ export default new VueRouter({
                     return 0
                 }
                 return { id }
+            },
+            meta:{
+                title: 'IT 2.0 Tools Добавить фото в альбом'
             }
         },
         {
@@ -70,6 +80,9 @@ export default new VueRouter({
             component: IndexPhoto,
             name: 'IndexPhoto',
             alias: ['/'],
+            meta: {
+                title: 'IT 2.0 Tools Фоторгафии'
+            }
         },
         {
             path: '/photos/:id',
@@ -83,6 +96,9 @@ export default new VueRouter({
                     return 0
                 }
                 return { id, previousRoute, albumId }
+            },
+            meta:{
+                title: 'IT 2.0 Tools Просмотр фото'
             }
         },
         {
@@ -96,6 +112,9 @@ export default new VueRouter({
                     return 0
                 }
                 return { id, previousRoute }
+            },
+            meta:{
+                title: 'IT 2.0 Tools Корректировать фотографии'
             }
         },
         {
@@ -110,6 +129,9 @@ export default new VueRouter({
                     return 0
                 }
                 return { id, previousRoute, albumId }
+            },
+            meta:{
+                title: 'IT 2.0 Tools Корректировать фото'
             }
         },
         {

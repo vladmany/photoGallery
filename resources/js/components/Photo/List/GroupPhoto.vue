@@ -1,13 +1,16 @@
 <template>
-    <div v-if="elements.length > 0" class="group">
+    <div v-if="elements.length > 0" class="col-auto">
         <div class="group-selector">
-            <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
+            <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId"
+                   v-model="isSelected"
+                   @click="clickInput"
+            >
             <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
         </div>
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
                       :id="photo.id"
-                      :is-selected-def="isSelected"
+                      :is-selected="isSelected"
                       :album-id="albumId"
             ></OnePhoto>
         </div>
@@ -48,6 +51,7 @@
             ...mapGetters({
                 selectAll: 'ListPhoto/selectAllPhotos',
                 selectedPhotos: 'selectedPhotos',
+                downUp: 'ListPhoto/downUp',
                 // groupsSelected: 'ListPhoto/groupsSelected'
             }),
         },
@@ -56,21 +60,30 @@
                 this.isSelected = this.selectAll;
             },
             selectedPhotos(newVal) {
-                let allPhotoSelected = this.checkAllElementsSelected()
-                if(this.isSelected !== allPhotoSelected) {
-                    this.isSelected = allPhotoSelected;
-                }
+                // let allPhotoSelected = this.checkAllElementsSelected()
+                // if(this.isSelected !== allPhotoSelected) {
+                //     this.isSelected = allPhotoSelected;
+                // }
             },
-            isSelected() {
-                if(this.isSelected) {
-                    this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
-                    this.selectAllElements()
+            isSelected(newVal) {
+                // console.log(this.downUp)
+                if(this.downUp === 0) {
+                    if(newVal) {
+                        this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
+                    } else {
+                        this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
+                    }
                 } else {
-                    this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
-                }
+                    // if(this.isSelected) {
+                    //     this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
+                    //     this.selectAllElements()
+                    // } else {
+                    //     this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
+                    // }
 
-                // let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id)
-                // let isSelGroup = this.$store.getters['ListPhoto/groupsSelected'][group]
+                    // let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id)
+                    // let isSelGroup = this.$store.getters['ListPhoto/groupsSelected'][group]
+                }
             }
         },
         methods: {
@@ -87,6 +100,10 @@
                     el['is_selected'] = true
                 }
                 console.log(this.elements)
+            },
+            clickInput() {
+                // this.$store.dispatch('ListPhoto/fromGroupToPhotos');
+                // this.$store.dispatch('ListPhoto/changeClickCount');
             }
         },
     }
@@ -119,6 +136,9 @@
         text-align: center;
         color: #999999;
         padding-left: 13px;
+    }
+    .group-date:hover {
+        opacity: 0.8;
     }
     .group-content {
         display: flex;
