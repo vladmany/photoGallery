@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\PhotoRequest;
+use App\Models\Dashboard\Album;
 use App\Models\Dashboard\AlbumPhoto;
 use App\Models\Dashboard\Photo;
 use App\Services\PhotoService;
@@ -171,6 +172,13 @@ class PhotoController extends Controller
                     $albumPhotos = AlbumPhoto::all()->where('photo_id', $photoBd->id);
                     foreach ($albumPhotos as $albumPhoto)
                     {
+                        $albums = Album::all()->where('cover', $photoBd->url);
+                        foreach ($albums as $album){
+                            $album->cover = "/storage/albums/placeholderAlbum.png";
+                            $album->save();
+                        }
+
+                        //dd($albums);
                         $albumPhoto->first()->delete();
                     }
                     $photoBd->delete();
