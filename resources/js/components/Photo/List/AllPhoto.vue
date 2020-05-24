@@ -60,7 +60,8 @@
         },
         data() {
             return {
-                pages: 0
+                pages: 0,
+                there: false
             }
         },
         computed: {
@@ -75,7 +76,15 @@
             photos() {
                 this.setPages();
                 this.onChangePage(1);
-            }
+            },
+            groups() {
+                let photos = this.$store.getters.photoChangedDate;
+                if(photos.length !== 0) {
+                    this.onChangePage(1);
+                    this.$store.state.photoChangedDate = [];
+                }
+                // console.log(this.$store.state.photoChangedDate)
+            },
         },
         methods: {
             onChangePage(page = 1) {
