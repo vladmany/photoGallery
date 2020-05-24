@@ -89,7 +89,6 @@ class LoginController extends Controller
                         'remember_token' => $access->access_token
                     ]
                 );
-                dd($user, $myuser);
                 Auth::login($user);
                 return response()->redirectTo(RouteServiceProvider::HOME);
             }
