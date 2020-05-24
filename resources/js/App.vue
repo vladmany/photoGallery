@@ -107,13 +107,14 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="http://team1-group-project.azurewebsites.net/user/profile">
-                            {{ user.name }} {{ user.surname }}
-                            <img v-if="user.avatar_url" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">
-                            <div v-if="!user.avatar_url" class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>
-<!--                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
-<!--                            <img :src="user.avatar">-->
-                        </a>
+                        <User/>
+<!--                        <a href="http://team1-group-project.azurewebsites.net/user/profile">-->
+<!--                            {{ user.name }} {{ user.surname }}-->
+<!--                            <img v-if="user.avatar_url" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
+<!--                            <div v-if="!user.avatar_url" class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>-->
+<!--&lt;!&ndash;                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <img :src="user.avatar">&ndash;&gt;-->
+<!--                        </a>-->
                         <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
                     </div>
                 </nav>
@@ -193,9 +194,11 @@
     import ChangeDateModal from "./components/Photo/List/Actions/СhangeDate/Modals/changeDate";
     import DeleteImagesFromAlbumModal
         from "./components/Album/List/ActionsOneAlbum/DeleteImagesFromAlbum/Modals/DeleteImagesFromAlbum";
+    import User from "./components/Global/User";
 
     export default {
         components: {
+            User,
             DeleteImagesFromAlbumModal,
             ChangeDateModal,
             DeleteImagesModal,
@@ -233,15 +236,15 @@
                     $('#sidebar-phone_toggle').removeClass('open')
                 }
             },
-            getUser() {
-                this.$store.dispatch('getUser')
-                // this.name = this.user.name + ' ' + this.user.surname;
-                // this.avatar = this.user.avatar;
-            },
-            getFirstLetter(val) {
-                try{ return val.substring(0, 1); }
-                catch { return '' }
-            },
+            // getUser() {
+            //     this.$store.dispatch('getUser')
+            //     // this.name = this.user.name + ' ' + this.user.surname;
+            //     // this.avatar = this.user.avatar;
+            // },
+            // getFirstLetter(val) {
+            //     try{ return val.substring(0, 1); }
+            //     catch { return '' }
+            // },
         },
         watch: {
             currentRoute() {
@@ -269,14 +272,14 @@
             isPhotoOpen() {
                 return this.$store.state.isPhotoOpen
             },
-            user() {
-                let usr = this.$store.getters['user']
-                console.log(usr)
-                return usr
-            },
-            initials() {
-                return `${this.user.name.substr(0,1)} ${this.user.surname.substr(0,1)}`
-            }
+            // user() {
+            //     let usr = this.$store.getters['user']
+            //     // console.log(usr)
+            //     return usr
+            // },
+            // initials() {
+            //     return `${this.user.name.substr(0,1)} ${this.user.surname.substr(0,1)}`
+            // }
         },
         created() {
             loadProgressBar()
@@ -291,7 +294,7 @@
                 }
             });
 
-            this.getUser()
+
         },
         mounted() {
             this.$root.$on('showPhotosSidebar', () => {
