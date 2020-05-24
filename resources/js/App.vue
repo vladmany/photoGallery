@@ -88,17 +88,22 @@
                     </div>
 
                     <div class="user_block">
-                        <div class="user_menu-wrapper">
+                        <div class="user_menu-wrapper"
+                             v-click-outside="closeMenu"
+                             :class="userMenuOpen ? 'user_menu-opened' : ''">
                             <div></div>
                             <ul class="user_menu" :class="userMenuOpen ? 'user_menu-opened' : ''">
                                 <li>
-                                    <router-link to="user/profile/">Мой профиль</router-link>
+                                    <a href="http://team1-group-project.azurewebsites.net/user/profile/"
+                                    >Мой профиль</a>
                                 </li>
                                 <li>
-                                    <router-link to="user/profile/security">Настройки безопасности</router-link>
+                                    <a href="http://team1-group-project.azurewebsites.net/user/profile/security/settings"
+                                    >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <router-link to="/authorization" @click="logout">Выход из системы</router-link>
+                                    <a href="http://team1-group-project.azurewebsites.net/logout"
+                                    >Выход из системы</a>
                                 </li>
                             </ul>
                         </div>
