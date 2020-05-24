@@ -1,7 +1,9 @@
 <template>
     <div class="search-panel">
-        <input type="text" v-model="value" placeholder="Найти альбом">
-        <button type="submit"><img src="/storage/albums/actions/ic_search.png"></button>
+        <div class="panel">
+            <input type="text" v-model="value" placeholder="Найти альбом">
+            <button type="submit"><img src="/storage/albums/actions/ic_search.png"></button>
+        </div>
     </div>
 </template>
 
@@ -45,6 +47,29 @@
         width: 100%;
         max-width: 285px;
         background: #ffffff;
+        display: flex;
+        align-self: center;
+        justify-content: center;
+
+    }
+    @media (min-width: 992px){
+        .search-panel{
+            height: 92px;
+            border-left: 5px solid rgb(250, 250, 250);
+        }
+        .panel{
+            padding-left: 28px;
+        }
+    }
+    @media (max-width: 991px){
+        .search-panel{
+            height: 35px;
+        }
+    }
+
+    .panel{
+        position: relative;
+        width: 100%;
         height: 35px;
         display: flex;
         align-self: center;
@@ -56,7 +81,6 @@
         background: transparent;
     }
     input {
-
         width: 100%;
     }
     button {
