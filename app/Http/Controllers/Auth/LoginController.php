@@ -75,10 +75,9 @@ class LoginController extends Controller
 
             $response = json_decode($result, true);//данные о user пришедшие от Богдана
 
-            dd($response);
-
             $myuser = User::query()->where('email', $response['email'])->first();
 
+            dd($myuser);
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
             if(!$myuser)
             {
@@ -91,9 +90,12 @@ class LoginController extends Controller
                         'remember_token' => $access->access_token
                     ]
                 );
+                dd($user);
                 Auth::login($user);
                 return response()->redirectTo(RouteServiceProvider::HOME);
             }
+
+
 
 //авторизовать пользователя
             $myuser->update([
