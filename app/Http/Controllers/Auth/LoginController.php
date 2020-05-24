@@ -75,8 +75,6 @@ class LoginController extends Controller
 
             $response = json_decode($result, true);//данные о user пришедшие от Богдана
 
-            dd($response);
-
             $myuser = User::query()->where('email', $response['email'])->first();
 
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
