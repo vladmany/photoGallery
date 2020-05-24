@@ -1,5 +1,5 @@
 <template>
-    <div v-if="elements.length > 0" class="col">
+    <div v-if="elements.length > 0" class="col-auto">
         <div class="group-selector">
             <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
             <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
