@@ -109,8 +109,8 @@
                         </div>
                         <a href="http://team1-group-project.azurewebsites.net/user/profile">
                             {{ user.name }} {{ user.surname }}
-<!--                            <img v-if="avatar" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
-                            <div class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>
+                            <img v-if="user.avatar_url" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">
+                            <div v-if="!user.avatar_url" class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>
 <!--                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
 <!--                            <img :src="user.avatar">-->
                         </a>
