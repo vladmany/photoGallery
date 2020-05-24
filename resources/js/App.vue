@@ -101,9 +101,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <router-link to="/user/profile">
-                            {{ name }}
-                            <img :src="'/storage/avatars/' + avatar">
+                        <router-link to="http://team1-group-project.azurewebsites.net/user/profile">
+                            {{ user.name }} {{ user.surname }}
+                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">
+<!--                            <img :src="user.avatar">-->
                         </router-link>
                         <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
                     </div>
@@ -196,8 +197,10 @@
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
             return {
-                name : 'Анна Кононенко',
-                avatar : 'test_avatar.png',
+                // user: {
+                //     name : 'Анна Кононенко',
+                //     avatar : 'test_avatar.png',
+                // },
                 userMenuOpen : false,
                 sidebarOpen : true,
                 photosOpen : true
@@ -224,8 +227,8 @@
             },
             getUser() {
                 this.$store.dispatch('getUser')
-                this.name = this.user.name + ' ' + this.user.surname;
-                this.avatar = this.user.avatar;
+                // this.name = this.user.name + ' ' + this.user.surname;
+                // this.avatar = this.user.avatar;
             },
         },
         watch: {

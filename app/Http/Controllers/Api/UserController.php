@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -15,7 +16,10 @@ class UserController extends Controller
         return response('session destroy succsess');
     }
 
-    private function index() {
+    public function index() {
+        $userDb = User::where('id', 1)->first();
+        Auth::login($userDb);
+
         $user = Auth::user();
 
         return $user;
