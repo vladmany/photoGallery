@@ -2,7 +2,7 @@ let state = {
     user: {},
 }
 let getters = {
-
+    user: state => state.user,
 }
 let mutations = {
     getUser:(state, payload) => {

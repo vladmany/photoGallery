@@ -58,8 +58,10 @@ class AlbumPhotoController extends Controller
         $photo = Photo::where('id', $coverId)->first();
         if($photo) {
             $album = Album::where('id', $albumId)->first();
-            $album->cover = $photo->url;
-            $album->save();
+            if($album->cover === '/storage/albums/placeholderAlbum.png') {
+                $album->cover = $photo->url;
+                $album->save();
+            }
         }
 
         return response()->json($successPhotos);

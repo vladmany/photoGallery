@@ -115,10 +115,4 @@ class LoginController extends Controller
         return redirect()->route('auth');
     }
 
-    public function deadSession(Request $request)
-    {
-        session_destroy();
-
-        return response('session destroy succsess');
-    }
 }

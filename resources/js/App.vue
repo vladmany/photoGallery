@@ -101,9 +101,10 @@
                                 </li>
                             </ul>
                         </div>
-                        <router-link to="/user/profile">
-                            {{ name }}
-                            <img :src="'/storage/avatars/' + avatar">
+                        <router-link to="http://team1-group-project.azurewebsites.net/user/profile">
+                            {{ user.name }} {{ user.surname }}
+                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">
+<!--                            <img :src="user.avatar">-->
                         </router-link>
                         <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
                     </div>
@@ -196,8 +197,10 @@
             ModalWindow, AddPhotoToAlbumModalWindow, SelectionErrorModal, ErrorsModalWindow, SuccessModalWindow},
         data: function () {
             return {
-                name : 'Анна Кононенко',
-                avatar : 'test_avatar.png',
+                // user: {
+                //     name : 'Анна Кононенко',
+                //     avatar : 'test_avatar.png',
+                // },
                 userMenuOpen : false,
                 sidebarOpen : true,
                 photosOpen : true
@@ -205,6 +208,7 @@
         },
         methods: {
             logout() {
+                this.$store.dispatch('logout')
             },
             getAllData() {
                 this.$store.dispatch('ListPhoto/getPhotos');
@@ -220,7 +224,12 @@
                     this.sidebarOpen = false
                     $('#sidebar-phone_toggle').removeClass('open')
                 }
-            }
+            },
+            getUser() {
+                this.$store.dispatch('getUser')
+                // this.name = this.user.name + ' ' + this.user.surname;
+                // this.avatar = this.user.avatar;
+            },
         },
         watch: {
             currentRoute() {
@@ -240,6 +249,18 @@
                 }
             },
         },
+        computed: {
+            currentRoute() {
+                console.log(this.$router.currentRoute)
+                return this.$router.currentRoute
+            },
+            isPhotoOpen() {
+                return this.$store.state.isPhotoOpen
+            },
+            user() {
+                return this.$store.getters['user']
+            }
+        },
         created() {
             loadProgressBar()
             this.$store.dispatch('getCorrects');
@@ -252,15 +273,8 @@
                     this.sidebarOpen = true
                 }
             });
-        },
-        computed: {
-            currentRoute() {
-                console.log(this.$router.currentRoute)
-                return this.$router.currentRoute
-            },
-            isPhotoOpen() {
-                return this.$store.state.isPhotoOpen
-            }
+
+            this.getUser()
         },
         mounted() {
             this.$root.$on('showPhotosSidebar', () => {

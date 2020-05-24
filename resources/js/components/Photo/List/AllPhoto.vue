@@ -2,12 +2,14 @@
     <div class="" v-if="photos.length > 0">
         <div class="photo-wrapper">
             <div class="photo-content">
-                <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
-                            :elements="elements"
-                            :title="title"
-                            :groupId="index"
-                            :album-id="albumId"
-                />
+                <div class="row">
+                    <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
+                                :elements="elements"
+                                :title="title"
+                                :groupId="index"
+                                :album-id="albumId"
+                    />
+                </div>
             </div>
             <div class="photo-paginate">
                 <Paginator :pages="pages" :func="onChangePage"></Paginator>
