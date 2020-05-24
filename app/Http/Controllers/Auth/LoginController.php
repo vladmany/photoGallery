@@ -75,8 +75,6 @@ class LoginController extends Controller
 
             $response = json_decode($result, true);//данные о user пришедшие от Богдана
 
-            session_destroy();
-
             $myuser = User::query()->where('email', $response['email'])->first();
 
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
@@ -91,7 +89,7 @@ class LoginController extends Controller
                         'remember_token' => $access->access_token
                     ]
                 );
-//                dd($response, $user);
+                dd($response, $user);
                 Auth::login($user);
                 return response()->redirectTo(RouteServiceProvider::HOME);
             }
