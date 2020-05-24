@@ -176,7 +176,14 @@ class PhotoController extends Controller
                         foreach ($albums as $album){
                             $album->cover = "/storage/albums/placeholderAlbum.png";
                             $album->save();
+
+                            $countAlbumPhotos=AlbumPhoto::where('album_id',$album->id)->count();
+                            if($countAlbumPhotos === 0){
+                                $album->cover = "/storage/albums/placeholderAlbum.png";
+                                $album->save();
+                            }
                         }
+
 
                         //dd($albums);
                         $albumPhoto->first()->delete();
