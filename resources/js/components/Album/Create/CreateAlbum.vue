@@ -1,30 +1,25 @@
 <template>
     <div class="createAlbum">
-        <modal-create-album v-if="isInfoPopupVisible" @closeModal="CloseModal"></modal-create-album>
-
-        <CButton text="Добавить альбом" :action="modalCreate" class="btn-create-album"></CButton>
+<!--         DD -->
+        <create></create>
+        <CButton text="Добавить" :action="modalCreate" class="btn-create-album"></CButton>
     </div>
 </template>
 
 <script>
 
-    import ModalCreateAlbum from "./ModalCreateAlbum";
     import CButton from "../../Global/CButton";
+    import Create from "../Modals/CreateAlbum";
+    import DelAlbums from "../Modals/DelAlbums";
     export default {
         name: "CreateAlbum",
-        components: {ModalCreateAlbum, CButton},
-        data: function () {
-            return {
-                album: {},
-                isInfoPopupVisible:false
-            }
-        },
+        components: {CButton,Create, DelAlbums},
         methods: {
             modalCreate(){
-                this.isInfoPopupVisible = true;
+                this.$store.commit('showCreateAlbum');
             },
             CloseModal(){
-                this.isInfoPopupVisible = false;
+                this.$store.commit('hideCreateAlbum');
 
             },
         }
@@ -32,7 +27,4 @@
 </script>
 
 <style scoped>
-    .createAlbum{
-
-    }
 </style>

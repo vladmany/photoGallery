@@ -13,7 +13,7 @@
             </div>
         </div>
         <div class="row card-wrapper">
-            <div class="card-button col-12 col-md-4 col-lg-3">
+            <div class="card-button col-12 col-md-3 col-lg-2">
                 <slot name="button">
                     <!--   Кнопка секции -->
                 </slot>
@@ -90,5 +90,6 @@
         align-items: center;
         background-color: #ffffff;
         max-width: 1110px;
+        margin-bottom: 25px;
     }
 </style>

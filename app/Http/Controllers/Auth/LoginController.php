@@ -31,36 +31,28 @@ class LoginController extends Controller
     public function redirect()
     {
         $query = http_build_query([
-            'client_id' => 15,//запросить у Богдана и вынести в конфиг
-            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/redirect',
-            //урл куда оправит сайт Богдана после успешной
+            'client_id' => 17,
+            'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
             'response_type' => 'code',
             'scope' => '',
         ]);
 
-        /*
-        team1-group-project.azurewebsites.net - урл Богдана, его тоже вынести в конфиг
-        */
-        return redirect('https://team1-group-project.azurewebsites.net/oauth/authorize?' . $query);
+        return redirect('https://team1-group-project.azurewebsites.net/oauth/authorize?'.$query);
     }
 
     public function callback(Request $request)
     {
-//        dd($request);
-
-        //заюзать use GuzzleHttp\Client;
         $http = new Client();
 
         $response = $http->post('http://team1-group-project.azurewebsites.net/oauth/token', [
             'form_params' => [
                 'grant_type' => 'authorization_code',
-                'client_id' => 15, //данные которые выдаст Богдан. вынести в конфиг
-                'client_secret' => 'S9qfCC612r1EhwviAq6Ca24EqM3xuetvFEzL3Qj9',//данные которые выдаст Богдан. вынести в конфиг
-                'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/redirect',
+                'client_id' => 17, //данные которые выдаст Богдан. вынести в конфиг
+                'client_secret' => ' DJWhEfPbsKMLlEBZDeyGgoCqc4RWmnJvDne4g7Pt', //данные которые выдаст Богдан. вынести в конфиг
+                'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
                 'code' => $request->code,
             ],
         ]);
-
 
         $access = json_decode((string)$response->getBody());//данные с токеном. придет сам токен и время его жизни
 
@@ -75,7 +67,6 @@ class LoginController extends Controller
                 'Authorization: Bearer ' . $access_token
             );
 
-
             curl_setopt($ch, CURLOPT_URL, $url);
             curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
             curl_setopt($ch, CURLOPT_HTTPHEADER, $header);
@@ -83,8 +74,6 @@ class LoginController extends Controller
             curl_close($ch);
 
             $response = json_decode($result, true);//данные о user пришедшие от Богдана
-
-            dd($response);
 
             $myuser = User::query()->where('email', $response['email'])->first();
 
@@ -94,17 +83,19 @@ class LoginController extends Controller
                 $user = User::firstOrCreate([
                         'email' => $response['email'],
                         'name' => $response['name'],
-                        'password' => Hash::make('12345678'),
-                        'token' => $access->access_token
+                        'surname' => $response['surname'],
+                        'avatar_url' => $response['avatar_url'] ?? null,
+                        'password' => Hash::make('qwer1234'),
+                        'remember_token' => $access->access_token
                     ]
                 );
-                $Rres = Auth::login($user);
+                Auth::login($user);
                 return response()->redirectTo(RouteServiceProvider::HOME);
             }
 
 //авторизовать пользователя
-            $myuser->update(['token' => $access->access_token]);
-            $Rres = Auth::login($myuser);
+            $myuser->update(['remember_token' => $access->access_token]);
+            Auth::login($myuser);
 
 //перекинуть в личны кабинет
             return response()->redirectTo(RouteServiceProvider::HOME);
@@ -121,6 +112,7 @@ class LoginController extends Controller
         $this->guard()->logout();
         Auth::logout();
 
-        return redirect()->route('auth.redirect');
+        return redirect()->route('auth');
     }
+
 }

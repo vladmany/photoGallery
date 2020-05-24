@@ -1,14 +1,27 @@
 <template>
     <Section>
+        <template v-slot:breadcrumbs>
+            <breadcrumbs
+                :crumbs="{
+                    'Фотографии': 'none',
+                    'Альбомы': {name: 'AlbumIndex'},
+                    'Просмотр альбома': 'none',
+                }"
+            />
+        </template>
         <template v-slot:title>
             <span>Просмотр альбома</span>
         </template>
         <template v-slot:button>
             <div class="row">
                 <div>
-                    <router-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id } }">
-                        <span class="btn btn-primary btn-lg text-nowrap">Добавить фото</span>
-                    </router-link>
+                    <c-button
+                        text="Добавить фото"
+                        :action="addToAlbum"
+                    />
+<!--                    <router-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id } }">-->
+<!--                        <span class="btn btn-primary btn-lg text-nowrap">Добавить фото</span>-->
+<!--                    </router-link>-->
                 </div>
             </div>
         </template>
@@ -16,16 +29,16 @@
             <ActionOneAlbum></ActionOneAlbum>
         </template>
         <template v-slot:content>
-            <div>
+            <div class="back-button">
                 <router-link :to="{ name: 'AlbumIndex' }" >
-                    Назад
+                    <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
                 </router-link>
             </div>
             <div class="row">
                 <div class="col-12">
-                    <p class="text-center album-name mt-2 mt-md-4 mt-5 mb-2 mb-md-4 mb-5">{{ album.name }}</p>
+                    <p class="text-center album-name mt-2 mt-md-4 mt-5 mb-2 mb-md-4 mb-5">{{ albumName }}</p>
                 </div>
-                <AllPhotoAlbum :paginate-count="20" :album-id="album.id" class="col-12"></AllPhotoAlbum>
+                <AllPhotoAlbum :paginate-count="20" :album-id="id" class="col-12"></AllPhotoAlbum>
             </div>
 
         </template>
@@ -35,11 +48,14 @@
 
 <script>
     import AllPhotoAlbum from "./AllPhotoAlbum";
-    import ActionOneAlbum from "./ActionOneAlbum";
+    import ActionOneAlbum from "./ActionsOneAlbum/ActionsIndex";
+    import CButton from "../../Global/CButton";
+    import routes from '../../../routes';
+    import Breadcrumbs from "../../Global/Breadcrumbs";
 
     export default {
         name: "OneAlbum",
-        components: {ActionOneAlbum, AllPhotoAlbum},
+        components: {CButton, ActionOneAlbum, AllPhotoAlbum, Breadcrumbs},
         props: {
             id: {
                 required: true,
@@ -49,8 +65,23 @@
         computed: {
             album() {
                 return this.$store.getters['ListAlbum/album'](this.id);
+            },
+            albumName() {
+                return this.album ? this.album.name : ''
             }
-        }
+        },
+        created() {
+
+            this.$store.dispatch('ListAlbum/getAlbums');
+            this.$store.dispatch('clearPhotos')
+            this.$store.dispatch('clearAlbums')
+            this.$store.state.IdAlbum = this.id;
+        },
+        methods: {
+            addToAlbum() {
+                routes.push({ name: 'AddPhotoToAlbum', params: { id: this.id } })
+            },
+        },
     }
 </script>
 
@@ -60,5 +91,17 @@
         align-items: center;
         font-weight: bolder;
         color: #666666;
+    }
+    object {
+        pointer-events: none;
+        filter: brightness(75%);
+    }
+    .back-button {
+        display: flex;
+        margin-top: 15px;
+        width: 30px;
+    }
+    .back-button:hover object {
+        filter: brightness(50%);
     }
 </style>

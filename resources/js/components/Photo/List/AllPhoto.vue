@@ -1,30 +1,18 @@
 <template>
-
-    <p>
-        <router-link :to="{ name: 'photos' }">Фотографии</router-link> |
-        <router-link :to="{ name: 'photo' }">Фото</router-link>
-    </p>
     <div class="" v-if="photos.length > 0">
         <div class="photo-wrapper">
             <div class="photo-content">
-                <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
-                            :elements="elements"
-                            :title="title"
-                            :groupId="index"/>
+                <div class="row">
+                    <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
+                                :elements="elements"
+                                :title="title"
+                                :groupId="index"
+                                :album-id="albumId"
+                    />
+                </div>
             </div>
             <div class="photo-paginate">
-                <paginate
-                    :page-count="pages"
-                    :page-range="3"
-                    :margin-pages="2"
-                    :click-handler="onChangePage"
-                    :prev-text="'&#129120;'"
-                    :next-text="'&#129122;'"
-                    :prev-class="'one-page prev'"
-                    :next-class="'one-page next'"
-                    :container-class="'paginate'"
-                    :page-class="'one-page'">
-                </paginate>
+                <Paginator :pages="pages" :func="onChangePage"></Paginator>
             </div>
         </div>
     </div>
@@ -44,7 +32,6 @@
     import ErrorsModalWindow from "../Upload/ErrorsModalWindow";
     import UploadPhotosComponent from "../Upload/UploadPhotosComponent";
     import Checkbox from "../../Global/Checkbox";
-    import Breadcrumbs from "../../Global/Breadcrumbs";
     import Paginator from "../../Global/Paginator"
 
     export default {
@@ -52,7 +39,7 @@
         components: {
             Checkbox, Section,
             GroupPhoto, ErrorsModalWindow,
-            UploadPhotosComponent, Breadcrumbs
+            UploadPhotosComponent, Paginator
         },
         props: {
             photos: {
@@ -66,6 +53,9 @@
             reverseGroup: {
                 type: Boolean,
                 default: false
+            },
+            albumId: {
+                type: Number
             }
         },
         data() {
@@ -75,7 +65,10 @@
         },
         computed: {
             ...mapGetters({
+                // photos: 'ListPhoto/photos',
                 groups: 'ListPhoto/groups',
+                selectedPhotos: 'selectedPhotos',
+                isSelectAll: 'ListPhoto/selectAllPhotos'
             })
         },
         watch: {
@@ -91,11 +84,19 @@
                 let to = (page * perPage);
                 let pageOfItems = this.photos.slice(from, to);
 
+                if(this.isSelectAll) {
+                    for(let key of Object.keys(this.groups)) {
+                        // for(let item of this.groups[key]) {
+                            this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
+                        // }
+                    }
+                }
+
                 this.$store.dispatch('ListPhoto/makeGroups', {
                     items: pageOfItems,
                     reverse: this.reverseGroup,
                 });
-
+                this.$store.dispatch('clearPhotos')
             },
             setPages () {
                 let pages =[]
@@ -105,11 +106,15 @@
                 }
                 this.pages = pages.length;
             },
+
         },
         created() {
             this.setPages();
             this.onChangePage(1);
-        }
+            this.$store.dispatch('ListPhoto/clearPhotos')
+            this.$store.dispatch('clearAngle')
+            // await this.$store.dispatch('ListPhoto/getPhotos')
+        },
     }
 </script>
 

@@ -1,38 +1,40 @@
 <template>
     <div class="actions">
-        <div class="action select_all">
+        <div class="action select_all" :class="(photos.length > 0) ? 'available' : ''">
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
             <label for="all-selector"></label>
         </div>
-        <div class="action create">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_create.svg"></object>
-        </div>
+<!--        <div class="action create">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_create.svg"></object>-->
+<!--        </div>-->
         <div class="action add_to_album" :class="isSelectedPhotos" @click="addToAlbum">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
-        <div class="action download" @click="download">
+        <div class="action download" :class="isSelectedPhotos" @click="download">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_download.svg"></object>
         </div>
-        <div class="action change_date" @click="changeDate">
+        <div class="action change_date" :class="isSelectedPhotos" @click="changeDate">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>
         </div>
-        <div class="action to_favorite" @click="toFavorite">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>
-        </div>
-        <div class="action turn_image" @click="turnImage">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
-        </div>
-        <div class="action image_correction" @click="imageCorrection">
-            <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
-        </div>
-        <div class="action delete_image" @click="deleteImages">
+<!--        <div class="action to_favorite" @click="toFavorite">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>-->
+<!--        </div>-->
+<!--        <div class="action turn_image" @click="turnImage">-->
+<!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>-->
+<!--        </div>-->
+        <div class="action delete_image" :class="isSelectedPhotos" @click="deleteImages">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
+        </div>
+        <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
+            <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
         </div>
     </div>
 </template>
 
 <script>
     // import ListPhoto from "../../../store/modules/ListPhoto";
+
+    import {mapGetters} from "vuex";
 
     export default {
         name: "Actions",
@@ -43,10 +45,14 @@
                 }
             },
             download() {
-
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.dispatch('downloadPhotos', this.$store.getters.selectedPhotos)
+                }
             },
             changeDate() {
-
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.commit('showChangeDate')
+                }
             },
             toFavorite() {
 
@@ -55,16 +61,29 @@
 
             },
             imageCorrection() {
-
+                if (this.$store.getters.selectedPhotos.length === 1) {
+                    this.$store.dispatch('setCorrectPhotoId')
+                    let id = this.$store.getters.correctPhotoId;
+                    this.$router.push({ name: 'CorrectIndexOne', params: { id: id, previousRoute: {name: 'IndexPhoto'} }});
+                }
             },
             deleteImages() {
-
-            }
+                if (this.$store.getters.selectedPhotos.length > 0) {
+                    this.$store.commit('showDeleteImages')
+                }
+            },
         },
         computed: {
-            isSelectedPhotos: function() {
-                return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : ''
-            }
+            isSelectedPhotos() {
+                return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : '';
+            },
+            isSelectedPhotos1() {
+                return (this.$store.getters.selectedPhotos.length === 1) ? 'available' : '';
+            },
+            ...mapGetters({
+                selectedPhotos: 'selectedPhotos',
+                photos: 'ListPhoto/photos'
+            })
         },
         data() {
             return {
@@ -74,6 +93,11 @@
         watch: {
             isSelected() {
                 this.$store.dispatch('ListPhoto/selectAllPhotos', this.isSelected);
+            },
+            selectedPhotos() {
+                if (this.selectedPhotos.length === 0) {
+                    this.isSelected = false
+                }
             }
         }
     }
@@ -88,6 +112,10 @@
     .action {
         margin-left: 15px;
         user-select: none;
+        opacity: 0;
+    }
+    .action.available {
+        opacity: 1;
     }
     .action.available object {
         filter: brightness(75%);

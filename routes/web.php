@@ -13,7 +13,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/auth/firstredirect', 'Auth\LoginController@redirect')->name('auth.redirect');
-Route::post('/auth/redirect', 'Auth\LoginController@callback')->name('auth.callback');
+Route::redirect('/','/photos');
 
-Route::view('/{any}','spa')->where('any', '.*'); # ->middleware('auth')
+Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth');
+Route::get('/auth/callback', 'Auth\LoginController@callback');
+
+if(env('IS_LOCAL') !== '1') {
+    Route::view('/{any}', 'spa')->where('any', '.*')->middleware('auth');  #
+} else {
+    Route::view('/{any}', 'spa')->where('any', '.*');  #->middleware('auth')
+}

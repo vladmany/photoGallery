@@ -1,13 +1,14 @@
 <template>
-    <div v-if="elements.length > 0" class="group">
+    <div v-if="elements.length > 0" class="col">
         <div class="group-selector">
             <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
             <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
         </div>
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
-                      :photo="photo"
+                      :id="photo.id"
                       :is-selected="isSelected"
+                      :album-id="albumId"
             ></OnePhoto>
         </div>
     </div>
@@ -33,6 +34,9 @@
             groupId: {
                 required: true,
                 type: Number
+            },
+            albumId: {
+                type: Number
             }
         },
         data() {
@@ -42,14 +46,49 @@
         },
         computed: {
             ...mapGetters({
-                selectAll: 'ListPhoto/selectAllPhotos'
-            })
+                selectAll: 'ListPhoto/selectAllPhotos',
+                selectedPhotos: 'selectedPhotos',
+                // groupsSelected: 'ListPhoto/groupsSelected'
+            }),
         },
         watch: {
             selectAll() {
                 this.isSelected = this.selectAll;
+            },
+            selectedPhotos(newVal) {
+                // let allPhotoSelected = this.checkAllElementsSelected()
+                // if(this.isSelected !== allPhotoSelected) {
+                //     this.isSelected = allPhotoSelected;
+                // }
+            },
+            isSelected() {
+                // if(this.isSelected) {
+                //     this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
+                //     this.selectAllElements()
+                // } else {
+                //     this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
+                // }
+
+                // let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id)
+                // let isSelGroup = this.$store.getters['ListPhoto/groupsSelected'][group]
             }
-        }
+        },
+        methods: {
+            checkAllElementsSelected() {
+                for(let el of this.elements) {
+                    if(!el['is_selected']) {
+                        return false
+                    }
+                }
+                return true
+            },
+            selectAllElements() {
+                for(let el of this.elements) {
+                    el['is_selected'] = true
+                }
+                console.log(this.elements)
+            }
+        },
     }
 </script>
 
@@ -80,6 +119,9 @@
         text-align: center;
         color: #999999;
         padding-left: 13px;
+    }
+    .group-date:hover {
+        opacity: 0.8;
     }
     .group-content {
         display: flex;

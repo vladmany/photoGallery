@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Dashboard\AlbumRequest;
 use App\Models\Dashboard\Album;
+use App\Models\Dashboard\AlbumPhoto;
+use App\Models\Dashboard\Photo;
 use Illuminate\Http\Request;
 
 class AlbumController extends Controller
@@ -15,7 +17,9 @@ class AlbumController extends Controller
      */
     public function index()
     {
-        return Album::with('photos')
+        return Album::with(['photos' => function ($query) {
+                $query->orderBy('created_at', 'desc');
+            }])
             ->orderBy('created_at', 'desc')
             ->get();
     }
@@ -28,7 +32,13 @@ class AlbumController extends Controller
      */
     public function store(AlbumRequest $request)
     {
-        $data = Album::create($request->all());
+        $albumCount = (string)(Album::all()->count()+1);
+        $url = 'http://gallery/album/'.base64_encode($albumCount);
+        $data = $request->all();
+        $data['url'] = $url;
+
+        $data = Album::create($data);
+
         return $data;
     }
 
@@ -50,19 +60,42 @@ class AlbumController extends Controller
      * @param  \App\Models\Dashboard\Album  $album
      * @return \Illuminate\Http\Response
      */
-    public function update(AlbumRequest $request, $album)
+    public function update(AlbumRequest $request)
     {
         //dd($request->all());
-        $data = $request->only(['AlbumId', 'AlbumName']);
-        $albumName = $data['AlbumName'];
-        $albumId = $data['AlbumId'];
+//        $data = $request->only(['id', 'name']);
+//        $albumName = $data['name'];
+//        $albumId = $data['id'];
+//        $album = Album::where('id', $albumId)->get()->first();
+//        $album->name = $albumName;
+//        $album->save();
+        /*$album = Album::findOrFail($id);
+        $album->update($request->all());
+
+        return album;*/
+        //dd($request->all());
+        /*$this->validate($request, [
+            'name' => 'required',
+        ]);
+
+        $user = Album::findOrFail($id);
+
+        $user->update($request->all());*/
+
+    }
+    public function myUpdate(AlbumRequest $request)
+    {
+        //dd($request->all());
+        $data = $request->only(['id', 'name']);
+        $albumName = $data['name'];
+        $albumId = $data['id'];
         $album = Album::where('id', $albumId)->get()->first();
         $album->name = $albumName;
         $album->save();
         /*$album = Album::findOrFail($id);
         $album->update($request->all());
 
-        return album;*/
+        return album; */
         //dd($request->all());
         /*$this->validate($request, [
             'name' => 'required',
@@ -84,4 +117,61 @@ class AlbumController extends Controller
     {
         //
     }
+    public function myDestroy(Request $request)
+    {
+        $data = $request->only(['id']);
+
+        $albumId = $data['id'];
+
+        Album::destroy($albumId);
+    }
+    public function changeCover(Request $request)
+    {
+        $data = $request->only(['idPhoto', 'idAlbum']);
+
+        $photoId = $data['idPhoto'];
+        $photo = Photo::where('id', $photoId)->get()->first();
+
+        $albumId = $data['idAlbum'];
+        $album = Album::where('id', $albumId)->get()->first();
+
+        $album->cover = $photo->url;
+
+        $album->save();
+    }
+    /*public function changeCoverForcibly(Request $request)
+    {
+        $data = $request->only(['idAlbum', 'idPhoto']);
+
+        $albumId = $data['idAlbum'];
+        $album = Album::where('id', $albumId)->get()->first();
+
+        $countAlbumPhotos=AlbumPhoto::where('album_id',$album->id)->count();
+        if($countAlbumPhotos == 0){
+            $album->cover = '/storage/albums/placeholderAlbum.png';
+        }
+        else {
+            $photoId = $data['idPhoto'];
+            $photo = Photo::where('id', $photoId->id)->get()->first();
+
+            if($album->cover == $photo->url){
+
+            }
+
+            $photoAlbumId = AlbumPhoto::where('album_id', $album->id)->get()->first();
+
+            $photo = Photo::where('id', $photoAlbumId->photo_id)->get()->first();
+
+            $album->cover = $photo->url;
+        }
+
+
+
+
+        if($album->cover == )
+
+
+
+        $album->save();
+    }*/
 }

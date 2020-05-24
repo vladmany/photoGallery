@@ -1,37 +1,68 @@
 <template>
-    <nav aria-label="breadcrumb">
-        <li><router-link to="/photos" v-for="crumb in crumbs" :key="crumb.path">Фотографии</router-link>
-            <router-link to={crumbs.children:path}></router-link>
-        </li>
-    </nav>
+    <div>
+        <p>
+            <span v-for="key in Object.keys(crumbs)">
+                <span class="crumb-delimiter"
+                    v-if="key !== Object.keys(crumbs)[0]"
+                > &#10095; </span>
+                <router-link v-if="crumbs[key] !== 'none'" :to="crumbs[key]" >{{ key }}</router-link>
+                <span v-else class="crumb-title">{{ key }}</span>
+            </span>
+        </p>
+    </div>
 </template>
 
 <script>
-    import AllPhoto from "../Photo/List/AllPhoto";
-    import AllAlbums from "../Album/List/AllAlbums";
-
     export default {
-        props: [
-            crumbs=[
-                {
-                    path: '/photos',
-                    component: AllPhoto,
-                    children: [
-                        {
-                            path: 'photo',
-                            component: AllPhoto
-                        },
-                        {
-                            path: 'albums',
-                            component: AllAlbums
-                        },
-                    ],
-            ],
-        ],
-        name: "Breadcrumbs"
+        name: "Breadcrumbs",
+        props: {
+            crumbs: {      // { tile1: 'link1', title2: 'link2'} - что будет передаваться
+                required: true
+            }
+        },
+        // computed: {
+        //     retStr() {
+        //         let breadStr = '';
+        //         let i = 0;
+        //         let keys = Object.keys(this.crumbs);
+        //         for(let key of keys) {
+        //             breadStr += key;
+        //             if (i !== (keys.length-1)) {
+        //                 breadStr += ' &#10095; '
+        //             }
+        //             i++;
+        //
+        //
+        //                             // здесь наращиваешь крошки
+        //                             // (ссылки(this.crumbs[key]) с титлам(key))
+        //                             // c разделителем
+        //         }
+        //
+        //         return breadStr;
+        //     }
+        // }
     }
 </script>
 
 <style scoped>
-
+    p {
+        margin-top: 30px;
+        margin-bottom: 0;
+    }
+    a {
+        font-size: 13px;
+        line-height: 30px;
+        color: #CCCCCC;
+    }
+    .crumb-delimiter {
+        padding-right: 5px;
+        padding-left: 5px;
+    }
+    p span:last-child .crumb-title {
+        /*font-weight: bold;*/
+        /*color: #aaaaaa;*/
+    }
+    /*span span .crumb-title:last-child {*/
+    /*    font-weight: bold;*/
+    /*}*/
 </style>

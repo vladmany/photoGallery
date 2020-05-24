@@ -13,6 +13,10 @@ class Photo extends Model
         return $this->belongsToMany(Album::class);
     }
 
+    public function correct() {
+        return $this->hasOne(Correct::class);
+    }
+
     protected $fillable = ['name', 'kind_id', 'user_id', 'album_id', 'kind_id', 'width', 'height', 'url', 'size', 'extension', 'path'];
 
     public function add(array $data): self

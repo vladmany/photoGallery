@@ -35,6 +35,7 @@
 
 <script>
     import ModalCreateAlbum from "./ModalCreateAlbum";
+    import routes from "../../../routes";
 
     export default {
         name: "ModalCreateAlbum",
@@ -56,6 +57,13 @@
                 axios.post('api/albums/create', newAlbum)
                     .then(response => {
                         this.closeModal()
+
+                        let payload = {
+                            text: this.album.name + ' Альбом создан',
+                        };
+                        this.$store.dispatch('showToasted', payload);
+                        this.$store.commit('ListAlbum/countAlbumsP');
+
                         this.$store.dispatch('ListAlbum/getAlbums');}
                     )
                     .catch(error =>{

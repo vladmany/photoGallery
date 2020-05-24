@@ -27,9 +27,15 @@
     },
     "dependencies": {
         "@chenfengyuan/vue-carousel": "^1.0.3",
-        "animate.css": "^4.0.0",
+        "animate.css": "^4.1.0",
+        "axios-progress-bar": "^1.2.0",
+        "js-cookie": "^2.2.1",
         "jw-vue-pagination": "^1.0.3",
         "material-design-icons-iconfont": "^5.0.1",
-        "vuejs-paginate": "^2.1.0"
+        "secure-ls": "^1.2.6",
+        "v-calendar": "^1.0.0-beta.23",
+        "vue-toasted": "^1.1.28",
+        "vuejs-paginate": "^2.1.0",
+        "vuex-persistedstate": "^3.0.1"
     }
 }

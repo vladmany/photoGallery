@@ -16,9 +16,6 @@
             <div v-else>
                 <div class="error-end" v-if="filesFinish.length <= 0">
                     <img src="/storage/photos/upload/ic_error.png">
-                    <embed width=200 height=200
-                           src="/storage/photos/tiffdocument.tif" type="image/tiff"
-                           negative=yes>
                     <span>Ни одного фото не было загружено</span>
                 </div>
                 <div class="success-end" v-else>
@@ -133,11 +130,15 @@
                 })
                 .catch(error => {
                     this.buttonState = true;
-                    if (error.response.status === 413) {
+                    // console.log(error.response)
+                    if ((error.response.status === 413) || (error.response.status === 404))  {
                         this.errorMessage = 'Максимальный размер загружаемого фото 16 МБ';
                     } else
                     if (error.response.status === 422) {
                         this.errorMessage = error.response.data.errors.photo[0];
+                    }
+                    if (error.response.status === 401) {
+                        this.errorMessage = error.response.data.message;
                     }
 
                     this.filesFail.push(item);

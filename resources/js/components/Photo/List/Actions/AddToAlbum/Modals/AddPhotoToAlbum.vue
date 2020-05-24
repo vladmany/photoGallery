@@ -45,10 +45,12 @@
         methods: {
             addToAlbum() {
                 this.errors = []
-                if (this.selectedPhotos.length > 0) {
+                let photos = ((this.$store.getters.selectedPhotos.length === 0) && (this.$store.getters.correctPhotoId !== 0)) ? [this.$store.getters.correctPhotoId] : this.$store.getters.selectedPhotos;
+                if (photos.length > 0) {
                     let albumId = $('.select__head span').attr('album-id');
                     if (albumId >= 0) {
-                        this.$store.dispatch('savePhotosToAlbum', albumId)
+                        let res = this.$store.dispatch('savePhotosToAlbum', albumId)
+                        console.log(res)
                     } else {
                         this.errors.push('Альбом не выбран')
                     }
@@ -96,8 +98,19 @@
             },
             selectedPhotos: function() {
                 return this.$store.getters.selectedPhotos
+            },
+            isAddPhotoToAlbum: function () {
+                return this.$store.state.isAddPhotoToAlbum
             }
         },
+        watch: {
+            isAddPhotoToAlbum() {
+                if( !this.isAddPhotoToAlbum ) {
+                    $('.select__head').html('<span>Выберите</span>')
+                    // console.log('Закрывается модалка')
+                }
+            }
+        }
     }
 </script>
 
@@ -216,5 +229,9 @@
     }
     .is-invalid {
         border-color: #dc3545!important;
+    }
+
+    .select__head span {
+        pointer-events: none;
     }
 </style>

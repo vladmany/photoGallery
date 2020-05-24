@@ -1,16 +1,9 @@
 <template>
     <div>
         <div class="outside-the-window">
-            <div class="window animated fadeInDown">
+            <div class="window animated fadeInDown" :style="'max-width: ' + minWidth + 'px'">
                 <button class="close-window-btn" @click="closeAction">
-                    <svg width="26" height="26" viewBox="0 0 26 26" xmlns="http://www.w3.org/2000/svg">
-                        <mask id="mask0" mask-type="alpha" maskUnits="userSpaceOnUse" x="6" y="6" width="14" height="14">
-                            <path fill-rule="evenodd" clip-rule="evenodd" d="M19.0667 8.15535L17.8447 6.93335L13 11.778L8.15535 6.93335L6.93335 8.15535L11.778 13L6.93335 17.8447L8.15535 19.0667L13 14.222L17.8447 19.0667L19.0667 17.8447L14.222 13L19.0667 8.15535Z" fill="white"/>
-                        </mask>
-                        <g mask="url(#mask0)">
-                            <rect x="1.7334" y="1.7334" width="22.5333" height="22.5333"/>
-                        </g>
-                    </svg>
+                    <object type="image/svg+xml" data="/storage/ic_clear.svg"></object>
                 </button>
                 <div class="window-content">
                     <span class="title">{{title}}</span>
@@ -21,7 +14,6 @@
                 </div>
             </div>
         </div>
-
     </div>
 </template>
 
@@ -36,7 +28,19 @@
             closeAction: {
                 type: Function,
                 required: true
+            },
+            minWidth: {
+                type: Number,
+                default: 540
             }
+        },
+        created() {
+            document.addEventListener('mouseup', (e) => {
+                let container = $(".window");
+                if (container.has(e.target).length === 0){
+                    this.closeAction()
+                }
+            });
         }
     }
 </script>
@@ -44,18 +48,18 @@
 <style scoped>
     .outside-the-window {
         opacity: 1;
-        z-index: 1;
+        z-index: 1000;
         position: fixed;
         top: 0;
         left: 0;
         width: 100%;
         height: 100%;
         overflow: auto;
+        background: rgba(64,64,64, .4);
     }
     .window {
         /*width: 150vw;*/
         opacity: 1!important;
-        max-width: 540px;
         /*height: 278px;*/
         background: #FFFFFF;
         box-shadow: 0px 5px 30px rgba(0, 0, 0, 0.07);
@@ -93,14 +97,17 @@
         background: #fff;
         border: none;
         float: right;
+        cursor: pointer;
+        border-radius: 6px;
     }
 
-    .close-window-btn svg {
-        fill: #D8D8D8;
+    .close-window-btn object {
+        pointer-events: none;
     }
 
-    .close-window-btn:hover svg, .close-window-btn:focus svg {
-        fill: #808080;
+    .close-window-btn:hover object {
+        filter: brightness(50%);
+
     }
 
     .window-content {

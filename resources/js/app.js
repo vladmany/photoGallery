@@ -1,5 +1,3 @@
-import Breadcrumbs from "./components/Global/Breadcrumbs";
-
 require('./bootstrap');
 
 import Vue from 'vue'
@@ -12,23 +10,42 @@ import Section from "./components/Global/Section";
 import VueCarousel from '@chenfengyuan/vue-carousel';
 import Paginate from 'vuejs-paginate'
 import JwPagination from 'jw-vue-pagination';
-import AllPhoto from "./components/Photo/List/AllPhoto";
-import AllAlbums from "./components/Album/List/AllAlbums";
+import Toasted from 'vue-toasted';
+import { loadProgressBar } from 'axios-progress-bar'
+import 'axios-progress-bar/dist/nprogress.css'
+import VCalendar from 'v-calendar';
 
+// Use v-calendar & v-date-picker components
+Vue.use(VCalendar, {
+    componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
+});
+
+// сохранение состояния state
+// store.subscribe((mutation, state) => {
+//         // Store the state object as a JSON string
+//         localStorage.setItem('store', JSON.stringify(state));
+//     });
+
+loadProgressBar()
+
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title
+    next()
+})
+
+Vue.use(Toasted)
 
 Vue.component('Section', Section);
-Vue.component('breadcrumbs', Breadcrumbs);
-Vue.component('jw-pagination', JwPagination);
-Vue.component('paginate', Paginate);
-Vue.component(VueCarousel.name, VueCarousel);
 
+Vue.component('jw-pagination', JwPagination);
+Vue.component('paginate', Paginate)
+Vue.component(VueCarousel.name, VueCarousel);
 
 Vue.use(VueRouter)
 
 Vue.config.devtools = false
 Vue.config.debug = false
 Vue.config.silent = true
-
 
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;
@@ -37,21 +54,3 @@ const app = new Vue({
     render: h => h(App),
     store, router
 }).$mount('#app');
-
-const routes=[
-        {
-            path: '/photos',
-            name: 'photos',
-            component: AllPhoto
-        },
-        {
-            path: '/photos/photo',
-            name: 'photo',
-            component: AllPhoto,
-        },
-        {
-            path: '/photos/albums',
-            name: 'albums',
-            component: AllAlbums,
-        },
-];
