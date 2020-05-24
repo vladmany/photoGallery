@@ -1,4 +1,9 @@
 <template>
+
+    <p>
+        <router-link :to="{ name: 'photos' }">Фотографии</router-link> |
+        <router-link :to="{ name: 'photo' }">Фото</router-link>
+    </p>
     <div class="" v-if="photos.length > 0">
         <div class="photo-wrapper">
             <div class="photo-content">
@@ -39,6 +44,7 @@
     import ErrorsModalWindow from "../Upload/ErrorsModalWindow";
     import UploadPhotosComponent from "../Upload/UploadPhotosComponent";
     import Checkbox from "../../Global/Checkbox";
+    import Breadcrumbs from "../../Global/Breadcrumbs";
     import Paginator from "../../Global/Paginator"
 
     export default {
@@ -46,7 +52,7 @@
         components: {
             Checkbox, Section,
             GroupPhoto, ErrorsModalWindow,
-            UploadPhotosComponent
+            UploadPhotosComponent, Breadcrumbs
         },
         props: {
             photos: {

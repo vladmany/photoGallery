@@ -1,3 +1,5 @@
+import Breadcrumbs from "./components/Global/Breadcrumbs";
+
 require('./bootstrap');
 
 import Vue from 'vue'
@@ -10,12 +12,14 @@ import Section from "./components/Global/Section";
 import VueCarousel from '@chenfengyuan/vue-carousel';
 import Paginate from 'vuejs-paginate'
 import JwPagination from 'jw-vue-pagination';
+import AllPhoto from "./components/Photo/List/AllPhoto";
+import AllAlbums from "./components/Album/List/AllAlbums";
 
 
 Vue.component('Section', Section);
-
+Vue.component('breadcrumbs', Breadcrumbs);
 Vue.component('jw-pagination', JwPagination);
-Vue.component('paginate', Paginate)
+Vue.component('paginate', Paginate);
 Vue.component(VueCarousel.name, VueCarousel);
 
 
@@ -33,3 +37,21 @@ const app = new Vue({
     render: h => h(App),
     store, router
 }).$mount('#app');
+
+const routes=[
+        {
+            path: '/photos',
+            name: 'photos',
+            component: AllPhoto
+        },
+        {
+            path: '/photos/photo',
+            name: 'photo',
+            component: AllPhoto,
+        },
+        {
+            path: '/photos/albums',
+            name: 'albums',
+            component: AllAlbums,
+        },
+];

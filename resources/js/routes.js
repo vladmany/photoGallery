@@ -23,6 +23,7 @@ export default new VueRouter({
             path: "/albums",
             component: AlbumIndex,
             name: "AlbumIndex",
+            meta: ''
         },
         {
             path: '/album/:id',
