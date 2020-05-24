@@ -39,14 +39,16 @@
             }
         },
         watch: {
-            isSelected() {
-                if(this.isSelected) {
-                    this.$store.dispatch('addPhoto', this.photo.id);
-                    this.$store.dispatch('ListPhoto/selectPhoto', this.photo.id)
+            isSelected(newVal) {
+                if(this.downUp === 1) {
+                    if(newVal) {
+                        this.$store.dispatch('addPhoto', this.photo.id);
+                        this.$store.dispatch('ListPhoto/selectPhoto', this.photo.id)
+                    } else {
+                        this.$store.dispatch('delPhoto', this.photo.id);
+                        this.$store.dispatch('ListPhoto/unselectPhoto', this.photo.id)
+                    }
                 } else {
-                    this.$store.dispatch('delPhoto', this.photo.id);
-                    this.$store.dispatch('ListPhoto/unselectPhoto', this.photo.id)
-
                     // let allPhotos = this.$store.getters["ListPhoto/photos"];
                     // let allSelectedPhotos = this.$store.getters.selectedPhotos;
                     // let res = allPhotos.length === allSelectedPhotos.length;
@@ -57,7 +59,8 @@
         computed: {
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
-                groupsSelected: 'ListPhoto/groupsSelected'
+                groupsSelected: 'ListPhoto/groupsSelected',
+                downUp: 'ListPhoto/downUp',
             }),
             photo() {
                 return this.$store.getters['ListPhoto/photo'](this.id)

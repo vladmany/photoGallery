@@ -3,6 +3,7 @@ let state = {
     groups: {},
     groupsSelected: {},
     selectAllPhotos: false,
+    downUp: 0,
 }
 let getters = {
     photos: state => state.photos,
@@ -54,10 +55,11 @@ let getters = {
             }
         }
     },
+    downUp: state => state.downUp,
 }
 let mutations = {
     getPhotos: (state, payload) => {
-        console.log('загрузить фото')
+        // console.log('загрузить фото')
         state.photos = payload
     },
     makeGroups:(state, payload) => {
@@ -84,6 +86,9 @@ let mutations = {
                 break;
             }
         }
+    },
+    setDownUp: (state, payload) => {
+        state.downUp = payload
     },
 }
 let actions = {
@@ -178,6 +183,12 @@ let actions = {
         payload['id'] = id
         payload['val'] = false;
         commit('setSelectPhoto', payload)
+    },
+    fromGroupToPhotos: ({ commit }) => {
+        commit('setDownUp', 0);
+    },
+    fromPhotoToGroup: ({ commit }) => {
+        commit('setDownUp', 1);
     },
 }
 
