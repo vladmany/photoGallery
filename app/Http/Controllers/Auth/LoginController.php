@@ -84,7 +84,7 @@ class LoginController extends Controller
                         'email' => $response['email'],
                         'name' => $response['name'],
                         'surname' => $response['surname'],
-                        'avatar_url' => $response['avatar_url'],
+                        'avatar_url' => $response['avatar_url'] ?? null,
                         'password' => Hash::make('qwer1234'),
                         'remember_token' => $access->access_token
                     ]

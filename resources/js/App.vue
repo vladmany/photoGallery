@@ -86,6 +86,7 @@
                         <span></span>
                         <span></span>
                     </div>
+
                     <div class="user_block">
                         <div class="user_menu-wrapper">
                             <div></div>
@@ -101,11 +102,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <router-link to="http://team1-group-project.azurewebsites.net/user/profile">
+                        <a href="http://team1-group-project.azurewebsites.net/user/profile">
                             {{ user.name }} {{ user.surname }}
-                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">
+<!--                            <img v-if="avatar" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
+                            <div class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>
+<!--                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
 <!--                            <img :src="user.avatar">-->
-                        </router-link>
+                        </a>
                         <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
                     </div>
                 </nav>
@@ -230,6 +233,10 @@
                 // this.name = this.user.name + ' ' + this.user.surname;
                 // this.avatar = this.user.avatar;
             },
+            getFirstLetter(val) {
+                try{ return val.substring(0, 1); }
+                catch { return '' }
+            },
         },
         watch: {
             currentRoute() {
@@ -251,14 +258,19 @@
         },
         computed: {
             currentRoute() {
-                console.log(this.$router.currentRoute)
+                // console.log(this.$router.currentRoute)
                 return this.$router.currentRoute
             },
             isPhotoOpen() {
                 return this.$store.state.isPhotoOpen
             },
             user() {
-                return this.$store.getters['user']
+                let usr = this.$store.getters['user']
+                console.log(usr)
+                return usr
+            },
+            initials() {
+                return `${this.user.name.substr(0,1)} ${this.user.surname.substr(0,1)}`
             }
         },
         created() {
@@ -429,7 +441,7 @@
         max-width: 50px;
         min-width: 50px;
         min-height: 50px;
-        font-size: 32px;
+        font-size: 28px;
         color: #999;
         border-radius: 50%;
         border: 1px solid #666;
