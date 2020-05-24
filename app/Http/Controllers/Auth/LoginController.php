@@ -102,7 +102,7 @@ class LoginController extends Controller
             Auth::login($myuser);
 
 //перекинуть в личны кабинет
-//            return response()->redirectTo(RouteServiceProvider::HOME);
+            return response()->redirectTo(RouteServiceProvider::HOME);
         }
     }
 
