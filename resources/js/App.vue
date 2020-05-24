@@ -205,6 +205,7 @@
         },
         methods: {
             logout() {
+                this.$store.dispatch('logout')
             },
             getAllData() {
                 this.$store.dispatch('ListPhoto/getPhotos');
@@ -220,7 +221,12 @@
                     this.sidebarOpen = false
                     $('#sidebar-phone_toggle').removeClass('open')
                 }
-            }
+            },
+            getUser() {
+                this.$store.dispatch('getUser')
+                this.name = this.user.name + ' ' + this.user.surname;
+                this.avatar = this.user.avatar;
+            },
         },
         watch: {
             currentRoute() {
@@ -240,6 +246,18 @@
                 }
             },
         },
+        computed: {
+            currentRoute() {
+                console.log(this.$router.currentRoute)
+                return this.$router.currentRoute
+            },
+            isPhotoOpen() {
+                return this.$store.state.isPhotoOpen
+            },
+            user() {
+                return this.$store.getters['user']
+            }
+        },
         created() {
             loadProgressBar()
             this.$store.dispatch('getCorrects');
@@ -252,15 +270,8 @@
                     this.sidebarOpen = true
                 }
             });
-        },
-        computed: {
-            currentRoute() {
-                console.log(this.$router.currentRoute)
-                return this.$router.currentRoute
-            },
-            isPhotoOpen() {
-                return this.$store.state.isPhotoOpen
-            }
+
+            this.getUser()
         },
         mounted() {
             this.$root.$on('showPhotosSidebar', () => {
