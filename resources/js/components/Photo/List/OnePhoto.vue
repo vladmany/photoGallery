@@ -25,7 +25,7 @@
                 required: true,
                 type: Number,
             },
-            isSelectedDef: {
+            isSelected: {
                 required: true,
                 type: Boolean,
             },
@@ -78,7 +78,7 @@
             }
         },
         created() {
-            this.isSelected = this.isSelectedDef;
+            // this.isSelected = this.isSelectedDef;
         },
     }
 </script>

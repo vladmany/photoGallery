@@ -1,5 +1,5 @@
 <template>
-    <div v-if="elements.length > 0" class="group">
+    <div v-if="elements.length > 0" class="col">
         <div class="group-selector">
             <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
             <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
@@ -7,7 +7,7 @@
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
                       :id="photo.id"
-                      :is-selected-def="isSelected"
+                      :is-selected="isSelected"
                       :album-id="albumId"
             ></OnePhoto>
         </div>
@@ -56,18 +56,18 @@
                 this.isSelected = this.selectAll;
             },
             selectedPhotos(newVal) {
-                let allPhotoSelected = this.checkAllElementsSelected()
-                if(this.isSelected !== allPhotoSelected) {
-                    this.isSelected = allPhotoSelected;
-                }
+                // let allPhotoSelected = this.checkAllElementsSelected()
+                // if(this.isSelected !== allPhotoSelected) {
+                //     this.isSelected = allPhotoSelected;
+                // }
             },
             isSelected() {
-                if(this.isSelected) {
-                    this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
-                    this.selectAllElements()
-                } else {
-                    this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
-                }
+                // if(this.isSelected) {
+                //     this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
+                //     this.selectAllElements()
+                // } else {
+                //     this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
+                // }
 
                 // let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id)
                 // let isSelGroup = this.$store.getters['ListPhoto/groupsSelected'][group]
