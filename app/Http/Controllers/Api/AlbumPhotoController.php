@@ -108,23 +108,29 @@ class AlbumPhotoController extends Controller
 
         $photos = $data['photos'];
         $albumId = $data['albumId'];
+        $album = Album::where('id', $albumId)->get()->first();
         if ((count($photos) > 0) and $albumId)
         {
             foreach ($photos as $photoId)
             {
                 $AlbumPhotoBd = AlbumPhoto::all()->where('photo_id', $photoId)->where('album_id', $albumId)->first();
+//                dd($AlbumPhotoBd);
                 if ($AlbumPhotoBd)
                 {
+                    $photo = Photo::where('id', $AlbumPhotoBd->photo_id)->get()->first();
+                    if($photo && $album->cover == $photo->url){
+                        $album->cover = "/storage/albums/placeholderAlbum.png";
+                        $album->save();
+                    }
                     $AlbumPhotoBd->delete();
                 }
             }
             $countAlbumPhotos=AlbumPhoto::where('album_id',$albumId)->count();
             if($countAlbumPhotos === 0){
-                $album = Album::where('id', $albumId)->get()->first();
+
                 $album->cover = "/storage/albums/placeholderAlbum.png";
                 $album->save();
             }
-
         }
     }
 
