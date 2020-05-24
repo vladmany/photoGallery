@@ -25,6 +25,18 @@ export default new VueRouter({
             beforeEnter() {location.href = 'https://team1-group-project.azurewebsites.net/'}
         },
         {
+            path: '/mail',
+            beforeEnter() {location.href = 'http://cu66460.tmweb.ru/'}
+        },
+        {
+            path: '/calendar',
+            beforeEnter() {location.href = 'http://laravelproject.s-host.net/'}
+        },
+        {
+            path: '/contacts',
+            beforeEnter() {location.href = 'https://contacts.s-host.net/'}
+        },
+        {
             path: "/albums",
             component: AlbumIndex,
             name: "AlbumIndex",
@@ -99,6 +111,14 @@ export default new VueRouter({
                 }
                 return { id, previousRoute, albumId }
             }
+        },
+        {
+            path: '/departaments',
+            beforeEnter() {location.href = 'https://team1-group-project.azurewebsites.net/'}
+        },
+        {
+            path: '/users',
+            beforeEnter() {location.href = 'https://team1-group-project.azurewebsites.net/'}
         },
         {
             path: '/manipul',

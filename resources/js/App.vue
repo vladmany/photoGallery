@@ -43,15 +43,15 @@
                             <span>Календарь</span>
                         </router-link>
                     </li>
-                    <li @click="photosOpen = !photosOpen" class="main-group-tab group-tab-open">
+                    <li @click="photosOpen = !photosOpen" class="main-group-tab group-tab-open photos">
                         <a>
                             <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_camera_alt.svg"></object>
                             <span>Фотографии</span>
                         </a>
                     </li>
-                    <div class="group-tabs">
+                    <div class="group-tabs photos" @click="closeSidebar()">
                         <li>
-                            <router-link to="/photos" >
+                            <router-link to="/photos">
                                 <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
                                 <span>Фото</span>
                             </router-link>
@@ -69,13 +69,26 @@
                             <span>Контакты</span>
                         </router-link>
                     </li>
-                    <li>
-                        <router-link to="/manage" >
+                    <li @click="manageOpen = !manageOpen" class="main-group-tab manage">
+                        <a>
                             <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
                             <span>Управление</span>
-                        </router-link>
+                        </a>
                     </li>
-
+                    <div class="group-tabs manage">
+                        <li>
+                            <router-link to="/departaments" >
+                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_location_city.svg"></object>
+                                <span>Отделы</span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/users" >
+                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
+                                <span>Пользователи</span>
+                            </router-link>
+                        </li>
+                    </div>
                 </ul>
             </nav>
             <div class="main_content">
@@ -200,7 +213,8 @@
                 avatar : 'test_avatar.png',
                 userMenuOpen : false,
                 sidebarOpen : true,
-                photosOpen : true
+                photosOpen : true,
+                manageOpen: false
             }
         },
         methods: {
@@ -220,6 +234,12 @@
                     this.sidebarOpen = false
                     $('#sidebar-phone_toggle').removeClass('open')
                 }
+            },
+            closeSidebar() {
+                if(!($('#sidebar-phone_toggle').css('display') === 'none'))
+                {
+                    this.sidebarOpen = false
+                }
             }
         },
         watch: {
@@ -231,20 +251,38 @@
                     this.photosOpen = false
             },
             photosOpen() {
-                $('.group-tabs').slideToggle(200)
+                $('.group-tabs.photos').slideToggle(200)
                 if (!this.photosOpen) {
-                    $('.main-group-tab').removeClass('group-tab-open')
+                    $('.main-group-tab.photos').removeClass('group-tab-open')
                 }
                 else {
-                    $('.main-group-tab').addClass('group-tab-open')
+                    this.manageOpen = false
+                    $('.main-group-tab.photos').addClass('group-tab-open')
+                }
+            },
+            manageOpen() {
+                $('.group-tabs.manage').slideToggle(200)
+                if (!this.manageOpen) {
+                    $('.main-group-tab.manage').removeClass('group-tab-open')
+                }
+                else {
+                    this.photosOpen = false
+                    $('.main-group-tab.manage').addClass('group-tab-open')
                 }
             },
         },
         created() {
             loadProgressBar()
             this.$store.dispatch('getCorrects');
-            let mql = window.matchMedia('(max-width: 1380px)');
+            $('.group-tabs').click(function () {
+                console.log('dsdasdads')
+                if(!($('#sidebar-phone_toggle').css('display') === 'none'))
+                {
+                    this.sidebarOpen = false
+                }
+            });
 
+            let mql = window.matchMedia('(max-width: 1380px)');
             mql.addListener((e) => {
                 if (e.matches) {
                     this.sidebarOpen = false
@@ -733,6 +771,10 @@
 
     .group-tabs {
         display: block;
+    }
+
+    .group-tabs.manage {
+        display: none;
     }
 
     .group-tabs li {
