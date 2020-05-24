@@ -32,46 +32,44 @@
             albumId: {
                 type: Number
             },
-            group: {
-                type: String
-            }
         },
         data() {
             return {
-                isSelected: false
+                // isSelected: false
             }
         },
         watch: {
             isSelected(newVal) {
-                if(this.downUp === 1) {
+                // if(this.downUp === 1) {
                     if(newVal) {
                         this.$store.dispatch('addPhoto', this.photo.id);
                         this.$store.dispatch('ListPhoto/selectPhoto', this.photo.id)
                     } else {
                         this.$store.dispatch('delPhoto', this.photo.id);
                         this.$store.dispatch('ListPhoto/unselectPhoto', this.photo.id)
-                    }
-                } else {
+                    // }
+                // } else {
                     // let allPhotos = this.$store.getters["ListPhoto/photos"];
                     // let allSelectedPhotos = this.$store.getters.selectedPhotos;
                     // let res = allPhotos.length === allSelectedPhotos.length;
                     // this.$store.dispatch('ListPhoto/selectAllPhotos', res);
                 }
             },
-            clickCount() {
-                if(this.downUp === 0) {
-                    let group = this.$store.getters['ListPhoto/groupByPhoto'](this.id);
-                    if(group === this.grgroup) {
-                        this.isSelected = true;
-                    }
-                }
-            }
+
+            // clickCount() {
+            //     if(this.downUp === 0) {
+            //         let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id);
+            //         let isSelectedGroup = this.$store.getters['ListPhoto/groupsSelected'][group];
+            //         this.isSelected = !this.isSelectedGroup;
+            //     }
+            // },
         },
         computed: {
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
                 groupsSelected: 'ListPhoto/groupsSelected',
                 downUp: 'ListPhoto/downUp',
+                // clickCount: 'ListPhoto/clickCount',
             }),
             photo() {
                 return this.$store.getters['ListPhoto/photo'](this.id)
@@ -82,9 +80,6 @@
 
                 return ret
             },
-            clickCount() {
-                this.$store.getters['ListPhoto/clickCount'];
-            }
         },
         methods: {
             getId() {

@@ -12,7 +12,6 @@
                       :id="photo.id"
                       :is-selected="isSelected"
                       :album-id="albumId"
-                      :group="title"
             ></OnePhoto>
         </div>
     </div>
@@ -67,7 +66,7 @@
                 // }
             },
             isSelected(newVal) {
-                console.log(this.downUp)
+                // console.log(this.downUp)
                 if(this.downUp === 0) {
                     if(newVal) {
                         this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
@@ -103,8 +102,8 @@
                 console.log(this.elements)
             },
             clickInput() {
-                this.$store.dispatch('ListPhoto/fromGroupToPhotos');
-                this.$store.dispatch('changeClickCount');
+                // this.$store.dispatch('ListPhoto/fromGroupToPhotos');
+                // this.$store.dispatch('ListPhoto/changeClickCount');
             }
         },
     }

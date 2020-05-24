@@ -86,9 +86,7 @@
 
                 if(this.isSelectAll) {
                     for(let key of Object.keys(this.groups)) {
-                        // for(let item of this.groups[key]) {
-                            this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
-                        // }
+                        this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
                     }
                 }
 
