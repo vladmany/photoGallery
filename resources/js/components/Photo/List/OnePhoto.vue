@@ -31,6 +31,9 @@
             },
             albumId: {
                 type: Number
+            },
+            group: {
+                type: String
             }
         },
         data() {
@@ -55,6 +58,14 @@
                     // this.$store.dispatch('ListPhoto/selectAllPhotos', res);
                 }
             },
+            clickCount() {
+                if(this.downUp === 0) {
+                    let group = this.$store.getters['ListPhoto/groupByPhoto'](this.id);
+                    if(group === this.grgroup) {
+                        this.isSelected = true;
+                    }
+                }
+            }
         },
         computed: {
             ...mapGetters({
@@ -70,6 +81,9 @@
                 // console.log(ret);
 
                 return ret
+            },
+            clickCount() {
+                this.$store.getters['ListPhoto/clickCount'];
             }
         },
         methods: {

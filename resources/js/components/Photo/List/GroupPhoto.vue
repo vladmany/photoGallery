@@ -12,6 +12,7 @@
                       :id="photo.id"
                       :is-selected="isSelected"
                       :album-id="albumId"
+                      :group="title"
             ></OnePhoto>
         </div>
     </div>
@@ -103,6 +104,7 @@
             },
             clickInput() {
                 this.$store.dispatch('ListPhoto/fromGroupToPhotos');
+                this.$store.dispatch('changeClickCount');
             }
         },
     }
