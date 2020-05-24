@@ -77,7 +77,6 @@ class LoginController extends Controller
 
             $myuser = User::query()->where('email', $response['email'])->first();
 
-            dd($myuser);
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
             if(!$myuser)
             {
@@ -90,7 +89,7 @@ class LoginController extends Controller
                         'remember_token' => $access->access_token
                     ]
                 );
-                dd($user);
+                dd($user, $myuser);
                 Auth::login($user);
                 return response()->redirectTo(RouteServiceProvider::HOME);
             }
