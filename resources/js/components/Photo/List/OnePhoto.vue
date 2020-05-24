@@ -103,8 +103,8 @@
     .photo_element {
         margin: 7px;
     }
-    .photo_element  {
-        -webkit-filter: brightness(1) saturate(1);
+    .photo_element {
+        -webkit-filter: brightness(1);
         -webkit-transition: filter 0.2s ease;
         -moz-transition: filter 0.2s ease;
         -o-transition: filter 0.2s ease;
@@ -113,7 +113,7 @@
     }
 
     .photo_element:hover {
-        -webkit-filter: brightness(0.6) saturate(1.3);
+        -webkit-filter: brightness(0.6);
     }
 
     .photo_element:hover {
@@ -126,6 +126,6 @@
         transform:scale(1.5);
         margin-top: 6px;
         margin-left: 6px!important;
-        -webkit-filter: brightness(1) saturate(1);
+        /*filter: brightness(1) saturate(1);*/
     }
 </style>
