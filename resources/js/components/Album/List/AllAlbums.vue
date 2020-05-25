@@ -1,9 +1,9 @@
 <template>
-    <div class="wrapper container">
-        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row ">
+    <div class="wrapper-album container justify-content-start">
+        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
-                           class="pt-3 pb-3 album col-12 col-md-6 col-lg-4 one-album mb-3 border"/>
+                           class="pt-3 pb-3 col-12 col-md-6 col-lg-4 one-album mb-3 border"/>
             <div class="album-paginate col-12" v-if="this.pages > 0">
                 <Paginator :pages="pages" :func="onChangePage"></Paginator>
             </div>
@@ -74,19 +74,9 @@
 </script>
 
 <style scoped>
-    .wrapper {
+    .wrapper-album {
         background-color: #ffffff;
         padding-top: 35px;
-        justify-content: start;
-    }
-    .album {
-        border-color: #DFDFDF;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        background-color: #ffffff;
-        justify-content: center;
-        border-radius: 3px;
     }
     .album-paginate {
         flex: 0 0 auto;
@@ -97,5 +87,9 @@
         transform: scale(1.05);
         z-index: 100;
         box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.15), 4px 4px 4px rgba(0, 0, 0, 0.15);
+        border-color: #DFDFDF;
+        background-color: #ffffff;
+        border-radius: 3px;
+        justify-content: start;
     }
 </style>
