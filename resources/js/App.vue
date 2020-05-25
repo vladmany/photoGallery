@@ -324,14 +324,14 @@
                     this.sidebarOpen = true
                 }
             });
-            // let mql1 = window.matchMedia('(max-width: 550px)');
-            // mql1.addListener((e) => {
-            //     if (e.matches) {
-            //         this.sidebarOpen = false
-            //     } else {
-            //         this.sidebarOpen = true
-            //     }
-            // });
+            let mql1 = window.matchMedia('(max-width: 550px)');
+            mql1.addListener((e) => {
+                if (e.matches) {
+                    this.sidebarOpen = false
+                } else {
+                    this.sidebarOpen = true
+                }
+            });
 
 
         },
@@ -433,14 +433,15 @@
         max-width: 100%;
     }
     #sidebar .navbar-brand {
-        padding: 19px 0;
+        padding: 19px 15px;
         margin-right: 0;
         width: 100%;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
-        position: relative;
+        /*position: relative;*/
     }
     #sidebar .navbar-brand img {
         max-width: 160px;
+        width: 100%
     }
     #sidebar .toggle_sidebar {
         cursor: pointer;

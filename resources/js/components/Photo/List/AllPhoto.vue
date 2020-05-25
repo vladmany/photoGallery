@@ -156,6 +156,7 @@
     }
 
     .photo-wrapper {
+        margin-top: 55px;
         min-height: 710px;
         display: flex;
         flex-direction: column;
