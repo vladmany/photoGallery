@@ -91,8 +91,8 @@
     .custom-checkbox+label::before {
         content: '';
         display: inline-block;
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         flex-shrink: 0;
         flex-grow: 0;
         border: 1px solid #adb5bd;

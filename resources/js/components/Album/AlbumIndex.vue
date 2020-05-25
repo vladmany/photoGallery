@@ -17,16 +17,16 @@
         <template v-slot:actions>
             <div class="panel">
                 <action-all-albums v-if="showPanels"></action-all-albums>
-                <search-albums v-if="showPanels" ></search-albums>
+                <search-albums v-if="showPanels" class="search-panel" ></search-albums>
             </div>
         </template>
         <template v-slot:content>
             <div class="albums-wrap">
                 <div v-if="showNoSearch">
-                    <p class="empty-search">Объект не найден</p>
+                    <p class="empty-search">Альбом не найден</p>
                 </div>
                 <div class="main-panel">
-                    <AllAlbums :paginate-count="12"></AllAlbums>
+                    <AllAlbums :paginate-count="6"></AllAlbums>
                 </div>
 
             </div>
@@ -92,7 +92,6 @@
         max-width: 1110px;
         background: #ffffff;
 
-
     }
 
     .albums-wrap {
@@ -134,7 +133,6 @@
         }
 
     }
-
     .upload {
         display: flex;
         max-width: 214px;

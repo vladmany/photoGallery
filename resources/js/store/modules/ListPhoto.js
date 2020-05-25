@@ -3,12 +3,16 @@ let state = {
     groups: {},
     groupsSelected: {},
     selectAllPhotos: false,
+    downUp: 0,
+    clickCount: 0,
 }
 let getters = {
     photos: state => state.photos,
     groups: state => state.groups,
+    groupElementsByTitle: state => title => state.groups[title],
     groupsSelected: state => state.groupsSelected,
     selectAllPhotos: state => state.selectAllPhotos,
+    clickCount: state => state.clickCount,
     photo: state => id =>
         state.photos.find(photo => photo.id === id),
     groupByPhoto: state => id => {
@@ -44,10 +48,20 @@ let getters = {
 
         return ind;
     },
+    GroupByPhotoId: state => id => {
+        for(let group of Object.keys(state.groups)) {
+            for(let item of state.groups[group]) {
+                if(item.id === id) {
+                    return group
+                }
+            }
+        }
+    },
+    downUp: state => state.downUp,
 }
 let mutations = {
     getPhotos: (state, payload) => {
-        console.log('загрузить фото')
+        // console.log('загрузить фото')
         state.photos = payload
     },
     makeGroups:(state, payload) => {
@@ -60,11 +74,26 @@ let mutations = {
         // console.log(state.photos)
         console.log('очистить фото')
     },
-    addGroupsSelected:(state, payload) => {
-        state.groupsSelected[payload.key] = true
+    changeGroupsSelected:(state, payload) => {
+        state.groupsSelected[payload.key] = payload.val
+        // console.log(state.groupsSelected)
     },
     clearGroupsSelected: (state) => {
         state.groupsSelected = {}
+    },
+    setSelectPhoto: (state, payload) => {
+        for(let i=0; i < state.photos.length; i++) {
+            if(state.photos[i].id === payload.id) {
+                state.photos[i]['is_selected'] = payload.val;
+                break;
+            }
+        }
+    },
+    setDownUp: (state, payload) => {
+        state.downUp = payload
+    },
+    changeClickCount: (state) => {
+        state.clickCount += 1;
     }
 }
 let actions = {
@@ -123,6 +152,7 @@ let actions = {
 
         for(key of keys) {
             desc_groups[key] = groups[key];
+            state.groupsSelected[key] = false;
         }
 
         commit('makeGroups', desc_groups);
@@ -132,11 +162,41 @@ let actions = {
     clearPhotos: ({ commit }) => {
         commit('clearPhotos')
     },
-    addGroupsSelected:({ commit }, payload) => {
-        commit('addGroupsSelected', payload)
+    addGroupsSelected:({ commit }, title) => {
+        let payload = {}
+        payload['key'] = title
+        payload['val'] = true
+        commit('changeGroupsSelected', payload)
+    },
+    delGroupsSelected:({ commit }, title) => {
+        let payload = {}
+        payload['key'] = title
+        payload['val'] = false
+        commit('changeGroupsSelected', payload)
     },
     clearGroupsSelected:({ commit }) => {
         commit('clearGroupsSelected');
+    },
+    selectPhoto: ({ commit }, id) => {
+        let payload = {}
+        payload['id'] = id
+        payload['val'] = true;
+        commit('setSelectPhoto', payload)
+    },
+    unselectPhoto: ({ commit }, id) => {
+        let payload = {}
+        payload['id'] = id
+        payload['val'] = false;
+        commit('setSelectPhoto', payload)
+    },
+    fromGroupToPhotos: ({ commit }) => {
+        commit('setDownUp', 0);
+    },
+    fromPhotoToGroup: ({ commit }) => {
+        commit('setDownUp', 1);
+    },
+    changeClickCount: ({ commit }) => {
+        commit('changeClickCount')
     }
 }
 

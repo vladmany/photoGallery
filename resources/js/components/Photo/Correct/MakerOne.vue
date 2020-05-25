@@ -49,10 +49,12 @@
                     text: 'Фото после коррекции сохранено',
                 })
                 this.$store.dispatch('getCorrects')
+                this.$store.dispatch('clearAngle')
                 // this.$store.dispatch('ListPhoto/getPhotos')
             },
             updatePhoto() {
-                this.$store.dispatch('ListPhoto/getPhotos')
+                // this.$store.dispatch('ListPhoto/getPhotos')
+                this.$store.dispatch('clearAngle')
             }
         },
         created() {

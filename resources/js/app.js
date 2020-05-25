@@ -20,7 +20,18 @@ Vue.use(VCalendar, {
     componentPrefix: 'vc',  // Use <vc-calendar /> instead of <v-calendar />
 });
 
+// сохранение состояния state
+// store.subscribe((mutation, state) => {
+//         // Store the state object as a JSON string
+//         localStorage.setItem('store', JSON.stringify(state));
+//     });
+
 loadProgressBar()
+
+router.beforeEach((to, from, next) => {
+    document.title = to.meta.title
+    next()
+})
 
 Vue.use(Toasted)
 
@@ -35,7 +46,6 @@ Vue.use(VueRouter)
 Vue.config.devtools = false
 Vue.config.debug = false
 Vue.config.silent = true
-
 
 Vue.prototype.$http = axios;
 Vue.config.productionTip = false;

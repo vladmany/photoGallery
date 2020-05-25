@@ -30,7 +30,7 @@
         </template>
         <template v-slot:content>
             <div class="back-button">
-                <router-link :to="previousRoute" >
+                <router-link :to="previousRoute" @click="back">
                     <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
                 </router-link>
             </div>
@@ -66,11 +66,14 @@
         methods: {
             back() {
                 // this.$router.go(-1);
+                this.$store.dispatch('clearAngle')
             }
         },
         created() {
             this.$root.$emit('showPhotosSidebar')
-        }
+            if((this.previousRoute.name === 'IndexPhoto'))
+                this.$root.$emit('changeActiveAlbums')
+        },
     }
 
 </script>

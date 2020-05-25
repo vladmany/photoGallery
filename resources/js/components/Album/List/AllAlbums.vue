@@ -3,7 +3,7 @@
         <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row ">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
-                           class="pt-3 pb-3 album col-12 col-md-6 col-lg-4"/>
+                           class="pt-3 pb-3 album col-12 col-md-6 col-lg-4 one-album mb-3 border"/>
             <div class="album-paginate col-12">
                 <!--            <paginate-->
                 <!--                :page-count="pages"-->
@@ -92,16 +92,22 @@
         justify-content: start;
     }
     .album {
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        border-color: #DADADA;
+        border-color: #DFDFDF;
         display: flex;
         flex-direction: row;
         flex-wrap: wrap;
         background-color: #ffffff;
         justify-content: center;
+        border-radius: 3px;
     }
     .album-paginate {
         flex: 0 0 auto;
+    }
+    .one-album:hover {
+        -webkit-transform: scale(1.05);
+        -ms-transform: scale(1.05);
+        transform: scale(1.05);
+        z-index: 100;
+        box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.15), 4px 4px 4px rgba(0, 0, 0, 0.15);
     }
 </style>

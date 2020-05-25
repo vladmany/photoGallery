@@ -1,10 +1,12 @@
 <template>
     <div class="wrap-list container">
         <div class="row">
-            <div class="text-center col-12">
+            <div class="col-12 cover_element text-center">
+                <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">
+                <label :for="'album-' + album.id"></label>
                 <router-link
                     :to="{ name: 'OneAlbum', params: { id: album.id } }">
-                    <img :src="album.cover" class="img-fluid img-cover">
+                    <img :src="album.cover" class="img-cover">
                 </router-link>
             </div>
             <div class="name-album col-12 text-center mt-2">
@@ -14,23 +16,14 @@
                 </router-link>
             </div>
             <div class="justify-content-around col-12 d-flex">
-                <div class="pl-2 pt-1">
-                    <!--<input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">-->
-                    <input type="checkbox" class="checkbox-album form-check-input text-center" :id="'album-' + album.id"
-                           v-model="isSelected"
-                    >
-                </div>
-                <div class="pr-2">
-                    <p class="text-center pt-2"><img src="/storage/albums/ico_calendar.png">
+                    <p class="text-center"><img src="/storage/albums/ico_calendar.png">
                         {{ formatDate(album.created_at) }}
                     </p>
-                </div>
             </div>
         </div>
     </div>
 
 </template>
-
 <script>
     import {mapGetters} from 'vuex'
 
@@ -52,11 +45,11 @@
                 this.isSelected = this.selectAll;
             },
             isSelected() {
-                if (this.isSelected) {
-                    this.$store.dispatch('addAlbum', this.album.id);
-                } else {
-                    this.$store.dispatch('delAlbum', this.album.id);
-                }
+               if (this.isSelected) {
+                   this.$store.dispatch('addAlbum', this.album.id);
+               } else {
+                   this.$store.dispatch('delAlbum', this.album.id);
+               }
             }
         },
         data() {
@@ -82,25 +75,41 @@
 </script>
 
 <style>
+    .cover_element{
+        width: 100%;
+        max-height: 180px;
+        display: block;
+    }
+    .cover_element input[type=checkbox] {
+        display: flex;
+        position: absolute;
+        transform:scale(1.5);
+        margin-top: 6px;
+        margin-left: 6px!important;
+    }
+
     .wrap-list {
         display: flex;
         flex-direction: column;
         justify-content: space-between;
-        width: 100%;
+        max-width: 350px;
         color: #666666 !important;
 
+        border: 1px;
+        border: solid;
+        border-color: #DFDFDF;
+        border-radius: 3px;
+
     }
-    .checkbox-album{
-        width: 21px;
-        height: 21px;
-        border: 1px solid #dddddd;
-        background-color: #ffffff;
+    .cover_element .custom-checkbox+label{
+        position: absolute;
+        margin-top: 6px;
+        margin-left: 6px;
     }
 
     .img-cover {
-        /*width: 180px;*/
-        /*height: 100px;*/
-        width: 220px;
+        max-height: 180px;
+        max-width: 100%;
     }
 
     .name-album {
@@ -115,6 +124,10 @@
         text-decoration: none !important;
     }
 
+    a:hover{
+        color: #666666;
+    }
+
     .one-page a {
         display: block; /* Ссылка как блочный элемент */
         text-align: center; /* Выравнивание по центру */
@@ -125,7 +138,6 @@
 
     .one-page:hover ~ .disable {
         color: #000;
-
     }
 
 </style>

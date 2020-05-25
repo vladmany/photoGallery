@@ -64,7 +64,7 @@
                 // this.$store.dispatch('ListPhoto/getPhotos')
             },
             makeAction(curInd) {
-                console.log('cur', this.currentIndex)
+                // console.log('cur', this.currentIndex)
                 this.$store.dispatch('changeCorrectPhotoId', this.realPhotoInd(curInd));
 
                 if(this.isCorrect) {
@@ -82,7 +82,7 @@
                     realIndex = curInd % this.images.length
                 }
 
-                console.log(this.images[realIndex], this.images)
+                // console.log(this.images[realIndex], this.images)
 
                 let id = this.images[realIndex].id
                 // console.log(id)
@@ -94,7 +94,7 @@
             slideImages() {
                 let ret = []
                 for(let im of this.images) {
-                    ret.push(im.url)
+                    ret.push(im.url + '?' + new Date().getTime())
                 }
 
                 return ret;
@@ -136,7 +136,7 @@
                 this.$store.dispatch('changeRotStyle', id)
                 let angle = this.$store.getters.rotWithId(id)
                 let cssStyle = `transform: rotate(${angle}deg)`
-                // console.log(cssStyle)
+                console.log(cssStyle)
                 this.myStyle = cssStyle
             }
         },
@@ -152,7 +152,11 @@
                 // console.log(this.$store.getters.cssAttrs)
                 this.myStyle = this.cssStyle;
             }
-        }
+        },
+        beforeMount() {
+            this.$store.commit('initialiseStore');
+            console.log(this.$store.state)
+        },
     };
 </script>
 

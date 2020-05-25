@@ -1,13 +1,13 @@
 <template>
     <div class="actions">
-        <div class="action select_all">
+        <div class="action select_all" :class="(albums.length > 0) ? 'available' : ''">
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
             <label for="all-selector"></label>
         </div>
-        <div class="action turn_download" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="downloadAlbums">
+        <div class="action turn_download" :class="isSelectedAlbums" @click="downloadAlbums">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
-        <div class="action delete_image" v-if="isSelectedAlbums" :class="isSelectedAlbums" @click="deleteAlbum">
+        <div class="action delete_image" :class="isSelectedAlbums" @click="deleteAlbum">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
         </div>
         <del-albums></del-albums>
@@ -26,7 +26,7 @@
         data() {
             return {
                 isSelected: false,
-                i:0
+                i:0,
             }
         },
         methods: {
@@ -50,11 +50,6 @@
                     this.isSelected = false
                 }
             },
-            /*selectedAllAlbums() {
-                if (this.selectedAlbums.length === 2) {
-                    this.isSelected = true
-                }
-            },*/
         },
 
         computed: {
@@ -66,6 +61,10 @@
                 albums: 'ListAlbum/albums',
             })
         },
+        created() {
+            this.isSelected = false
+            this.selectedAlbums.length = 0
+        }
     }
 </script>
 
@@ -78,6 +77,14 @@
         max-width: 285px;
         width: 100%;
         align-self: center;
+    }
+    .action {
+        margin-left: 15px;
+        user-select: none;
+        opacity: 0;
+    }
+    .action.available {
+        opacity: 1;
     }
     .action.available object {
         filter: brightness(75%);

@@ -3,19 +3,14 @@
         <div class="action change_album" :class="isSelectedEveryTime" @click="changeAlbumName">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_change_album.svg"></object>
         </div>
-        <div class="action to_provide_access" :class="isSelectedPhotos" @click="toProvideAccess">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_provide_access.svg"></object>
-
-        </div>
         <div class="action turn_download" :class="isSelectedPhotos" @click="turnDownload">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
-
-        <div class="action change_date" :class="isSelectedSinglePhoto" @click="ChangeCover">
-            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_cover.svg"></object>
-        </div>
         <div class="action delete_image" :class="isSelectedPhotos" @click="deleteImages">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
+        </div>
+        <div class="action change_date" :class="isSelectedSinglePhoto" @click="ChangeCover">
+            <object type="image/svg+xml" data="/storage/albums/actions/ic_change_cover.svg"></object>
         </div>
         <change-name-album></change-name-album>
     </div>
@@ -39,9 +34,6 @@
                 let id = this.$store.getters.selectedPhotos;
                 console.log(id);
                 this.$store.dispatch('changeCover', [id[0], this.$store.state.IdAlbum])
-            },
-            toProvideAccess(){
-
             },
             turnDownload(){
                 if (this.$store.getters.selectedPhotos.length > 0) {
@@ -127,10 +119,10 @@
     .action {
         margin-left: 15px;
         user-select: none;
-        display: none;
+        opacity: 0;
     }
     .action.available {
-        display: block;
+        opacity: 1;
     }
     .action.available object {
         filter: brightness(75%);

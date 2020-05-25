@@ -13,6 +13,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::redirect('/','/photos');
+
 Route::get('/auth/redirect', 'Auth\LoginController@redirect')->name('auth');
 Route::get('/auth/callback', 'Auth\LoginController@callback');
 
