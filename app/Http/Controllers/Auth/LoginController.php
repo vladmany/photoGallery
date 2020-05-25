@@ -48,7 +48,7 @@ class LoginController extends Controller
             'form_params' => [
                 'grant_type' => 'authorization_code',
                 'client_id' => 17, //данные которые выдаст Богдан. вынести в конфиг
-                'client_secret' => ' DJWhEfPbsKMLlEBZDeyGgoCqc4RWmnJvDne4g7Pt', //данные которые выдаст Богдан. вынести в конфиг
+                'client_secret' => 'DJWhEfPbsKMLlEBZDeyGgoCqc4RWmnJvDne4g7Pt', //данные которые выдаст Богдан. вынести в конфиг
                 'redirect_uri' => 'https://it20-tools-photogallery.azurewebsites.net/auth/callback',
                 'code' => $request->code,
             ],

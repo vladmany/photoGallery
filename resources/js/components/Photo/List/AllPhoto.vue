@@ -120,7 +120,7 @@
             this.onChangePage(1);
         },
         mounted() {
-            this.$store.dispatch('ListPhoto/getPhotos')
+            // this.$store.dispatch('ListPhoto/getPhotos')
             this.$store.dispatch('ListPhoto/clearPhotos')
             this.$store.dispatch('clearAngle')
         }
