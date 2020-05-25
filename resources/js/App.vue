@@ -115,7 +115,7 @@
                                     >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <a href="##" @click="logout"
+                                    <a href="#" @click="logout"
                                     >Выход из системы</a>
                                 </li>
                             </ul>
