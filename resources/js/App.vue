@@ -324,14 +324,14 @@
                     this.sidebarOpen = true
                 }
             });
-            // let mql1 = window.matchMedia('(max-width: 550px)');
-            // mql1.addListener((e) => {
-            //     if (e.matches) {
-            //         this.sidebarOpen = false
-            //     } else {
-            //         this.sidebarOpen = true
-            //     }
-            // });
+            let mql1 = window.matchMedia('(max-width: 550px)');
+            mql1.addListener((e) => {
+                if (e.matches) {
+                    this.sidebarOpen = false
+                } else {
+                    this.sidebarOpen = true
+                }
+            });
 
 
         },

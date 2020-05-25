@@ -9,7 +9,7 @@
             />
         </template>
         <template v-slot:title>
-            <h1 class="pl-3">Альбомы</h1>
+            <span>Альбомы</span>
         </template>
         <template v-slot:button>
                 <CreateAlbum></CreateAlbum>

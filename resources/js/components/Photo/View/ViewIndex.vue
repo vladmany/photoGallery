@@ -20,7 +20,7 @@
             />
         </template>
         <template v-slot:title>
-            <h1>Просмотр фото</h1>
+            <span>Просмотр фото</span>
         </template>
         <template v-slot:actions>
             <actions
@@ -67,12 +67,10 @@
             back() {
                 // this.$router.go(-1);
                 this.$store.dispatch('clearAngle')
-            }
+            },
         },
         created() {
             this.$root.$emit('showPhotosSidebar')
-            if((this.previousRoute.name === 'IndexPhoto'))
-                this.$root.$emit('changeActiveAlbums')
         },
     }
 
