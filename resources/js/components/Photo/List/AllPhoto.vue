@@ -2,7 +2,7 @@
     <div class="" v-if="photos.length > 0">
         <div class="photo-wrapper">
             <div class="photo-content">
-                <div class="row">
+                <div class="row pl-3">
                     <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
                                 :elements="elements"
                                 :title="title"
@@ -118,10 +118,12 @@
         created() {
             this.setPages();
             this.onChangePage(1);
+        },
+        mounted() {
+            // this.$store.dispatch('ListPhoto/getPhotos')
             this.$store.dispatch('ListPhoto/clearPhotos')
             this.$store.dispatch('clearAngle')
-            // await this.$store.dispatch('ListPhoto/getPhotos')
-        },
+        }
     }
 </script>
 

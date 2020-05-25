@@ -78,7 +78,14 @@
                 return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : '';
             },
             isSelectedPhotos1() {
-                return (this.$store.getters.selectedPhotos.length === 1) ? 'available' : '';
+                if(this.$store.getters.selectedPhotos.length === 1){
+                    let id = this.$store.getters.correctPhotoId;
+                    let photo = this.$store.getters['ListPhoto/photo'](id)
+                    if(photo.extension !== 'gif') {
+                        return 'available';
+                    }
+                }
+                return '';
             },
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',

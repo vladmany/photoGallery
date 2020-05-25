@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap-list container">
+    <div class="wrap-list">
         <div class="row">
             <div class="col-12 cover_element text-center">
                 <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'album-' + album.id" v-model="isSelected">
@@ -89,16 +89,13 @@
     }
 
     .wrap-list {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
         max-width: 350px;
         color: #666666 !important;
-
         border: 1px;
         border: solid;
         border-color: #DFDFDF;
         border-radius: 3px;
+        display: flex;
 
     }
     .cover_element .custom-checkbox+label{
@@ -113,6 +110,7 @@
     }
 
     .name-album {
+        max-width: 345px;
         font-size: 16px;
         word-wrap: break-word;
         font-weight: bold;

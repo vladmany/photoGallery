@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::get('token', 'Api\UserController@token');
+
 Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/corrects', 'Api\CorrectController');
