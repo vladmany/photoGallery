@@ -20,7 +20,7 @@
             />
         </template>
         <template v-slot:title>
-            <span>Просмотр фото</span>
+            <span class="hint--bottom" aria-label="Thank you!">Просмотр фото</span>
         </template>
         <template v-slot:actions>
             <actions
