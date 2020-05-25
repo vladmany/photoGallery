@@ -1,7 +1,7 @@
 <template>
     <a href="http://team1-group-project.azurewebsites.net/user/profile">
         {{ user.name }} {{ user.surname }}
-        <img v-if="user['avatar_url']" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user['avatar_url']">
+        <img v-if="user['avatar_url']" :src="'http://team1-group-project.azurewebsites.net/avatars/' + user['avatar_url']">
         <div v-if="!user['avatar_url']" class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>
     </a>
 </template>
