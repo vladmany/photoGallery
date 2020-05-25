@@ -57,7 +57,7 @@
         },
         created() {
             // setTimeout(this.load, 1000);
-            this.loadData()
+            // this.loadData()
             console.log('главная страница с фото')
             this.$store.dispatch('clearPhotos');
         }
