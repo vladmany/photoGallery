@@ -55,7 +55,7 @@
     @media (min-width: 992px){
         .search-panel{
             height: 92px;
-            border-left: 5px solid rgb(250, 250, 250);
+            border-left: 2px solid rgb(250, 250, 250);
         }
         .panel{
             padding-left: 28px;

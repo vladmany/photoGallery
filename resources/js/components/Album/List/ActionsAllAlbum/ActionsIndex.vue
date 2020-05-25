@@ -2,12 +2,12 @@
     <div class="actions">
         <div class="action select_all" :class="(albums.length > 0) ? 'available' : ''">
             <input type="checkbox" class="custom-checkbox" id="all-selector" v-model="isSelected">
-            <label for="all-selector"></label>
+            <label for="all-selector" title="Выбрать все альбомы"></label>
         </div>
-        <div class="action turn_download" :class="isSelectedAlbums" @click="downloadAlbums">
+        <div class="action turn_download" :class="isSelectedAlbums" @click="downloadAlbums" title="Скачать выбранные альбомы">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_download.svg"></object>
         </div>
-        <div class="action delete_image" :class="isSelectedAlbums" @click="deleteAlbum">
+        <div class="action delete_image" :class="isSelectedAlbums" @click="deleteAlbum" title="Удалить выбранные альбомы">
             <object type="image/svg+xml" data="/storage/albums/actions/ic_delete.svg"></object>
         </div>
         <del-albums></del-albums>

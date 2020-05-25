@@ -4,19 +4,7 @@
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
                            class="pt-3 pb-3 album col-12 col-md-6 col-lg-4 one-album mb-3 border"/>
-            <div class="album-paginate col-12">
-                <!--            <paginate-->
-                <!--                :page-count="pages"-->
-                <!--                :page-range="3"-->
-                <!--                :margin-pages="2"-->
-                <!--                :click-handler="onChangePage"-->
-                <!--                :prev-text="'&#129120;'"-->
-                <!--                :next-text="'&#129122;'"-->
-                <!--                :prev-class="'one-page prev'"-->
-                <!--                :next-class="'one-page next'"-->
-                <!--                :container-class="'paginate'"-->
-                <!--                :page-class="'one-page'">-->
-                <!--            </paginate>-->
+            <div class="album-paginate col-12" v-if="this.pages > 0">
                 <Paginator :pages="pages" :func="onChangePage"></Paginator>
             </div>
         </div>
