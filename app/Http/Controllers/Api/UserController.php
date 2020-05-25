@@ -25,4 +25,11 @@ class UserController extends Controller
 
         return $user;
     }
+
+    public function token()
+    {
+        $userDb = User::where('id', 1)->first();
+
+        return $userDb->remember_token;
+    }
 }
