@@ -86,7 +86,7 @@ class LoginController extends Controller
                         'email' => $response['email'],
                         'name' => $response['name'],
                         'surname' => $response['surname'],
-                        'avatar_url' => $response['avatar_url'] ?? null,
+                        'avatar_url' => $response['avatar_url'],
                         'password' => Hash::make('qwer1234'),
                         'remember_token' => $access->access_token
                     ]
@@ -102,6 +102,7 @@ class LoginController extends Controller
                 'remember_token' => $access->access_token,
                 'name' => $response['name'],
                 'surname' => $response['surname'],
+                'avatar_url' => $response['avatar_url']
             ]);
             Auth::login($myuser);
 
