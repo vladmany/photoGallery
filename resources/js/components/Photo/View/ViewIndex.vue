@@ -71,6 +71,8 @@
         },
         created() {
             this.$root.$emit('showPhotosSidebar')
+            if((this.previousRoute.name === 'IndexPhoto'))
+                this.$root.$emit('changeActiveAlbums')
         },
     }
 

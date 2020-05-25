@@ -315,13 +315,6 @@
         created() {
             loadProgressBar()
             this.$store.dispatch('getCorrects');
-            $('.group-tabs').click(function () {
-                console.log('dsdasdads')
-                if(!($('#sidebar-phone_toggle').css('display') === 'none'))
-                {
-                    this.sidebarOpen = false
-                }
-            });
 
             let mql = window.matchMedia('(max-width: 1380px)');
             mql.addListener((e) => {
@@ -331,12 +324,21 @@
                     this.sidebarOpen = true
                 }
             });
+            // let mql1 = window.matchMedia('(max-width: 550px)');
+            // mql1.addListener((e) => {
+            //     if (e.matches) {
+            //         this.sidebarOpen = false
+            //     } else {
+            //         this.sidebarOpen = true
+            //     }
+            // });
 
 
         },
         mounted() {
-            this.$root.$on('showPhotosSidebar', () => {
-                this.photosOpen = true
+            this.$root.$on('changeActiveAlbums', () => {
+                $('#side_menu .router-link-active').removeClass('router-link-active');
+                $('#side_menu a[href="/albums"]').addClass('router-link-active');
             })
         },
     }

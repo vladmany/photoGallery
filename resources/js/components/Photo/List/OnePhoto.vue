@@ -103,7 +103,7 @@
     .photo_element {
         margin: 7px;
     }
-    .photo_element  {
+    .photo_element a{
         -webkit-filter: brightness(1) saturate(1);
         -webkit-transition: filter 0.2s ease;
         -moz-transition: filter 0.2s ease;
@@ -112,11 +112,11 @@
         transition: filter 0.2s ease;
     }
 
-    .photo_element:hover {
+    .photo_element a:hover {
         -webkit-filter: brightness(0.6) saturate(1.3);
     }
 
-    .photo_element:hover {
+    .photo_element a:hover {
         box-shadow: 0 0 3px rgba(0,0,0,0.5);
     }
 
@@ -127,5 +127,10 @@
         margin-top: 6px;
         margin-left: 6px!important;
         -webkit-filter: brightness(1) saturate(1);
+
+    }
+
+    .photo_element label::before {
+        z-index: 10;
     }
 </style>
