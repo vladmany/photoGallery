@@ -8,9 +8,9 @@
     export default {
         name: "OnePhoto",
         props: {
-            id: {
+            photo: {
                 required: true,
-                type: Number
+                type: Object
             },
         },
         data() {
@@ -19,9 +19,9 @@
             }
         },
         computed: {
-            photo() {
-                return this.$store.getters['ListPhoto/photo'](this.id);
-            },
+            // photo() {
+            //     return this.$store.getters['ListPhoto/photo'](this.id);
+            // },
             photoUrl() {
                 let ret = this.photo.url + '?' + new Date().getTime();
                 // console.log(this.photo.url, ret)

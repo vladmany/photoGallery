@@ -9,7 +9,7 @@
             />
         </template>
         <template v-slot:title>
-            <span>Фото</span>
+            <span>{{ title }}</span>
         </template>
         <template v-slot:button>
             <upload-photos-component/>
@@ -49,6 +49,9 @@
             ...mapGetters({
                 photos: 'ListPhoto/photos',
             }),
+            title() {
+                return this.$route.name === 'IndexPhoto' ? 'Фото' : 'Добавление фото в альбом';
+            },
         },
         methods: {
         },
