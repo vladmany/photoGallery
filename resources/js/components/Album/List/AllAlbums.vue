@@ -1,22 +1,10 @@
 <template>
-    <div class="wrapper container">
-        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row ">
+    <div class="wrapper-album container justify-content-start">
+        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
-                           class="pt-3 pb-3 album col-12 col-md-6 col-lg-4 one-album"/>
-            <div class="album-paginate col-12">
-                <!--            <paginate-->
-                <!--                :page-count="pages"-->
-                <!--                :page-range="3"-->
-                <!--                :margin-pages="2"-->
-                <!--                :click-handler="onChangePage"-->
-                <!--                :prev-text="'&#129120;'"-->
-                <!--                :next-text="'&#129122;'"-->
-                <!--                :prev-class="'one-page prev'"-->
-                <!--                :next-class="'one-page next'"-->
-                <!--                :container-class="'paginate'"-->
-                <!--                :page-class="'one-page'">-->
-                <!--            </paginate>-->
+                           class="pt-3 pb-3 col-12 col-md-6 col-lg-4 one-album mb-3 border"/>
+            <div class="album-paginate col-12" v-if="this.pages > 0">
                 <Paginator :pages="pages" :func="onChangePage"></Paginator>
             </div>
         </div>
@@ -86,20 +74,9 @@
 </script>
 
 <style scoped>
-    .wrapper {
+    .wrapper-album {
         background-color: #ffffff;
         padding-top: 35px;
-        justify-content: start;
-    }
-    .album {
-        border-bottom-width: 1px;
-        border-bottom-style: solid;
-        border-color: #DADADA;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: wrap;
-        background-color: #ffffff;
-        justify-content: center;
     }
     .album-paginate {
         flex: 0 0 auto;
@@ -108,5 +85,11 @@
         -webkit-transform: scale(1.05);
         -ms-transform: scale(1.05);
         transform: scale(1.05);
+        z-index: 100;
+        box-shadow: -4px -4px 4px rgba(0, 0, 0, 0.15), 4px 4px 4px rgba(0, 0, 0, 0.15);
+        border-color: #DFDFDF;
+        background-color: #ffffff;
+        border-radius: 3px;
+        justify-content: start;
     }
 </style>
