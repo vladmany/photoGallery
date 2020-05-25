@@ -15,7 +15,9 @@
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
-                    <img src="/storage/navbar_logo.png" alt="navbar_logo">
+                    <a href="/photos">
+                        <img src="/storage/navbar_logo.png" alt="navbar_logo">
+                    </a>
                 </a>
                 <div @click="sidebarOpen = !sidebarOpen" class="p-3"><div class="toggle_sidebar" :class="sidebarOpen ? 'toggled' : ''"></div></div>
                 <ul id="side_menu" class="list-unstyled components">
@@ -379,7 +381,7 @@
         font-weight: 500;
         font-size: 13px;
         text-decoration: none;
-        color: #999999;
+        color: #808080;
         height: 100%;
     }
     #side_menu a span,
@@ -400,7 +402,7 @@
     #side_menu .router-link-active {
         color: #666666;
     }
-    #side_menu .router-link-active object {
+    #side_menu .router-link-active {
         -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
     }
