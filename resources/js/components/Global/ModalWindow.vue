@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="outside-the-window">
+        <div class="outside-the-window" @click="close">
             <div class="window animated fadeInDown" :style="'max-width: ' + minWidth + 'px'">
                 <button class="close-window-btn" @click="closeAction">
                     <object type="image/svg+xml" data="/storage/ic_clear.svg"></object>
@@ -34,13 +34,21 @@
                 default: 540
             }
         },
-        created() {
-            document.addEventListener('mouseup', (e) => {
-                let container = $(".window");
-                if (container.has(e.target).length === 0){
+        methods: {
+            close(e) {
+                if($(e.target).hasClass('outside-the-window')) {
                     this.closeAction()
                 }
-            });
+            }
+        },
+        created() {
+            // document.addEventListener('mouseup', (e) => {
+            //     let container = $(".window");
+            //     if (container.has(e.target).length === 0){
+            //         // console.log($('.outside-the-window'))
+            //         this.closeAction()
+            //     }
+            // });
         }
     }
 </script>

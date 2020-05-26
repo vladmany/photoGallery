@@ -2,7 +2,7 @@
     <div class="createAlbum">
 <!--         DD -->
         <create></create>
-        <CButton text="Добавить" :action="modalCreate" class="btn-create-album"></CButton>
+        <CButton text="Добавить" :action="modalCreate" class="btn-create-album" title="Создать новый альбом"></CButton>
     </div>
 </template>
 

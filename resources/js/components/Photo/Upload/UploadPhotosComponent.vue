@@ -1,6 +1,7 @@
 <template>
     <div>
 
+
             <button class="upload-btn" @click="switchShowMethods"><label for="photo" class="from-computer">Загрузить</label></button>
 
         <input type="file" name="photo" id="photo" ref="photo" class="inputfile inputfile-1" @change="sendFiles" @click="clearFiles" multiple accept="image/bmp,image/gif,image/jpeg,image/png,image/tiff"/>
@@ -30,8 +31,6 @@
             },
             sendFiles(e) {
                 let photos = $(e.target);
-                console.log(photos.prop('files').length)
-                console.log(this.$store.state.maxFilesToUpload)
                 if ((photos.prop('files').length > 0) && (photos.prop('files').length <= this.$store.state.maxFilesToUpload))
                 {
                     let files = Array.from(this.$refs.photo.files);

@@ -12,6 +12,7 @@ class UserController extends Controller
     public function deadSession(Request $request)
     {
         session_destroy();
+        Auth::logout();
 
         return response('session destroy succsess');
     }
@@ -23,5 +24,12 @@ class UserController extends Controller
         $user = Auth::user();
 
         return $user;
+    }
+
+    public function token()
+    {
+        $userDb = User::where('id', 1)->first();
+
+        return $userDb->remember_token;
     }
 }

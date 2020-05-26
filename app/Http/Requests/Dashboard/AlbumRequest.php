@@ -14,7 +14,7 @@ class AlbumRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'required|min:3|max:100|regex:/^[A-Za-zА-Яа-яё0-9 ]{3,100}$/ui'
+            'name' => 'required|min:3|max:100|regex:/^[A-Za-zА-Яа-яё0-9 -;`]{3,100}$/ui'
         ];
     }
     public function messages()

@@ -15,7 +15,9 @@
 
             <nav id="sidebar" :class="sidebarOpen ? 'sidebar-open' : ''">
                 <a class="navbar-brand">
-                    <img src="/storage/navbar_logo.png" alt="navbar_logo">
+                    <a href="/photos">
+                        <img src="/storage/navbar_logo.png" alt="navbar_logo">
+                    </a>
                 </a>
                 <div @click="sidebarOpen = !sidebarOpen" class="p-3"><div class="toggle_sidebar" :class="sidebarOpen ? 'toggled' : ''"></div></div>
                 <ul id="side_menu" class="list-unstyled components">
@@ -43,15 +45,15 @@
                             <span>Календарь</span>
                         </router-link>
                     </li>
-                    <li @click="photosOpen = !photosOpen" class="main-group-tab group-tab-open">
+                    <li @click="photosOpen = !photosOpen" class="main-group-tab group-tab-open photos">
                         <a>
                             <object type="image/svg+xml" data="/storage/sidebar_icons/photos/ic_camera_alt.svg"></object>
                             <span>Фотографии</span>
                         </a>
                     </li>
-                    <div class="group-tabs">
+                    <div class="group-tabs photos" @click="closeSidebar()">
                         <li>
-                            <router-link to="/photos" >
+                            <router-link to="/photos">
                                 <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
                                 <span>Фото</span>
                             </router-link>
@@ -69,13 +71,26 @@
                             <span>Контакты</span>
                         </router-link>
                     </li>
-                    <li>
-                        <router-link to="/manage" >
+                    <li @click="manageOpen = !manageOpen" class="main-group-tab manage">
+                        <a>
                             <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
                             <span>Управление</span>
-                        </router-link>
+                        </a>
                     </li>
-
+                    <div class="group-tabs manage">
+                        <li>
+                            <router-link to="/departaments" >
+                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_location_city.svg"></object>
+                                <span>Отделы</span>
+                            </router-link>
+                        </li>
+                        <li>
+                            <router-link to="/users" >
+                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
+                                <span>Пользователи</span>
+                            </router-link>
+                        </li>
+                    </div>
                 </ul>
             </nav>
             <div class="main_content">
@@ -107,13 +122,14 @@
                                 </li>
                             </ul>
                         </div>
-                        <a href="http://team1-group-project.azurewebsites.net/user/profile">
-                            {{ user.name }} {{ user.surname }}
-<!--                            <img v-if="avatar" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
-                            <div class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>
-<!--                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
-<!--                            <img :src="user.avatar">-->
-                        </a>
+                        <User/>
+<!--                        <a href="http://team1-group-project.azurewebsites.net/user/profile">-->
+<!--                            {{ user.name }} {{ user.surname }}-->
+<!--                            <img v-if="user.avatar_url" :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">-->
+<!--                            <div v-if="!user.avatar_url" class="initials">{{ getFirstLetter(user.name) }}{{ getFirstLetter(user['surname']) }}</div>-->
+<!--&lt;!&ndash;                            <img :src="'http://team1-group-project.azurewebsites.net/storage/avatars/' + user.avatar">&ndash;&gt;-->
+<!--&lt;!&ndash;                            <img :src="user.avatar">&ndash;&gt;-->
+<!--                        </a>-->
                         <div @click="userMenuOpen = !userMenuOpen" class="toggle_user-menu"></div>
                     </div>
                 </nav>
@@ -193,9 +209,11 @@
     import ChangeDateModal from "./components/Photo/List/Actions/СhangeDate/Modals/changeDate";
     import DeleteImagesFromAlbumModal
         from "./components/Album/List/ActionsOneAlbum/DeleteImagesFromAlbum/Modals/DeleteImagesFromAlbum";
+    import User from "./components/Global/User";
 
     export default {
         components: {
+            User,
             DeleteImagesFromAlbumModal,
             ChangeDateModal,
             DeleteImagesModal,
@@ -211,7 +229,8 @@
                 // },
                 userMenuOpen : false,
                 sidebarOpen : true,
-                photosOpen : true
+                photosOpen : true,
+                manageOpen: false
             }
         },
         methods: {
@@ -233,15 +252,21 @@
                     $('#sidebar-phone_toggle').removeClass('open')
                 }
             },
-            getUser() {
-                this.$store.dispatch('getUser')
-                // this.name = this.user.name + ' ' + this.user.surname;
-                // this.avatar = this.user.avatar;
+            closeSidebar() {
+                if(!($('#sidebar-phone_toggle').css('display') === 'none'))
+                {
+                    this.sidebarOpen = false
+                }
             },
-            getFirstLetter(val) {
-                try{ return val.substring(0, 1); }
-                catch { return '' }
-            },
+            // getUser() {
+            //     this.$store.dispatch('getUser')
+            //     // this.name = this.user.name + ' ' + this.user.surname;
+            //     // this.avatar = this.user.avatar;
+            // },
+            // getFirstLetter(val) {
+            //     try{ return val.substring(0, 1); }
+            //     catch { return '' }
+            // },
         },
         watch: {
             currentRoute() {
@@ -252,12 +277,23 @@
                     this.photosOpen = false
             },
             photosOpen() {
-                $('.group-tabs').slideToggle(200)
+                $('.group-tabs.photos').slideToggle(200)
                 if (!this.photosOpen) {
-                    $('.main-group-tab').removeClass('group-tab-open')
+                    $('.main-group-tab.photos').removeClass('group-tab-open')
                 }
                 else {
-                    $('.main-group-tab').addClass('group-tab-open')
+                    this.manageOpen = false
+                    $('.main-group-tab.photos').addClass('group-tab-open')
+                }
+            },
+            manageOpen() {
+                $('.group-tabs.manage').slideToggle(200)
+                if (!this.manageOpen) {
+                    $('.main-group-tab.manage').removeClass('group-tab-open')
+                }
+                else {
+                    this.photosOpen = false
+                    $('.main-group-tab.manage').addClass('group-tab-open')
                 }
             },
         },
@@ -269,20 +305,20 @@
             isPhotoOpen() {
                 return this.$store.state.isPhotoOpen
             },
-            user() {
-                let usr = this.$store.getters['user']
-                console.log(usr)
-                return usr
-            },
-            initials() {
-                return `${this.user.name.substr(0,1)} ${this.user.surname.substr(0,1)}`
-            }
+            // user() {
+            //     let usr = this.$store.getters['user']
+            //     // console.log(usr)
+            //     return usr
+            // },
+            // initials() {
+            //     return `${this.user.name.substr(0,1)} ${this.user.surname.substr(0,1)}`
+            // }
         },
         created() {
             loadProgressBar()
             this.$store.dispatch('getCorrects');
-            let mql = window.matchMedia('(max-width: 1380px)');
 
+            let mql = window.matchMedia('(max-width: 1380px)');
             mql.addListener((e) => {
                 if (e.matches) {
                     this.sidebarOpen = false
@@ -290,12 +326,21 @@
                     this.sidebarOpen = true
                 }
             });
+            let mql1 = window.matchMedia('(max-width: 550px)');
+            mql1.addListener((e) => {
+                if (e.matches) {
+                    this.sidebarOpen = false
+                } else {
+                    this.sidebarOpen = true
+                }
+            });
 
-            this.getUser()
+
         },
         mounted() {
-            this.$root.$on('showPhotosSidebar', () => {
-                this.photosOpen = true
+            this.$root.$on('changeActiveAlbums', () => {
+                $('#side_menu .router-link-active').removeClass('router-link-active');
+                $('#side_menu a[href="/albums"]').addClass('router-link-active');
             })
         },
     }
@@ -336,7 +381,7 @@
         font-weight: 500;
         font-size: 13px;
         text-decoration: none;
-        color: #999999;
+        color: #808080;
         height: 100%;
     }
     #side_menu a span,
@@ -357,7 +402,7 @@
     #side_menu .router-link-active {
         color: #666666;
     }
-    #side_menu .router-link-active object {
+    #side_menu .router-link-active {
         -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
     }
@@ -390,14 +435,15 @@
         max-width: 100%;
     }
     #sidebar .navbar-brand {
-        padding: 19px 0;
+        padding: 19px 15px;
         margin-right: 0;
         width: 100%;
         box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.05);
-        position: relative;
+        /*position: relative;*/
     }
     #sidebar .navbar-brand img {
         max-width: 160px;
+        width: 100%
     }
     #sidebar .toggle_sidebar {
         cursor: pointer;
@@ -764,6 +810,10 @@
 
     .group-tabs {
         display: block;
+    }
+
+    .group-tabs.manage {
+        display: none;
     }
 
     .group-tabs li {

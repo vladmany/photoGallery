@@ -3,6 +3,8 @@ let state = {
     groups: {},
     groupsSelected: {},
     selectAllPhotos: false,
+    downUp: 0,
+    clickCount: 0,
 }
 let getters = {
     photos: state => state.photos,
@@ -10,6 +12,7 @@ let getters = {
     groupElementsByTitle: state => title => state.groups[title],
     groupsSelected: state => state.groupsSelected,
     selectAllPhotos: state => state.selectAllPhotos,
+    clickCount: state => state.clickCount,
     photo: state => id =>
         state.photos.find(photo => photo.id === id),
     groupByPhoto: state => id => {
@@ -54,10 +57,11 @@ let getters = {
             }
         }
     },
+    downUp: state => state.downUp,
 }
 let mutations = {
     getPhotos: (state, payload) => {
-        console.log('загрузить фото')
+        // console.log('загрузить фото')
         state.photos = payload
     },
     makeGroups:(state, payload) => {
@@ -85,6 +89,12 @@ let mutations = {
             }
         }
     },
+    setDownUp: (state, payload) => {
+        state.downUp = payload
+    },
+    changeClickCount: (state) => {
+        state.clickCount += 1;
+    }
 }
 let actions = {
     addPhoto: payload => {
@@ -179,6 +189,15 @@ let actions = {
         payload['val'] = false;
         commit('setSelectPhoto', payload)
     },
+    fromGroupToPhotos: ({ commit }) => {
+        commit('setDownUp', 0);
+    },
+    fromPhotoToGroup: ({ commit }) => {
+        commit('setDownUp', 1);
+    },
+    changeClickCount: ({ commit }) => {
+        commit('changeClickCount')
+    }
 }
 
 export default {

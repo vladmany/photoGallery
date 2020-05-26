@@ -1,14 +1,19 @@
 <template>
-    <div v-if="elements.length > 0" class="col">
+    <div v-if="elements.length > 0" class="col-auto">
         <div class="group-selector">
-            <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId" v-model="isSelected">
+            <input type="checkbox" class="custom-checkbox" :id="'group-' + groupId"
+                   v-model="isSelected"
+                   @click="select"
+            >
             <label class="group-date" :for="'group-' + groupId">{{ title }}</label>
         </div>
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
-                      :id="photo.id"
-                      :is-selected="isSelected"
+                      :photo="photo"
+                      :is-selected-def="isSelected"
                       :album-id="albumId"
+                      :down-up="downUp"
+                      @select-child="clickInput($event)"
             ></OnePhoto>
         </div>
     </div>
@@ -36,12 +41,13 @@
                 type: Number
             },
             albumId: {
-                type: Number
+                type: Object
             }
         },
         data() {
             return {
                 isSelected: false,
+                downUp: { v: 0 }
             }
         },
         computed: {
@@ -53,25 +59,9 @@
         },
         watch: {
             selectAll() {
+                this.downUp.v = 0;
                 this.isSelected = this.selectAll;
             },
-            selectedPhotos(newVal) {
-                // let allPhotoSelected = this.checkAllElementsSelected()
-                // if(this.isSelected !== allPhotoSelected) {
-                //     this.isSelected = allPhotoSelected;
-                // }
-            },
-            isSelected() {
-                // if(this.isSelected) {
-                //     this.$store.dispatch('ListPhoto/addGroupsSelected', this.title)
-                //     this.selectAllElements()
-                // } else {
-                //     this.$store.dispatch('ListPhoto/delGroupsSelected', this.title)
-                // }
-
-                // let group = this.$store.getters['ListPhoto/GroupByPhotoId'](this.id)
-                // let isSelGroup = this.$store.getters['ListPhoto/groupsSelected'][group]
-            }
         },
         methods: {
             checkAllElementsSelected() {
@@ -87,7 +77,17 @@
                     el['is_selected'] = true
                 }
                 console.log(this.elements)
-            }
+            },
+            clickInput(childChecked) {
+                if(this.isSelected) {
+                    if(childChecked) {
+                        this.isSelected = false;
+                    }
+                }
+            },
+            select() {
+                this.downUp.v = 0;
+            },
         },
     }
 </script>
@@ -99,17 +99,6 @@
         margin-top: 53px;
         margin-left: 90px;
     }
-    /*.group-selector {*/
-    /*    display: flex;*/
-    /*    flex-direction: row;*/
-    /*    margin-left: 12px;*/
-    /*}*/
-    /*.group-selector input[type=checkbox] {*/
-    /*    display: flex;*/
-    /*    transform:scale(1.5);*/
-    /*    margin-top: 7px;*/
-    /*    margin-right: 4px;*/
-    /*}*/
     .group-date {
         font-family: 'Roboto', sans-serif;
         font-style: normal;

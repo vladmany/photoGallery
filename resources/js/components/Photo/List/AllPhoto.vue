@@ -2,7 +2,7 @@
     <div class="" v-if="photos.length > 0">
         <div class="photo-wrapper">
             <div class="photo-content">
-                <div class="row">
+                <div class="row pl-3">
                     <GroupPhoto v-for="(elements, title, index) in groups" :key="title"
                                 :elements="elements"
                                 :title="title"
@@ -60,7 +60,8 @@
         },
         data() {
             return {
-                pages: 0
+                pages: 0,
+                there: false
             }
         },
         computed: {
@@ -75,7 +76,15 @@
             photos() {
                 this.setPages();
                 this.onChangePage(1);
-            }
+            },
+            groups() {
+                let photos = this.$store.getters.photoChangedDate;
+                if(photos.length !== 0) {
+                    this.onChangePage(1);
+                    this.$store.state.photoChangedDate = [];
+                }
+                // console.log(this.$store.state.photoChangedDate)
+            },
         },
         methods: {
             onChangePage(page = 1) {
@@ -86,9 +95,7 @@
 
                 if(this.isSelectAll) {
                     for(let key of Object.keys(this.groups)) {
-                        // for(let item of this.groups[key]) {
-                            this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
-                        // }
+                        this.$store.dispatch('ListPhoto/AddGroupsSelected', { key })
                     }
                 }
 
@@ -111,10 +118,12 @@
         created() {
             this.setPages();
             this.onChangePage(1);
+        },
+        mounted() {
+            // this.$store.dispatch('ListPhoto/getPhotos')
             this.$store.dispatch('ListPhoto/clearPhotos')
             this.$store.dispatch('clearAngle')
-            // await this.$store.dispatch('ListPhoto/getPhotos')
-        },
+        }
     }
 </script>
 
@@ -149,6 +158,7 @@
     }
 
     .photo-wrapper {
+        margin-top: 55px;
         min-height: 710px;
         display: flex;
         flex-direction: column;
@@ -223,8 +233,8 @@
     .custom-checkbox+label::before {
         content: '';
         display: inline-block;
-        width: 16px;
-        height: 16px;
+        width: 20px;
+        height: 20px;
         flex-shrink: 0;
         flex-grow: 0;
         border: 1px solid #adb5bd;

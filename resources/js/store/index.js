@@ -47,6 +47,7 @@ export default new Vuex.Store({
         isDelAlbum: false,
         IdAlbum: 16,
         errorAlbum: [],
+        createAlbum:{},
         //------------------------------------------
 
         // Альбомы
@@ -69,12 +70,16 @@ export default new Vuex.Store({
         // Удаление фото из альбома
         isDeleteImagesFromAlbum: false,
         //-------------------------
-
+        photoChangedDate: [],
     },
     getters: {
-
+        photoChangedDate: state => state.photoChangedDate,
     },
     mutations: {
+        setPhotoChangedDate: (state, payload) => {
+            state.photoChangedDate = payload
+        },
+
         // возврат состояния state
 
         // beforeCreate() {
@@ -120,6 +125,8 @@ export default new Vuex.Store({
             state.isCreateAlbum = true
         },
         hideCreateAlbum(state) {
+            state.errorAlbum = [],
+            state.createAlbum={},
             state.isCreateAlbum = false
         },
         //--------------
@@ -306,6 +313,7 @@ export default new Vuex.Store({
                     };
                     this.dispatch('showToasted', payload);
                     this.commit('ListAlbum/countAlbumsP');
+                    this.state.createAlbum = [];
                     this.commit('hideCreateAlbum');
                     this.dispatch('ListAlbum/getAlbums');
 }
@@ -429,6 +437,7 @@ export default new Vuex.Store({
         },
         changeDatePhotos({ commit, getters, dispatch }, date) {
             let photos = ((getters.selectedPhotos.length === 0) && (getters.correctPhotoId !== 0)) ? [getters.correctPhotoId] : getters.selectedPhotos;
+            commit('setPhotoChangedDate', photos)
             axios.post('/api/photos/change-date', {
                 photos: photos,
                 date: date

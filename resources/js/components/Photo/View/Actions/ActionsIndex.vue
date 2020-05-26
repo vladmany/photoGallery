@@ -1,24 +1,24 @@
 <template>
     <div class="actions">
-        <div class="action add_to_album" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="addToAlbum">
+        <div class="action add_to_album" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="addToAlbum" title="Добавить фото в альбом">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
-        <div class="action download" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="download">
+        <div class="action download" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="download" title="Скачать фото">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_download.svg"></object>
         </div>
-        <div class="action change_date" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="changeDate">
+        <div class="action change_date" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="changeDate" title="Изменить дату">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_change_date.svg"></object>
         </div>
 <!--        <div class="action to_favorite" @click="toFavorite">-->
 <!--            <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_favorite.svg"></object>-->
 <!--        </div>-->
-        <div class="action image_correction" :class="isSelectedPhotos1" @click="turnImage">
+        <div class="action image_correction" :class="isSelectedPhotos1" @click="turnImage" title="Повернуть фото">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_turn.svg"></object>
         </div>
-        <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection">
+        <div class="action image_correction" :class="isSelectedPhotos1" @click="imageCorrection" title="Открыть окно коррекции фото">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_photo_correction.svg"></object>
         </div>
-        <div class="action delete_image" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="deleteImages">
+        <div class="action delete_image" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="deleteImages" title="Удалить фото">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_delete.svg"></object>
         </div>
     </div>
@@ -140,8 +140,14 @@
                 return (this.$store.getters.selectedPhotos.length > 0) ? 'available' : '';
             },
             isSelectedPhotos1() {
-                return (this.$store.getters.selectedPhotos.length === 1
-                    || this.$route.name === 'IndexViewPhoto') ? 'available' : '';
+                if(this.$store.getters.selectedPhotos.length === 1 || this.$route.name === 'IndexViewPhoto'){
+                    let id = this.$store.getters.correctPhotoId;
+                    let photo = this.$store.getters['ListPhoto/photo'](id)
+                    if(photo.extension !== 'gif') {
+                        return 'available';
+                    }
+                }
+                return '';
             },
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',

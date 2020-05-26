@@ -9,7 +9,7 @@
             />
         </template>
         <template v-slot:title>
-            <h1 class="pl-3">Альбомы</h1>
+            <span>Альбомы</span>
         </template>
         <template v-slot:button>
                 <CreateAlbum></CreateAlbum>
@@ -17,7 +17,7 @@
         <template v-slot:actions>
             <div class="panel">
                 <action-all-albums v-if="showPanels"></action-all-albums>
-                <search-albums v-if="showPanels" ></search-albums>
+                <search-albums v-if="showPanels" class="search-panel" ></search-albums>
             </div>
         </template>
         <template v-slot:content>
@@ -92,7 +92,6 @@
         max-width: 1110px;
         background: #ffffff;
 
-
     }
 
     .albums-wrap {
@@ -134,7 +133,6 @@
         }
 
     }
-
     .upload {
         display: flex;
         max-width: 214px;
