@@ -117,7 +117,7 @@
                                     >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <a href="https://it20-tools-photogallery.azurewebsites.net/auth/logout"
+                                    <a  href="#"
                                     >Выход из системы</a>
                                 </li>
                             </ul>
@@ -237,7 +237,12 @@
         },
         methods: {
             logout() {
-                this.$store.dispatch('logout')
+                // this.$store.dispatch('logout')
+
+                axios.get('https://team1-group-project.azurewebsites.net/api/client_logout' ,
+                    { headers: {Authorization: "Bearer " + this.user.token}})
+                    .then(r => location.href= r.data)
+                }
             },
             getAllData() {
                 this.$store.dispatch('ListPhoto/getPhotos');
