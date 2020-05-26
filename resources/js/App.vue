@@ -320,22 +320,16 @@
 
             let mql = window.matchMedia('(max-width: 1380px)');
             mql.addListener((e) => {
-                if (e.matches) {
-                    this.sidebarOpen = false
-                } else {
-                    this.sidebarOpen = true
-                }
+                this.sidebarOpen = !e.matches
             });
             let mql1 = window.matchMedia('(max-width: 550px)');
             mql1.addListener((e) => {
-                if (e.matches) {
-                    this.sidebarOpen = false
-                } else {
-                    this.sidebarOpen = true
-                }
+                this.sidebarOpen = false
             });
 
-
+            $(() => {
+                this.sidebarOpen = !mql1.matches
+            });
         },
         mounted() {
             this.$root.$on('changeActiveAlbums', () => {

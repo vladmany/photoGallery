@@ -20,7 +20,7 @@
             />
         </template>
         <template v-slot:title>
-            <span class="hint--bottom" aria-label="Thank you!">Просмотр фото</span>
+            <span>Просмотр фото</span>
         </template>
         <template v-slot:actions>
             <actions
@@ -71,7 +71,19 @@
         },
         created() {
             this.$root.$emit('showPhotosSidebar')
+            $(() => {
+                if (this.previousRoute.name === 'OneAlbum') {
+                    $('#sidebar .router-link-active').removeClass('router-link-active')
+                    $('#sidebar a[href="/albums"]').addClass('router-link-active')
+                }
+            })
         },
+        updated() {
+            $('#sidebar a[href="/albums"]').removeClass('router-link-active')
+        },
+        destroyed() {
+            $('#sidebar a[href="/albums"]').removeClass('router-link-active')
+        }
     }
 
 </script>

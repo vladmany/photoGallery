@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import Axios from "axios";
 
 import AddPhoto from './modules/AddPhoto'
 import ListPhoto from './modules/ListPhoto'
@@ -57,6 +58,7 @@ export default new Vuex.Store({
         // Скачивание фото
         isDownloadProgress: false,
         downloadProgress: 0,
+        downloadRequest: null,
         //----------------
 
         // Удоление фото на странице фото
@@ -74,6 +76,9 @@ export default new Vuex.Store({
     },
     getters: {
         photoChangedDate: state => state.photoChangedDate,
+        downloadCancelSource: state => {
+            state.downloadCancelToken.source()
+        }
     },
     mutations: {
         setPhotoChangedDate: (state, payload) => {
@@ -182,6 +187,9 @@ export default new Vuex.Store({
         },
         setDownloadProgress(state, data) {
             state.downloadProgress = data
+        },
+        setDownloadRequest(state, data) {
+            state.downloadRequest = data;
         },
         //----------------
 
@@ -327,6 +335,8 @@ export default new Vuex.Store({
         },
         downloadPhotos({ commit, getters }, photos) {
             this.commit('showDownloadProgress');
+            const axiosSource = axios.CancelToken.source();
+            commit('setDownloadRequest',{ cancel: axiosSource.cancel, msg: "Loading..." })
             axios.post('/api/photos/download', {
                 photos: photos
             },
@@ -335,7 +345,8 @@ export default new Vuex.Store({
                 onDownloadProgress: (itemDownload) => {
                     let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
                     this.commit('setDownloadProgress', Progress)
-                }
+                },
+                cancelToken: axiosSource.token
             })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
@@ -359,6 +370,8 @@ export default new Vuex.Store({
         },
         downloadAlbums({ commit, getters }, albums) {
             this.commit('showDownloadProgress');
+            const axiosSource = axios.CancelToken.source();
+            commit('setDownloadRequest',{ cancel: axiosSource.cancel, msg: "Loading..." })
             axios.post('/api/album-photos/download-albums', {
                 albums: albums
             },
@@ -367,7 +380,8 @@ export default new Vuex.Store({
                 onDownloadProgress: (itemDownload) => {
                     let Progress = Math.round((itemDownload.loaded / itemDownload.total) * 100);
                     this.commit('setDownloadProgress', Progress)
-                }
+                },
+                cancelToken: axiosSource.token
             })
             .then(response => {
                 const url = window.URL.createObjectURL(new Blob([response.data]));
