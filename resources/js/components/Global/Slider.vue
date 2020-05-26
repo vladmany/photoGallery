@@ -212,7 +212,7 @@
     }
 
     .slider {
-        margin-top: 100px;
+        margin-top: 30px;
         position: relative;
         display: flex;
         justify-content: center;

@@ -109,17 +109,23 @@ let actions = {
     },
     setSccAttrsById: ({ commit, state }, id) => {
         let obj = state.photoCorrects.find(photo => photo.photo_id === id)
-        if(obj) {
-            for(let key of Object.keys(state.cssAttrsDef)) {
-                state.cssAttrs[key] = obj[key]
-            }
-        } else {
-            for(let key of Object.keys(state.cssAttrsDef)) {
-                commit('setCssAttr', {
-                    name: key,
-                    value: state.cssAttrsDef[key]
-                })
-            }
+        // if(obj) {
+        //     for(let key of Object.keys(state.cssAttrsDef)) {
+        //         state.cssAttrs[key] = obj[key]
+        //     }
+        // } else {
+        //     for(let key of Object.keys(state.cssAttrsDef)) {
+        //         commit('setCssAttr', {
+        //             name: key,
+        //             value: state.cssAttrsDef[key]
+        //         })
+        //     }
+        // }
+        for(let key of Object.keys(state.cssAttrsDef)) {
+            commit('setCssAttr', {
+                name: key,
+                value: state.cssAttrsDef[key]
+            })
         }
     },
     rotatePhoto: ({ commit }, angle) => {
