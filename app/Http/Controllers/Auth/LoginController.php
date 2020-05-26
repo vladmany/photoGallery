@@ -129,8 +129,6 @@ class LoginController extends Controller
 
         $cookie = Cookie::forget('laravel_session');
 
-        dd($cookie);
-
         $this->guard()->logout();
         Auth::logout();
 
