@@ -23,7 +23,6 @@ Route::get('token', 'Api\UserController@token');
 Route::apiResource('all-photos', 'Api\PhotoController');
 Route::apiResource('all-albums', 'Api\AlbumController');
 Route::apiResource('/corrects', 'Api\CorrectController');
-
 Route::post('/dead-session', 'Api\UserController@deadSession');
 Route::get('/get-user', 'Api\UserController@index');
 Route::apiResource('/albums-photos', 'Api\AlbumPhotoController');

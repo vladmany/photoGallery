@@ -2,7 +2,9 @@
     <modal-window
         v-if="this.$store.state.isDeleteImagesFromAlbum"
         title="Выберите действие"
-        :close-action="close">
+        :close-action="close"
+        :min-width="610"
+    >
         <template v-slot:content>
             <span>Вы хотите удалить {{selectedPhotos.length}} фото полностью или только из текущего альбома?</span>
         </template>

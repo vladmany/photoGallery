@@ -326,11 +326,17 @@
             });
             let mql1 = window.matchMedia('(max-width: 550px)');
             mql1.addListener((e) => {
-                this.sidebarOpen = false
+                this.sidebarOpen = !mql1
+            });
+
+            let mql3 = window.matchMedia('(max-width: 1000px)');
+            mql3.addListener((e) => {
+                this.sidebarOpen = !mql3
             });
 
             $(() => {
-                this.sidebarOpen = !mql1.matches
+                this.sidebarOpen = !mql.matches
+                // this.sidebarOpen = !mql3.matches
             });
 
             $(document).mouseup((e) => { // событие клика по веб-документу
@@ -339,7 +345,6 @@
                 if (!div.is(e.target) && (!div2.is(e.target)) && div.has(e.target).length === 0 && div2.has(e.target).length === 0)
                 {
                     this.userMenuOpen = false
-                    console.log('ЗАКРЫВАЙ!')
                 }
             });
         },
@@ -416,6 +421,7 @@
         margin-top: 12px;
         margin-bottom: 7px;
         z-index: -1;
+        pointer-events: none;
     }
     #side_menu li{
         height: 60px;
@@ -624,6 +630,7 @@
     }
     .social_block object{
         z-index: -1000;
+        pointer-events: none;
     }
     footer li{
         margin-bottom: 20px;
@@ -639,14 +646,17 @@
     .social_block li:hover object{
         -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
+        pointer-events: none;
     }
     #side_menu li:not(.second_level-wrapper):not(.main-group-tab):hover a:not(.router-link-active) object {
         -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         opacity: .6;
+        pointer-events: none;
     }
     #side_menu li.main-group-tab:not(.group-tab-open):hover a object {
         filter: brightness(70%);
+        pointer-events: none;
     }
     .social_block object {
         pointer-events: none;
@@ -676,16 +686,19 @@
     .second_level-toggled object{
         -webkit-filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
         filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
+        pointer-events: none;
     }
     #side_menu .second_level-wrapper:hover > a:first-of-type:not(.second_level-toggled) object {
         -webkit-filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
         filter: brightness(0) saturate(100%) invert(61%) sepia(26%) saturate(0%) hue-rotate(228deg) brightness(94%) contrast(93%);
         opacity: .6;
+        pointer-events: none;
     }
     #side_menu .second_level-wrapper a:not(:first-of-type):not(.router-link-active):hover object {
         -webkit-filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         filter: brightness(0) saturate(100%) invert(35%) sepia(60%) saturate(3842%) hue-rotate(203deg) brightness(97%) contrast(94%);
         opacity: .6;
+        pointer-events: none;
     }
     .sidebar-open .second_level-wrapper {
         max-height: 60px;
@@ -811,10 +824,12 @@
     }
     .group-tab-open a object {
         filter: brightness(15%);
+        pointer-events: none;
     }
 
     .group-tab-open:hover a object {
         filter: brightness(40%);
+        pointer-events: none;
     }
 
     .group-tabs {
