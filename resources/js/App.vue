@@ -238,7 +238,9 @@
         methods: {
             logout() {
                 // this.$store.dispatch('logout')
-
+                setCookie('laravel_session', "", {
+                    'max-age': -1
+                });
                 axios.get('https://team1-group-project.azurewebsites.net/api/client_logout',
                     {headers: {Authorization: "Bearer " + this.user.token}})
                     .then(r => location.href = r.data)
