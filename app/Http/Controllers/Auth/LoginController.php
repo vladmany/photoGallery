@@ -120,10 +120,17 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
+//        if(Auth::user()->token())
+//            Auth::user()->token()->revoke();
+//        Auth::logout();
+
         $this->guard()->logout();
         Auth::logout();
 
-        return redirect()->route('auth');
+        return redirect('https://it20-tools-photogallery.azurewebsites.net/authorization') ;
+
+//
+//        return redirect()->route('auth');
     }
 
 }

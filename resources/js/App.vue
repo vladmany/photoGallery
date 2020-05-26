@@ -311,6 +311,11 @@
             isPhotoOpen() {
                 return this.$store.state.isPhotoOpen
             },
+            user() {
+                let usr = this.$store.getters['user']
+                // console.log(usr)
+                return usr
+            },
             // user() {
             //     let usr = this.$store.getters['user']
             //     // console.log(usr)
