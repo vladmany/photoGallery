@@ -117,7 +117,7 @@
                                     >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <a href="https://it20-tools-photogallery.azurewebsites.net/auth/logout"
+                                    <a href="#"
                                        @click="logout"
                                     >Выход из системы</a>
                                 </li>
@@ -238,7 +238,8 @@
         },
         methods: {
             logout() {
-                // this.$store.dispatch('logout')
+
+                this.$store.dispatch('logout')
                 // function setCookie(name, value, options = {}) {
                 //
                 //     options = {
@@ -266,6 +267,9 @@
                 // setCookie('laravel_session', "", {
                 //     'max-age': -1
                 // });
+
+
+
                 // axios.get('https://team1-group-project.azurewebsites.net/api/client_logout',
                 //     {headers: {Authorization: "Bearer " + this.user.token}})
                 //     .then(r => location.href = r.data)
