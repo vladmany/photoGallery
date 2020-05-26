@@ -332,6 +332,16 @@
             $(() => {
                 this.sidebarOpen = !mql1.matches
             });
+
+            $(document).mouseup((e) => { // событие клика по веб-документу
+                let div = $(".user_menu"); // тут указываем ID элемента
+                let div2 = $(".toggle_user-menu");
+                if (!div.is(e.target) && (!div2.is(e.target)) && div.has(e.target).length === 0 && div2.has(e.target).length === 0)
+                {
+                    this.userMenuOpen = false
+                    console.log('ЗАКРЫВАЙ!')
+                }
+            });
         },
         mounted() {
             this.$root.$on('changeActiveAlbums', () => {
@@ -496,7 +506,7 @@
     .user_menu-wrapper {
         max-height: 0px;
         overflow: hidden;
-        transition: max-height .7s ease-in-out;
+        transition: max-height .3s ease-in-out;
         position: absolute;
         left: -20%;
         transform: translateY(100%);
