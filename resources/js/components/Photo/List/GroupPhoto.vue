@@ -79,6 +79,10 @@
                 console.log(this.elements)
             },
             clickInput(childChecked) {
+                if(this.selectAll) {
+                    this.downUp.v = 0
+                    this.isSelected = false
+                }
                 if(this.isSelected) {
                     if(childChecked) {
                         this.isSelected = false;
