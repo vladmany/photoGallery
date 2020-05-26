@@ -43,11 +43,12 @@ class AlbumController extends Controller
      */
     public function store(AlbumRequest $request)
     {
+        $userId = Auth::id();
         $albumCount = (string)(Album::all()->count()+1);
         $url = 'http://gallery/album/'.base64_encode($albumCount);
         $data = $request->all();
         $data['url'] = $url;
-
+        $data['user_id'] = $userId;
         $data = Album::create($data);
 
         return $data;
