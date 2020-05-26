@@ -117,8 +117,7 @@
                                     >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <a href="https://it20-tools-photogallery.azurewebsites.net/auth/logout">
-<!--                                    <a href="#" @click="logout"-->
+                                    <a href="https://it20-tools-photogallery.azurewebsites.net/auth/logout"
                                     >Выход из системы</a>
                                 </li>
                             </ul>
