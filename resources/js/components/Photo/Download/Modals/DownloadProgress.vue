@@ -26,6 +26,8 @@
         methods: {
             close() {
                 this.$store.commit('hideDownloadProgress')
+                this.$store.state.downloadRequest.cancel();
+                this.$store.commit('setDownloadProgress',0)
             }
         },
         computed: {

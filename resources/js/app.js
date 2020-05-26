@@ -52,5 +52,5 @@ Vue.config.productionTip = false;
 
 const app = new Vue({
     render: h => h(App),
-    store, router
+    store, router, axios
 }).$mount('#app');
