@@ -13,7 +13,7 @@
                 </router-link>
             </div>
             <div>
-                <OnePhoto :id="id"></OnePhoto>
+                <OnePhoto :photo="photo"></OnePhoto>
             </div>
         </template>
     </Section>
@@ -28,9 +28,9 @@
         name: "OnePhotoIndex",
         components: {Actions, OnePhoto },
         props: {
-            id: {
+            photo: {
                 required: true,
-                type: Number
+                type: Object
             }
         },
     }

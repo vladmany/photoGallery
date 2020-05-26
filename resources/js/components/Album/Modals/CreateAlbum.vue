@@ -8,7 +8,7 @@
             <template v-slot:content>
                 <div class="content">
                     <label class="control-label">Добавить название альбома</label>
-                    <input type="text" v-model="album.name" class="form-control input">
+                    <input type="text" v-model="$store.state.createAlbum.name" class="form-control input">
                     <span v-if="$store.state.errorAlbum[0]" class="create-error">{{$store.state.errorAlbum[0]}}</span>
                 </div>
             </template>
@@ -36,19 +36,21 @@
         components: {modalwindow, CButton},
         data: function () {
             return {
-                album: {},
                 errors: []
             }
         },
         methods: {
             CreateAlbum() {
-                this.$store.dispatch('createAlbum', this.album);
+                this.$store.dispatch('createAlbum', this.$store.state.createAlbum);
             },
             CloseModalCreateAlbum(){
-                this.album = [];
+                this.$store.state.createAlbum = {};
                 this.$store.commit('hideCreateAlbum');
             }
         },
+        created() {
+            this.$store.state.createAlbum = {};
+            }
     }
 </script>
 

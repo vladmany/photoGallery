@@ -49,13 +49,16 @@
             ...mapGetters({
                 photos: 'ListPhoto/photos',
             }),
+            // title() {
+            //     return this.$route.name === 'IndexPhoto' ? 'Фото' : 'Добавление фото в альбом';
+            // },
         },
         methods: {
         },
         created() {
             // setTimeout(this.load, 1000);
             // this.loadData()
-            console.log('главная страница с фото')
+            // console.log('главная страница с фото')
             this.$store.dispatch('clearPhotos');
         },
         mounted() {

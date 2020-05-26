@@ -11,7 +11,7 @@
             />
         </template>
         <template v-slot:title>
-            <span>Фото</span>
+            <span>Добавление фото в альбом</span>
         </template>
         <template v-slot:button>
             <upload-photos-component/>

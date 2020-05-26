@@ -47,6 +47,7 @@ export default new Vuex.Store({
         isDelAlbum: false,
         IdAlbum: 16,
         errorAlbum: [],
+        createAlbum:{},
         //------------------------------------------
 
         // Альбомы
@@ -124,6 +125,8 @@ export default new Vuex.Store({
             state.isCreateAlbum = true
         },
         hideCreateAlbum(state) {
+            state.errorAlbum = [],
+            state.createAlbum={},
             state.isCreateAlbum = false
         },
         //--------------
@@ -310,6 +313,7 @@ export default new Vuex.Store({
                     };
                     this.dispatch('showToasted', payload);
                     this.commit('ListAlbum/countAlbumsP');
+                    this.state.createAlbum = [];
                     this.commit('hideCreateAlbum');
                     this.dispatch('ListAlbum/getAlbums');
 }

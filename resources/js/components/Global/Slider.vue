@@ -136,7 +136,7 @@
                 this.$store.dispatch('changeRotStyle', id)
                 let angle = this.$store.getters.rotWithId(id)
                 let cssStyle = `transform: rotate(${angle}deg)`
-                console.log(cssStyle)
+                // console.log(cssStyle)
                 this.myStyle = cssStyle
             }
         },
@@ -154,8 +154,8 @@
             }
         },
         beforeMount() {
-            this.$store.commit('initialiseStore');
-            console.log(this.$store.state)
+            // this.$store.commit('initialiseStore');
+            // console.log(this.$store.state)
         },
     };
 </script>
