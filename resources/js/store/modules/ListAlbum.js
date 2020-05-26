@@ -80,8 +80,17 @@ let actions = {
     },
     selectAllAlbums:({ commit }, isselect) =>
         commit('selectAllAlbums', isselect),
+
+
+
     setSearchStr:({ commit }, payload) => {
         commit('setSearchStr', payload);
+    },
+    selectAlbum: ({ commit }, id) => {
+        let payload = {}
+        payload['id'] = id
+        payload['val'] = true;
+        commit('setSelectPhoto', payload)
     },
 }
 
