@@ -18,12 +18,13 @@ class UserController extends Controller
     }
 
     public function index() {
-        $userDb = User::where('id', 1)->first();
-        Auth::login($userDb);
+        $user_id = Auth::id();
+        $userDb = User::where('id', $user_id)->first();
+//        Auth::login($userDb);
 
-        $user = Auth::user();
+//        $user = Auth::user();
 
-        return $user;
+        return $userDb;
     }
 
     public function token()

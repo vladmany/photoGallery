@@ -82,7 +82,7 @@ class LoginController extends Controller
 //нужно сохранить пользователя на вашем преокте, если уже есть пользователь с таким email тогда обновить токен
             if(!$myuser)
             {
-                $user = User::firstOrCreate([
+                $user = User::Create([
                         'email' => $response['email'],
                         'name' => $response['name'],
                         'surname' => $response['surname'],
