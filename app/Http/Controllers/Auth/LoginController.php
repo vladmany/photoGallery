@@ -106,7 +106,7 @@ class LoginController extends Controller
             ]);
             Auth::login($myuser);
 
-            dd($response ,$myuser);
+//            dd($response ,$myuser);
 
 //перекинуть в личны кабинет
             return response()->redirectTo(RouteServiceProvider::HOME);
