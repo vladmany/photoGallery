@@ -117,7 +117,8 @@
                                     >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <a href="https://team1-group-project.azurewebsites.net/logout"
+                                    <a href="https://it20-tools-photogallery.azurewebsites.net/auth/logout">
+<!--                                    <a href="#" @click="logout"-->
                                     >Выход из системы</a>
                                 </li>
                             </ul>
@@ -237,8 +238,8 @@
         },
         methods: {
             logout() {
-
-                this.$store.dispatch('logout')
+                // location.href
+                // this.$store.dispatch('logout')
                 // function setCookie(name, value, options = {}) {
                 //
                 //     options = {

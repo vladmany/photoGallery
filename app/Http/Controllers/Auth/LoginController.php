@@ -127,12 +127,13 @@ class LoginController extends Controller
 
 //        $request->session()->flush();
 
-        $cookie = Cookie::forget('laravel_session');
+//        $cookie = Cookie::forget('laravel_session');
 
         $this->guard()->logout();
+
         Auth::logout();
 
-        return redirect('https://it20-tools-photogallery.azurewebsites.net/authorization') ;
+        return redirect('https://team1-group-project.azurewebsites.net/logout') ;
 
 //
 //        return redirect()->route('auth');
