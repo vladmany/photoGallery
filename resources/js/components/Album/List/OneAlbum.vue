@@ -106,6 +106,8 @@
     }
     .button-wrapper {
         width: 100%;
+        display: flex;
+        justify-content: center;
     }
     .button-main-wrapper {
         width: 100%;

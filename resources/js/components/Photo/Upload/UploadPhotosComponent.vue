@@ -50,6 +50,8 @@
 <style scoped>
     .upload-wrapper {
         width: 100%;
+        display: flex;
+        justify-content: center;
     }
     .inputfile {
         width: 0.1px;

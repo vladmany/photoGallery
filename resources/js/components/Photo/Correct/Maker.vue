@@ -9,7 +9,7 @@
                         </router-link>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 text-right">
+                <div class="col-12 col-lg-6 text-right save-wrapper">
                     <span @click="save" class="save">Сохранить</span>
                 </div>
             </div>
@@ -64,6 +64,10 @@
 </script>
 
 <style scoped>
+    .save-wrapper {
+        display: flex;
+        justify-content: flex-end;
+    }
     .save {
         margin-top: 15px;
         cursor: pointer;

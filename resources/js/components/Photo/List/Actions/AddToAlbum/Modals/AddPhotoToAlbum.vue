@@ -2,7 +2,8 @@
     <modal-window
         v-show="this.$store.state.isAddPhotoToAlbum"
         title="Добавить в альбом"
-        :close-action="close">
+        :close-action="close"
+    >
         <template v-slot:content>
             <div class="content">
                 <label>Выбрать альбом</label>

@@ -33,8 +33,10 @@
 <style scoped>
     .button-wrapper {
         width: 100%;
+        max-width: 155px;
         display: flex;
         justify-content: center;
+        margin-top: 10px;
     }
     button {
         font-family: 'Roboto', sans-serif;
@@ -43,7 +45,6 @@
         height: 50px;
         border: none;
         text-transform: uppercase;
-        max-width: 155px;
         width: 100%;
     }
 
