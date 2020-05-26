@@ -43,11 +43,35 @@
         },
         watch: {
             isSelected() {
-                this.$store.dispatch('ListAlbum/selectAllAlbums', this.isSelected);
+                console.log('watch IsSelected do + dovnUp ' + this.downUp.v + 'isSelected ' + this.isSelected)
+                if(this.downUp.v === 0 /*&& this.isSelected === true*/){
+                    this.$store.dispatch('ListAlbum/selectAllAlbums', this.isSelected);
+                    console.log('watch IsSelected posle ' + this.isSelected)
+                }
+            },
+            downUp(){
+                console.log('watch downUp do uslovij' + this.downUp.v)
+                if(this.isSelected && this.downUp.v === 1){
+                     this.isSelected = false;
+                    console.log('watch downUp 2 uslovija' + this.downUp.v)
+                }
+                if(this.downUp.v === 1){
+                    this.downUp.v = 0;
+                    console.log('watch downUp 1 uslovija' + this.downUp.v)
+                }
             },
             selectedAlbums() {
+                console.log('watch selectedAlbums do uslovija ' + this.selectedAlbums.length + ' dovnUp ' + this.downUp.v)
                 if (this.selectedAlbums.length === 0) {
+                     this.isSelected = false
+                    this.downUp.v = 0;
+                    console.log('watch selectedAlbums v uslovie ' + this.isSelected)
+                }
+
+                if (this.selectedAlbums.length < 6 && this.downUp.v === 1) {
                     this.isSelected = false
+                    this.downUp.v = 0;
+                    console.log('watch selectedAlbums v uslovie 2' + this.isSelected)
                 }
             },
         },
@@ -55,10 +79,12 @@
         computed: {
             isSelectedAlbums: function() {
                 return (this.$store.getters.selectedAlbums.length > 0) ? 'available' : ''
+                console.log('computed IsSelectedAlbums ' + this.$store.getters.selectedAlbums.length)
             },
             ...mapGetters({
                 selectedAlbums: 'selectedAlbums',
                 albums: 'ListAlbum/albums',
+                downUp: 'ListAlbum/downUp'
             })
         },
         created() {

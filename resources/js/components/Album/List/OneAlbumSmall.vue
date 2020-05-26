@@ -16,9 +16,9 @@
                 </router-link>
             </div>
             <div class="justify-content-around col-12 d-flex">
-                    <p class="text-center"><img src="/storage/albums/ico_calendar.png">
-                        {{ formatDate(album.created_at) }}
-                    </p>
+                <p class="text-center"><img src="/storage/albums/ico_calendar.png">
+                    {{ formatDate(album.created_at) }}
+                </p>
             </div>
         </div>
     </div>
@@ -37,7 +37,8 @@
         },
         computed: {
             ...mapGetters({
-                selectAll: 'ListAlbum/selectAllAlbums'
+                selectAll: 'ListAlbum/selectAllAlbums',
+                downUp: 'ListAlbum/downUp'
             }),
         },
         watch: {
@@ -45,11 +46,14 @@
                 this.isSelected = this.selectAll;
             },
             isSelected() {
-               if (this.isSelected) {
-                   this.$store.dispatch('addAlbum', this.album.id);
-               } else {
-                   this.$store.dispatch('delAlbum', this.album.id);
-               }
+                if (this.isSelected) {
+                    this.$store.dispatch('addAlbum', this.album.id);
+                    console.log('____ watch isSelected true-usl ' + this.downUp.v);
+                } else {
+                    this.downUp.v = 1;
+                    this.$store.dispatch('delAlbum', this.album.id);
+                    console.log(this.album.id + '____ watch isSelected false-usl ' + this.downUp.v);
+                }
             }
         },
         data() {

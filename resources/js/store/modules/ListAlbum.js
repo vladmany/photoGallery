@@ -4,7 +4,8 @@ let state = {
     groups: {},
     selectAllAlbums: false,
     searchString: "",
-    countAlbums: 0
+    countAlbums: 0,
+    downUp: { v: 0 },
 }
 let getters = {
     albums: state => {
@@ -44,6 +45,7 @@ let getters = {
         return false;
     },
     getSearchStr: state => state.searchString,
+    downUp: state => state.downUp,
 }
 let mutations = {
     getAlbums:(state, payload) => {
@@ -63,6 +65,9 @@ let mutations = {
     },
     countAlbumsM(state) {
         state.countAlbums = state.countAlbums - 1
+    },
+    setDownUp: (state, payload) => {
+        state.downUp = payload
     },
 
 }
