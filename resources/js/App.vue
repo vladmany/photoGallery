@@ -117,7 +117,8 @@
                                     >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <a  href="#" @click="logout"
+                                    <a href="https://it20-tools-photogallery.azurewebsites.net/auth/logout"
+                                       @click="logout"
                                     >Выход из системы</a>
                                 </li>
                             </ul>
@@ -238,36 +239,38 @@
         methods: {
             logout() {
                 // this.$store.dispatch('logout')
-                function setCookie(name, value, options = {}) {
+                // function setCookie(name, value, options = {}) {
+                //
+                //     options = {
+                //         path: '/',
+                //         // при необходимости добавьте другие значения по умолчанию
+                //         ...options
+                //     };
+                //
+                //     if (options.expires instanceof Date) {
+                //         options.expires = options.expires.toUTCString();
+                //     }
+                //
+                //     let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
+                //
+                //     for (let optionKey in options) {
+                //         updatedCookie += "; " + optionKey;
+                //         let optionValue = options[optionKey];
+                //         if (optionValue !== true) {
+                //             updatedCookie += "=" + optionValue;
+                //         }
+                //     }
+                //
+                //     document.cookie = updatedCookie;
+                // }
+                // setCookie('laravel_session', "", {
+                //     'max-age': -1
+                // });
+                // axios.get('https://team1-group-project.azurewebsites.net/api/client_logout',
+                //     {headers: {Authorization: "Bearer " + this.user.token}})
+                //     .then(r => location.href = r.data)
 
-                    options = {
-                        path: '/',
-                        // при необходимости добавьте другие значения по умолчанию
-                        ...options
-                    };
 
-                    if (options.expires instanceof Date) {
-                        options.expires = options.expires.toUTCString();
-                    }
-
-                    let updatedCookie = encodeURIComponent(name) + "=" + encodeURIComponent(value);
-
-                    for (let optionKey in options) {
-                        updatedCookie += "; " + optionKey;
-                        let optionValue = options[optionKey];
-                        if (optionValue !== true) {
-                            updatedCookie += "=" + optionValue;
-                        }
-                    }
-
-                    document.cookie = updatedCookie;
-                }
-                setCookie('laravel_session', "", {
-                    'max-age': -1
-                });
-                axios.get('https://team1-group-project.azurewebsites.net/api/client_logout',
-                    {headers: {Authorization: "Bearer " + this.user.token}})
-                    .then(r => location.href = r.data)
             },
             getAllData() {
                 this.$store.dispatch('ListPhoto/getPhotos');
