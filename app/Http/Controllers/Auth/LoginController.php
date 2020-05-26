@@ -123,6 +123,7 @@ class LoginController extends Controller
         $this->guard()->logout();
         Auth::logout();
 
+        session_destroy();
         return redirect()->route('auth');
     }
 
