@@ -317,6 +317,7 @@
             // }
         },
         created() {
+            console.log(document.cookie)
             loadProgressBar()
             this.$store.dispatch('getCorrects');
 
