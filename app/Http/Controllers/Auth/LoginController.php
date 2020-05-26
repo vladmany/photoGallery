@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -126,7 +127,9 @@ class LoginController extends Controller
 
 //        $request->session()->flush();
 
-        dd($request->session());
+        $cookie = Cookie::forget('laravel_session');
+
+        dd($cookie);
 
         $this->guard()->logout();
         Auth::logout();
