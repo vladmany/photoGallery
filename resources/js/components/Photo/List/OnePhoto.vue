@@ -59,6 +59,9 @@
                 } else {
                     this.$store.dispatch('delPhoto', this.photo.id);
                     this.$store.dispatch('ListPhoto/unselectPhoto', this.photo.id)
+                    if(this.selectAll) {
+                        this.$store.dispatch('ListPhoto/selectAllPhotos', false);
+                    }
                 }
             },
             selectAll(newVal) {
