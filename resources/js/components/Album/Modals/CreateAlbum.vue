@@ -41,7 +41,13 @@
         },
         methods: {
             CreateAlbum() {
-                this.$store.dispatch('createAlbum', this.$store.state.createAlbum);
+             /*   if(this.$store.state.createAlbum.name.trim()>=3){*/
+                    this.$store.dispatch('createAlbum', this.$store.state.createAlbum);
+                /*}*/
+               /* else {
+                    this.$store.state.errorAlbum[0]='Минимальна длина названия 3 символаdd'}
+                }*/
+
             },
             CloseModalCreateAlbum(){
                 this.$store.state.createAlbum = {};
