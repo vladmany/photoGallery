@@ -117,8 +117,7 @@
                                     >Настройки безопасности</a>
                                 </li>
                                 <li>
-                                    <a href="#"
-                                       @click="logout"
+                                    <a href="https://team1-group-project.azurewebsites.net/logout"
                                     >Выход из системы</a>
                                 </li>
                             </ul>
