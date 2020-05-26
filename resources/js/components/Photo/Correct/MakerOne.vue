@@ -9,7 +9,7 @@
                         </router-link>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 text-right">
+                <div class="col-12 col-lg-6 text-right save-wrapper">
                     <span @click="save" class="save">Сохранить</span>
                 </div>
             </div>
@@ -69,6 +69,13 @@
         cursor: pointer;
         font-weight: bold;
         color: #999999;
+    }
+    .save:hover {
+        filter: brightness(50%);
+    }
+    .save-wrapper {
+        display: flex;
+        justify-content: flex-end;
     }
     object {
         pointer-events: none;

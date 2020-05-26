@@ -8,7 +8,7 @@
                 <div class="window-content">
                     <span class="title">{{title}}</span>
                     <slot name="content"><span>Содержание модалки</span></slot>
-                    <div class="window-buttons d-flex">
+                    <div class="window-buttons">
                         <slot name="buttons"/>
                     </div>
                 </div>
@@ -139,5 +139,9 @@
         line-height: 30px;
         color: #808080;
     }
-
+    .window-buttons {
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+    }
 </style>

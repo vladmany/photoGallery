@@ -88,6 +88,7 @@
                 this.reset()
             },
             async uploadFiles(files) {
+                console.log(files)
                 if (this.isEnd) {
                     this.$store.dispatch('ListPhoto/getPhotos');
                     this.close()
@@ -111,8 +112,7 @@
             async uploadFile(item) {
                 let form = new FormData();
                 form.append('photo', item)
-
-                await axios.post('api/photos/upload', form, {
+                await axios.post(window.location.origin + '/api/photos/upload', form, {
                     onUploadProgress: (itemUpload) => {
                         this.fileProgress = Math.round((itemUpload.loaded / itemUpload.total) * 100);
                         this.fileCurrent = item.name
