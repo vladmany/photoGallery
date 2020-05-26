@@ -40,6 +40,15 @@ class PhotoService
             $data['width'] = $imageSize[0];
             $data['height'] = $imageSize[1];
             $data['kind_id'] = $kindId;
+            $data['hash'] = md5_file($file);
+//            dd(Photo::all()->where('hash', $data['hash'])->where('user_id', $userId)->first());
+            if(Photo::all()->where('hash', $data['hash'])->where('user_id', $userId)->first())
+            {
+                return response()->json(array(
+                    'code'      =>  401,
+                    'message'   =>  'Текущее фото уже существует в вашей галерее'
+                ), 401);
+            }
 
             return Photo::create($data);
         }
