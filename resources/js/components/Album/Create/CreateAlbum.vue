@@ -27,4 +27,7 @@
 </script>
 
 <style scoped>
+    .createAlbum {
+        width: 100%;
+    }
 </style>

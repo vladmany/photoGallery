@@ -81,7 +81,7 @@
     }
     .actions-panel{
         width: 100%;
-        min-height: 92px;
+        min-height: 70px;
         height: 100%;
     }
 
@@ -91,5 +91,21 @@
         background-color: #ffffff;
         max-width: 1110px;
         margin-bottom: 25px;
+    }
+
+    @media(max-width: 768px) {
+        .card-button {
+            margin-top: 15px;
+            margin-bottom: 15px;
+        }
+        .actions-panel{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            min-height: 70px;
+            height: 100%;
+            border-top: 2px solid #F5F5F5;
+        }
     }
 </style>

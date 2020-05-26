@@ -13,8 +13,8 @@
             <span>Просмотр альбома</span>
         </template>
         <template v-slot:button>
-            <div class="row">
-                <div>
+            <div class="row button-main-wrapper">
+                <div class="button-wrapper">
                     <c-button
                         text="Добавить фото"
                         :action="addToAlbum"
@@ -103,5 +103,13 @@
     }
     .back-button:hover object {
         filter: brightness(50%);
+    }
+    .button-wrapper {
+        width: 100%;
+    }
+    .button-main-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
     }
 </style>

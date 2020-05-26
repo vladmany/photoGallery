@@ -115,6 +115,7 @@
         display: flex;
         align-items: center;
         min-height: 90px;
+        height: 100%;
     }
     .action {
         margin-left: 15px;

@@ -78,6 +78,19 @@
         width: 100%;
         align-self: center;
     }
+    @media(max-width: 768px) {
+        .actions {
+            justify-content: center;
+            max-width: none;
+            /*border-bottom: 2px solid #F5F5F5;*/
+            min-height: 50px;
+        }
+    }
+    @media(max-width: 1070px) {
+        .actions {
+            padding-top: 15px!important;
+        }
+    }
     .action {
         margin-left: 15px;
         user-select: none;

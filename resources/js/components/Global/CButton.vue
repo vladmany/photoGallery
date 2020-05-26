@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="button-wrapper">
         <button :class="type + (state ? '' : ' disabled')" @click="action">{{text}}</button>
     </div>
 </template>
@@ -31,6 +31,11 @@
 </script>
 
 <style scoped>
+    .button-wrapper {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
     button {
         font-family: 'Roboto', sans-serif;
         padding-left: 10px;
@@ -38,6 +43,12 @@
         height: 50px;
         border: none;
         text-transform: uppercase;
+        max-width: 155px;
+        width: 100%;
+    }
+
+    button:not(.disabled):hover {
+        opacity: 0.9;
     }
 
     button.primary {

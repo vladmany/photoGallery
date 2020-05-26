@@ -144,7 +144,9 @@
                     <li class="col-lg-4 col-md-6 col-sm-12 pl-sm-3">
                         <ul>
                             <li>
-                                <img src="/storage/navbar_logo.png" alt="navbar_logo">
+                                <a href="/photos">
+                                    <img src="/storage/navbar_logo.png" alt="navbar_logo">
+                                </a>
                             </li>
                             <li>Все права защищены</li>
                             <li>© OOO «IT 2.0»</li>
@@ -163,22 +165,22 @@
                     <li class="col-lg-4 offset-md-6 offset-sm-0 offset-lg-0 col-md-6 col-sm-12 pl-sm-3">
                         <h4 class="text">Контакты</h4>
                         <ul>
-                            <li>+38095 900 38 00 </li>
-                            <li>mail@aiti20.com</li>
+                            <li><a href="tel:380959003800">+38095 900 38 00</a></li>
+                            <li><a href="mailto:mail@aiti20.com">mail@aiti20.com</a></li>
                         </ul>
                         <ul class="social_block">
                             <li>
-                                <a href="google.com">
+                                <a href="https://www.facebook.com/">
                                     <object type="image/svg+xml" data="/storage/social_ic/ic_facebook.svg"/>
                                 </a>
                             </li>
                             <li>
-                                <a href="google.com">
+                                <a href="https://twitter.com/">
                                     <object type="image/svg+xml" data="/storage/social_ic/ic_twitter.svg"/>
                                 </a>
                             </li>
                             <li>
-                                <a href="google.com">
+                                <a href="https://www.instagram.com/">
                                     <object type="image/svg+xml" data="/storage/social_ic/ic_instagram.svg"/>
                                 </a>
                             </li>
@@ -580,7 +582,7 @@
         font-weight: 500;
         font-size: 14px;
         line-height: 30px;
-        color: #B3B3B3;
+        color: #9B9B9B;
     }
     footer ul {
         list-style: none;
@@ -635,6 +637,9 @@
     }
     #side_menu li.main-group-tab:not(.group-tab-open):hover a object {
         filter: brightness(70%);
+    }
+    .social_block object {
+        pointer-events: none;
     }
     .footer_wrapper {
         width: 100%;

@@ -1,7 +1,11 @@
 <template>
     <div class="search-panel">
         <div class="panel">
-            <input type="text" v-model="value" placeholder="Найти альбом">
+            <div class="group">
+                <input type="text" v-model="value" required>
+                <span class="bar"></span>
+                <label>Найти альбом</label>
+            </div>
             <button type="submit"><img src="/storage/albums/actions/ic_search.png"></button>
         </div>
     </div>
@@ -50,12 +54,19 @@
         display: flex;
         align-self: center;
         justify-content: center;
-
     }
+
+
+    @media(max-width: 990px) {
+        .search-panel {
+            margin-bottom: 25px;
+        }
+    }
+
     @media (min-width: 992px){
         .search-panel{
             height: 92px;
-            border-left: 2px solid rgb(250, 250, 250);
+            /*border-left: 2px solid rgb(250, 250, 250);*/
         }
         .panel{
             padding-left: 28px;
@@ -75,6 +86,8 @@
         align-self: center;
         justify-content: center;
     }
+    /* form starting stylings ------------------------------- */
+    /* form starting stylings ------------------------------- */
     input, button {
         border: none;
         outline: none;
@@ -90,5 +103,72 @@
         top: 0;
         right: 0;
         cursor: pointer;
+    }
+    .group {
+        position: relative;
+        margin-bottom: 30px;
+    }
+
+    input {
+        font-size: 16px;
+        padding: 10px;
+        display: block;
+        width: 300px;
+        border: none;
+        border-bottom: 1px solid #ccc;
+    }
+    input:focus {
+        outline: none;
+    }
+
+    /* LABEL ======================================= */
+    label {
+        font-family: "Nunito", sans-serif;
+        color: #999;
+        font-size: 18px;
+        position: absolute;
+        pointer-events: none;
+        left: 10px;
+        top: 15px;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+
+    /* active state */
+    input:focus ~ label, input:valid ~ label {
+        top: -15px;
+        font-size: 14px;
+        color: #808080;
+    }
+
+    /* BOTTOM BARS ================================= */
+    .bar {
+        position: relative;
+        display: block;
+        width: 320px;
+    }
+    .bar:before, .bar:after {
+        content: "";
+        height: 2px;
+        width: 0;
+        bottom: 0;
+        position: absolute;
+        background: #808080;
+        transition: 0.2s ease all;
+        -moz-transition: 0.2s ease all;
+        -webkit-transition: 0.2s ease all;
+    }
+    .bar:before {
+        left: 50%;
+    }
+    .bar:after {
+        right: 50%;
+    }
+
+    /* active state */
+    input:focus ~ .bar:before,
+    input:focus ~ .bar:after {
+        width: 50%;
     }
 </style>
