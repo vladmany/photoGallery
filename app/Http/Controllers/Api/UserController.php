@@ -11,19 +11,18 @@ class UserController extends Controller
 {
     public function deadSession(Request $request)
     {
-        session_destroy();
         Auth::logout();
+        session_destroy();
 
-        return response('session destroy succsess');
+//        return response('session destroy succsess');
     }
 
     public function index() {
-        $userDb = User::where('id', 1)->first();
-        Auth::login($userDb);
+        $user_id = Auth::id();
 
-        $user = Auth::user();
+        $userDb = User::where('id', $user_id)->first();
 
-        return $user;
+        return $userDb;
     }
 
     public function token()

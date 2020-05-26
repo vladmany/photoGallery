@@ -7,19 +7,30 @@ use App\Http\Requests\Dashboard\AlbumRequest;
 use App\Models\Dashboard\Album;
 use App\Models\Dashboard\AlbumPhoto;
 use App\Models\Dashboard\Photo;
+use App\Services\PhotoService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AlbumController extends Controller
 {
+
+    public function __construct(PhotoService $photoService)
+    {
+//        $this->photoService = $photoService;
+        $this->middleware('auth');
+    }
+
     /**
      * Display a listing of the resource.
      *
      */
     public function index()
     {
+        $user_id = Auth::id();
         return Album::with(['photos' => function ($query) {
                 $query->orderBy('created_at', 'desc');
             }])
+            ->where('user_id', $user_id)
             ->orderBy('created_at', 'desc')
             ->get();
     }
@@ -32,11 +43,12 @@ class AlbumController extends Controller
      */
     public function store(AlbumRequest $request)
     {
+        $userId = Auth::id();
         $albumCount = (string)(Album::all()->count()+1);
         $url = 'http://gallery/album/'.base64_encode($albumCount);
         $data = $request->all();
         $data['url'] = $url;
-
+        $data['user_id'] = $userId;
         $data = Album::create($data);
 
         return $data;

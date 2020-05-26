@@ -23,10 +23,11 @@ class PhotoController extends Controller
 {
 //    public $photoService;
 //
-//    public function __construct(PhotoService $photoService)
-//    {
+    public function __construct(PhotoService $photoService)
+    {
 //        $this->photoService = $photoService;
-//    }
+        $this->middleware('auth');
+    }
 
     /**
      * Display a listing of the resource.
@@ -34,8 +35,10 @@ class PhotoController extends Controller
      */
     public function index()
     {
+        $user_id = Auth::id();
 //        dd(Photo::all());
         return Photo::with('albums')
+            ->where('user_id', $user_id)
             ->orderBy('created_at', 'desc')
             ->get();
     }
@@ -56,7 +59,7 @@ class PhotoController extends Controller
             ), 401);
         }
 
-        $userId = Auth::check() ? Auth::id() : 1;
+        $userId = Auth::id();
 
         if($request->hasFile('photo')) {
 //            dd('ЕСТЬ ФАЙЛЫ');

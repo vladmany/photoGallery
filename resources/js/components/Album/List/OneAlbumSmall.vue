@@ -42,19 +42,21 @@
             }),
         },
         watch: {
-            selectAll() {
-                this.isSelected = this.selectAll;
-            },
-            isSelected() {
-                if (this.isSelected) {
+            isSelected(newVal) {
+                // if(this.downUp === 1) {
+                if(newVal) {
                     this.$store.dispatch('addAlbum', this.album.id);
-                    console.log('____ watch isSelected true-usl ' + this.downUp.v);
                 } else {
-                    this.downUp.v = 1;
                     this.$store.dispatch('delAlbum', this.album.id);
-                    console.log(this.album.id + '____ watch isSelected false-usl ' + this.downUp.v);
+                    if(this.selectAll) {
+                        this.$store.dispatch('ListAlbum/selectAllAlbums', false);
+                    }
                 }
+            },
+            selectAll(newVal){
+                this.isSelected = newVal
             }
+
         },
         data() {
             return {

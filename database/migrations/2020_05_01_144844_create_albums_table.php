@@ -15,7 +15,8 @@ class CreateAlbumsTable extends Migration
     {
         Schema::create('albums', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 100)->comment('навание альбома');
+            $table->string('name', 100)->comment('название альбома');
+            $table->unsignedBigInteger('user_id')->comment('создатель альбома')->default(1);
             $table->string('url')->nullable()->comment('ссылка на альбом');
             $table->string('cover')->nullable()->comment('картинка обложки альбома');
             $table->timestamps();
