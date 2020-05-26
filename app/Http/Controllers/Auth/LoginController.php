@@ -124,7 +124,7 @@ class LoginController extends Controller
 //            Auth::user()->token()->revoke();
 //        Auth::logout();
 
-        $request->session()->flush();
+        $request->user()->token()->revoke();
 
         $this->guard()->logout();
         Auth::logout();
