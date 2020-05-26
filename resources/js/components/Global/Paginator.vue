@@ -72,6 +72,18 @@
         border-top-right-radius: 3px;
         color: #D8D8D8;
     }
+
+    .prev.disabled,
+    .next.disabled {
+        color: transparent;
+        background-color: transparent;
+    }
+
+    .prev.disabled a,
+    .next.disabled a {
+        cursor: default;
+    }
+
     li.active > a {
         /*background-color: red;*/
         background: #FAFAFA;
