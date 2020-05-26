@@ -120,8 +120,6 @@ class LoginController extends Controller
 
     public function logout(Request $request)
     {
-        session_destroy();
-
         $this->guard()->logout();
         Auth::logout();
 
