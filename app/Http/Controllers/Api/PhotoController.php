@@ -59,7 +59,7 @@ class PhotoController extends Controller
             ), 401);
         }
 
-        $userId = Auth::check() ? Auth::id() : 1;
+        $userId = Auth::id();
 
         if($request->hasFile('photo')) {
 //            dd('ЕСТЬ ФАЙЛЫ');
