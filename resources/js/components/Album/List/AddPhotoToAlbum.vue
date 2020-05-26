@@ -34,9 +34,9 @@
                     </div>
                 </div>
                 <div class="col-12">
-                    <h2 class="text-center text-uppercase">
-                        Добавить фото в {{ album.name }}
-                    </h2>
+                    <h3 class="text-center text-uppercase title-h2">
+                        Добавление фото в {{ album.name }}
+                    </h3>
                 </div>
                 <AllPhoto
                     :photos="photos"
@@ -108,5 +108,8 @@
     }
     .save:hover {
         color: #6e6e6e;
+    }
+    .title-h2 {
+        color: #808080
     }
 </style>

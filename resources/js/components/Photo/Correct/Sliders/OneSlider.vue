@@ -21,7 +21,7 @@
         },
         data() {
             return {
-                value: 0,
+                value: 100,
             }
         },
         computed: {
@@ -42,6 +42,7 @@
                     value: this.value
                 })
                 this.$store.dispatch('makeCssFilter');
+                console.log(this.$store.getters.getCssAttr)
             },
             correctPhotoId() {
                 this.value = this.val;

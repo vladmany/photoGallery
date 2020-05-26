@@ -89,7 +89,8 @@
             },
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
-                photos: 'ListPhoto/photos'
+                photos: 'ListPhoto/photos',
+                selectAllPhotos: 'ListPhoto/selectAllPhotos'
             })
         },
         data() {
@@ -105,6 +106,9 @@
                 if (this.selectedPhotos.length === 0) {
                     this.isSelected = false
                 }
+            },
+            selectAllPhotos(newVal) {
+                this.isSelected = newVal
             }
         }
     }
