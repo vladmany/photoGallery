@@ -187,6 +187,12 @@
         margin-top: 33px;
         width: 100%;
     }
+    @media(max-width: 768px) {
+        .buttons {
+            flex-direction: column;
+        }
+    }
+
     .apply-to-all {
         display: flex;
         vertical-align: center;
