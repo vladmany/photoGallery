@@ -1,6 +1,6 @@
 <template>
-    <div class="wrapper-album container justify-content-start">
-        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row">
+    <div class="wrapper-album container">
+        <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row sub-cont">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
                            class="pt-3 pb-3 col-12 col-md-6 col-lg-4 one-album mb-3 border"/>
@@ -73,6 +73,17 @@
 </script>
 
 <style scoped>
+    @media (min-width: 768px) {
+        .sub-cont {
+            justify-content: start;
+        }
+    }
+    @media (max-width: 767px) {
+        .sub-cont {
+            justify-content: center;
+        }
+    }
+
     .wrapper-album {
         background-color: #ffffff;
         padding-top: 35px;
