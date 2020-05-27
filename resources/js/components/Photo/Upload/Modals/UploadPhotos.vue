@@ -25,15 +25,17 @@
             </div>
         </template>
         <template v-slot:buttons>
-            <div class="buttons">
-                <c-button
-                    :action="continueUpload"
-                    :state="buttonState || isEnd"
-                />
-            </div>
-            <div class="apply-to-all" v-if="buttonState && !isEnd && (filesOrder.length !== 0)">
-                <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'apply-to-all'" v-model="applyToAll">
-                <label :for="'apply-to-all'">Применить для всех</label>
+            <div class="row">
+                <div class="buttons col-6">
+                    <c-button
+                        :action="continueUpload"
+                        :state="buttonState || isEnd"
+                    />
+                </div>
+                <div class="apply-to-all col-6" v-if="buttonState && !isEnd && (filesOrder.length !== 0)">
+                    <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'apply-to-all'" v-model="applyToAll">
+                    <label :for="'apply-to-all'">Применить для всех</label>
+                </div>
             </div>
         </template>
 
