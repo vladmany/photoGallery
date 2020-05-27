@@ -46,9 +46,10 @@
         border: none;
         text-transform: uppercase;
         width: 100%;
+        border-radius: 4px;
     }
 
-    button:not(.disabled):hover {
+    button:not(.disabled):not(.secondary):hover {
         opacity: 0.9;
     }
 
@@ -58,8 +59,8 @@
         font-size: 12px;
         line-height: 50px;
         color: #fff;
-        border-radius: 4px;
         margin-right: 10px;
+        border: 2px solid #F5F5F5;
     }
 
     button.primary.disabled {
@@ -73,6 +74,11 @@
         line-height: 50px;
         color: #B3B3B3;
         background-color: #ffffff;
+    }
+
+    button.secondary:hover {
+        filter: brightness(0.9);
+        transition: all 0.3s;
     }
 
     button.secondary.disabled {

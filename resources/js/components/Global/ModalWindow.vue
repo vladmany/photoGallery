@@ -98,8 +98,6 @@
                                   not supported by any browser */
     }
 
-
-
     .close-window-btn {
         position: absolute;
         background: #fff;
