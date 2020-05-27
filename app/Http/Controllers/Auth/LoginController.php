@@ -8,6 +8,7 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cookie;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 
@@ -124,10 +125,15 @@ class LoginController extends Controller
 //            Auth::user()->token()->revoke();
 //        Auth::logout();
 
+//        $request->session()->flush();
+
+//        $cookie = Cookie::forget('laravel_session');
+
         $this->guard()->logout();
+
         Auth::logout();
 
-        return redirect('https://it20-tools-photogallery.azurewebsites.net/authorization') ;
+        return redirect('https://team1-group-project.azurewebsites.net/logout') ;
 
 //
 //        return redirect()->route('auth');

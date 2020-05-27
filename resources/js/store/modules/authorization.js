@@ -17,14 +17,15 @@ let actions = {
             })
     },
     logout({ commit, state }) {
-        axios.post('/api/dead-session', {})
-            .then(res => {
-                console.log(res.data)
-            })
+        // axios.post('/api/dead-session', {})
+        //     .then(res => {
+        //         console.log(res.data)
+        //     })
 
-        // axios.get('https://team1-group-project.azurewebsites.net/api/client_logout', {
-        //         headers: { Authorization: "Bearer " + state.user.token }
-        //     }).then(r => location.href= r.data)
+        console.log('logout')
+        axios.get('https://team1-group-project.azurewebsites.net/api/client_logout', {
+                headers: { Authorization: "Bearer " + state.user.token }
+            }).then(r => location.href= r.data)
     },
 }
 
