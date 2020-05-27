@@ -51,6 +51,7 @@
 
     button:not(.disabled):not(.secondary):hover {
         opacity: 0.9;
+        transition: opacity 0.3s;
     }
 
     button.primary {

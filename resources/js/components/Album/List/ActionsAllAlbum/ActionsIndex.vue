@@ -80,7 +80,7 @@
     }
     @media(max-width: 768px) {
         .actions {
-            justify-content: center;
+            /*justify-content: center;*/
             max-width: none;
             /*border-bottom: 2px solid #F5F5F5;*/
             min-height: 50px;

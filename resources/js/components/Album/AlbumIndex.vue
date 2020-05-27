@@ -123,6 +123,12 @@
         align-items: center;
         min-height: 92px;
     }
+
+    @media(max-width: 768px) {
+        .panel {
+            flex-direction: column;
+        }
+    }
     @media (min-width: 1055px) {
         .panel {
             justify-content: space-between;
