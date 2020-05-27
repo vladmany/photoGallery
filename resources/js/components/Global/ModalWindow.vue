@@ -142,4 +142,8 @@
         flex-wrap: wrap;
         flex-direction: row;
     }
+
+    .window-buttons button {
+        margin-top: 10px;
+    }
 </style>

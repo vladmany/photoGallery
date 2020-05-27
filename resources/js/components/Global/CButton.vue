@@ -36,7 +36,6 @@
         max-width: 155px;
         display: flex;
         justify-content: center;
-        margin-top: 10px;
     }
     button {
         font-family: 'Roboto', sans-serif;

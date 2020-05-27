@@ -41,10 +41,14 @@
         },
         methods: {
             addToAlbum() {
-                console.log(this.correctPhotoId)
-                if (this.correctPhotoId !== 0) {
-                    this.$store.commit('clearPhotos')
-                    this.$store.commit('showAddPhotoToAlbum')
+                if (this.albums.length > 0) {
+                    if (this.correctPhotoId !== 0) {
+                        this.$store.commit('clearPhotos')
+                        this.$store.commit('showAddPhotoToAlbum')
+                    }
+                }
+                else {
+                    this.$store.dispatch('showToasted', { text: 'Список альбомов пуст' });
                 }
             },
             download() {
