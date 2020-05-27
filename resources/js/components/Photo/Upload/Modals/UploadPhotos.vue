@@ -25,14 +25,12 @@
             </div>
         </template>
         <template v-slot:buttons>
-            <div class="row">
-                <div class="buttons col-6">
-                    <c-button
-                        :action="continueUpload"
-                        :state="buttonState || isEnd"
-                    />
-                </div>
-                <div class="apply-to-all col-6" v-if="buttonState && !isEnd && (filesOrder.length !== 0)">
+            <div class="buttons">
+                <c-button
+                    :action="continueUpload"
+                    :state="buttonState || isEnd"
+                />
+                <div class="apply-to-all" v-if="buttonState && !isEnd && (filesOrder.length !== 0)">
                     <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'apply-to-all'" v-model="applyToAll">
                     <label :for="'apply-to-all'">Применить для всех</label>
                 </div>
@@ -188,17 +186,10 @@
         display: flex;
         margin-top: 33px;
         width: 100%;
-        flex-wrap: wrap;
     }
-
-    /*.button-wrapper {*/
-    /*    width: unset!important;*/
-    /*}*/
     .apply-to-all {
         display: flex;
         vertical-align: center;
-        /*width: 300px;*/
-        padding-top: 10px;
     }
     .error-end, .success-end {
         margin-top: 33px;
