@@ -114,9 +114,13 @@ class CorrectService
         $image->rotate($angle);
         $image->save($url);
 
-//        $photo->update([
-//            'path' => $original_url
-//        ]);
+        $width = $photo['height'];
+        $height = $photo['width'];
+
+        $photo->update([
+            'width' => $width,
+            'height' => $height,
+        ]);
     }
 
     private function mirror(string $url, $kind)
