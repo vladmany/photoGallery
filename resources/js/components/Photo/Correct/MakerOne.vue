@@ -2,14 +2,14 @@
     <div class="row">
         <div class="col-12">
             <div class="row justify-content-between">
-                <div class="col-12 col-lg-6">
+                <div class="col-6 col-lg-6">
                     <div class="back-button">
                         <router-link :to="{ name: 'IndexPhoto' }" @click="updatePhoto">
                             <object type="image/svg+xml" data="/storage/ic_arrow_left.svg"></object>
                         </router-link>
                     </div>
                 </div>
-                <div class="col-12 col-lg-6 text-right save-wrapper">
+                <div class="col-6 col-lg-6 text-right save-wrapper">
                     <span @click="save" class="save">Сохранить</span>
                 </div>
             </div>

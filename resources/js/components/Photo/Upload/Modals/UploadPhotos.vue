@@ -81,6 +81,7 @@
                 this.isEnd = false
             },
             continueUpload() {
+                this.errorMessage = ''
                 this.uploadFiles(Array.from(this.filesOrder))
             },
             close() {
@@ -88,7 +89,6 @@
                 this.reset()
             },
             async uploadFiles(files) {
-                console.log(files)
                 if (this.isEnd) {
                     this.$store.dispatch('ListPhoto/getPhotos');
                     this.close()
