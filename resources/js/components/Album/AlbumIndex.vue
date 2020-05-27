@@ -106,6 +106,19 @@
         border-bottom: 2px solid #F5F5F5;
     }
 
+
+    @media (min-width: 768px) {
+        .main-panel {
+            justify-content: start;
+        }
+    }
+    @media (max-width: 767px) {
+        .main-panel {
+            justify-content: center;
+        }
+    }
+
+
     .buttons-edit {
         border-right-width: 2px;
         border-right-style: solid;
