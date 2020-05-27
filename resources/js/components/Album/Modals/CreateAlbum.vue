@@ -43,9 +43,10 @@
             CreateAlbum() {
                 this.$store.state.errorAlbum=[]
                 let name = this.$store.state.createAlbum.name;
-                //
-                name.trim();
+
+
                 if(name){
+                    name.trim();
                     if(name.length<3){
                         this.$store.state.errorAlbum[0] = 'Минимальна длина названия 3 символа'
                     } else {
