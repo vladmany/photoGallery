@@ -40,9 +40,15 @@
         name: "Actions",
         methods: {
             addToAlbum() {
-                if (this.$store.getters.selectedPhotos.length > 0) {
-                    this.$store.commit('showAddPhotoToAlbum')
+                if (this.albums.length > 0) {
+                    if (this.$store.getters.selectedPhotos.length > 0) {
+                        this.$store.commit('showAddPhotoToAlbum')
+                    }
                 }
+                else {
+                    this.$store.dispatch('showToasted', { text: 'Список альбомов пуст' });
+                }
+
             },
             download() {
                 if (this.$store.getters.selectedPhotos.length > 0) {
@@ -90,7 +96,8 @@
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
                 photos: 'ListPhoto/photos',
-                selectAllPhotos: 'ListPhoto/selectAllPhotos'
+                selectAllPhotos: 'ListPhoto/selectAllPhotos',
+                albums: 'ListAlbum/albums'
             })
         },
         data() {
