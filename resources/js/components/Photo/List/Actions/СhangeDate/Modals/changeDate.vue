@@ -3,7 +3,7 @@
         v-if="this.$store.state.isChangeDate"
         title="Изменить дату"
         :close-action="close"
-        :min-width="340"
+        :min-width="432"
     >
     <template v-slot:content>
         <div class="calendar-wrapper">
@@ -87,7 +87,7 @@
     .calendar-wrapper {
         display: flex;
         flex-direction: column;
-        /*justify-content: center;*/
+        justify-content: center;
         margin-top: 15px;
         margin-bottom: 33px;
     }
