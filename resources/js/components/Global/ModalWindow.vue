@@ -101,12 +101,12 @@
 
 
     .close-window-btn {
-        position: relative;
+        position: absolute;
         background: #fff;
         border: none;
-        float: right;
         cursor: pointer;
         border-radius: 6px;
+        right: 0;
     }
 
     .close-window-btn object {

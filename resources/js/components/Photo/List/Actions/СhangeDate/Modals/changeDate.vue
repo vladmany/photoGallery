@@ -86,7 +86,7 @@
 <style scoped>
     .calendar-wrapper {
         display: flex;
-        flex-direction: column;
+        /*flex-direction: column;*/
         justify-content: center;
         margin-top: 15px;
         margin-bottom: 33px;
