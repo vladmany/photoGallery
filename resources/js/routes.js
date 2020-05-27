@@ -131,7 +131,7 @@ export default new VueRouter({
                 return { id, previousRoute, albumId }
             },
             meta:{
-                title: 'IT 2.0 Tools - Корректировать фото'
+                title: 'IT 2.0 Tools - Корректировать фото',
             }
         },
         {
