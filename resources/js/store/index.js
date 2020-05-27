@@ -165,7 +165,8 @@ export default new Vuex.Store({
             state.isChangeNameAlbum = true
         },
         hideChangeNameAlbum(state) {
-            state.isChangeNameAlbum = false
+            state.isChangeNameAlbum = false,
+            state.errorAlbum = []
         },
         showDelAlbum(state) {
             state.isDelAlbum = true

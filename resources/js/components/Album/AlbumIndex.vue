@@ -68,8 +68,9 @@
         computed: {
             showPanels: function() {
                 if(this.$store.getters['ListAlbum/countAlbums'] > 0)
-                {console.log("count "+this.$store.getters['ListAlbum/countAlbums']);
-                    return true}
+                {
+                    return true
+                }
                 else return false
 
             },

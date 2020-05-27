@@ -19,9 +19,6 @@
                         text="Добавить фото"
                         :action="addToAlbum"
                     />
-<!--                    <router-link :to="{ name: 'AddPhotoToAlbum', params: { id: album.id } }">-->
-<!--                        <span class="btn btn-primary btn-lg text-nowrap">Добавить фото</span>-->
-<!--                    </router-link>-->
                 </div>
             </div>
         </template>
