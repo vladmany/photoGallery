@@ -1,5 +1,5 @@
 <template>
-    <div class="wrapper-album container justify-content-start">
+    <div class="wrapper-album container">
         <div v-if="this.$store.getters['ListAlbum/countAlbums'] > 0" class="row">
             <OneAlbumSmall v-for="album in pageOfItems" :key="album.id"
                            :album="album"
@@ -73,6 +73,17 @@
 </script>
 
 <style scoped>
+    @media (min-width: 768px) {
+        .wrapper-album {
+            justify-content: start;
+        }
+    }
+    @media (max-width: 767px) {
+        .wrapper-album {
+            justify-content: center;
+        }
+    }
+
     .wrapper-album {
         background-color: #ffffff;
         padding-top: 35px;
