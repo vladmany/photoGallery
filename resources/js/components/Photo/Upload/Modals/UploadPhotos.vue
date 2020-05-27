@@ -30,10 +30,10 @@
                     :action="continueUpload"
                     :state="buttonState || isEnd"
                 />
-                <div class="apply-to-all" v-if="buttonState && !isEnd && (filesOrder.length !== 0)">
-                    <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'apply-to-all'" v-model="applyToAll">
-                    <label :for="'apply-to-all'">Применить для всех</label>
-                </div>
+            </div>
+            <div class="apply-to-all" v-if="buttonState && !isEnd && (filesOrder.length !== 0)">
+                <input type="checkbox" class="mx-1 mb-1 custom-checkbox" :id="'apply-to-all'" v-model="applyToAll">
+                <label :for="'apply-to-all'">Применить для всех</label>
             </div>
         </template>
 
@@ -82,7 +82,6 @@
             },
             continueUpload() {
                 this.errorMessage = ''
-                console.log('Очищаю ошибки')
                 this.uploadFiles(Array.from(this.filesOrder))
             },
             close() {
@@ -173,13 +172,31 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
+
+    label {
+        font-style: normal;
+        font-weight: 500;
+        /*font-size: 14px;*/
+        line-height: 30px;
+        color: #808080;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
     .buttons {
         display: flex;
         margin-top: 33px;
+        width: 100%;
+        flex-wrap: wrap;
     }
+
+    /*.button-wrapper {*/
+    /*    width: unset!important;*/
+    /*}*/
     .apply-to-all {
         display: flex;
         vertical-align: center;
+        /*width: 300px;*/
+        padding-top: 10px;
     }
     .error-end, .success-end {
         margin-top: 33px;
