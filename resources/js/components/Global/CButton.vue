@@ -74,6 +74,7 @@
         line-height: 50px;
         color: #B3B3B3;
         background-color: #ffffff;
+        border: 2px solid #F5F5F5;
     }
 
     button.secondary:hover {
