@@ -44,9 +44,29 @@
         },
         methods: {
             saveChange() {
-                this.$store.dispatch('changeNameAlbum', this.album.name);
+                this.$store.state.errorAlbum=[]
+                this.album.name.trim();
+                if(this.album.name){
+                    if( this.album.name.length<3){
+                        this.$store.state.errorAlbum[0] = 'Минимальна длина названия 3 символа'
+                    } else {
+                        if( this.album.name.length>100){
+                            this.$store.state.errorAlbum[0] = 'Максимальная длина названия 100 символов'
+                        } else{
+                            this.$store.dispatch('changeNameAlbum', this.album.name);
+                        }
+                    }
+                }
+                else {
+                    this.$store.state.errorAlbum[0] = 'Вы не ввели название альбома'
+                }
+
+
+
             },
             CloseModalChangeNameAlbum() {
+                this.album.name = this.$store.getters['ListAlbum/album'](this.$store.state.IdAlbum).name;
+
                 this.$store.commit('hideChangeNameAlbum');
 
             },

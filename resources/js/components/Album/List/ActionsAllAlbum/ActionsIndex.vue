@@ -44,13 +44,10 @@
         watch: {
             isSelected() {
                 this.$store.dispatch('ListAlbum/selectAllAlbums', this.isSelected);
-                console.log('isSelected' + this.isSelected);
             },
 
             selectAllAlbums(newVal) {
-                console.log(newVal)
                 this.isSelected = newVal
-                // console.log('selectAllAlbums');
             }
         },
 

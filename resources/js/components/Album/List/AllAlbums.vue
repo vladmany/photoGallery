@@ -55,7 +55,6 @@
                 let from = (page * perPage) - perPage;
                 let to = (page * perPage);
                 this.pageOfItems = this.albums.slice(from, to);
-                // this.$store.dispatch('ListAlbum/makeGroups', pageOfItems);
             },
             setPages() {
                 let pages = []

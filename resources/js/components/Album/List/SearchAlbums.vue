@@ -22,23 +22,19 @@
         computed: {
             val() {
                 let a = this.$store.getters['ListAlbum/getSearchStr'];
-                //console.log(a);
                 return a
             },
 
         },
         watch: {
             val(newVal, oldVal) {
-                //console.log(newVal);
                 this.value = newVal
             },
             value() {
                 this.$store.dispatch('ListAlbum/setSearchStr', this.value)
-                //console.log(this.value)
             },
         },
         created() {
-            //console.log(this.val);
             this.value = this.val;
         }
     }
@@ -66,7 +62,6 @@
     @media (min-width: 992px){
         .search-panel{
             height: 92px;
-            /*border-left: 2px solid rgb(250, 250, 250);*/
         }
         .panel{
             padding-left: 28px;
