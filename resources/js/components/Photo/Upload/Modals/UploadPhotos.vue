@@ -82,6 +82,7 @@
             },
             continueUpload() {
                 this.errorMessage = ''
+                console.log('Очищаю ошибки')
                 this.uploadFiles(Array.from(this.filesOrder))
             },
             close() {
