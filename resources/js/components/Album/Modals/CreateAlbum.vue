@@ -41,7 +41,28 @@
         },
         methods: {
             CreateAlbum() {
-                this.$store.dispatch('createAlbum', this.$store.state.createAlbum);
+                this.$store.state.errorAlbum=[]
+                let name = this.$store.state.createAlbum.name;
+
+
+                if(name){
+                    name.trim();
+                    if(name.length<3){
+                        this.$store.state.errorAlbum[0] = 'Минимальна длина названия 3 символа'
+                    } else {
+                        if(name.length>100){
+                            this.$store.state.errorAlbum[0] = 'Максимальная длина названия 100 символов'
+                        } else{
+                            this.$store.dispatch('createAlbum', this.$store.state.createAlbum);
+                        }
+                    }
+                }
+                else {
+                    this.$store.state.errorAlbum[0] = 'Вы не ввели название альбома'
+                }
+
+
+
             },
             CloseModalCreateAlbum(){
                 this.$store.state.createAlbum = {};

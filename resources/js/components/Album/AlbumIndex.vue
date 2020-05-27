@@ -68,8 +68,9 @@
         computed: {
             showPanels: function() {
                 if(this.$store.getters['ListAlbum/countAlbums'] > 0)
-                {console.log("count "+this.$store.getters['ListAlbum/countAlbums']);
-                    return true}
+                {
+                    return true
+                }
                 else return false
 
             },
@@ -121,6 +122,12 @@
         flex-wrap: wrap;
         align-items: center;
         min-height: 92px;
+    }
+
+    @media(max-width: 768px) {
+        .panel {
+            flex-direction: column;
+        }
     }
     @media (min-width: 1055px) {
         .panel {

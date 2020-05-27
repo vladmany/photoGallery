@@ -98,15 +98,13 @@
                                   not supported by any browser */
     }
 
-
-
     .close-window-btn {
-        position: relative;
+        position: absolute;
         background: #fff;
         border: none;
-        float: right;
         cursor: pointer;
         border-radius: 6px;
+        right: 0;
     }
 
     .close-window-btn object {
@@ -143,5 +141,9 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
+    }
+
+    .window-buttons button {
+        margin-top: 10px;
     }
 </style>

@@ -81,6 +81,7 @@
                 this.isEnd = false
             },
             continueUpload() {
+                this.errorMessage = ''
                 this.uploadFiles(Array.from(this.filesOrder))
             },
             close() {
@@ -88,7 +89,6 @@
                 this.reset()
             },
             async uploadFiles(files) {
-                console.log(files)
                 if (this.isEnd) {
                     this.$store.dispatch('ListPhoto/getPhotos');
                     this.close()
@@ -172,10 +172,27 @@
         padding-top: 15px;
         padding-bottom: 15px;
     }
+
+    label {
+        font-style: normal;
+        font-weight: 500;
+        /*font-size: 14px;*/
+        line-height: 30px;
+        color: #808080;
+        padding-top: 15px;
+        padding-bottom: 15px;
+    }
     .buttons {
         display: flex;
         margin-top: 33px;
+        width: 100%;
     }
+    @media(max-width: 768px) {
+        .buttons {
+            flex-direction: column;
+        }
+    }
+
     .apply-to-all {
         display: flex;
         vertical-align: center;

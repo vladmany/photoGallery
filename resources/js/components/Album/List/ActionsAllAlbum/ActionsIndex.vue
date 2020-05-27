@@ -44,13 +44,10 @@
         watch: {
             isSelected() {
                 this.$store.dispatch('ListAlbum/selectAllAlbums', this.isSelected);
-                console.log('isSelected' + this.isSelected);
             },
 
             selectAllAlbums(newVal) {
-                console.log(newVal)
                 this.isSelected = newVal
-                // console.log('selectAllAlbums');
             }
         },
 
@@ -83,7 +80,7 @@
     }
     @media(max-width: 768px) {
         .actions {
-            justify-content: center;
+            /*justify-content: center;*/
             max-width: none;
             /*border-bottom: 2px solid #F5F5F5;*/
             min-height: 50px;

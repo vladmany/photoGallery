@@ -1,6 +1,5 @@
 <template>
     <div class="createAlbum">
-<!--         DD -->
         <create></create>
         <CButton text="Добавить" :action="modalCreate" class="btn-create-album" title="Создать новый альбом"></CButton>
     </div>
@@ -30,6 +29,6 @@
     .createAlbum {
         width: 100%;
         display: flex;
-        justify-content: center;
+        /*justify-content: center;*/
     }
 </style>
