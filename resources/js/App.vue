@@ -71,26 +71,26 @@
                             <span>Контакты</span>
                         </router-link>
                     </li>
-                    <li @click="manageOpen = !manageOpen" class="main-group-tab manage">
-                        <a>
-                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>
-                            <span>Управление</span>
-                        </a>
-                    </li>
-                    <div class="group-tabs manage">
-                        <li>
-                            <router-link to="/departaments" >
-                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_location_city.svg"></object>
-                                <span>Отделы</span>
-                            </router-link>
-                        </li>
-                        <li>
-                            <router-link to="/users" >
-                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>
-                                <span>Пользователи</span>
-                            </router-link>
-                        </li>
-                    </div>
+<!--                    <li @click="manageOpen = !manageOpen" class="main-group-tab manage">-->
+<!--                        <a>-->
+<!--                            <object type="image/svg+xml" data="/storage/sidebar_icons/ic_business_center.svg"></object>-->
+<!--                            <span>Управление</span>-->
+<!--                        </a>-->
+<!--                    </li>-->
+<!--                    <div class="group-tabs manage">-->
+<!--                        <li>-->
+<!--                            <router-link to="/departaments" >-->
+<!--                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_location_city.svg"></object>-->
+<!--                                <span>Отделы</span>-->
+<!--                            </router-link>-->
+<!--                        </li>-->
+<!--                        <li>-->
+<!--                            <router-link to="/users" >-->
+<!--                                <object type="image/svg+xml" data="/storage/sidebar_icons/ic_people.svg"></object>-->
+<!--                                <span>Пользователи</span>-->
+<!--                            </router-link>-->
+<!--                        </li>-->
+<!--                    </div>-->
                 </ul>
             </nav>
             <div class="main_content">

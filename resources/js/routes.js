@@ -143,6 +143,10 @@ export default new VueRouter({
             beforeEnter() {location.href = 'https://team1-group-project.azurewebsites.net/'}
         },
         {
+            path: '/disk',
+            beforeEnter() {location.href = 'http://it20tools-disk.dtdgma.org.ua/disk'}
+        },
+        {
             path: '/manipul',
 
         },
