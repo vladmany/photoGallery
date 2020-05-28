@@ -26,6 +26,7 @@ class AlbumController extends Controller
      */
     public function index()
     {
+//        $user_id = Auth::check() ? Auth::id() : 1;
         $user_id = Auth::id();
         return Album::with(['photos' => function ($query) {
                 $query->orderBy('created_at', 'desc');
@@ -43,6 +44,7 @@ class AlbumController extends Controller
      */
     public function store(AlbumRequest $request)
     {
+//        $userId = Auth::check() ? Auth::id() : 1;
         $userId = Auth::id();
         $albumCount = (string)(Album::all()->count()+1);
         $url = 'http://gallery/album/'.base64_encode($albumCount);

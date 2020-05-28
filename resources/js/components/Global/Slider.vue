@@ -131,11 +131,14 @@
                 this.myStyle = newVal;
             },
             rotAngle(newVal, oldVal) {
-                // console.log(newVal)
-                let id = this.realPhotoInd
+                // let id = this.realPhotoInd
+                let id = this.$store.getters['correctPhotoId']
+                let photo = this.$store.getters['ListPhoto/photo'](id)
                 this.$store.dispatch('changeRotStyle', id)
                 let angle = this.$store.getters.rotWithId(id)
-                let cssStyle = `transform: rotate(${angle}deg)`
+                let cssStyle = photo.width > photo.height
+                    ? `transform: rotate(${angle}deg) scale(0.5);`
+                    : `transform: rotate(${angle}deg);`
                 // console.log(cssStyle)
                 this.myStyle = cssStyle
             }
@@ -152,10 +155,6 @@
                 // console.log(this.$store.getters.cssAttrs)
                 this.myStyle = this.cssStyle;
             }
-        },
-        beforeMount() {
-            // this.$store.commit('initialiseStore');
-            // console.log(this.$store.state)
         },
     };
 </script>

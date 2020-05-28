@@ -7,7 +7,12 @@
                    @click="select"
             >
             <label :for="'photo-' + photo.id"></label>
-            <router-link :to="{ name: 'IndexViewPhoto', params: { id: photo.id, previousRoute: (albumId) ? { name: 'OneAlbum', params: { id: albumId } } : { name: 'IndexPhoto' }, albumId: albumId } }">
+            <router-link :to="{ name: 'IndexViewPhoto', params:
+            {
+                id: photo.id,
+                images: photos,
+                previousRoute: (albumId) ? { name: 'OneAlbum', params: { id: albumId } } : { name: 'IndexPhoto' }, albumId: albumId }
+            }">
                 <img :src="photoUrl" :alt="photo.name"
                      class="img-fluid one-photo"
                      @click="getId"
@@ -38,6 +43,9 @@
             },
             downUp: {
                 type: Object
+            },
+            photos: {
+                type: Array
             }
         },
         data() {
@@ -75,6 +83,7 @@
                 selectedPhotos: 'selectedPhotos',
                 groupsSelected: 'ListPhoto/groupsSelected',
                 selectAll: 'ListPhoto/selectAllPhotos',
+                // images: 'ListPhoto/photos',
                 // downUp: 'ListPhoto/downUp',
                 // clickCount: 'ListPhoto/clickCount',
             }),

@@ -10,6 +10,7 @@
         <div class="group-content">
             <OnePhoto v-for="photo in elements" :key="photo.id"
                       :photo="photo"
+                      :images="elements"
                       :is-selected-def="isSelected"
                       :album-id="albumId"
                       :down-up="downUp"

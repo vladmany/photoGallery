@@ -35,7 +35,7 @@
                 </router-link>
             </div>
             <div>
-                <SliderPhoto :id="id"></SliderPhoto>
+                <SliderPhoto :id="id" :images="images"></SliderPhoto>
             </div>
         </template>
     </Section>
@@ -62,6 +62,15 @@
             albumId: {
                 type: Number
             }
+        },
+        computed: {
+            images() {
+                if(this.albumId) {
+                    return this.$store.getters['ListAlbum/photosByAlbum'](this.albumId)
+                }
+
+                return this.$store.getters['ListPhoto/photos']
+            },
         },
         methods: {
             back() {

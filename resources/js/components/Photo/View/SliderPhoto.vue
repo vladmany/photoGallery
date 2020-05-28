@@ -20,12 +20,16 @@
             isCorrect: {
                 type: Boolean,
                 default: false,
+            },
+            images: {
+                type: Array,
+                required: true
             }
         },
         computed: {
-            images() {
-                return this.$store.getters['ListPhoto/photos'];
-            },
+            // images() {
+            //     return this.$store.getters['ListPhoto/photos'];
+            // },
             start() {
                 return this.$store.getters['ListPhoto/getPhotoIndex'](this.images, this.id);
             },

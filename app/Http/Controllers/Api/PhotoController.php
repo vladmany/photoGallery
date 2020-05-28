@@ -35,8 +35,8 @@ class PhotoController extends Controller
      */
     public function index()
     {
+//        $user_id = Auth::check() ? Auth::id() : 1;
         $user_id = Auth::id();
-//        dd(Photo::all());
         return Photo::with('albums')
             ->where('user_id', $user_id)
             ->orderBy('created_at', 'desc')
@@ -59,6 +59,7 @@ class PhotoController extends Controller
             ), 401);
         }
 
+//        $userId = Auth::check() ? Auth::id() : 1;
         $userId = Auth::id();
 
         if($request->hasFile('photo')) {
