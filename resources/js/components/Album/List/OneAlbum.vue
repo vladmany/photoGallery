@@ -88,6 +88,7 @@
         align-items: center;
         font-weight: bolder;
         color: #666666;
+        word-wrap: break-word;
     }
     object {
         pointer-events: none;
