@@ -139,10 +139,11 @@
                 let cssStyle = photo.width > photo.height
                     ? `transform: rotate(${angle}deg); margin-top: 120px;`
                     : `transform: rotate(${angle}deg);`
-                // console.log(cssStyle)
+                console.log(cssStyle)
                 this.myStyle = cssStyle
             }
         },
+
         created() {
             let id = this.$store.getters.correctPhotoId;
             // console.log(id);
