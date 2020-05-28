@@ -141,6 +141,7 @@
         display: flex;
         flex-wrap: wrap;
         flex-direction: row;
+        justify-content: center;
     }
 
     .window-buttons button {

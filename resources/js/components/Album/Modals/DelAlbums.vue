@@ -78,6 +78,7 @@
     .button-panel{
         display: flex;
         margin-top: 35px;
+        width: 100%;
     }
     .content{
         margin-top: 35px;

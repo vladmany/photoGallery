@@ -63,6 +63,12 @@
         border: 2px solid #F5F5F5;
     }
 
+    @media(max-width: 768px) {
+        button.primary {
+            margin-right: unset;
+        }
+    }
+
     button.primary.disabled {
         background-color: rgba(24, 117, 240, 0.62);
         pointer-events: none;

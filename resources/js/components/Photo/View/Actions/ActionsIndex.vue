@@ -1,6 +1,6 @@
 <template>
     <div class="actions">
-        <div class="action add_to_album" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="addToAlbum" title="Добавить фото в альбом">
+        <div class="action add_to_album" :class="((this.correctPhotoId !== 0) && (this.previousRoute.name !== 'OneAlbum')) ? 'available': ''" @click="addToAlbum" title="Добавить фото в альбом">
             <object type="image/svg+xml" data="/storage/photos/actions/ic_add_to_album.svg"></object>
         </div>
         <div class="action download" :class="(this.correctPhotoId !== 0) ? 'available': ''" @click="download" title="Скачать фото">
@@ -155,7 +155,8 @@
             },
             ...mapGetters({
                 selectedPhotos: 'selectedPhotos',
-                correctPhotoId: 'correctPhotoId'
+                correctPhotoId: 'correctPhotoId',
+                albums: 'ListAlbum/albums'
 
             })
         },

@@ -4,8 +4,8 @@
         :page-range="3"
         :margin-pages="2"
         :click-handler="func"
-        :prev-text="'&#129120;'"
-        :next-text="'&#129122;'"
+        prev-text="<object type='image/svg+xml' data='/storage/ic_arrow_back.svg'></object>"
+        next-text="<object type='image/svg+xml' data='/storage/ic_arrow_forward.svg'></object>"
         :prev-class="'one-page prev'"
         :next-class="'one-page next'"
         :container-class="'paginate'"
@@ -61,12 +61,16 @@
         color: #000;
 
     }
-    .prev {
-        /*border-bottom-left-radius: 3px;*/
-        /*border-top-left-radius: 3px;*/
-        color: #D8D8D8;
-        border-left: none;
+    .prev a, .next a {
+        display: flex!important;
+        justify-content: center;
+        align-items: center;
     }
+
+    .prev a object, .next a object {
+        pointer-events: none;
+    }
+
     .next {
         border-bottom-right-radius: 3px;
         border-top-right-radius: 3px;
@@ -75,8 +79,7 @@
 
     .prev.disabled,
     .next.disabled {
-        color: transparent;
-        background-color: transparent;
+        opacity: 0
     }
 
     .prev.disabled a,

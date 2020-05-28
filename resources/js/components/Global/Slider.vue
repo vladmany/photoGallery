@@ -166,8 +166,8 @@
         vertical-align: middle;
     }
     .one-slide {
-        min-height: 400px;
-        line-height: 400px;
+        /*min-height: 400px;*/
+        /*line-height: 400px;*/
         text-align: center;
     }
     .fade-enter-active,
