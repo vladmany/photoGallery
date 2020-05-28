@@ -137,7 +137,7 @@
                 this.$store.dispatch('changeRotStyle', id)
                 let angle = this.$store.getters.rotWithId(id)
                 let cssStyle = photo.width > photo.height
-                    ? `transform: rotate(${angle}deg); margin-top: 120px;`
+                    ? `transform: rotate(${angle}deg) scale(0.5);`
                     : `transform: rotate(${angle}deg);`
                 console.log(cssStyle)
                 this.myStyle = cssStyle
